@@ -1700,7 +1700,7 @@ abstract class REST_Controller extends CI_Controller {
 		foreach($url_params as $k => $param)
 		{
 			if( ($k % 2) != 0 ) continue;
-			if($k == $key)
+			if($key!== NULL && $k == $key)
 			{
 				return $url_params[$k + 1];
 			}
