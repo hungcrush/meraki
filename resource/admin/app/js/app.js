@@ -66,7 +66,6 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 				},
 			}
         }).
-		// Main Layout Structure
         //------------------------------
         // MAIN LAYOUT STRUCTURE
         //------------------------------

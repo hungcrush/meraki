@@ -10,7 +10,7 @@ header("Pragma: no-cache");
 $folder = isset($_POST['folder']) ? $_POST['folder'] : '';
 $thumSize = isset($_POST['thumSize']) ? json_decode($_POST['thumSize']) : '';
 
-$targetDir = 'uploads/'.$folder.'/full-size';
+$targetDir = '../uploads/'.$folder.'/full-size';
 $cleanupTargetDir = true; // Remove old files
 $maxFileAge = 5 * 3600; // Temp file age in seconds
 
