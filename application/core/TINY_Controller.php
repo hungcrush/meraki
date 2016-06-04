@@ -2,6 +2,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+require_once 'Extend_Controller.php';
 class TINY_Controller extends Extend_Controller
 {
     protected $class_name;
