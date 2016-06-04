@@ -18,7 +18,7 @@ class Welcome extends TINY_Controller {
 	}
     
     public function testDuLieu(){
-        die('OK');
+        die('OK ^^');
     }
     
     //-- function load Template for angular
