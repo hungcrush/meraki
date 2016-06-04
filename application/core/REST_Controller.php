@@ -1690,13 +1690,14 @@ abstract class REST_Controller extends CI_Controller {
 	* GET params from url with explode method
 	*/
 	public function params($key = NULL, $xss_clean = NULL){
-		// do this to makesure $query_value always is array
-		if(!is_array($query_value)) return $query_value;
 		$url_params = explode('/', end(explode($this->function_name. '/', strtok($_SERVER[REQUEST_URI], '?'))));
 		if( $xss_clean !== 'URL' )
 		{
 			$query_value = $this->query($key, $xss_clean);
+			// do this to makesure $query_value always is array
+			if(!is_array($query_value)) return $query_value;
 			if(empty($url_params)) return $query_value;
+			
 			foreach($url_params as $k => $param)
 			{
 				if( ($k % 2) != 0 ) continue;
