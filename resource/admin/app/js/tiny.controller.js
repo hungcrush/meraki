@@ -571,9 +571,8 @@ angular.module('tiny.admin.controllers', []).
         }
         
         $scope.$on('$stateChangeSuccess', function(evt, toState){
-            if(toState.name == 'admin.product.list'){
+            if(toState.name == 'admin.product.list' && $scope.listProduct.length){
                 $rootScope.changeRoute('admin.product.list.items', {module: $scope.listProduct[0].product_id});
-                console.warn('AAAAAAaa');
             }
         })
     }).
