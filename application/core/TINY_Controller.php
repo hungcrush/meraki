@@ -14,6 +14,7 @@ class TINY_Controller extends Extend_Controller
 
     public function __construct()
     {
+        parent::__construct();
         $this->permission = array(
             'Load'  => isset($_REQUEST['load_data'])
         );
