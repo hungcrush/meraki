@@ -44,7 +44,7 @@ class Welcome extends TINY_Controller {
          
     public function Dataupload()
     {
-        $s = $this->params('file', 'URL');
+        $s = $this->params('uploads', 'URL');
         if($s)
         {
             $filePath = end(explode('/', $s));
@@ -52,8 +52,13 @@ class Welcome extends TINY_Controller {
             $contentType = finfo_file($finfo, $filePath);
             finfo_close($finfo);
             
-            header('Content-Type: ' . $contentType);
-            readfile($filePath);
+            $url = dirname(__FILE__).'/../../../uploads/' . $s;
+            if(file_exists($url))
+            {
+                header('Content-Type: ' . $contentType);
+                readfile($url);
+            }
         }
+        exit;
     }
 }
