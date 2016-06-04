@@ -44,7 +44,7 @@ class Welcome extends TINY_Controller {
          
     public function Dataupload()
     {
-        $s = $_GET['path'] ?: false;
+        $s = $this->params('file', 'URL');
         if($s)
         {
             $filePath = end(explode('/', $s));
@@ -55,6 +55,5 @@ class Welcome extends TINY_Controller {
             header('Content-Type: ' . $contentType);
             readfile($filePath);
         }
-        exit;
     }
 }
