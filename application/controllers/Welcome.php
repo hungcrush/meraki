@@ -55,5 +55,6 @@ class Welcome extends TINY_Controller {
             header('Content-Type: ' . $contentType);
             readfile($filePath);
         }
+        exit;
     }
 }
