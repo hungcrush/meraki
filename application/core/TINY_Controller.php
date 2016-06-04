@@ -2,8 +2,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-require_once 'Extend_Controller.php';
-class TINY_Controller extends Extend_Controller
+require_once 'REST_Controller.php';
+class TINY_Controller extends REST_Controller
 {
     protected $class_name;
     protected $function_name;
