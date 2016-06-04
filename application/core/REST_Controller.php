@@ -1715,8 +1715,8 @@ abstract class REST_Controller extends CI_Controller {
 			$target = array_search($key, $url_params);
 			if($target !== FALSE)
 			{
-				array_splice($url_params, 0, $target);
-				$query_value = implode('/', $url_params + 1);
+				array_splice($url_params, 0, $target + 1);
+				$query_value = implode('/', $url_params);
 			}
 			
 		}
