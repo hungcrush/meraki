@@ -2,7 +2,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class TINY_Controller extends CI_Controller
+class TINY_Controller extends Extend_Controller
 {
     protected $class_name;
     protected $function_name;
@@ -13,7 +13,6 @@ class TINY_Controller extends CI_Controller
 
     public function __construct()
     {
-        parent::__construct();
         $this->permission = array(
             'Load'  => isset($_REQUEST['load_data'])
         );
