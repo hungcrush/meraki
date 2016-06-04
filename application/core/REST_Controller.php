@@ -358,6 +358,11 @@ abstract class REST_Controller extends CI_Controller {
         self::HTTP_INTERNAL_SERVER_ERROR => 'INTERNAL SERVER ERROR',
         self::HTTP_NOT_IMPLEMENTED => 'NOT IMPLEMENTED'
     ];
+	/**
+	* Variable HungTV
+	*/
+	protected $class_name;
+    protected $function_name;
 
     /**
      * Extend this function to apply additional checking early on in the process
@@ -1679,6 +1684,16 @@ abstract class REST_Controller extends CI_Controller {
 
         return isset($this->_query_args[$key]) ? $this->_xss_clean($this->_query_args[$key], $xss_clean) : NULL;
     }
+	
+	/**
+	* Extend by HungTV
+	* GET params from url with explode method
+	*/
+	public function params($key = NULL, $xss_clean = NULL){
+		$query_value = $this->query($key, $xss_clean);
+		$url_params = explode('/', end(explode($this->function_name, $_SERVER[REQUEST_URI])));
+		$this->debug($url_params);
+	}
 
     /**
      * Sanitizes data so that Cross Site Scripting Hacks can be

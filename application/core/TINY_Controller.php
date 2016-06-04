@@ -5,16 +5,13 @@ if (!defined('BASEPATH'))
 require_once 'REST_Controller.php';
 class TINY_Controller extends REST_Controller
 {
-    protected $class_name;
-    protected $function_name;
-    
     protected $data = array();
     
     protected $permission = array();
 
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct();        
         $this->permission = array(
             'Load'  => isset($_REQUEST['load_data'])
         );
