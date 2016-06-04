@@ -1713,10 +1713,10 @@ abstract class REST_Controller extends CI_Controller {
 		{
 			$query_value = FALSE;
 			$target = array_search($key, $url_params);
-			if($target)
+			if($target !== FALSE)
 			{
 				array_splice($url_params, 0, $target);
-				$query_value = implode('/', $url_params);
+				$query_value = implode('/', $url_params + 1);
 			}
 			
 		}
