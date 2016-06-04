@@ -1699,7 +1699,7 @@ abstract class REST_Controller extends CI_Controller {
 		
 		foreach($url_params as $key => $param)
 		{
-			if( ($key % 2) == 0 ) continue;
+			if( ($key % 2) != 0 ) continue;
 			$query_value[$param] = $url_params[$key + 1];
 		}
 		
