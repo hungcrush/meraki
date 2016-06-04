@@ -1,0 +1,169 @@
+<style>
+    .user-img > img{
+        width: 80px;
+    }
+</style>
+
+<page-title ng-if="layoutOptions.pageTitles" title="{title_page}" description="Interface for adding new members using our styled forms."></page-title>
+
+<form tiny-submit="save_edit(dataForm)" method="post">
+	<div class="panel panel-headerless">
+		<div class="panel-body">
+			<div class="member-form-add-header">
+				<div class="row">
+					<div class="col-md-2 col-sm-4 pull-right-sm">
+
+						<div class="action-buttons">
+							<button type="submit" class="btn btn-block btn-secondary">Save Changes</button>
+							<button type="reset" class="btn btn-block btn-gray">Reset to Default</button>
+						</div>
+
+					</div>
+					<div class="col-md-10 col-sm-8">
+
+						<div id="main" class="user-img">
+							<img image_target src="{{avatar}}" class="img-circle" alt="user-pic" />
+                            <a class="change_img" on-uploaded="uploaded(respon, file)" tiny-upload="true">Change Picture</a>
+						</div>
+						<div class="user-name">
+							<a href="">{{full_name}}</a>
+							<span>{{role_name}}</span>
+						</div>
+
+					</div>
+				</div>
+			</div>
+            <hr />
+            <tabset>
+            <tab id="{{isEdit ? '' : 'isEdit'}}" heading="Account Infomation">
+			<div class="member-form-inputs">
+				<div class="row">
+					<div class="col-sm-3">
+						<label class="control-label" for="username">Screen Name</label>
+					</div>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" name="username" id="username" required="true" value="{{username}}" ng-disabled="isEdit" />
+					</div>
+				</div>
+                
+                <div class="row">
+					<div class="col-sm-3">
+						<label class="control-label" for="full_name">Password</label>
+					</div>
+					<div class="col-sm-9">
+						<input type="password" class="form-control" required="true" name="password" id="password" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-3">
+						<label class="control-label" for="full_name">Full Name</label>
+					</div>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" name="full_name" required="true" id="full_name" value="{{full_name}}" />
+					</div>
+				</div>
+                
+                <div class="row">
+					<div class="col-sm-3">
+						<label class="control-label" for="email">Email</label>
+					</div>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" name="email" required="true" id="email" value="{{email}}" />
+					</div>
+				</div>
+                
+                <div class="row">
+					<div class="col-sm-3">
+						<label class="control-label" for="address">Address</label>
+					</div>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" name="address" required="true" id="address" value="{{address}}" />
+					</div>
+				</div>
+                
+                <div class="row">
+					<div class="col-sm-3">
+						<label class="control-label" for="address">Phone</label>
+					</div>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" name="phone" id="phone" value="{{phone}}" />
+					</div>
+				</div>
+                
+				<div class="row">
+					<div class="col-sm-3">
+						<label class="control-label" for="birthdate">Birthdate</label>
+					</div>
+					<div class="col-sm-9">
+						<div class="input-group">
+							<input type="text" class="form-control tiny-picker" name="birthdate" data-format="dd-mm-yyyy" value="{{birth_date}}">
+
+							<div class="input-group-addon">
+								<a href=""><i class="linecons-calendar"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+                
+                <div class="row">
+					<div class="col-sm-3">
+						<label class="control-label" for="birthdate">User Group</label>
+					</div>
+					<div class="col-sm-9">
+						<select required class="form-control tiny-selectbox" name="group-parent">
+                        	<option ng-selected="group.parent" ng-repeat="group in groups" value="{{group.user_group_id}}">{{group.title}}</option>
+                        </select>
+					</div>
+				</div>
+                
+                <div class="row">
+					<div class="col-sm-3">
+						<label class="control-label">Secondary User Groups</label>
+					</div>
+					<div class="col-sm-9">
+                    <p ng-repeat="group in groups" ng-if="!group.parent">
+						<label class="cbr-inline">
+							<input type="checkbox" value="{{group.user_group_id}}" ng-checked="group.checked" name="group" class="tiny-cbr">
+							{{group.title}}
+						</label>
+                    </p>
+
+					</div>
+				</div>
+            
+			</div>
+            </tab>
+            
+            <tab ng-if="isEdit" heading="Permissions">
+                <table class="table table-model-2 table-hover">
+                	<tbody id="permissions">
+                		<tr ng-repeat-start="list in permissions">
+                			<td class="group-header" colspan="3"><h4>{{list.title}}</h4></td>                                
+                		</tr>
+                		<tr ng-repeat="i in list.list_permission">
+                			<td>{{i.title}} <small class="tiny-smallid">{{i.permission_id}}</small></td>
+                			<td class="action-group">
+                				<input ng-checked="i.checked != '' && i.checked != 'denied'" type="checkbox" class="tinyRadio" name="permission-{{i.checked != '' ? i.checked : 'user'}}" value="{{i.permission_id}}" />
+                			</td>
+                		</tr>
+                		<tr ng-repeat-end></tr>                              
+                	</tbody>
+                </table>
+            </tab>
+            </tabset>
+
+		</div>
+	</div>
+<input ng-if="isEdit" type="hidden" name="user_id" value="{{user_id}}" />
+<input type="hidden" name="avatar-link" id="avatar_link" value="{{avatar_link}}" />
+</form>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        setTimeout(function(){
+            if($('#isEdit').length){
+                $('#isEdit').parent('ul.nav.nav-tabs').hide();
+            }
+        }, 300);
+    })
+</script>

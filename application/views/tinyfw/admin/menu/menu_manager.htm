@@ -1,0 +1,91 @@
+<page-title ng-if="layoutOptions.pageTitles" title="{title_page}" description="{description}"></page-title>
+<style>
+    .uk-nestable ul{
+        list-style: none;
+    }
+    .group-option{
+        float: right;
+        margin-top: 6px;
+    }
+</style>
+<script type="text/ng-template" id="menu-items-tpl">
+    <li ng-repeat="menu in menus" data-item="{{menu.title}}" data-item-id="{{menu.menu_id}}" repeat-complete>
+		<div class="uk-nestable-item">
+		    <div class="uk-nestable-handle"></div>
+		    <div data-nestable-action="toggle"></div>
+		    <div class="list-label">{{menu.title}}</div>
+            <div class="group-option">
+                <button tiny-modal="true" data-size="lg" data-id="admin/menu/add-menu.htm?6" data-titleper="{{menu.title}}" data-menuid="{{menu.menu_id}}" data-parent="{{menu.parent}}" data-permissionid="{{menu.permission_id}}" data-link="{{menu.link}}" data-icon="{{menu.icon}}" class="btn btn-icon btn-warning btn-sm">
+    				Edit
+    			</button>
+                
+                <button ng-click="Remove(menu.menu_id);" class="btn btn-icon btn-danger btn-sm">
+    				Delete
+    			</button>
+            </div>
+		</div>
+        <ul ng-if="menu.child.length" ng-init="Childs = menu.child" ng-include="'menu-items-tpl-child'"></ul>
+	</li>
+</script>
+
+<script type="text/ng-template" id="menu-items-tpl-child">
+    <li ng-repeat="menu in Childs" data-item="{{menu.title}}" data-item-id="{{menu.menu_id}}">
+		<div class="uk-nestable-item">
+		    <div class="uk-nestable-handle"></div>
+		    <div data-nestable-action="toggle"></div>
+		    <div class="list-label">{{menu.title}}</div>
+            <div class="group-option">
+                <button tiny-modal="true" data-size="lg" data-id="admin/menu/add-menu.htm?6" data-titleper="{{menu.title}}" data-menuid="{{menu.menu_id}}" data-parent="{{menu.parent}}" data-permissionid="{{menu.permission_id}}" data-link="{{menu.link}}" data-icon="{{menu.icon}}" class="btn btn-icon btn-warning btn-sm">
+    				Edit
+    			</button>
+                
+                <button ng-click="Remove(menu.menu_id);" class="btn btn-icon btn-danger btn-sm">
+    				Delete
+    			</button>
+            </div>
+		</div>
+        <ul ng-if="menu.child.length" ng-init="Childs = menu.child" ng-include="'menu-items-tpl-child'"></ul>
+	</li>
+</script>
+
+<div class="row">
+	<div class="col-md-12">
+        <div class="panel panel-default tiny-panel">
+        	<div class="panel-heading">
+        		<div class="panel-title">
+                    {title_page}
+                </div>
+        		
+        		<div class="panel-options">
+                    <button ng-if="isUpdate" ng-click="sortMenu();" class="btn btn-warning btn-icon">
+						<i class="fa-check"></i>
+						<span>Install Update</span>
+					</button>
+                    <button class="btn btn-secondary btn-icon btn-icon-standalone" tiny-modal="true" data-size="lg" data-id="admin/menu/add-menu.htm?5">
+            			<i class="fa-plus"></i>
+        				<span>Add Menu</span>
+            		</button>
+        		</div>
+        	</div>
+        	<div class="panel-body">
+        		<ul id="nestable-list-1" class="uk-nestable" ng-include="'menu-items-tpl'"></ul>
+        	</div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var json = {};
+	function toJson(items, parent){
+		
+		jQuery.each(items, function(i, obj){//-- index, value
+			json[Object.keys(json).length] = {
+				id: obj.itemId,
+                parent: parent,
+				order: i
+			};
+			if(obj.children)
+				toJson(obj.children, obj.itemId);
+		})
+	}	
+</script>

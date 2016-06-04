@@ -1,0 +1,61 @@
+
+<form role="form" tiny-submit="createMenu(dataForm)" class="form-horizontal ng-pristine ng-valid">
+    <div class="modal-header">
+		<button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">{{menuid > 0 ? 'Edit Navigation' : 'Create New Admin Navigation Link'}} <span ng-if="titleper.length > 0">: </span><span class="tiny-title-bind" ng-bind="titleper"></span></h4>
+	</div>
+    <div class="modal-body">
+        <div class="form-group">
+			<label class="col-sm-3 control-label" for="title">Title</label>
+
+			<div class="col-sm-9">
+				<input required type="text" ng-model="titleper" class="form-control" name="title" id="title" placeholder="Navigation Title">
+			</div>
+    	</div>
+        
+        <div class="form-group">
+			<label class="col-sm-3 control-label" for="link">Link</label>
+
+			<div class="col-sm-9">
+				<input required type="text" class="form-control" name="link" id="link" ng-value="link" placeholder="Link">
+			</div>
+    	</div>
+        
+        <div class="form-group">
+			<label class="col-sm-3 control-label" for="icon">Icon</label>
+
+			<div class="col-sm-9">
+				<input required type="text" class="form-control" name="icon" id="icon" ng-value="icon" placeholder="Icon">
+			</div>
+    	</div>
+        <hr />
+        <div class="form-group">
+			<label class="col-sm-3 control-label" for="title">Parent Navigation Entry</label>
+
+			<div class="col-sm-9">
+				<select name="parent" class="form-control tiny-selectbox">
+                    <option value="0">--- Root ---</option>
+                    <option ng-repeat="option in options" ng-selected="(option.id == parent)" value="{{option.id}}">{{option.title}}</option>
+                </select>
+			</div>
+    	</div>
+        
+        <div class="form-group">
+			<label class="col-sm-3 control-label" for="title">Required Admin Permission</label>
+
+			<div class="col-sm-9">
+				<select name="permission_id" class="form-control tiny-selectbox">
+                    <option value="">No Required</option>
+                    <optgroup ng-repeat="list in listAdmin" label="{{list.title}}">
+                        <option ng-repeat="i in list.list_permission" ng-selected="(i.permission_id == permissionid)" value="{{i.permission_id}}">{{i.title}}</option>
+                    </optgroup>
+                </select>
+			</div>
+    	</div>
+    </div>
+    <div class="modal-footer">
+		<button type="button" class="btn btn-white" ng-click="currentModal.close();">Close</button>
+		<button type="submit" class="btn btn-info">Save changes</button>
+	</div>
+ <input ng-if="(menuid > 0)" type="hidden" name="menu_id" ng-value="menuid" />
+</form>

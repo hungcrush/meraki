@@ -1,0 +1,250 @@
+.owl-carousel .owl-stage{
+    display: flex;
+}
+.my-carousel{
+    clear: both;
+    opacity: 0;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)”;
+    filter: alpha(opacity = 0);
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+    width: 100%;
+    display: block;
+}
+.my-carousel:first-child{
+    border-top: 0px solid #ccc;
+    padding-top: 0px;
+}
+.my-carousel .group_pro_title{
+    margin-bottom: 20px;
+}
+.my-carousel .group_pro_title h4{
+    font-size: 22px;
+    line-height: 26px;
+    text-transform: capitalize;
+    margin-top: 0px;
+    position: relative;
+    display: inline;
+}
+.my-carousel .group_pro_title h4 a{
+    color: #333;
+}
+.my-carousel .group_pro_title h4 a i{
+    font-size: 25px;
+    position: absolute;
+    right: -15px;
+    top: 1px;
+}
+.my-carousel .group_pro_title > a{
+    display: inline;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+.my-carousel .owl-carousel .owl-controls .owl-nav .owl-next{
+    background: url(next.png) no-repeat;
+    height: 44px;
+    margin: 0px;
+    padding: 0px;
+    width: 22px;
+
+    opacity: 0;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)”;
+filter: alpha(opacity = 0);
+
+    transition: all 0.3s;
+
+    position: absolute;
+    right: -15px;
+    top: 40%;
+}
+
+.my-carousel .owl-carousel .owl-controls .owl-nav .owl-prev{
+    background: url(prev.png) no-repeat;
+    height: 44px;
+    width: 22px;
+    margin: 0px;
+    padding: 0px;
+
+    opacity: 0;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)”;
+filter: alpha(opacity = 0);
+
+    transition: all 0.3s;
+
+    position: absolute;
+    left: -15px;
+    top: 40%;
+}
+
+.my-carousel .owl-theme:hover .owl-controls .owl-nav .owl-next{
+    opacity: 1;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)”;
+filter: alpha(opacity = 100);
+    right: 25px;
+}
+
+.my-carousel .owl-theme:hover .owl-controls .owl-nav .owl-prev{
+    opacity: 1;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)”;
+filter: alpha(opacity = 100);
+    left: 25px;
+}
+
+.owl-carousel{
+    width: 100% !important;
+    margin: auto;
+}
+.my-carousel .owl-item .item h4{
+    font-size: 15px;
+    line-height: 20px;
+    text-transform: capitalize;
+    color: #333333;
+    height: 42px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.my-carousel .owl-item .thumbnail{
+    border: none;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+.my-carousel .owl-item .item .item_commission{
+    clear: both;
+    width: 100%;
+    padding-top: 9px;
+}
+.my-carousel .owl-item .item .item_commission .com_donation{
+    float: left;
+    text-align: center;
+    width: 50%;
+    color: #ffffff;
+    background: #949494;
+    padding-top: 5px;
+    height: 33px;
+    font-size: 16px;
+}
+.my-carousel .owl-item .item .item_commission .com_CashReward{
+    float: right;
+    text-align: center;
+    width: 50%;
+    color: #ffffff;
+    background: #afafaf;
+    padding-top: 5px;
+    height: 33px;
+    font-size: 16px;
+}
+.my-carousel .owl-item .item .item_commission .com_CashReward img{
+    padding: 0px;
+    border: none;
+    margin-right: 10px;
+}
+.my-carousel .owl-carousel .owl-item:hover .item .item_commission .com_CashReward{
+    background: #B1DC1B;
+}
+.my-carousel .owl-carousel .owl-item:hover .item .item_commission .com_donation{
+    background: #71c12a;
+}
+.my-carousel .owl-carousel .owl-item:hover .item h4{
+    color: #50A008;
+}
+
+.my-carousel .owl-item .item .item_commission i{
+    margin-right: 15px;
+    font-size: 17px;
+}
+.my-carousel .owl-item .item .item_commission .com_CashReward i{
+    font-size: 19px;
+}
+
+.my-carousel .owl-item .item img{
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.my-carousel .owl-item .item a{
+    color: #333333;
+}
+.my-carousel .owl-item .item a:hover{
+    text-decoration:none;
+}
+
+.my-carousel .owl-item .item p{
+    clear: both;
+    margin: 0px;
+    line-height: 20px;
+    font-size: 13px;
+}
+
+.my-carousel .owl-item .item .item_promo{
+    position: absolute;
+    left:0px;
+    bottom: 0px;
+    width: 100%;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #ffffff;
+    overflow:hidden;
+    background: #ff7300;
+}
+
+.my-carousel .owl-item .item .item_promo .sp_promo{
+    clear: both;
+    padding: 2px 4px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.my-carousel .owl-item .item .item_img{
+    position:relative;
+    overflow:hidden;
+    clear:both;
+}
+
+.my-carousel .owl-item .item .sp_price, .item_tooltip .tooltip-inner .sp_price{
+    font-size: 18px;
+    color: #ff7300;
+}
+.my-carousel .owl-item .item .sp_price_p{
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+}
+
+.my-carousel .owl-item .item .sp_out_of_stock, .item_tooltip .tooltip-inner .sp_out_of_stock{
+    font-size: 11px;
+    color: red;
+    margin-left: 10px;
+}
+.item_tooltip{
+    opacity: 1 !important;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)”;
+    filter: alpha(opacity = 100);
+    margin-top: -10px !important;
+}
+.item_tooltip .tooltip-inner{
+    background: #FFFFFF;
+    opacity: 1 !important;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)”;
+    filter: alpha(opacity = 100);
+    border: 1px solid #dbdbdb;
+    border-top: none;
+    color: #666666;
+    text-align: left;
+
+    -webkit-border-radius: 0px 0px 4px 4px;
+    -moz-border-radius: 0px 0px 4px 4px;
+    border-radius: 0px 0px 4px 4px;
+
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.075);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.075);
+    max-width: 100%;
+}
+
+.owl-carousel .owl-item{
+    transition: all 0.4s;
+}

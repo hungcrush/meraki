@@ -1,0 +1,113 @@
+
+
+	<page-title ng-if="layoutOptions.pageTitles" title="{title_page}" description="Badges, labels and other Boostrap elements"></page-title>
+
+
+<div class="row">
+	
+	<div id="main" class="col-sm-9">
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Preview
+			</div>
+			
+			<div class="panel-body">
+				<img image_target class="img-responsive tiny-drag-target" ng-src="{{home.background ? home.background : '{r}/images/no-thumb2.jpg'}}" />
+                <div ng-switch="home.indexType" id="tiny-drag-target" class="valign-wrapper s">
+                    <div style="width: {{home.media_size}}%;transition: all 0.3s;" class="valign">
+                        <div style="opacity: {{home.opacity / 100}}" ng-switch-when="video" class="embed-responsive embed-responsive-16by9">
+                            <iframe src="{{home.src | trustAsResourceUrl}}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        
+                        <div style="opacity: {{home.opacity / 100}}" ng-switch-when="image" class="image-home">
+                            <img ng-src="{{home.content}}" class="img-responsive" />
+                        </div>
+                        
+                        <div style="opacity: {{home.opacity / 100}}" ng-switch-when="text" class="image-home" ng-bind-html="toTrustedHTML(home.content)"></div>
+ 
+                        <div class="clearfix"></div>
+                        <div ng-if="home.background" ng-class="{'btn-group-tiny': home.indexType}">
+                            <button tiny-modal="true" data-id="admin/content/home_modal/video.htm" class="btn btn-danger"><i class="fa fa-youtube-play"></i> Video</button>
+                            <button tiny-modal="true" data-id="admin/content/home_modal/upload_img.htm" class="btn btn-orange"><i class="fa fa-picture-o"></i> Picture</button>
+                            <button tiny-modal="true" data-id="admin/content/home_modal/text.htm?2" html-content="home.content" data-size="lg" class="btn btn-turquoise"><i class="fa fa-font"></i> Text</button>
+                        </div>
+                    </div>
+                </div>
+			</div>
+			
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">Home Background</div>
+			
+			<div class="panel-body align-center">
+				<button class="btn btn-success" not-thumb="true" on-uploaded="uploadComplete(respon, file)" folder="content/home" x-ssize-required="2000,1333" tiny-upload="true"><i class="fa fa-cloud-upload"></i> Change Home Backgroup (2000 x 1333)</button>
+                <div class="clearfix"></div>
+                <small>Update background for home page. Please choose image size <b>2000x1333</b></small>
+			</div>
+            <input type="hidden" id="image_src" value="" />
+		</div>
+		
+	</div>
+	
+	<div class="col-sm-3">
+	
+		<div class="panel panel-default hide-no-data" ng-class="{'active': home.indexType != '' && home.indexType != 'null'}">
+			<div class="panel-heading">
+				Setting
+			</div>
+			
+			<div class="panel-body">
+            <form tiny-submit="saveHomeSetting(dataForm)" id="setting-form" class="setting-form">
+				<label>Size</label>
+				<select name="media_size" ng-model="home.media_size" tiny-selected="home.media_size" class="tiny-selectbox form-control">
+                    <option value="10">10%</option>
+                    <option value="30">30%</option>
+                    <option value="50">50%</option>
+                    <option value="70">70%</option>
+                    <option value="80">80%</option>
+                </select>
+                
+                <label>Font size</label>
+                <select ng-model="home.font_size" tiny-selected="home.font_size" name="font_size" class="tiny-selectbox form-control">
+                    <option value="10">10%</option>
+                    <option value="30">30%</option>
+                    <option value="50">50%</option>
+                    <option value="70">70%</option>
+                    <option value="80">80%</option>
+                    <option value="100">100%</option>
+                </select>
+                
+                <label>Opacity</label>
+                <select ng-model="home.opacity" tiny-selected="home.opacity" name="opacity" class="tiny-selectbox form-control">
+                    <option value="50">50%</option>
+                    <option value="70">70%</option>
+                    <option value="80">80%</option>
+                    <option value="100">100%</option>
+                </select>
+                
+                <hr />
+                <label>Video Setting</label>
+                <label class="cbr-inline">
+    				<input ng-checked="home.show_suggest" ng-click="ChangeURL()" type="checkbox" value="1" name="show_suggest" class="tiny-cbr">
+    				Show suggested videos when the video ends
+    			</label>
+                <label class="cbr-inline">
+    				<input ng-checked="home.show_control" ng-click="ChangeURL()" type="checkbox" value="1" name="show_control" class="tiny-cbr">
+    				Show player controls
+    			</label>
+                <label class="cbr-inline">
+    				<input ng-checked="home.show_title" ng-click="ChangeURL()" type="checkbox" value="1" name="show_title" class="tiny-cbr">
+    				Show the video title and the task of the player
+    			</label>
+                <hr />
+                <button type="button" ng-click="removeMedia()" class="btn btn-primary"><i class="fa fa-close"></i> Remove Media</button>
+                <button type="submit" class="btn btn-warning pull-right">Save Changes</button>
+            </form>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>

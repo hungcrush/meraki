@@ -1,0 +1,11 @@
+<div class="owl-carousel">
+    <div ng-if="!image" ng-repeat="slide in objSlider" data-hash="{{slide.hash}}" class="item">
+        <a href="{{slide.link}}" style="background-image: url({{slide.src}});"></a>
+    </div>
+    
+    <div ng-if="image" ng-repeat="slide in objSlider" data-hash="{{slide.hash}}" class="item">
+        <a href="{{slide.link}}">
+            <img class="responsive-img" ng-src="{{slide.src}}" />
+        </a>
+    </div>
+</div>

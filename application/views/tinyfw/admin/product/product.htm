@@ -1,0 +1,89 @@
+<div ng-if="Moved != '2'" class="gallery-manage" ng-class="{'col-sm-3': !isLarge, 'col-sm-9': isLarge, 'col-md-12' : (listProduct.length == 0)}">
+    <div class="gallery-sidebar">
+
+        <div class="album-header s">
+            <h2>Product</h2>
+            <a tiny-modal="true" ng-if="p.productadd" data-id="admin/product/edit-product.htm?6" class="upload-sm"><i tooltip="Upload" class="fa-upload"></i></a>
+            <ul class="album-options list-unstyled list-inline">
+                <li>
+                    <input type="checkbox" class="tiny-cbr tiny-selectall" target=".album-image input[type='checkbox']" id="select-all2" />
+                    <label for="select-all2">Select all</label>
+                </li>
+                <li ng-if="p.productadd">
+                    <a tiny-modal="true" data-id="admin/product/edit-product.htm?5" href="">
+                        <i class="fa-upload"></i>
+                        Add Images
+                    </a>
+                </li>
+                <li>
+                    <a href="" element="sortable-product-child" cancel-btn="cancel-product-child" on-save="saveSort(serilaze, '')" class="tiny-sort">
+                        <i class="fa-arrows"></i>
+                        Re-order
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="test()" href="" data-action="trash">
+                        <i class="fa-trash"></i>
+                        Trash
+                    </a>
+                </li>
+            </ul>
+            <i ng-click="toggleProduct();" class="fa" ng-class="{'fa-angle-right': !isLarge, 'fa-angle-left': isLarge}"></i>
+        </div>
+        
+        <!-- Sorting Information -->
+        <div id="cancel-product-child" class="album-sorting-info">
+            <div class="album-sorting-info-inner clearfix">
+                <a href="" class="btn btn-secondary btn-xs btn-single btn-icon btn-icon-standalone pull-right" data-action="sort">
+                    <i class="fa-save"></i>
+                    <span>Save Current Order</span>
+                </a>
+
+                <i class="fa-arrows-alt"></i>
+                Drag images to sort them
+            </div>
+        </div>
+        
+        <div class="clearfix"></div>
+        <center ng-if="!listProduct.length"><h3>No Product</h3></center>
+        <ul ng-if="!isLarge" class="list-unstyled list-product-small">
+            <li ng-class="{'active': (product_id == product.product_id)}" ng-repeat="product in listProduct">
+                <a ng-href="{{_module}}{{product.product_id}}{{product.product_item_id ? '/'+product.product_item_id : ''}}">
+                    <img ng-src="{{product.thumb}}" class="responsive-img" />
+                    <span>{{product.name}}</span>
+                </a>
+                <div class="image-options">
+                    <a data-imagethumb="{{product.image}}" data-image="{{product.origin_img}}" data-productid="{{product.product_id}}" data-title-per="{{product.name}}" data-description="{{product.description}}" tiny-modal="true" data-id="admin/product/edit-product.htm?2" href="" data-action="add-product"><i class="fa-pencil"></i></a>
+                    <a ng-click="Remove(product.product_id, '')" href="" data-action="trash"><i class="fa-trash"></i></a>
+                </div>
+            </li>
+        </ul>
+        
+        <div ng-if="isLarge" id="sortable-product-child" class="album-images row">
+            <div ng-repeat="product in listProduct" data-id="{{product.product_id}}" class="col-md-3 col-sm-4 col-xs-6 ui-sorable-tiny">
+                <div class="album-image">
+                    <a ng-href="{{_module}}{{product.product_id}}" class="thumb" data-action="edit">
+                        <img ng-src="{{product.image}}" class="img-responsive" />
+                    </a>
+
+                    <a href="" class="name">
+                        <span>{{product.name}}</span>
+                    </a>
+
+                    <div class="image-options">
+                        <a data-imagethumb="{{product.image}}" data-image="{{product.origin_img}}" data-productid="{{product.product_id}}" data-title-per="{{product.name}}" data-description="{{product.description}}" tiny-modal="true" data-id="admin/product/edit-product.htm?1" href="" data-action="add-product"><i class="fa-pencil"></i></a>
+                        <a ng-click="Remove(product.product_id, '')" href="" data-action="trash"><i class="fa-trash"></i></a>
+                    </div>
+
+                    <div class="image-checkbox">
+                        <input type="checkbox" tiny-model="lanvi" value="{{product.product_id}}" class="tiny-cbr" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="gallery-manage" ng-class="{'col-sm-3': isLarge || Moved == '2', 'col-sm-9': !isLarge && Moved != '2'}" ui-view="items"></div>
+<div ng-show="Moved == '2'" ui-view="detail" class="col-sm-9">
+    
+</div>

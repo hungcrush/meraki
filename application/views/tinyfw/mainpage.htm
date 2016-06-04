@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tinyfw">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title ng-bind-template="Tiny - {{currentPage.title || '{title_page}' }}">Tiny</title>
+
+  <!-- CSS  -->
+  <link href="{r}/materialize/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{r}/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{r}/css/media.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{r}/ionicons/css/ionicons.min.css" type="text/css" rel="stylesheet" />
+  <link rel="stylesheet" href="{r}/admin/assets/css/fonts/line-icons-2/line-icons.css">
+  
+  <!--  Scripts-->
+  <script src="{r}/javascript/jquery.js"></script>
+  <script src="{r}/javascript/jquery-ui-custom.js"></script>
+  <script src="{r}/materialize/js/materialize.min.js"></script>
+  <script src="{r}/javascript/angular.min.js"></script>
+  <script src="{r}/javascript/angular-ui-router.js"></script>
+  <script src="{r}/javascript/angular-animate.js"></script>
+  <script src="{r}/admin/app/js/oc-lazyload/ocLazyLoad.min.js"></script>
+  <script src="{r}/javascript/tiny.base64.js"></script>
+  <script type="text/javascript">
+  <!--
+        var hs = false;
+        var URL_SERVER = '{tinyfw}';
+            TEMP_ = '{tinyfw}angular.htm',
+            PATH_ = '{path}';
+            
+        var tinyConfig = {
+            dirTemp: '{r}',
+    		templatesDir: '{dirTemp}app/tpls',
+    		assetsDir: '{r}/admin/assets',
+            tinyToken: '{hash}',
+            thumbSize: {w: 100, h: 90},
+    		templatePath: function(view_name)
+    		{
+    			return this.templatesDir + '/' + view_name + '.html?17';
+    		},
+            
+            templatePathAjax: function(view_name)
+    		{
+    			return URL_SERVER+'welcome/load/?template=app/tpls/' + view_name + '.html&isTemp=true';
+    		},
+    
+    		assetPath: function(file_path)
+    		{
+    			return this.assetsDir + '/' + file_path;
+    		}
+   	    };
+  -->
+  </script>
+</head>
+<body>
+<section class="tiny-fw tiny-navigation">
+  <nav class="white" id="tinyNavbar" role="navigation">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="tiny-mobile">
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            
+            <div class="col s4 m4 l2 center-align"><a id="logo-container" ui-sref="home" class="center">MERAKI</a></div>
+            
+            <ul id="nav-mobile" class="side-nav fixed">
+                <li><a ui-sref="home.products">Product</a></li>
+                <li><a ui-sref="home.blog">Blog</a></li>
+                <li><a href="home/LANVIs">About Us</a></li>
+                <li><a href="#">Login</a></li>
+                <li><a ui-sref="/" href="home/LANVIs">Help</a></li>
+                <li><a ui-sref="home">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col s4 m4 l5 center-align">
+                <ul id="nav-mobile-left">
+                  <li ng-class="{'active': (isActive == 'product')}"><a ui-sref="home.products">Product</a></li>
+                  <li ui-sref-active="active"><a ui-sref="home.blog">Blog</a></li>
+                  <li ui-sref-active="active"><a ui-sref="home.aboutus">About Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="col s4 m4 l2 center-align"><a id="logo-container" ui-sref="home" class="center">MERAKI</a></div>
+            
+            <div class="col s4 m4 l5 center-align">
+                <ul id="nav-mobile-right">
+                  <li><a href="#">Login</a></li>
+                  <li><a ui-sref="/" href="home/LANVIs">Help</a></li>
+                  <li><a ui-sref="home">Contact Us</a></li>
+                </ul>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  </nav>
+  <nav class="white"></nav>
+  <div id="main" ng-class="{'container': isContainer}" ui-view></div>
+</section>
+  <footer class="page-footer grey darken-3">
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="">#LV YU+</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{r}/loading-bar/loading-bar.js"></script>
+  <link href="{r}/loading-bar/loading-bar.css" type="text/css" rel="stylesheet" />
+  <!-- Tiny Resource -->
+  <script src="{r}/javascript/tiny.until.js"></script>
+  <script src="{r}/javascript/app/tiny.factory.js"></script>
+  <script src="{r}/javascript/app/tiny.directive.js"></script>
+  <script src="{r}/javascript/app/directive.js"></script>
+  <script src="{r}/javascript/app/controller.js"></script>
+  <script src="{r}/javascript/scriptJquery.js"></script>
+  
+  <script src="{r}/javascript/app/tiny.app.js"></script>
+  </body>
+</html>

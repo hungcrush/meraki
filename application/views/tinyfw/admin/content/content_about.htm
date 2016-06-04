@@ -1,0 +1,50 @@
+
+
+	<page-title ng-if="layoutOptions.pageTitles" title="{title_page}" description="{description}"></page-title>
+
+
+<div class="panel panel-default">
+
+	<div class="panel-heading">
+		<div class="panel-title">
+			Setup {title_page}
+		</div>
+		
+		<small class="text-small pull-right" style="padding-top:5px;">
+			<code>data-validate="rule1,rule2,...,ruleN"</code>
+		</small>
+	</div>
+	
+	<div class="panel-body">
+        <alert type="success" close="success = false" class="ng-hide-animate" ng-show="success == true">
+			<strong><i class="fa fa-check"></i> Success!</strong> Product update success. <a target="_blank" ng-href="#!{href}">View Post</a></a>.
+		</alert>
+	
+		<form role="form" tiny-submit="formSubmit(dataForm)" method="post">
+			
+			<div ng-if="!required_title" class="form-group">
+				<label class="control-label">Title</label>
+				<input type="text" class="form-control" name="title" value="{content_title}" placeholder="Title" />
+			</div>
+            
+            <div ng-if="!required_des" class="form-group">
+				<label class="control-label">Description</label>
+                <textarea class="form-control" name="description" placeholder="Description">{content_des}</textarea>
+			</div>
+            
+            <div class="form-group">
+				<label class="control-label">Content</label>
+                <textarea class="form-control tiny-editor" timeout="0" id="content" rows="5" name="content" placeholder="Content">{content_html}</textarea>
+			</div>
+			
+			<div class="form-group">
+				<button type="submit" class="btn btn-success">Validate</button>
+				<button type="reset" class="btn btn-white">Reset</button>
+			</div>
+		  
+            <input type="hidden" name="type" value="{type}" />
+		</form>
+	
+	</div>
+
+</div>

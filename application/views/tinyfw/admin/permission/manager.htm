@@ -1,0 +1,81 @@
+<page-title ng-if="layoutOptions.pageTitles" title="{title_page}" description="{description}"></page-title>
+<div class="row">
+	<div class="col-md-12">
+		<div ng-init="tabbed_panel_active = 1;" class="panel panel-default panel-tabs tiny-tabs">
+			<div class="panel-heading">
+				<div class="panel-title">
+                    <button ng-click="fn.for = tabbed_panel_active" tiny-modal="true" data-id="admin/permission/add-permission.htm?6" data-size="null" class="btn btn-success btn-icon btn-icon-standalone">
+						<i class="fa-plus"></i>
+						<span>Add Permission</span>
+					</button>
+                    
+                    <button tiny-modal="true" data-id="admin/permission/add-group.htm?4" class="btn btn-white btn-icon btn-icon-standalone btn-icon-standalone">
+						<i class="fa-plus-square"></i>
+						<span>Add Group Permission</span>
+					</button>
+                </div>
+                
+                <div class="panel-options">
+					
+					<ul class="nav nav-tabs">
+						<li ng-class="{'active': tabbed_panel_active == 1}">
+							<a href="" ng-click="tabbed_panel_active = 1"><i class='linecons-star'></i> Admin</a>
+						</li>
+						<li ng-class="{'active': tabbed_panel_active == 0}">
+							<a href="" ng-click="tabbed_panel_active = 0"><i class='fa fa-users'></i> Users</a>
+						</li>
+					</ul>
+					
+				</div>                                                
+				
+			</div>
+			<div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane" ng-class="{'active': tabbed_panel_active == 1}">                
+                        <table class="table table-model-2 table-hover">
+                        	<tbody>
+                        		<tr ng-repeat-start="list in lists">
+                        			<td class="group-header" colspan="3"><h4>{{list.title}}</h4></td>                                
+                        		</tr>
+                        		<tr ng-repeat="i in list.list_permission">
+                        			<td>{{i.permission_id}}</td>
+                        			<td>{{i.title}} <br /> <small>{{i.description}}</small></td>
+                        			<td class="action-group">
+                        				<a data-group_id="{{list.id}}" data-editid="{{i.permission_id}}" data-isedit="isedit" data-title="{{i.title}}" data-permission_id="{{i.permission_id}}" data-pdescription="{{i.description}}" data-for="{{list.type}}" tiny-modal="true" data-id="admin/permission/add-permission.htm?5" class="edit"><i class="fa-pencil"></i></a>
+                        				<a ng-click="Remove(i.permission_id)" class="remove"><i class="fa-remove"></i></a>
+                        			</td>
+                        		</tr>
+                        		<tr ng-repeat-end></tr>                              
+                        	</tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" ng-class="{'active': tabbed_panel_active == 0}">                    
+                        <table class="table table-model-2 table-hover">
+                        	<tbody>
+                        		<tr ng-repeat-start="list in listsUser">
+                        			<td class="group-header" colspan="3"><h4>{{list.title}}</h4></td>                                
+                        		</tr>
+                        		<tr ng-repeat="i in list.list_permission">
+                        			<td>{{i.permission_id}}</td>
+                        			<td>{{i.title}} <br /> <small>{{i.description}}</small></td>
+                        			<td class="action-group">
+                        				<a data-editid="{{i.permission_id}}" data-isedit="isedit" data-title="{{i.title}}" data-permission_id="{{i.permission_id}}" data-pdescription="{{i.description}}" data-for="{{list.type}}" tiny-modal="true" data-id="admin/permission/add-permission.htm?5" class="edit"><i class="fa-pencil"></i></a>
+                        				<a ng-click="Remove(i.permission_id)" class="remove"><i class="fa-remove"></i></a>
+                        			</td>
+                        		</tr>
+                        		<tr ng-repeat-end></tr>                              
+                        	</tbody>
+                        </table>
+                    </div>                        
+                </div>                        
+			</div>
+		</div>	
+  </div>
+</div>	
+	
+	
+<script>
+    $(document).ready(function(){
+        
+    })
+</script>

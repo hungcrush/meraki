@@ -1,0 +1,15 @@
+
+    <div class="modal-header">
+		<button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">Image</h4>
+	</div>
+    <div id="main" class="modal-body">
+        <div image_target></div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+			<button style="margin: auto; display: block;" tiny-upload="true" on-uploaded="uploadComplete(respon, file)" folder="content/home" class="btn btn-success btn-lg"><i class="fa fa-cloud-upload"></i> Select Image</button>
+    	</div>
+    </div>
+    
+    <input type="hidden" name="title" value="text" />
+  

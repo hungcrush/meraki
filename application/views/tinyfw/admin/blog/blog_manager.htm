@@ -1,0 +1,77 @@
+<page-title ng-if="layoutOptions.pageTitles" title="{title_page}" description="{description}"></page-title>
+
+<!-- Responsive Table -->
+<div class="row">
+	<div class="col-md-12">
+	
+		<div class="panel panel-default">
+                <form tiny-submit="Search(dataForm)" no-reset="true" style="margin-bottom: 20px;" role="form" class="form-inline">
+                    <div class="form-group">
+                        <input class="form-control" name="keyword" type="text" placeholder="Search..." />
+                    </div>
+                    
+                    <div class="form-group">
+                        <select name="category_id" class="form-control">
+                            <option value="">All Category</option>
+                            <option value="0">Unspecified (No Category)</option>
+                            <option ng-repeat="cate in listcates" value="{{cate.category_id}}">{{cate.title}}</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-single">Search</button>
+                    </div>
+                    
+                    <div class="form-group pull-right">
+                        <a href="add" class="btn btn-secondary btn-single">Add New</a>
+                    </div>
+                    
+                </form>
+
+			<div class="panel-body">
+                <center ng-if="!listBlogs.length"><h4>No Post. <a href="add">Add new post</a>.</h4></center>
+                <table ng-if="listBlogs.length" class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">Image</th>
+                            <th style="width: 50%;">Title / Description</th>
+                            <th>Category</th>
+                            <th>Created at</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                        <tr ng-repeat="blog in listBlogs">
+                            <td>
+                                <a class="blog-thumb" style="background-image: url({{blog.image}});"></a>
+                            </td>
+                            <td>
+                                <p class="bold">{{blog.title}}</p>
+                                <hr />
+                                <small>{{blog.description}}</small>
+                            </td>
+                            <td><p>{{categories[blog.category_id].title}}</p></td>
+                            <td><p>{{blog.created_at}}</p></td>
+                            <td>
+                                <a href="#!admin/blog/edit/{{blog.blog_id}}" class="btn btn-sm btn-warning">Edit</a>
+                                <a ng-click="Delete(blog.blog_id, blog.category_id)" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                
+                <div ng-if="listBlogs.length" class="row">
+                    <div class="col-sm-6">
+                        
+                    </div>
+                    
+                    <div class="col-sm-6 text-right text-center-sm">
+                        <pagination boundary-links="false" total-items="countBlog" items-per-page="item_page" ng-model="currentPage" ng-change="changePage(currentPage)" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+</div>

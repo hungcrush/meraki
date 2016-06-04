@@ -1,0 +1,29 @@
+<style>
+    .modalLogin{
+        transition: all 0.6s;
+        overflow: hidden;
+    }
+</style>
+<div class="modal-header">
+	<button type="button" onclick="window.location.href=URL_SERVER;" class="close" aria-hidden="true">&times;</button>
+	<h4 class="modal-title">Session expired</h4>
+</div>
+
+<div class="modal-body text-center">
+    <div class="modalLogin" id="modalBody">
+        <p>Please log in again. You will not move away from this page.</p>
+        <button id="loginAgain" style="width: 120px;" class="btn btn-success" type="button">Login Again</button>
+        <button onclick="window.location.href=URL_SERVER;" type="button" class="btn btn-link">Cancel</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    
+        var modal  = $('#modalBody');
+        var $scope = $mainCtrl.scope();
+        $('#loginAgain').click(function(){
+            var c = $scope.getUrlCurrent();
+            window.location = URL_SERVER+'login?r='+c.name+'&p='+c.params;
+        })
+    
+</script>

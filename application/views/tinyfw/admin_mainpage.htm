@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="xenon-app">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Xenon Boostrap Admin Panel" />
+	<meta name="author" content="" />
+
+	<title ng-bind-template="Tiny - {{currentPage.title || '{title_page}' }}">Tiny</title>
+
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
+	<link rel="stylesheet" href="{r}/admin/assets/css/fonts/linecons/css/linecons.css">
+	<link rel="stylesheet" href="{r}/admin/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{r}/admin/assets/css/bootstrap.css">
+	<link rel="stylesheet" href="{r}/admin/assets/css/xenon-core.css">
+	<link rel="stylesheet" href="{r}/admin/assets/css/xenon-forms.css">
+	<link rel="stylesheet" href="{r}/admin/assets/css/xenon-components.css">
+	<link rel="stylesheet" href="{r}/admin/assets/css/xenon-skins.css">
+	<link rel="stylesheet" href="{r}/admin/assets/css/custom.css">
+
+	<script src="{r}/admin/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="{r}/javascript/tiny.base64.js"></script>
+    <script src="{r}/admin/assets/js/toastr/toastr.min.js"></script>
+    <script>
+    <!--    
+    var URL_SERVER = '{tinyfw}';
+    var TEMP_ = '{tinyfw}angular.htm';
+    var PATH_ = '{path}';        
+    var tinyConfig = {
+        dirTemp: '{r}',
+		assetsDir: '{r}/admin/assets',
+        tinyToken: '{hash}',
+        thumbSize: {w: 100, h: 90},
+        dirTempHtm: '{dirTemp}',
+		templatesDir: '{dirTemp}app/tpls',
+		assetsDir: '{r}/admin/assets',
+        item_page: parseInt('{item_per_page}'),
+
+		// Methods
+		templatePath: function(view_name)
+		{
+			return this.templatesDir + '/' + view_name + '.html?18';
+		},
+        
+        templatePathAjax: function(view_name)
+		{
+			return URL_SERVER+'welcome/load/?template=app/tpls/' + view_name + '.html&isTemp=true';
+		},
+
+		assetPath: function(file_path)
+		{
+			return this.assetsDir + '/' + file_path;
+		},
+        
+        urlAdminTemplate: function(file_path){
+            return URL_SERVER + 'admin'+file_path;
+        }
+	};
+	var avatar_default = tinyConfig.dirTemp+'/admin/assets/images/user-1.png';
+    -->
+	</script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body class="page-body" id="MainCtrl__" ng-controller="MainCtrl" ng-class="{'settings-pane-open': layoutOptions.settingsPane.isOpen, 'chat-open': layoutOptions.chat.isOpen, 'login-page': isLoginPage && isMainPage == false, 'login-light': isLightLoginPage && isMainPage == false, 'lockscreen-page': isLockscreenPage && isMainPage == false, 'right-sidebar': layoutOptions.sidebar.isRight, 'boxed-container': layoutOptions.container.isBoxed}">
+
+
+	<settings-pane></settings-pane>
+
+	<horizontal-menu ng-if="layoutOptions.horizontalMenu.isVisible"></horizontal-menu>
+
+	<div class="page-container" ui-view></div>
+
+	<!-- Remove this code if you want to disable Loading Overlay in the beginning of document loading -->
+	<div class="page-loading-overlay">
+		<div class="loader-2"></div>
+	</div>
+
+
+	<!-- Bottom Scripts -->
+	<script src="{r}/admin/app/js/angular/angular.min.js"></script>
+	<script src="{r}/javascript/angular-ui-router.js"></script>
+	<script src="{r}/admin/app/js/angular-ui/ui-bootstrap-tpls-0.13.0.min.js"></script>
+	<script src="{r}/admin/app/js/angular/angular-cookies.min.js"></script>
+	<script src="{r}/admin/app/js/oc-lazyload/ocLazyLoad.min.js"></script>
+	<script src="{r}/admin/app/js/angular-fullscreen.js"></script>
+	<script src="{r}/admin/assets/js/TweenMax.min.js"></script>
+	<script src="{r}/admin/assets/js/joinable.js"></script>
+	<script src="{r}/admin/assets/js/resizeable.js"></script>
+
+
+	<!-- App -->
+	<script src="{r}/admin/app/js/app.js"></script>
+    <script src="{r}/admin/app/js/constant.js"></script>
+	<script src="{r}/admin/app/js/controllers.js"></script>
+	<script src="{r}/admin/app/js/directives.js"></script>
+	<script src="{r}/admin/app/js/factory.js"></script>
+	<script src="{r}/admin/app/js/services.js"></script>
+    
+    <script>
+    <!--
+        var $mainCtrl = angular.element(document.getElementById('MainCtrl__'));
+    -->
+    </script>
+    
+    <!-- Tiny Resource -->
+    <script src="{r}/javascript/tiny.until.js"></script>
+    <script src="{r}/javascript/app/tiny.factory.js"></script>
+    <script src="{r}/javascript/app/tiny.directive.js"></script>
+    <script src="{r}/javascript/app/tiny.services.js"></script>
+    
+    <script src="{r}/admin/app/js/tiny.controller.js"></script>
+
+	<!-- JavaScripts initializations and stuff -->
+	<script src="{r}/admin/app/js/xenon-custom.js?152"></script>
+
+</body>
+</html>

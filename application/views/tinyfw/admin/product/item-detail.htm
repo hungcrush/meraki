@@ -1,0 +1,41 @@
+<div class="panel panel-headerless">
+    <div class="panel-body">
+        <form role="form" tiny-submit="updateSubmit(dataForm)">
+            <div class="modal-header">
+        		<h4 class="modal-title"><img style="width: 50px;" ng-src="{{itemData.thumb}}" class="responsive-img" /> <b class="tiny-title-bind" ng-bind="itemData.name"></b></h4>
+        	</div>
+        	
+        	<div class="modal-body">
+                    <alert type="success" close="success = false" class="ng-hide-animate" ng-show="success == true">
+						<strong><i class="fa fa-check"></i> Success!</strong> Product update success. <a href="">View Items</a> or <a ng-click="backToList()" href="">Back to Product List</a>.
+					</alert>
+                    
+                    <div class="form-group">
+        				<label for="title">Item name</label>
+                        <input required="true" type="text" class="form-control" name="title" id="title" ng-model="itemData.name" placeholder="Title" />
+        			</div>
+                    
+                    <div class="form-group">
+        				<label for="content">Product Detail</label>
+                        <textarea class="tiny-editor" id="detail_content" timeout="100" height="350" name="description" rows="4" placeholder="Product Description" tiny-html="itemData.item_detail"></textarea>
+        			</div>
+                    
+       				<label for="title">Images</label>
+                    <div id="main" class="form-group inline-s">
+                        <a ng-repeat="image in itemImages" style="background-image: url({{image.src}});" id="{{image.id}}" origin-src="{{image.src}}" data-index="{{$index}}" data-path="{{image.path}}" class="drop-target s">
+                            <i ng-if="image.origin" ng-click="DeleteImage(image.path, image.id)" class="mdi-navigation-close fa fa-times removeDraged"></i>
+                        </a>
+                        <a thumb-size="200,200" multi="true" folder="product/items" on-remove="DeleteImage(path, id);" on-addfile="onAddfile(up, files)" on-uploaded="onUploaded(respon, file)" tiny-upload="true" class="drop-target s"><i class="fa fa-plus"></i></a>
+        			</div>
+        	</div>
+        	<div style="margin-bottom: 15px;" class="clearfix"></div>
+        	<div class="modal-footer nomodal">
+        		<button type="button" class="btn btn-white back-page">Back</button>
+        		<button type="submit" class="btn btn-info">Save changes</button>
+        	</div>
+            
+            <input type="hidden" name="item_id" value="{{item_id}}" />
+            <input type="hidden" name="image" value="1" />
+        </form>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+
+<form role="form" tiny-submit="formSubmit(dataForm)" class="form-horizontal ng-pristine ng-valid">
+    <div class="modal-header">
+		<button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">Video</h4>
+	</div>
+    <div class="modal-body">
+        <div class="form-group">
+			<label class="col-sm-3 control-label" for="content">URL</label>
+
+			<div class="col-sm-9">
+				<input required type="text" class="form-control" name="content" id="content" placeholder="https://www.youtube.com/watch?v=v7y-ue9z5w0">
+			</div>
+    	</div>
+    </div>
+    
+    <input type="hidden" name="title" value="video" />
+    
+    <div class="modal-footer">
+		<button type="button" class="btn btn-white" ng-click="currentModal.close();">Close</button>
+		<button type="submit" class="btn btn-info">Save changes</button>
+	</div>
+</form>

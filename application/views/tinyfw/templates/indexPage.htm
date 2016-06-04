@@ -1,0 +1,50 @@
+<style>
+    .bg-home{
+        background: url({r}/images/IMG_0496.jpg);
+        background-size: cover;
+        width: 100%;
+        position: absolute;
+        height: 100%;
+    }
+    .section{
+        padding: 0;
+        min-height: 100%;
+        position: relative;
+    }
+    .valign-wrapper .valign{
+        margin: auto;
+        text-align: center;
+    }
+    .valign-wrapper.s{
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 100%;
+    }
+    
+    .bg-home.valign-wrapper .valign hr{
+        height: 4px;
+        background-color: #000;
+    }
+    .bg-home.valign-wrapper .valign .flow-text{
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+</style>
+<div ui-view class="section">
+    <div class="slider fullscreen">
+      <ul style="background-image: url({background})" class="slides"></ul>
+      <div ng-init="type = '{content_title}'" class="valign-wrapper s">
+        <div ng-switch="type" style="width: {media_size}%;opacity: {{ {opacity} / 100 }}" class="valign">
+            <div ng-switch-when="video" class="video-container no-controls">
+                <iframe src="{src}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            
+            <div ng-switch-when="image">
+                <img class="responsive-img" src="{content}" />
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

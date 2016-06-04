@@ -1,0 +1,32 @@
+<page-title ng-if="layoutOptions.pageTitles" title="{title_page}" description="{description}"></page-title>
+<div class="row">
+	<div class="col-md-12">
+        <div class="panel panel-default tiny-panel">
+        	<div class="panel-heading">
+        		<div class="panel-title">
+                    {title_page}
+                </div>
+        		
+        		<div class="panel-options">
+                    <button class="btn btn-secondary btn-icon btn-icon-standalone" ng-click="fn.for = 1" tiny-modal="true" data-id="admin/users/add-group.htm?8" data-size="lg">
+            			<i class="fa-plus"></i>
+        				<span>Add Group</span>
+            		</button>
+        		</div>
+        	</div>
+        	<div class="panel-body">
+        		<table class="table table-model-2 table-hover">
+        			<tbody>
+                        <tr ng-repeat="i in list">
+        					<td>{{i.title}}</td>
+        					<td class="action-group">
+                                <a data-groupid="{{i.user_group_id}}" data-permissions="{{i.permission_ids.split(',') | json}}" data-isedit="true" data-titleper="{{i.title}}" data-size="lg" tiny-modal="true" data-id="admin/users/add-group.htm?2" class="edit"><i class="fa-pencil"></i></a>
+                                <a ng-click="Remove(i.user_group_id)" class="remove"><i class="fa-remove"></i></a>
+                            </td>
+        				</tr>                            
+        			</tbody>
+        		</table>
+        	</div>
+        </div>
+    </div>
+</div>

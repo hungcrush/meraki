@@ -1,0 +1,18 @@
+<form role="form" tiny-submit="saveCategory(dataForm)">
+    <div class="modal-header">
+		<button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">Edit Category</h4>
+	</div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="title">Category name</label>
+            <input type="text" placeholder="Category name" name="title" class="form-control" required="true" ng-value="catetitle" />
+        </div>
+    </div>
+    <div class="modal-footer">
+		<button type="button" class="btn btn-white" ng-click="currentModal.close();">Close</button>
+		<button type="submit" class="btn btn-info">Save changes</button>
+	</div>
+    
+    <input type="hidden" ng-value="categoryid" name="category_id" />
+</form>

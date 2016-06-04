@@ -1,0 +1,6 @@
+<ul class="icheck-list">
+	<li ng-repeat="item in checkboxs">
+		<input value="{{item.value}}" name="for[]" type="checkbox" class="{{checkboxID}}" ng-checked="item.checked" id="minimal-checkbox-{{$index}}">
+		<label for="minimal-checkbox-{{$index}}">{{item.label}}</label>
+	</li>
+</ul>

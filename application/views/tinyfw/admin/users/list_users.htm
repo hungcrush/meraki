@@ -1,0 +1,89 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Members List" description="Members management page separated with tabs."></page-title>
+
+<div class="pull-right">
+    <a class="btn btn-secondary btn-icon btn-icon-standalone" href="add">
+		<i class="fa-plus"></i>
+		<span>Add People</span>
+	</a>
+</div>
+<div class="row">
+
+	<div class="col-md-12">
+
+		<tabset>
+			<tab ng-repeat="list in lists" heading="{{list.title}}">
+
+				<table ng-init="currentPage[$index] = 1" class="table table-hover members-table middle-align">
+					<thead>
+						<tr>
+							<th></th>
+							<th class="hidden-xs hidden-sm"></th>
+							<th>Name and Role</th>
+							<th class="hidden-xs hidden-sm">E-Mail</th>
+							<th>ID</th>
+							<th>Settings</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="user in list.list_user">
+							<td class="user-cb">
+								<input tiny-model="members_list" select="check(input)" type="checkbox" class="tiny-cbr" name="members-list-{{list.user_group_id}}[]" ng-value="user.user_id" />
+							</td>
+							<td class="user-image hidden-xs hidden-sm">
+								<a href="">
+									<img ng-src="{{user.avatar != '' ? user.avatar : avatar_default}}" class="img-circle" alt="user-pic" />
+								</a>
+							</td>
+							<td class="user-name">
+								<a href="#!admin/administrator/peoples/edit/{{user.user_id}}" class="name">{{user.full_name}}</a>
+								<span>{{list.title}}</span>
+							</td>
+							<td class="hidden-xs hidden-sm">
+								<span class="email">{{user.email}}</span>
+							</td>
+							<td class="user-id">
+								{{user.user_id}}
+							</td>
+							<td class="action-links">
+								<a href="#!admin/administrator/peoples/edit/{{user.user_id}}" class="edit">
+									<i class="linecons-pencil"></i>
+									Edit Profile
+								</a>
+
+								<a href="" ng-click="Remove(user.user_id)" class="delete">
+									<i class="linecons-trash"></i>
+									Delete
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="row">
+					<div class="col-sm-6">
+
+						<div ng-if="members_list.length" class="members-table-actions">
+							<div class="selected-items">
+								<span>{{(members_list|filter:query).length}}</span>
+								members selected
+							</div>
+
+							<div class="selected-actions">
+								<a href="" class="edit">Edit Profile</a>
+								or
+								<a href="" class="delete">Delete</a>
+							</div>
+						</div>
+
+					</div>
+                    
+                    <div class="col-sm-6 text-right text-center-sm">
+                        <pagination boundary-links="false" total-items="list.maxLength" items-per-page="item_page" ng-model="currentPage[$index]" ng-change="changePage(currentPage[$index], '{{list.user_group_id}}')" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                    </div>
+				</div>
+			</tab>
+		</tabset>
+
+	</div>
+
+</div>

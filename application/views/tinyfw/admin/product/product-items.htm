@@ -1,0 +1,150 @@
+
+            <!-- Album Header -->
+            <div class="album-header">
+                <i ng-if="Moved == '2'" style="font-size: 25px;float: left;" class="fa fa-angle-left back-page" tooltip="Back"></i>
+                <h2 ng-class="{'pull-right': Moved == '2'}">{{item_name}}</h2>
+
+                <ul class="album-options list-unstyled list-inline">
+                    <li>
+                        <input type="checkbox" class="tiny-cbr tiny-selectall" target=".album-image input[type='checkbox']" id="select-all" />
+                        <label for="select-all">Select all</label>
+                    </li>
+                    <li>
+                        <a href="" data-action="add-item" data-productid="{{product_id}}" tiny-modal="true" data-id="admin/product/edit-product.htm?2">
+                            <i class="fa-upload"></i>
+                            Add Images
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" element="sortable-product" cancel-btn="cancel-product" on-save="saveSort(serilaze, 'item')" class="tiny-sort">
+                            <i class="fa-arrows"></i>
+                            Re-order
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" data-action="trash">
+                            <i class="fa-trash"></i>
+                            Trash
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Sorting Information -->
+            <div id="cancel-product" class="album-sorting-info">
+                <div class="album-sorting-info-inner clearfix">
+                    <a href="" class="btn btn-secondary btn-xs btn-single btn-icon btn-icon-standalone pull-right" data-action="sort">
+                        <i class="fa-save"></i>
+                        <span>Save Current Order</span>
+                    </a>
+
+                    <i class="fa-arrows-alt"></i>
+                    Drag images to sort them
+                </div>
+            </div>
+
+            <!-- Album Images -->
+            <div class="gallery-sidebar">
+                <center ng-if="!listItems.length"><h3>No Item</h3></center>
+                <!-- Album Image -->
+                <ul ng-if="isLarge || Moved == '2'" class="list-unstyled list-product-small">
+                    <li ng-class="{'active' : product.product_item_id == item_id}" ng-repeat="product in listItems">
+                        <a href="{{_module+product.product_id+'/'+product.product_item_id}}">
+                            <img ng-src="{{product.thumb}}" class="responsive-img" />
+                            <span>{{product.name}}</span>
+                        </a>
+                        <div class="image-options">
+                            <a href="" data-action="edit"><i class="fa-pencil"></i></a>
+                            <a href="" data-action="trash"><i class="fa-trash"></i></a>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div ng-if="!isLarge && Moved != '2'" id="sortable-product" class="album-images row">
+                    <div ng-repeat="product in listItems" data-id="{{product.product_item_id}}" class="col-md-3 col-sm-4 col-xs-6 ui-sorable-tiny">
+                        <div class="album-image">
+                            <a href="{{_module+product.product_id+'/'+product.product_item_id}}" class="thumb">
+                                <img ng-src="{{product.image}}" class="img-responsive" />
+                            </a>
+    
+                            <a href="" class="name">
+                                <span>{{product.name}}</span>
+                            </a>
+    
+                            <div class="image-options">
+                                <a html-content="product.name" data-imagethumb="{{product.image}}" data-image="{{product.origin_img}}" data-productid="{{product.product_id}}" data-itemid="{{product.product_item_id}}" data-title-per="{{product.name}}" data-description="{{product.description}}" tiny-modal="true" data-id="admin/product/edit-product.htm?5" href="" data-action="add-item"><i class="fa-pencil"></i></a>
+                                <a ng-click="Remove(product.product_item_id, 'item')" href="" data-action="trash"><i class="fa-trash"></i></a>
+                            </div>
+    
+                            <div class="image-checkbox">
+                                <input type="checkbox" class="tiny-cbr" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <button style="display: none;" class="btn btn-white btn-block">
+                <i class="fa-bars"></i>
+                Load More Images
+            </button>
+            
+            <div ng-if="Moved != '2'" class="panel panel-headerless panel-post">
+            	<div class="panel-body">
+            
+            		<ul id="sortable-post" class="highlights list-unstyled">
+            			<li class="version">
+            				<h4>Product Posts</h4>
+                            <div class="album-header post">
+                                <ul class="album-options list-unstyled list-inline">
+
+                                    <li>
+                                        <a href="" data-action="add-post" data-productid="{{product_id}}" tiny-modal="true" data-size="lg" data-id="admin/product/edit-post.htm">
+                                            <i class="fa fa-plus"></i>
+                                            Add Post
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" element="sortable-post" data-items="> li.sort_li" cancel-btn="cancel-posts" on-save="saveSort(serilaze, 'post')" class="tiny-sort">
+                                            <i class="fa-arrows"></i>
+                                            Re-order
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" data-action="trash">
+                                            <i class="fa-trash"></i>
+                                            Trash
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+            			</li>
+                        <!-- Sorting Information -->
+                        <div id="cancel-posts" class="album-sorting-info">
+                            <div class="album-sorting-info-inner clearfix">
+                                <a href="" class="btn btn-secondary btn-xs btn-single btn-icon btn-icon-standalone pull-right" data-action="sort">
+                                    <i class="fa-save"></i>
+                                    <span>Save Current Order</span>
+                                </a>
+            
+                                <i class="fa-arrows-alt"></i>
+                                Drag post to sort them
+                            </div>
+                        </div>
+                        <center ng-if="!listPosts.length"><h3>No Post</h3></center>
+                        <li class="sort_li" data-id="{{posts.product_post_id}}" ng-repeat="posts in listPosts">
+                            <div class="entry-description">
+                                <h3>{{posts.name}}</h3>
+                                <p>{{posts.content_trucate}}</p>
+                                
+                                <div class="image-options">
+                                    <a html-content="posts.content" data-productid="{{posts.product_id}}" data-postid="{{posts.product_post_id}}" data-title-per="{{posts.name}}" tiny-modal="true" data-id="admin/product/edit-post.htm?1" data-size="lg" href="" data-action="add-post"><i class="fa-pencil"></i></a>
+                                    <a ng-click="Remove(posts.product_post_id, 'post')" href="" data-action="trash"><i class="fa-trash"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+               </div>
+            </div>
+            
+            

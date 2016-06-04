@@ -1,0 +1,98 @@
+<form role="form" tiny-submit="createPermission(dataForm)" class="form-horizontal ng-pristine ng-valid">
+    <div class="modal-header">
+		<button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">Create Permission <span ng-if="title.length > 0">: </span><span class="tiny-title-bind" ng-bind="title"></span></h4>
+	</div>
+	
+	<div class="modal-body">
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="permission_id">Permission ID</label>
+
+				<div class="col-sm-9">
+					<input required type="text" ng-value="permission_id" class="form-control" name="permission_id" id="permission_id" placeholder="Permission ID">
+				</div>
+			</div>
+            
+            <div class="form-group">
+				<label class="col-sm-3 control-label" for="title">Title</label>
+
+				<div class="col-sm-9">
+					<input required type="text" ng-model="title" class="form-control" name="title" id="title" placeholder="Permission Title">
+				</div>
+			</div>
+            
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="description">Description</label>
+                
+                <div class="col-sm-9">
+                    <div class="input-group input-group-lg input-group-minimal">
+						<span class="input-group-addon">
+							<i class="linecons-pencil"></i>
+						</span>
+						<input type="text" ng-value="pdescription" name="description" class="form-control" placeholder="Permission description">
+					</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="type">For</label>
+                
+                <div class="col-sm-9">
+                    <p class="group-radio">
+						<label class="radio-inline">
+							<input ng-model="for" type="radio" value="1" name="type" checked="">
+							Admin
+						</label>
+						<label class="radio-inline">
+							<input ng-model="for" type="radio" value="0" name="type">
+							User
+						</label>
+					</p>
+                </div>
+            </div>
+            
+            <div style="display: {{for == 0 ? 'block' : 'none'}}" class="form-group">
+                <label class="col-sm-3 control-label" for="title">Permission Group</label>
+                
+                <div class="col-sm-9">
+                    <select required class="form-control tiny-selectbox" name="{{for == 0 ? 'group_permission' : 'none'}}">
+                    	<option ng-if="g.type == 0" ng-selected="g.permission_group_id == group_id" ng-repeat="g in list_group" value="{{g.permission_group_id}}">{{g.title}}</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div style="display: {{for == 1 ? 'block' : 'none'}}" class="form-group">
+                <label class="col-sm-3 control-label" for="title">Permission Group</label>
+                
+                <div class="col-sm-9">
+                    <select required class="form-control tiny-selectbox" name="{{for == 1 ? 'group_permission' : 'none'}}">
+                    	<option ng-if="g.type == 1" ng-selected="g.permission_group_id == group_id" ng-repeat="g in list_group" value="{{g.permission_group_id}}">{{g.title}}</option>
+                    </select>
+                </div>
+            </div>
+            
+
+			<div class="form-group-separator"></div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Default for</label>
+
+				<div class="col-sm-9">
+					
+                    <p ng-repeat="group in user_group">
+						<label class="cbr-inline">
+							<input type="checkbox" value="{{group.value}}" name="group" class="tiny-cbr">
+							{{group.label}}
+						</label>
+                    </p>
+				</div>
+			</div>
+            
+            <input name="{{isedit}}" value="{{editid}}" type="hidden" />
+	</div>
+	
+	<div class="modal-footer">
+		<button type="button" class="btn btn-white" ng-click="currentModal.dismiss('cancel');">Close</button>
+		<button type="submit" class="btn btn-info">Save changes</button>
+	</div>
+</form>

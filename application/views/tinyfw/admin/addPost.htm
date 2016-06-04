@@ -1,0 +1,52 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Editors" description="Combined WYSIWYG editors you can use with Xenon theme"></page-title>
+
+<h3 class="text-gray">
+	Bootstrap WYSIHMTL5 <br />
+	<small class="text-muted">Simple, beautiful wysiwyg editor</small>
+</h3>
+
+<br />
+
+<form role="form" method="post">
+
+	<div class="form-group">
+		<textarea class="form-control wysihtml5" data-stylesheet-url="{r}/admin/assets/js/wysihtml5/lib/css/wysiwyg-color.css" name="sample_wysiwyg" id="sample_wysiwyg"></textarea>
+	</div>
+		
+</form>
+
+<br />
+
+<h3 class="text-gray">
+	Markdown Area <br />
+	<small class="text-muted">Create a rich HTML or markdown editor with an immediate preview and syntax highlighting.</small>
+</h3>
+
+
+<br />
+
+<form role="form" method="post">
+	
+	<div class="form-group">
+		<textarea class="form-control" rows="10"  id="uikit_editor_2">#Heading
+        
+        Lorem ipsum dolor sit **amet**, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. [This is a link](#)
+        
+        * Item
+        * Item
+        * Item
+        
+        ## Heading
+        
+        Ut enim ad *minim* veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        </textarea>
+				<script type="text/javascript">
+			jQuery.UIkit.htmleditor(jQuery("#uikit_editor_2"), {
+				markdown: true,
+				mode: 'tab'
+			});
+		</script>
+			</div>
+	
+</form>
+

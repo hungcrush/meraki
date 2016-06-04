@@ -1,0 +1,75 @@
+<form role="form" tiny-submit="createGroup(dataForm)" class="form-horizontal ng-pristine ng-valid">
+    <div class="modal-header">
+		<button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">Create Group <span ng-if="titleper.length > 0">: </span><span class="tiny-title-bind" ng-bind="titleper"></span></h4>
+	</div>
+    <div ng-init="tabbed_panel_active = 1;" class="nav-tabs-justified">
+        <ul class="nav nav-tabs">
+    		<li ng-class="{'active': tabbed_panel_active == 1}">
+    			<a href="" ng-click="tabbed_panel_active = 1"> <i class='linecons-star'></i> Group Info</a>
+    		</li>
+    		<li ng-class="{'active': tabbed_panel_active == 0}">
+    			<a href="" ng-click="tabbed_panel_active = 0"><i class='linecons-star'></i> Permission</a>
+    		</li>
+    	</ul>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane tiny-tab-form" ng-class="{'active': tabbed_panel_active == 1}">
+            <div class="form-group">
+    				<label class="col-sm-3 control-label" for="title">Group Title</label>
+    
+    				<div class="col-sm-9">
+    					<input required type="text" ng-model="titleper" class="form-control" name="title" id="title" placeholder="Permission Title">
+    				</div>
+ 			</div>
+        </div>
+        <div class="tab-pane tiny-tab-form" ng-class="{'active': tabbed_panel_active == 0}">
+            <div class="form-group">
+                <label class="col-sm-1 control-label" for="title">For</label>
+                
+                <div ng-init="type = 1" class="col-sm-11">
+                    <select ng-model="type" required class="form-control tiny-selectbox" name="type">
+                    	<option value="1">Admin</option>
+                        <option value="0">Users</option>
+                    </select>
+                </div>
+            </div>
+            <hr />
+            <table ng-if="type == 1" class="table table-model-2 table-hover">
+            	<tbody>
+            		<tr ng-repeat-start="list in listAdmin">
+            			<td class="group-header" colspan="3"><h4>{{list.title}}</h4></td>                                
+            		</tr>
+            		<tr ng-repeat="i in list.list_permission">
+            			<td>{{i.title}} <small class="tiny-smallid">{{i.permission_id}}</small></td>
+            			<td class="action-group">
+            				<label><input ng-checked="(permissions.indexOf(i.permission_id) > -1)" type="checkbox" class="tinyRadio" name="permission" value="{{i.permission_id}}" /></label>
+            			</td>
+            		</tr>
+            		<tr ng-repeat-end></tr>                              
+            	</tbody>
+            </table>
+            
+            <table ng-if="type == 0" class="table table-model-2 table-hover">
+            	<tbody>
+            		<tr ng-repeat-start="list in listUser">
+            			<td class="group-header" colspan="3"><h4>{{list.title}}</h4></td>                                
+            		</tr>
+            		<tr ng-repeat="i in list.list_permission">
+            			<td>{{i.title}} <small class="tiny-smallid">{{i.permission_id}}</small></td>
+            			<td class="action-group">
+            				<input ng-checked="(permissions.indexOf(i.permission_id) > -1)" type="checkbox" class="tinyRadio" name="permission" value="{{i.permission_id}}" />
+            			</td>
+            		</tr>
+            		<tr ng-repeat-end></tr>                              
+            	</tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+		<button type="button" class="btn btn-white" ng-click="currentModal.close();">Close</button>
+		<button type="submit" class="btn btn-info">Save changes</button>
+	</div>
+    
+    <input type="hidden" ng-value="groupid" ng-if="isedit" name="isedit" />
+</form>

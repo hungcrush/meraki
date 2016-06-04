@@ -1,0 +1,90 @@
+
+.DialogModalControllerOverlay{position:fixed; left:0; right:0; bottom:0; top:0; z-index:9999;transition: all 0.5s}
+.DialogModalController{width:300px; height:auto; position:fixed; overflow:hidden; z-index:100000;}
+.DialogModalController .dmc-header{width:100%; border-bottom:solid 1px #e9e9e9; position:relative; padding:15px 25px; box-sizing:border-box; font-size:20px;cursor: move;}
+.DialogModalController .dmc-header>a{width:16px; height:16px; position:absolute; background:url(../img/modal-close.png) no-repeat bottom; right:15px; top:15px; cursor:pointer; opacity:0.3;}
+.DialogModalController .dmc-header>a:hover{opacity:1;}
+.DialogModalController .dmc-container{width:100%; min-height:50px; position:relative;}
+.DialogModalController .dmc-container>div{padding:30px; font-size:15px; overflow:hidden;}
+.DialogModalController .dmc-container input[type=text],.DialogModalController .dmc-container input[type=password],.DialogModalController .dmc-container select,.DialogModalController .dmc-container textarea{box-sizing:border-box; width:100%; padding:10px; border:solid 1px #DDD; background:none; outline:none;}
+.DialogModalController .dmc-container input[type=text]:focus,.DialogModalController .dmc-container input[type=password]:focus, .DialogModalController .dmc-container select:focus, .DialogModalController .dmc-container textarea:focus{border:solid 1px #2980b9;}
+.DialogModalController .dmc-footer{width:100%; background:#fff !important; position:relative;}
+.DialogModalController .dmc-footer>div{padding:15px; font-size:16px; overflow:hidden; text-align:right; width:100%; box-sizing:border-box;}
+
+.DialogModalController .dmc-footer>div>span.result{font-size:14px;}
+
+.easing {
+    animation-name: bigEntrance;
+	-webkit-animation-name: bigEntrance;	
+
+	animation-duration: 0.2s;	
+	-webkit-animation-duration: 0.2s;
+
+	animation-timing-function: ease-out;	
+	-webkit-animation-timing-function: ease-out;	
+
+	visibility: visible !important;	
+}
+
+.dmc-dark{background:#2e3846;}
+.dmc-dark .dmc-header{border-color:#202732; color:#f2f2f2;}
+.dmc-dark .dmc-container{color:#FFF;}
+.dmc-dark .dmc-footer{background:#202732;}
+.dmc-dark .dmc-container input[type=text],.dmc-dark .dmc-container input[type=password],.dmc-dark .dmc-container select,.dmc-dark .dmc-container textarea{border:solid 1px #202732;}
+
+.dmc-white{background:#FFF;margin: auto !important;}
+.dmc-white .dmc-header{border-color:#e9e9e9; color:#29333f;}
+.dmc-white .dmc-container{color:#29333f;}
+.dmc-white .dmc-footer{background:#e9e9e9;}
+.dmc-white .dmc-container input[type=text],.dmc-white .dmc-container input[type=password],.dmc-white .dmc-container select,.dmc-white .dmc-container textarea{border:solid 1px #DDD;}
+
+.dmc-style-green .dmc-container input[type=text]:focus, .dmc-style-green .dmc-container input[type=password]:focus, .dmc-style-green .dmc-container select:focus, .dmc-style-green .dmc-container textarea:focus{border:solid 1px #27ae60;}
+.dmc-style-green .dmc-footer>div>button{background:#27ae60;}
+
+.dmc-style-turquoise .dmc-container input[type=text]:focus, .dmc-style-turquoise .dmc-container input[type=password]:focus, .dmc-style-turquoise .dmc-container select:focus, .dmc-style-turquoise .dmc-container textarea:focus{border:solid 1px #1fb5ad;}
+.dmc-style-turquoise .dmc-footer>div>button{background:#1fb5ad;}
+
+.dmc-style-yellow .dmc-container input[type=text]:focus, .dmc-style-yellow .dmc-container input[type=password]:focus, .dmc-style-yellow .dmc-container select:focus, .dmc-style-yellow .dmc-container textarea:focus{border:solid 1px #f39c12;}
+.dmc-style-yellow .dmc-footer>div>button{background:#f39c12;}
+
+.dmc-style-red .dmc-container input[type=text]:focus, .dmc-style-red .dmc-container input[type=password]:focus, .dmc-style-red .dmc-container select:focus, .dmc-style-red .dmc-container textarea:focus{border:solid 1px #f44a56;}
+.dmc-style-red .dmc-footer>div>button{background:#f44a56;}
+
+.dmc-style-purple .dmc-container input[type=text]:focus, .dmc-style-purple .dmc-container input[type=password]:focus, .dmc-style-purple .dmc-container select:focus, .dmc-style-purple .dmc-container textarea:focus{border:solid 1px #795aac;}
+.dmc-style-purple .dmc-footer>div>button{background:#795aac;}
+
+.dmc-style-default .dmc-container input[type=text]:focus, .dmc-style-default .dmc-container input[type=password]:focus, .dmc-style-default .dmc-container select:focus, .dmc-style-default .dmc-container textarea:focus{border:solid 1px #2980b9;}
+
+.easing a, .easing button{transition:.25s linear; -moz-transition:.25s linear; -webkit-transition:.25s linear;margin-bottom: 0}
+.radius, .radius button{-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;}
+.shadow{-webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.35); -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.35); box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.35);}
+.DialogModalController .dmc-footer button:not(:last-child) {
+    border-right: 1px solid rgba(0, 0, 0, .10);
+    content: '';
+}
+
+@keyframes bigEntrance {
+	0% {
+		transform: scale(0.3);
+		opacity: 0.2;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}		
+}
+
+@-webkit-keyframes bigEntrance {
+	0% {
+		-webkit-transform: scale(0.3);
+		opacity: 0.2;
+	}
+	100% {
+		-webkit-transform: scale(1);
+		opacity: 1;
+	}				
+}
+
+@media (max-width: 560px){
+    .dmc-white{background:#FFF;left: 0 !important;right: 0 !important;margin: auto !important;}
+}

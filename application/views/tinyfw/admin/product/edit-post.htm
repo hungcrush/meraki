@@ -1,0 +1,26 @@
+<form role="form" tiny-submit="formSubmit(dataForm, action)">
+    <div class="modal-header">
+		<button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">{{postid != null ? 'Edit Post' : 'Add New Post'}} <span ng-if="titlePer.length > 0">: </span><span class="tiny-title-bind" ng-bind="titlePer"></span></h4>
+	</div>
+	
+	<div class="modal-body">
+            
+            <div class="form-group">
+				<label for="title">Title</label>
+                <input required type="text" ng-model="titlePer" class="form-control" name="title" id="title" placeholder="Title" />
+			</div>
+            
+            <div class="form-group">
+				<label for="content">Content</label>
+                <textarea class="tiny-editor" id="post_content" timeout="400" height="350" name="description" rows="4" placeholder="Product Description">{{htmlContent}}</textarea>
+			</div>
+            <input type="hidden" ng-if="postid" ng-value="postid" name="post_id" />
+            <input type="hidden" ng-if="productid" ng-value="productid" name="product_id" />
+	</div>
+	
+	<div class="modal-footer">
+		<button type="button" class="btn btn-white" ng-click="currentModal.close();">Close</button>
+		<button type="submit" class="btn btn-info">Save changes</button>
+	</div>
+</form>
