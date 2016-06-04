@@ -35,12 +35,25 @@ class Welcome extends TINY_Controller {
         switch($_GET['path']){
             case 'uploads':
                 if(isset($_POST['folder']) && isset($_POST['filename'])){
-                    @unlink('uploads/'.$_POST['folder'].'/full-size/'.$_POST['filename']);
-                    @unlink('uploads/'.$_POST['folder'].'/thumbs/'.$_POST['filename']);
+                    @unlink('../uploads/'.$_POST['folder'].'/full-size/'.$_POST['filename']);
+                    @unlink('../uploads/'.$_POST['folder'].'/thumbs/'.$_POST['filename']);
                 }
                 break;
         }
     }
          
-    
+    public function Dataupload()
+    {
+        $s = $_GET['path'] ?: false;
+        if($s)
+        {
+            $filePath = end(explode('/', $s));
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $contentType = finfo_file($finfo, $filePath);
+            finfo_close($finfo);
+            
+            header('Content-Type: ' . $contentType);
+            readfile($filePath);
+        }
+    }
 }

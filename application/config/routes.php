@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['uploads/(:any)']= 'welcome/dataupload?path=$1';
 
 $route['home'] = 'welcome/home/';
 $route['drag'] = 'welcome/drag/';
