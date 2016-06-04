@@ -1537,7 +1537,7 @@ abstract class REST_Controller extends CI_Controller {
      * @param NULL $xss_clean Whether to apply XSS filtering
      * @return array|string|NULL Value from the GET request; otherwise, NULL
      */
-    public function get($key = NULL, $xss_clean = NULL)
+    public function _get($key = NULL, $xss_clean = NULL)
     {
         if ($key === NULL)
         {
@@ -1594,7 +1594,7 @@ abstract class REST_Controller extends CI_Controller {
      * @param NULL $xss_clean Whether to apply XSS filtering
      * @return array|string|NULL Value from the POST request; otherwise, NULL
      */
-    public function post($key = NULL, $xss_clean = NULL)
+    public function _post($key = NULL, $xss_clean = NULL)
     {
         if ($key === NULL)
         {
@@ -1613,7 +1613,7 @@ abstract class REST_Controller extends CI_Controller {
      * @param NULL $xss_clean Whether to apply XSS filtering
      * @return array|string|NULL Value from the PUT request; otherwise, NULL
      */
-    public function put($key = NULL, $xss_clean = NULL)
+    public function _put($key = NULL, $xss_clean = NULL)
     {
         if ($key === NULL)
         {
@@ -1632,7 +1632,7 @@ abstract class REST_Controller extends CI_Controller {
      * @param NULL $xss_clean Whether to apply XSS filtering
      * @return array|string|NULL Value from the DELETE request; otherwise, NULL
      */
-    public function delete($key = NULL, $xss_clean = NULL)
+    public function _delete($key = NULL, $xss_clean = NULL)
     {
         if ($key === NULL)
         {
