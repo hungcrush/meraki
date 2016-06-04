@@ -1691,8 +1691,19 @@ abstract class REST_Controller extends CI_Controller {
 	*/
 	public function params($key = NULL, $xss_clean = NULL){
 		$query_value = $this->query($key, $xss_clean);
-		$url_params = explode('/', end(explode($this->function_name, $_SERVER[REQUEST_URI])));
-		$this->debug($url_params);
+		// do this to makesure $query_value always is array
+		if(!is_array($query_value)) return $query_value;
+		$url_params = explode('/', end(explode($this->function_name. '/', $_SERVER[REQUEST_URI])));
+		
+		if(empty($url_params)) return $query_value;
+		
+		foreach($url_params as $key => $param)
+		{
+			if( ($key % 2) == 0 ) continue;
+			$query_value[$param] = $url_params[$key + 1];
+		}
+		
+		return $query_value;
 	}
 
     /**
