@@ -1690,22 +1690,34 @@ abstract class REST_Controller extends CI_Controller {
 	* GET params from url with explode method
 	*/
 	public function params($key = NULL, $xss_clean = NULL){
-		$query_value = $this->query($key, $xss_clean);
 		// do this to makesure $query_value always is array
 		if(!is_array($query_value)) return $query_value;
 		$url_params = explode('/', end(explode($this->function_name. '/', strtok($_SERVER[REQUEST_URI], '?'))));
-		
-		if(empty($url_params)) return $query_value;
-		
-		foreach($url_params as $k => $param)
+		if( $xss_clean !== 'URL' )
 		{
-			if( ($k % 2) != 0 ) continue;
-			if($key!== NULL && $k == $key)
+			$query_value = $this->query($key, $xss_clean);
+			if(empty($url_params)) return $query_value;
+			foreach($url_params as $k => $param)
 			{
-				return $url_params[$k + 1];
+				if( ($k % 2) != 0 ) continue;
+				if($key!== NULL && $k == $key)
+				{
+					return $url_params[$k + 1];
+				}
+				
+				$query_value[$param] = $url_params[$k + 1];
+			}
+		}
+		else
+		{
+			$query_value = FALSE;
+			$target = array_search($key, $url_params);
+			if($target)
+			{
+				array_splice($url_params, 0, $target);
+				$query_value = implode('/', $url_params);
 			}
 			
-			$query_value[$param] = $url_params[$k + 1];
 		}
 		
 		return $query_value;
