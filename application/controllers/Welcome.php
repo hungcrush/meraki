@@ -57,8 +57,9 @@ class Welcome extends TINY_Controller {
             {
                 header('Content-Type: ' . $contentType);
                 readfile($url);
+                exit;
             }
         }
-        exit;
+        show_404();
     }
 }
