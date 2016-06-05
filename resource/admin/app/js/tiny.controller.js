@@ -189,6 +189,7 @@ angular.module('tiny.admin.controllers', []).
     }).
     controller('MenuCtrl', function(Load, $scope, $tiny, $rootScope, $stateParams, g){
         $scope.menus = Load.menus;
+        $scope.pages = Load.pages;
         $scope.isUpdate = false;
         $scope.json = {};
         $scope.fn = {

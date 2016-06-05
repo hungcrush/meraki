@@ -7,6 +7,7 @@ class Menu_model extends TINY_Model
     public function __construct(){
         parent::__construct();
         $this->_temporary_return_type = 'array';
+        $this->load->config('tiny');
     }
     
     public function Load(){
@@ -16,7 +17,8 @@ class Menu_model extends TINY_Model
         
         return array(
             'menus'     => $data,
-            'options'   => $options
+            'options'   => $options,
+            'pages'     => $this->config->item('tiny_pages')
         );
     }
     

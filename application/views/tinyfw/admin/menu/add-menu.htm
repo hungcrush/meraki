@@ -52,6 +52,22 @@
                 </select>
 			</div>
     	</div>
+
+    	<div class="form-group-separator"></div>
+
+		<div class="form-group">
+			<label class="col-sm-3 control-label">For Page</label>
+
+			<div class="col-sm-9">
+				
+                <p ng-repeat="(key, page) in pages">
+					<label class="cbr-inline">
+						<input type="checkbox" value="{{key}}" name="group" class="tiny-cbr">
+						{{page}}
+					</label>
+                </p>
+			</div>
+		</div>
     </div>
     <div class="modal-footer">
 		<button type="button" class="btn btn-white" ng-click="currentModal.close();">Close</button>
