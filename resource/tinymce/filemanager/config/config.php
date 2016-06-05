@@ -71,7 +71,7 @@ $config = array(
 	| with start and final /
 	|
 	*/
-	'upload_dir' => $baseURL.'uploads/source/full/',
+	'upload_dir' => $baseURL.'../uploads/source/full/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -81,7 +81,7 @@ $config = array(
 	| with final /
 	|
 	*/
-	'current_path' => '../../../uploads/source/full/',
+	'current_path' => '../../../../uploads/source/full/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -92,7 +92,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => '../../../uploads/source/thumbs/',
+	'thumbs_base_path' => '../../../../uploads/source/thumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
