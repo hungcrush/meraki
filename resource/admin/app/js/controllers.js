@@ -195,6 +195,7 @@ angular.module('xenon.controllers', []).
         var $sidebarMenuItems = $menuItems.instantiate();
 		var menuInit = function()
         {
+            $sidebarMenuItems.menuItems = [];
             $scope.menuItems = [];
             $tiny.ajax({
                 url: URL_SERVER+'admin/administrator/menu/Navigation'
