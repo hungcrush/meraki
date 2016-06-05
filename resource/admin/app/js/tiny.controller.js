@@ -249,10 +249,17 @@ angular.module('tiny.admin.controllers', []).
                         $scope.menus = response.menus;
                         $scope.fn.options = response.options;
                     })
+                    
+                    public_vars.$body.trigger('UpdateMenu');
                 }
             })
         }
         $scope.fn.pages = Load.pages;
+        $scope.fn.isChecked = function(id, str)
+        {
+            //-- use indexOf to get id is checked
+            
+        }
         
         $tiny.loadData(tinyConfig.urlAdminTemplate('/administrator/permission')).then(function(response){
             $scope.fn.listAdmin    = response.list_1;

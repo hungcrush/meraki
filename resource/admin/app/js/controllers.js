@@ -191,23 +191,32 @@ angular.module('xenon.controllers', []).
 	controller('SidebarMenuCtrl', function($scope, $rootScope, $menuItems, $timeout, $location, $state, $layout, $tiny)
 	{
 
-		// Menu Items
-		var $sidebarMenuItems = $menuItems.instantiate();
-        
-		//$scope.menuItems = $sidebarMenuItems.prepareSidebarMenu().getAll();
-        
-        $scope.menuItems = [];
-        $tiny.ajax({
-            url: URL_SERVER+'admin/administrator/menu/Navigation'
-        }).success(function(data){
-            $scope.menuItems = $sidebarMenuItems.prepareSidebarMenu(data.menu).getAll();
-            setActice();
+		var menuInit = function()
+        {
+            // Menu Items
+    		var $sidebarMenuItems = $menuItems.instantiate();
             
-            // Trigger menu setup
-    		public_vars.$sidebarMenu = public_vars.$body.find('.sidebar-menu');
-    		$timeout(setup_sidebar_menu, 1);
-    
-    		ps_init(); // perfect scrollbar for sidebar
+            $scope.menuItems = [];
+            $tiny.ajax({
+                url: URL_SERVER+'admin/administrator/menu/Navigation'
+            }).success(function(data){
+                $scope.menuItems = $sidebarMenuItems.prepareSidebarMenu(data.menu).getAll();
+                setActice();
+                
+                // Trigger menu setup
+        		public_vars.$sidebarMenu = public_vars.$body.find('.sidebar-menu');
+        		$timeout(setup_sidebar_menu, 1);
+        
+        		ps_init(); // perfect scrollbar for sidebar
+            })
+        }
+        
+        menuInit();
+        
+        public_vars.$body.on('UpdateMenu', function(){
+            $timeout(function(){
+                menuInit();
+            }, 500)
         })
         
 		// Set Active Menu Item

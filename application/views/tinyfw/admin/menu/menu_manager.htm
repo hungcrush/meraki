@@ -35,9 +35,14 @@
 		    <div data-nestable-action="toggle"></div>
 		    <div class="list-label">{{menu.title}}</div>
             <div class="group-option">
-                <button tiny-modal="true" data-size="lg" data-id="admin/menu/add-menu.htm?6" data-titleper="{{menu.title}}" data-menuid="{{menu.menu_id}}" data-parent="{{menu.parent}}" data-permissionid="{{menu.permission_id}}" data-link="{{menu.link}}" data-icon="{{menu.icon}}" class="btn btn-icon btn-warning btn-sm">
-    				Edit
-    			</button>
+                <button tiny-modal="true" data-size="lg" 
+                    data-id="admin/menu/add-menu.htm?6" 
+                    data-titleper="{{menu.title}}" 
+                    data-menuid="{{menu.menu_id}}" 
+                    data-parent="{{menu.parent}}" 
+                    data-permissionid="{{menu.permission_id}}" 
+                    data-link="{{menu.link}}" 
+                    data-icon="{{menu.icon}}" class="btn btn-icon btn-warning btn-sm">Edit</button>
                 
                 <button ng-click="Remove(menu.menu_id);" class="btn btn-icon btn-danger btn-sm">
     				Delete
