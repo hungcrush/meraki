@@ -189,7 +189,6 @@ angular.module('tiny.admin.controllers', []).
     }).
     controller('MenuCtrl', function(Load, $scope, $tiny, $rootScope, $stateParams, g){
         $scope.menus = Load.menus;
-        $scope.pages = Load.pages;
         $scope.isUpdate = false;
         $scope.json = {};
         $scope.fn = {
@@ -253,6 +252,7 @@ angular.module('tiny.admin.controllers', []).
                 }
             })
         }
+        $scope.fn.pages = Load.pages;
         
         $tiny.loadData(tinyConfig.urlAdminTemplate('/administrator/permission')).then(function(response){
             $scope.fn.listAdmin    = response.list_1;
