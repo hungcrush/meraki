@@ -6,8 +6,9 @@ require_once 'REST_Controller.php';
 class TINY_Controller extends REST_Controller
 {
     protected $data = array();
-    
     protected $permission = array();
+    
+    private   $USE_REST = FALSE;
 
     public function __construct()
     {
