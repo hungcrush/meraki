@@ -8,14 +8,14 @@ class Welcome extends TINY_Controller {
         $this->load->model('content_model', 'content');
     }
     
-	public function index(){
-	    $data = $this->content->loadContentIndex();
+    public function index(){
+        $data = $this->content->loadContentIndex();
         unset($data['data']['path']);
-		$this->data = array(
+        $this->data = array(
             'template'  => 'templates/indexPage.htm',
             'dataParse' => $data['data']
         );
-	}
+    }
     
     public function testDuLieu(){
         die('OK ^^');
@@ -55,6 +55,14 @@ class Welcome extends TINY_Controller {
             $url = dirname(__FILE__).'/../../../uploads/' . $s;
             if(file_exists($url))
             {
+                header('Cache-control: max-age='.(60*60*24*365));
+                header('Expires: '.gmdate(DATE_RFC1123,time()+60*60*24*365));
+                header('Last-Modified: '.gmdate(DATE_RFC1123,filemtime($url)));
+                header('Content-Type: image/png');
+                if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+                   header('HTTP/1.1 304 Not Modified');
+                   die();
+                }
                 header('Content-Type: ' . $contentType);
                 readfile($url);
                 exit;
