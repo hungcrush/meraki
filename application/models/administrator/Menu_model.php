@@ -18,11 +18,12 @@ class Menu_model extends TINY_Model
         foreach($this->__load() as $key => $arr)
         {
             $data[$key] = array();
-            $this->__parse($arr, 0, $data[$key], $options);
+            $this->__parse($arr, 0, $data[$key]);
         }
         
         //-- Get for options
-        $this->__parse($this->all_menu, 0, array(), $options);
+        $temp = array();
+        $this->__parse($this->all_menu, 0, $temp, $options);
         
         return array(
             'menus'     => $data,
