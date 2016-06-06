@@ -44,7 +44,7 @@ class Menu_model extends TINY_Model
             'status'        => 1
         );
         
-        $of_page = $this->_ctrl->post('of_page');
+        $of_page = $this->_ctrl->post('of_page') ?: 1;
         if(!is_array($of_page))
         {
             $data['of_page'] = $of_page;
