@@ -91,7 +91,7 @@ class TINY_Model extends CI_Model
     protected $_temporary_return_type = NULL;
     
     //-- Controller method
-    protected $_ctrl;
+    public $_ctrl;
 
     /* --------------------------------------------------------------
      * GENERIC METHODS
