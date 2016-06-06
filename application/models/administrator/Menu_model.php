@@ -36,13 +36,28 @@ class Menu_model extends TINY_Model
     
     public function Save(){
         $data = array(
-            'title'         => $this->input->post('title'),
-            'parent'        => $this->input->post('parent'),
-            'permission_id' => $this->input->post('permission_id'),
-            'link'          => $this->input->post('link'),
-            'icon'          => $this->input->post('icon'),
+            'title'         => $this->_->post('title'),
+            'parent'        => $this->_->post('parent'),
+            'permission_id' => $this->_->post('permission_id'),
+            'link'          => $this->_->post('link'),
+            'icon'          => $this->_->post('icon'),
             'status'        => 1
         );
+        
+        $of_page = $this->_->post('of_page');
+        if(!is_array($of_page))
+        {
+            $data['of_page'] = $of_page;
+        }else
+        {
+            $data['of_page'] = '';
+            foreach($of_page as $page)
+            {
+                $data['of_page'] .= $page . ',';
+            }
+            $data['of_page'] = rtrim($data['of_page'], ',');
+        }
+        
         if(isset($_POST['menu_id']))
             $this->update($_POST['menu_id'], $data);
         else
@@ -52,7 +67,7 @@ class Menu_model extends TINY_Model
     }
     
     public function Sort(){
-        $data = json_decode($this->input->post('data'), true);
+        $data = json_decode($this->_->post('data'), true);
         $this->primary_key = 'menu_id';
         foreach($data as $value){
             $this->update($value['id'], array('weight' => $value['order'], 'parent' => $value['parent']));
@@ -61,7 +76,7 @@ class Menu_model extends TINY_Model
     }
     
     public function Remove(){
-        $id = $this->input->post('menu_id');
+        $id = $this->_->post('menu_id');
         $this->delete($id);
         return 'OK';
     }
