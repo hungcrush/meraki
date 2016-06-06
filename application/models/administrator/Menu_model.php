@@ -17,6 +17,7 @@ class Menu_model extends TINY_Model
         
         foreach($this->__load() as $key => $arr)
         {
+            $data[$key] = array();
             $this->__parse($this->__load(), 0, $data[$key], $options);
         }
         
@@ -37,6 +38,7 @@ class Menu_model extends TINY_Model
         $data = array();
         foreach($this->__load(true) as $key => $arr)
         {
+            $data[$key] = array();
             $this->__parse($arr, 0, $data[$key]);
         }
         
