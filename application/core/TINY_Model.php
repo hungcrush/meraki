@@ -91,7 +91,7 @@ class TINY_Model extends CI_Model
     protected $_temporary_return_type = NULL;
     
     //-- Controller method
-    protected $_;
+    protected $_ctrl;
 
     /* --------------------------------------------------------------
      * GENERIC METHODS
@@ -108,7 +108,7 @@ class TINY_Model extends CI_Model
         $this->load->helper('inflector');
 
         $this->_database = $this->db;
-        $this->_         = & get_instance();
+        $this->_ctrl     = & get_instance();
         
         $this->_fetch_table();
 

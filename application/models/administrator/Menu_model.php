@@ -36,15 +36,15 @@ class Menu_model extends TINY_Model
     
     public function Save(){
         $data = array(
-            'title'         => $this->_->post('title'),
-            'parent'        => $this->_->post('parent'),
-            'permission_id' => $this->_->post('permission_id'),
-            'link'          => $this->_->post('link'),
-            'icon'          => $this->_->post('icon'),
+            'title'         => $this->_ctrl->post('title'),
+            'parent'        => $this->_ctrl->post('parent'),
+            'permission_id' => $this->_ctrl->post('permission_id'),
+            'link'          => $this->_ctrl->post('link'),
+            'icon'          => $this->_ctrl->post('icon'),
             'status'        => 1
         );
         
-        $of_page = $this->_->post('of_page');
+        $of_page = $this->_ctrl->post('of_page');
         if(!is_array($of_page))
         {
             $data['of_page'] = $of_page;
@@ -67,7 +67,7 @@ class Menu_model extends TINY_Model
     }
     
     public function Sort(){
-        $data = json_decode($this->_->post('data'), true);
+        $data = json_decode($this->_ctrl->post('data'), true);
         $this->primary_key = 'menu_id';
         foreach($data as $value){
             $this->update($value['id'], array('weight' => $value['order'], 'parent' => $value['parent']));
@@ -76,7 +76,7 @@ class Menu_model extends TINY_Model
     }
     
     public function Remove(){
-        $id = $this->_->post('menu_id');
+        $id = $this->_ctrl->post('menu_id');
         $this->delete($id);
         return 'OK';
     }
