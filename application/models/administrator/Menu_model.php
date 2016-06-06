@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Menu_model extends TINY_Model
 {
     var $user_permission = array();
-    var $all_menu;
+    var $all_menu = array();
     
     public function __construct(){
         parent::__construct();
