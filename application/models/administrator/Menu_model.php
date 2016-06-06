@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Menu_model extends TINY_Model
 {
     var $user_permission = array();
+    var $all_menu;
     
     public function __construct(){
         parent::__construct();
@@ -13,7 +14,14 @@ class Menu_model extends TINY_Model
     public function Load(){
         $data       = array();
         $options    = array(); 
-        $this->__parse($this->__load(), 0, $data, $options);
+        
+        foreach($this->__load() as $key => $arr)
+        {
+            $this->__parse($this->__load(), 0, $data[$key], $options);
+        }
+        
+        //-- Get for options
+        $this->__parse($this->all_menu, 0, array(), $options);
         
         return array(
             'menus'     => $data,
@@ -27,7 +35,11 @@ class Menu_model extends TINY_Model
         $this->user_permission = $p['permissions'];
         
         $data = array();
-        $this->__parse($this->__load(true), 0, $data);
+        foreach($this->__load(true) as $key => $arr)
+        {
+            $this->__parse($arr, 0, $data[$key]);
+        }
+        
         
         return array(
             'menu'  => $data
@@ -111,7 +123,19 @@ class Menu_model extends TINY_Model
             if($check && trim($row['permission_id']) != ''){
                 if(!isset($this->user_permission[$row['permission_id']])) continue;
             }
-            $data[$row['parent']][] = $row;
+            $of_page = array(1);
+            if(!empty($row['of_page']))
+            {
+                $of_page = explode(',', $row['of_page']);
+            }
+            
+            foreach($of_page as $page)
+            {
+                $data[$page][$row['parent']][] = $row;
+            }
+            
+            $this->all_menu[$row['parent']][] = $row;
+            
         }
         
         return $data;
