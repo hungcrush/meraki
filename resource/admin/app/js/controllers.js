@@ -200,7 +200,7 @@ angular.module('xenon.controllers', []).
             $tiny.ajax({
                 url: URL_SERVER+'admin/administrator/menu/Navigation'
             }).success(function(data){
-                $scope.menuItems = $sidebarMenuItems.prepareSidebarMenu(data.menu).getAll();
+                $scope.menuItems = $sidebarMenuItems.prepareSidebarMenu(data.menu[1]).getAll();
                 setActice();
                 
                 // Trigger menu setup
