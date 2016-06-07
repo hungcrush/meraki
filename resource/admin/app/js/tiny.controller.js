@@ -258,6 +258,7 @@ angular.module('tiny.admin.controllers', []).
         $scope.fn.isChecked = function(id, str)
         {
             //-- use indexOf to get id is checked
+            str = str.toString();
             return str.indexOf(id + ',') || str.indexOf(',' + id);
         }
         
