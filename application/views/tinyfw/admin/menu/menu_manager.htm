@@ -9,7 +9,7 @@
     }
 </style>
 <script type="text/ng-template" id="menu-items-tpl">
-    <li ng-repeat="menu in _menus" data-item="{{menu.title}}" data-item-id="{{menu.menu_id}}" repeat-complete>
+    <li ng-repeat="menu in menus[_menus]" data-item="{{menu.title}}" data-item-id="{{menu.menu_id}}" repeat-complete>
 		<div class="uk-nestable-item">
 		    <div class="uk-nestable-handle"></div>
 		    <div data-nestable-action="toggle"></div>
@@ -75,7 +75,7 @@
         	<div class="panel-body">
                 <tabset>
                     <tab ng-repeat="(key, value) in fn.pages" heading="{{value}}">
-        		      <ul id="nestable-list-{{key}}" ng-init="_menus = menus[key]" class="uk-nestable" ng-include="'menu-items-tpl'"></ul>
+        		      <ul id="nestable-list-{{key}}" ng-init="_menus = key" class="uk-nestable" ng-include="'menu-items-tpl'"></ul>
                     </tab>
                 </tabset>
         	</div>
