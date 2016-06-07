@@ -201,6 +201,8 @@ angular.module('xenon.controllers', []).
                 url: URL_SERVER+'admin/administrator/menu/Navigation'
             }).success(function(data){
                 $scope.menuItems = $sidebarMenuItems.prepareSidebarMenu(data.menu[1]).getAll();
+                $rootScope._services = data.pages;
+                console.log(data);
                 setActice();
                 
                 // Trigger menu setup

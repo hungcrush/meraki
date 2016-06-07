@@ -45,7 +45,8 @@ class Menu_model extends TINY_Model
         
         
         return array(
-            'menu'  => $data
+            'menu'  => $data,
+            'pages'     => $this->config->item('tiny_pages')
         );
     }
     

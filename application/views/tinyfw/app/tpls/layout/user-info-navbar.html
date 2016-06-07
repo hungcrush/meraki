@@ -254,9 +254,9 @@
 
 	<!-- Right links for user info navbar -->
 	<ul class="user-info-menu right-links list-inline list-unstyled">
-				<li class="fullscreen" ng-show="isFullscreenSupported">
-			<a href="" ng-click="goFullscreen()" title="Fullscreen">
-				<i ng-class="{'fa-expand': ! isFullscreen, 'fa-compress': isFullscreen == true}"></i>
+		<li ng-repeat="(key, value) in _services" class="fullscreen">
+			<a href="{{key}}" ng-click="goFullscreen()" title="Fullscreen">
+				{{value}}
 			</a>
 		</li>
 
