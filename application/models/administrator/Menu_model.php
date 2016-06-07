@@ -117,6 +117,7 @@ class Menu_model extends TINY_Model
     
     private function __load($check = false){
         $data = array();
+        $cacheMenu = array();
         
         $this->order_by('weight');
         $sql = $this->get_many_by('status', 1);
@@ -138,6 +139,8 @@ class Menu_model extends TINY_Model
             }
             
             $this->all_menu[$row['parent']][] = $row;
+
+            $cacheMenu[$row['menu_id']] = $row;
             
         }
         
