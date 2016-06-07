@@ -143,6 +143,12 @@ class Menu_model extends TINY_Model
             $cacheMenu[$row['menu_id']] = $row;
             
         }
+
+        //-- fill parent
+        foreach($data as &$datapage)
+        {
+            $this->__fillParent($cacheMenu, $datapage);
+        }
         
         return $data;
     }
