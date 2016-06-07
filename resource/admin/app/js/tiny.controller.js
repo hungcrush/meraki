@@ -258,7 +258,7 @@ angular.module('tiny.admin.controllers', []).
         $scope.fn.isChecked = function(id, str)
         {
             //-- use indexOf to get id is checked
-            
+            return str.indexOf(id + ',') || str.indexOf(',' + id);
         }
         
         $tiny.loadData(tinyConfig.urlAdminTemplate('/administrator/permission')).then(function(response){
