@@ -248,6 +248,7 @@ angular.module('tiny.admin.controllers', []).
                     g.Load($stateParams, $tiny ,g).then(function(response){
                         $scope.menus = response.menus;
                         $scope.fn.options = response.options;
+                        $scope.fn.pages = response.pages;
                     })
                     
                     public_vars.$body.trigger('UpdateMenu');
