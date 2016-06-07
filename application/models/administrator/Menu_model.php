@@ -169,9 +169,9 @@ class Menu_model extends TINY_Model
                 if(!$find)
                 {
                     $childData[$data[$parent]['parent']][] = $data[$parent];
-                    if($data[$parent]['parent'] > 0)
+                    if($data[$parent]['parent'] != 0)
                     {
-                        $this->__fillParent($data, $childData[$data[$parent]['parent']]);
+                        $this->__fillParent($data, $childData);
                     }
                 }
                 
