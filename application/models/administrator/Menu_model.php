@@ -143,5 +143,27 @@ class Menu_model extends TINY_Model
         
         return $data;
     }
+
+    protected function __fillParent($data, &$childData)
+    {
+        foreach(array_keys($childData) as $parent){
+            if(isset($data[$parent]))
+            {
+                $find = FALSE;
+                if(isset($childData[$data[$parent]['parent']]))
+                {
+                    foreach($childData[$data[$parent]['parent']] as $c){
+                        if($c['menu_id'] == $data[$parent]['menu_id']) $find = TRUE;
+                    }
+                }
+
+                if(!$find)
+                {
+                    $childData[$data[$parent]['parent']][] = $data[$parent];
+                }
+                
+            }
+        }
+    }
     
 }
