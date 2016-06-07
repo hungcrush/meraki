@@ -248,6 +248,7 @@ angular.module('tiny.admin.controllers', []).
                     g.Load($stateParams, $tiny ,g).then(function(response){
                         $scope.menus = response.menus;
                         $scope.fn.options = response.options;
+                        $scope.fn.pages = [];
                         $scope.fn.pages = response.pages;
                     })
                     
