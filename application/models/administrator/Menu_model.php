@@ -153,9 +153,10 @@ class Menu_model extends TINY_Model
         return $data;
     }
 
-    protected function __fillParent($data, &$childData)
+    protected function __fillParent($data, &$childData, $parent = FALSE)
     {
-        foreach(array_keys($childData) as $parent){
+        $arr_keys = !$parent ? array_keys($childData) : array($parent);
+        foreach($arr_keys as $parent){
             if(isset($data[$parent]))
             {
                 $find = FALSE;
@@ -171,7 +172,7 @@ class Menu_model extends TINY_Model
                     $childData[$data[$parent]['parent']][] = $data[$parent];
                     if($data[$parent]['parent'] != 0)
                     {
-                        $this->__fillParent($data, $childData);
+                        $this->__fillParent($data, $childData, $data[$parent]['parent']);
                     }
                 }
                 
