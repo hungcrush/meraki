@@ -191,6 +191,24 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
                 }
             }
         }).
+        state('admin.profile', {
+            url: '/profile/*module',
+            templateUrl: function($stateParams){
+                if($stateParams && jQuery.trim($stateParams.module) != '')
+                    return URL_SERVER + 'admin/profile/'+$stateParams.module;
+                else
+                    return URL_SERVER+'admin/profile';
+            },
+            resolve: {
+                profile: function($ocLazyLoad){
+                    return $ocLazyLoad.load([
+                        ASSETS.core.googleMapsLoader,
+                        ASSETS.icons.elusive,
+                    ]);
+                },
+            },
+            controller: 'ProfileCtrl'
+        }).
         //------------------------------
         // CONTENT MANAGER
         //------------------------------

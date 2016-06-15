@@ -53,6 +53,11 @@
 		{
 			return this.assetsDir + '/' + file_path;
 		},
+
+		appResourcePath: function(file_path)
+		{
+			return this.dirTemp + '/admin/' + file_path;
+		},
         
         urlAdminTemplate: function(file_path){
             return URL_SERVER + 'admin'+file_path;

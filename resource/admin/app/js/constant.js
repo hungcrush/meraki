@@ -9,7 +9,7 @@ angular.module('xenon.constant', []).constant('ASSETS', {
 
 		'moment': tinyConfig.assetPath('js/moment.min.js'),
 
-		'googleMapsLoader': tinyConfig.assetPath('app/js/angular-google-maps/load-google-maps.js')
+		'googleMapsLoader': tinyConfig.appResourcePath('app/js/angular-google-maps/load-google-maps.js')
 	},
     
     'plupload': tinyConfig.assetPath('js/plupload.full.min.js'),

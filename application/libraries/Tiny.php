@@ -17,6 +17,8 @@ class Tiny {
     //-- Pagination default
     var $items_per_page = 2;
 
+    public $userData = array();
+
     const DIR_TEMP  = 'tinyfw/';
     
     protected $CI;
@@ -41,6 +43,8 @@ class Tiny {
             'hash'          => base64_encode(json_encode(array( $this->CI->security->get_csrf_token_name() => $this->CI->security->get_csrf_hash() ))),
             'item_per_page' => $this->items_per_page
          );
+
+        $this->userData = $this->CI->session->userdata('logged_in');
     }
     
     public function YU($params){

@@ -274,7 +274,7 @@
 
 		<li class="dropdown user-profile" dropdown>
 			<a href="" class="dropdown-toggle" dropdown-toggle>
-				<img src="{{userinfo.avatar}}" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
+				<img ng-src="{{userinfo.avatar}}" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
 				<span>
 					{{userinfo.full_name}}
 					<i class="fa-angle-down"></i>
@@ -283,7 +283,7 @@
 
 			<ul class="dropdown-menu user-profile-menu list-unstyled">
 				<li>
-					<a href="#profile">
+					<a href="/admin/profile/">
 						<i class="fa-user"></i>
 						Profile
 					</a>

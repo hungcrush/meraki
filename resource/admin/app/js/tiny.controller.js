@@ -799,4 +799,7 @@ angular.module('tiny.admin.controllers', []).
                             
             })
         }
+    }).
+    controller('ProfileCtrl', function($scope, $tiny){
+        
     })
