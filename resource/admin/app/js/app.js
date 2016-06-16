@@ -208,7 +208,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
                 },
             },
             controller: 'ProfileCtrl'
-        }).
+        })
         //------------------------------
         // CONTENT MANAGER
         //------------------------------

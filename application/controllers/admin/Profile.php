@@ -15,5 +15,13 @@ class Profile extends TINY_Controller {
         );
     }
 
+    public function Edit(){
+        $this->data['template'] = 'admin/profile/profile.html';
+        $info_user = $this->users->LoadSingle($this->tiny->userData['user_id']);
+
+        $this->data['dataParse'] = $info_user['user_info'];
+        $this->data['dataParse']['title_page'] = 'Edit your profile';
+    }
+
     
 }
