@@ -22,7 +22,7 @@
 				</a>
 				
 				<span class="user-title">
-					CEO at <strong>Google</strong>
+					{{::userinfo.role_name}}
 				</span>
 				
 				<hr />
@@ -30,15 +30,15 @@
 				<ul class="list-unstyled user-info-list">
 				<li>
 					<i class="fa-home"></i>
-					Prishtina, Kosovo
+					{{::userinfo.address}}
 				</li>
 				<li>
-					<i class="fa-briefcase"></i>
-					<a href="">Laborator</a>
+					<i class="fa fa-phone" aria-hidden="true"></i>
+					{{::userinfo.phone}}
 				</li>
 				<li>
-					<i class="fa-graduation-cap"></i>
-					University of Bologna
+					<i class="fa fa-birthday-cake" aria-hidden="true"></i>
+					{{::userinfo.birth_date}}
 				</li>
 			</ul>	
 					
@@ -66,8 +66,8 @@
 		<div class="col-sm-9">
 			
 			<!-- User Post form and Timeline -->
-			<form method="post" action="" class="profile-post-form">
-				<textarea class="form-control input-unstyled input-lg autogrow" placeholder="What's on your mind?"></textarea>
+			<form method="post" tiny-submit="postTimeLine(data)" class="profile-post-form">
+				<textarea class="form-control input-unstyled input-lg autogrow" name="content" placeholder="What's on your mind?"></textarea>
 				<i class="el-edit block-icon"></i>
 				
 				<ul class="list-unstyled list-inline form-action-buttons">

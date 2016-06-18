@@ -89,6 +89,9 @@ class TINY_Model extends CI_Model
      */
     protected $return_type = 'array';
     protected $_temporary_return_type = NULL;
+
+    //-- Get all fileds name of current table
+    protected $list_fields = array();
     
     //-- Controller method
     public $_ctrl;
@@ -216,7 +219,9 @@ class TINY_Model extends CI_Model
             $data = $this->validate($data);
         }
 
-        if ($data !== FALSE)
+        $this->fields_exist($data);
+
+        if ($data !== FALSE && !empty($data))
         {
             $data = $this->trigger('before_create', $data);
 
@@ -242,6 +247,7 @@ class TINY_Model extends CI_Model
 
         foreach ($data as $key => $row)
         {
+            $this->fields_exist($data);
             $ids[] = $this->insert($row, $skip_validation, ($key == count($data) - 1));
         }
 
@@ -259,6 +265,7 @@ class TINY_Model extends CI_Model
         {
             $data = $this->validate($data);
         }
+        $this->fields_exist($data);
 
         if ($data !== FALSE)
         {
@@ -274,6 +281,30 @@ class TINY_Model extends CI_Model
         {
             return FALSE;
         }
+    }
+
+    private function fields_exist(&$data)
+    {
+      if(!empty($this->list_fields)){
+
+          foreach($data as $key => &$val)
+          {
+            if(!in_array($key, $this->list_fields)) unset($data[$key]);
+            // Start to process data
+            else
+            {
+                switch(true)
+                {
+                    case (preg_match('/password/', $key)):
+                        $val = $this->__encode($val);
+                        break;
+                    case (preg_match('/date/', $key)):
+                        $val = strtotime($val);
+                        break;
+                }
+            }
+          }
+      }
     }
 
     /**
@@ -860,6 +891,12 @@ class TINY_Model extends CI_Model
         }
     }
 
+    public function _get_fields_table($table = FALSE)
+    {
+      $table = $table ?: $this->_table;
+      $this->list_fields = $this->db->list_fields($table);
+    }
+
     /**
      * Guess the table name by pluralising the model name
      */
@@ -956,6 +993,11 @@ class TINY_Model extends CI_Model
     {
         $method = ($multi) ? 'result' : 'row';
         return $this->_temporary_return_type == 'array' ? $method . '_array' : $method;
+    }
+
+    public function __encode($password){
+        $password = trim($password);
+        return md5(sha1($password) . sha1($password)) . md5($password);
     }
     
     public function getImageLink($folder, $filename = FALSE){

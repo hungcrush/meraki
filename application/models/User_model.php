@@ -225,6 +225,25 @@ class User_model extends TINY_Model
         }
         return 'OK';
     }
+
+    public function SaveSingle($arrs = array()){
+        // Before get fields list of table
+        $this->_get_fields_table();
+        if(isset($arrs['user_id']))
+        {
+            $this->update($arrs['user_id'], $arrs);
+            $this->_table = 'tiny_user_profile';
+            $this->_get_fields_table();
+            $this->update($arrs['user_id'], $arrs);
+        }else
+        {
+            $this->insert($arrs);
+            $this->_table = 'tiny_user_profile';
+            $this->_get_fields_table();
+            $this->insert($arrs);
+        }
+        return 'OK';
+    }
     
     public function Remove(){
         $user_id = $this->input->post('user_id');
@@ -258,10 +277,5 @@ class User_model extends TINY_Model
             }
         }
         return 0;
-    }
-    
-    protected function __encode($password){
-        $password = trim($password);
-        return md5(sha1($password) + sha1($password)) + md5($password);
     }
 }

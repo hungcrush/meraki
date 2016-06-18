@@ -454,6 +454,21 @@ angular.module('xenon.directives', []).
 			}
 		};
 	})
+
+	.directive('autogrow', function(){
+		return {
+			restrict: 'AC',
+			link: function(scope, el, attr)
+			{
+				if( ! jQuery.isFunction(jQuery.fn.autosize))
+					return false;
+
+				var $el = angular.element(el);
+
+				$el.autosize();
+			}
+		}
+	})
     
     
     .directive('tinyModal', function($modal, $rootScope, $controller){

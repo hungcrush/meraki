@@ -6,7 +6,7 @@
 
 <page-title ng-if="layoutOptions.pageTitles" title="{title_page}" description="Interface for adding new members using our styled forms."></page-title>
 
-<form tiny-submit="save_edit(dataForm)" method="post">
+<form tiny-submit="save_edit(dataForm)" no-reset method="post">
 	<div class="panel panel-headerless">
 		<div class="panel-body">
 			<div class="member-form-add-header">
@@ -40,7 +40,7 @@
 						<label class="control-label" for="username">Screen Name</label>
 					</div>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" name="username" id="username" required="true" value="{username}" ng-disabled="isEdit" />
+						<input type="text" class="form-control" name="username" id="username" required="true" value="{username}" disabled="" />
 					</div>
 				</div>
                 
@@ -49,7 +49,16 @@
 						<label class="control-label" for="full_name">Password</label>
 					</div>
 					<div class="col-sm-9">
-						<input type="password" class="form-control" required="true" name="password" id="password" />
+						<ul ng-init="changePassword = 1" class="ul">
+							<li><label><input ng-model="changePassword" value="1" type="radio" name="changeyourpassword"> Do not change</label></li>
+							<li><label><input ng-model="changePassword" value="2" type="radio" name="changeyourpassword"> Set new password:</label>
+								<ul>
+									<li><input ng-disabled="changePassword == 1" type="password" class="form-control" required="true" name="password" id="password" /></li>
+								</ul>
+							</li>
+
+						</ul>
+						
 					</div>
 				</div>
 
@@ -95,7 +104,7 @@
 					</div>
 					<div class="col-sm-9">
 						<div class="input-group">
-							<input type="text" class="form-control tiny-picker" name="birthdate" data-format="dd-mm-yyyy" value="{birth_date}">
+							<input type="text" class="form-control tiny-picker" name="birth_date" data-format="dd-mm-yyyy" value="{birth_date}">
 
 							<div class="input-group-addon">
 								<a href=""><i class="linecons-calendar"></i></a>

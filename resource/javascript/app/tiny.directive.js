@@ -19,8 +19,11 @@ angular.module('tinyfw.directive', [])
                             
                             if(r !== false){
                                 $form.find('[type="submit"]').prop('disabled', true);
-                                if(!attrs.noReset || attrs.noReset == 'false')
+                                if(typeof attrs.noReset == 'undefined'){
+                                    console.log(attrs);
                                     $form.trigger('reset');
+                                }else
+                                    console.log('No Reset');
                             }
                         }, __time);
                     

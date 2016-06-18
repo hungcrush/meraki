@@ -163,9 +163,7 @@ angular.module('tiny.admin.controllers', []).
             }).success(function(response){
                 if(response.content == 'OK'){
                     toastr.success('<i class="fa fa-check"></i> Success');
-                    if(!$scope.isEdit){
-                        $rootScope.changeRoute('admin.administrator', {module: 'peoples'});
-                    }
+                    $rootScope.changeRoute('admin.administrator', {module: 'peoples'});
                 }
             })
         }
@@ -800,6 +798,29 @@ angular.module('tiny.admin.controllers', []).
             })
         }
     }).
+    /*
+        Controller for Profile, Timline
+    */
     controller('ProfileCtrl', function($scope, $tiny){
-        
+        $scope.save_edit = function(data){
+            $tiny.ajax({
+                url: tn.makeURL('save', '/admin/profile'),
+                data: data
+            }).success(function(data){
+                if(data.content == 'OK')
+                {
+                    toastr.success('<i class="fa fa-check"></i> Success');
+                }
+            })
+        }
+
+        $scope.uploaded = function(res, file){
+            var r = angular.fromJson(res);
+            $('#avatar_link').val(r.folder+'|'+r.filename);
+        }
+
+        $scope.postTimeLine = function(){
+
+        }
     })
+
