@@ -255,8 +255,8 @@
 	<!-- Right links for user info navbar -->
 	<ul class="user-info-menu right-links list-inline list-unstyled">
 		<li ng-repeat="(key, value) in _services" class="fullscreen">
-			<a href="" ng-click="switchRolePage(key)" title="Fullscreen">
-				{{value}}
+			<a href="" ng-click="switchRolePage(key, value.skin)" title="Fullscreen">
+				{{value.name}}
 			</a>
 		</li>
 

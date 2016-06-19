@@ -121,14 +121,14 @@ angular.module('xenon.factory', []).
 				$window.showLoadingBar = this.showLoadingBar;
 				$window.hideLoadingBar = this.hideLoadingBar;
 
-				$rootScope.$on('$stateChangeStart', function()
+				$rootScope.$on('$stateChangeStart', function(evt, to, params, from)
 				{
 					pl.showLoadingBar({
 						pct: 95,
 						delay: 1.1,
 						resetOnEnd: false
 					});
-
+					if(to.redirectTo != from.name)
 					jQuery('body .page-container .main-content').addClass('is-loading');
 				});
 

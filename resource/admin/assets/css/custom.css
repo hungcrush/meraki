@@ -402,3 +402,309 @@ li.sort_li.ui-sortable-placeholder{
     list-style: none;
     padding-left: 15px;
 }
+.crm-menu-wrap {
+	display:block;
+	float: left;
+	padding: 0;
+	position:relative;
+	width:73%;
+	height: 94px;
+	overflow: hidden;
+}
+
+.crm-menu-table {
+	border-spacing:0;
+	max-width:800px;
+	padding:0;
+	width:100%;
+}
+
+.crm-menu-cell {
+	text-align:left;
+	padding:0;
+	vertical-align:top;
+}
+
+.crm-menu-item-wrap {
+	display:inline-block;
+	min-height:86px;
+	position:relative;
+	margin: 0 5px 8px 0;
+	vertical-align: top;
+}
+
+.crm-menu-item {
+	cursor:pointer;
+	display:inline-block;
+	border-radius:2px;
+	min-height:86px;
+	margin-right:5px;
+	min-width:76px;
+	padding:0 5px;
+	position:relative;
+	text-align:center;
+	text-decoration:none;
+	vertical-align:top;
+}
+
+.crm-menu-item-active,
+.crm-menu-item:active,
+.crm-menu-item-wrap:hover .crm-menu-item {
+	background-color: #d6f1fb;
+}
+
+.crm-menu-item-wrap:hover .crm-menu-icon {
+	opacity: 1;
+}
+
+.crm-menu-item-active .crm-menu-icon,
+.crm-menu-item:active .crm-menu-icon {
+	opacity: 1;
+}
+.crm-menu-icon {
+	background:url(../images/crm-control-panel-sprite-21.png) no-repeat 500px 500px;
+	display:block;
+	height:53px;
+	opacity: 0.6;
+}
+
+.crm-menu-feed 		.crm-menu-icon { background-position: center -2071px; }
+.crm-menu-activity 	.crm-menu-icon { background-position: center 13px; }
+.crm-menu-company  	.crm-menu-icon { background-position: center -33px; }
+.crm-menu-contact 	.crm-menu-icon { background-position: center -75px; }
+.crm-menu-deal 		.crm-menu-icon { background-position: center -122px; }
+.crm-menu-lead 		.crm-menu-icon { background-position: center -170px; }
+.crm-menu-quote 	.crm-menu-icon { background-position: center -3283px; }
+.crm-menu-invoice 	.crm-menu-icon {background-position: center -2813px;}
+.crm-menu-report 	.crm-menu-icon { background-position: center -270px; }
+.crm-menu-funnel 	.crm-menu-icon { background-position: center -222px; }
+.crm-menu-event 	.crm-menu-icon { background-position: center -870px; }
+.crm-menu-catalog 	.crm-menu-icon { background-position: center -930px; }
+.crm-menu-settings 	.crm-menu-icon { background-position: center -1407px;}
+.crm-menu-apps 		.crm-menu-icon { background-position: center -4831px;}
+.crm-menu-more 		.crm-menu-icon {
+	background-position: center -977px;
+	height: 51px;
+}
+.crm-menu-more .crm-menu-name {
+	display:inline-block;
+	margin-right: -8px;
+	padding-right:11px;
+	position:relative;
+}
+
+.crm-menu-more .crm-menu-name:before {
+	background:url(../images/crm-control-panel-sprite-21.png) no-repeat -24px -468px;
+	content:"";
+	height:3px;
+	right:0;
+	top:6px;
+	position:absolute;
+	width:6px;
+}
+
+.crm-menu-icon-counter,
+.crm-menu-item-popup-icon {
+    background-color:#f43400;
+    border-radius:10px;
+    color:#fff;
+    left: 50%;
+    line-height: 16px;
+    height:16px;
+    font-size:12px;
+    font-weight:bold;
+    margin-left: 7px;
+    top:3px;
+    min-width:11px;
+    text-align:center;
+    padding:0 3px;
+    position:absolute;
+}
+
+.crm-menu-icon-counter-grey {
+    background-color:#80868e;
+}
+
+
+.crm-menu-item-popup-icon {
+    left: auto;
+    right: 5px;
+    top: 15px;
+}
+
+.crm-menu-name {
+    color:#80868e;
+    display:block;
+    font-size:12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.crm-menu-item-wrap:hover .crm-menu-name,
+.crm-menu-item-active .crm-menu-name {
+    color:#333333;
+}
+
+.crm-menu-item .crm-menu-quote:hover .crm-menu-name,
+.crm-menu-item .crm-menu-quote:active .crm-menu-name {color:#252c38;}
+
+.crm-menu-item .crm-menu-invoice:hover .crm-menu-name,
+.crm-menu-item .crm-menu-invoice:active .crm-menu-name {color:#252c38;}
+
+.crm-menu-plus-btn {
+    bottom: -17px;
+    cursor:pointer;
+    display:none;
+    height:35px;
+    margin-left:-27px;
+    left:50%;
+    text-decoration:none;
+    position:absolute;
+    width:50px;
+    z-index:2;
+}
+
+.crm-menu-plus-btn:before {
+    background:url(../images/crm-control-panel-sprite-21.png) no-repeat center -331px #d6f1fb;
+    content: '';
+    border-radius: 50%;
+    height: 22px;
+    margin-left: -11px;
+    left: 50%;
+    position: absolute;
+    top: 4px;
+    width: 22px;
+}
+
+.crm-menu-item-wrap:hover .crm-menu-plus-btn {display:block;}
+
+.crm-menu-plus-btn:hover:before {
+    background-color: #1ec7fa;
+    background-position: center -378px;
+    text-decoration:none;
+}
+
+.crm-menu-shadow {
+    border-top: 1px solid #f0f1f2;
+    bottom:9px;
+    display:block;
+    left:0;
+    position:absolute;
+    width:100%;
+}
+
+.crm-menu-shadow-right,
+.crm-menu-shadow-center {
+    display: none;
+}
+
+.crm-search-block{
+    display:block;
+    overflow:hidden;
+    padding: 20px 4% 0 0;
+}
+
+.crm-search {
+    border-radius:2px;
+    border:1px solid;
+    border-color:#ced0d1 #d1d3d5 #d3d6d8;
+    box-shadow:inset 0 1px 2px 0 #e3e3e3;
+    display:block;
+    height:31px;
+}
+
+.crm-search-btn {
+    background:url(../images/crm-control-panel-sprite-21.png) no-repeat center -504px;
+    cursor:pointer;
+    display:block;
+    float:right;
+    height:31px;
+    width:37px;
+}
+
+.crm-search-btn:hover {background-position:center -477px}
+
+.crm-search-inp-wrap {
+    display:block;
+    overflow:hidden;
+    padding:5px 0 0 9px;
+}
+
+.crm-search-inp {
+    background:#fff;
+    border:none;
+    color:#000;
+    height:19px;
+    font-size:14px;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    outline:none;
+    padding:0;
+    width:100%;
+}
+
+.crm-search-inp:-moz-placeholder{color: #c2c2c2;}/*Firefox < 19*/
+.crm-search-inp::-moz-placeholder{color: #c2c2c2;}/*firefox 19+*/
+.crm-search-inp::-webkit-input-placeholder{color: #c2c2c2;}
+.crm-search-inp:-ms-input-placeholder {color: #c2c2c2;}/*IE10*/
+
+
+.crm-menu-resize .crm-menu-item-wrap {height:57px;}
+.crm-menu-resize .crm-menu-item {height:33px;}
+.crm-menu-resize .crm-menu-icon {display:none;}
+.crm-menu-resize .crm-menu-name {padding-top:7px;}
+.crm-menu-resize .crm-menu-more .crm-menu-name:before {top:16px;}
+.crm-menu-resize .crm-search-block {padding-top:0;}
+.crm-menu-resize .crm-menu-icon-counter {top:-8px; left:68px;}
+
+.crm-header-inner {
+    background-color: #fff;
+    height: 107px;
+    position: relative;
+}
+
+.crm-menu-fixed {
+    -webkit-box-shadow: 0 4px 10px 0 #c6c9cb;
+    box-shadow: 0 4px 10px 0 #c6c9cb;
+    margin-left: -15px;
+    margin-right: -15px;
+    height: 46px;
+    overflow: hidden;
+    padding-left: 15px ;
+    padding-right: 15px;
+    position: fixed;
+    z-index: 987;
+}
+
+.crm-menu-fixed .crm-menu-item-wrap {min-height: 0; height:36px;}
+.crm-menu-fixed .crm-menu-item {min-height: 0; height:33px;}
+.crm-menu-fixed .crm-menu-icon {display:none;}
+.crm-menu-fixed .crm-menu-name {padding-top:7px;}
+.crm-menu-fixed .crm-menu-more .crm-menu-name:before {top:13px;}
+.crm-menu-fixed .crm-search-block {padding-top:1px;}
+.crm-menu-fixed .crm-menu-icon-counter {top:-8px; left:68px;}
+.crm-menu-fixed .crm-menu-shadow,
+.crm-menu-fixed .crm-menu-icon-counter {display: none;}
+
+.crm-menu-fixed-btn {
+    background: url(../images/crm-control-panel-sprite-21.png) no-repeat center -3752px;
+    cursor: pointer;
+    height: 37px;
+    top: 20px;
+    right: 0;
+    opacity: 0.8;
+    position: absolute;
+    width: 4%;
+}
+
+.crm-menu-unfixed-btn {
+    background-position: center -4168px;
+}
+
+.crm-menu-fixed .crm-menu-fixed-btn {
+    top: 1px;
+}
+
+.crm-menu-fixed-btn:hover {
+    opacity: 1;
+}

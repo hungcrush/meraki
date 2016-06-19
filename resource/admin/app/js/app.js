@@ -339,13 +339,22 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
             url: '/crm',
             templateUrl: URL_SERVER+'admin/crm',
             controller: 'CRMCtrl',
-            redirectTo: 'admin.crm.list'
+            redirectTo: 'admin.crm.stream'
         }).
-        state('admin.crm.list', {
-            url: '/lists',
+        state('admin.crm.stream', {
+            url: '/stream/',
             views: {
                 content: {
-                    templateUrl: URL_SERVER + 'admin/crm/lists',
+                    templateUrl: URL_SERVER + 'admin/crm/stream',
+                    controller: 'CRMListCtrl'
+                }
+            }
+        }).
+        state('admin.crm.contacts', {
+            url: '/contact/',
+            views: {
+                content: {
+                    templateUrl: URL_SERVER + 'admin/crm/contact',
                     controller: 'CRMListCtrl'
                 }
             }

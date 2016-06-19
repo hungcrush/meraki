@@ -70,11 +70,16 @@ angular.module('xenon.controllers', []).
 			userInfoNavVisible	: false
 		};
 
-		$scope.switchRolePage = function(page)
+		$scope.switchRolePage = function(page, skin)
 		{
 			$rootScope.rolePage = page;
 			tinyCookies.setItem('rolepage', page, 604800); //-- 7 days
 			public_vars.$body.trigger('UpdateMenu');
+
+			if($.trim(skin) != '')
+			{
+				public_vars.$body.addClass(skin);
+			}
 		}
         
         $rootScope.reload = function() {
@@ -151,7 +156,7 @@ angular.module('xenon.controllers', []).
 
 
 		// Set Scroll to 0 When page is changed
-		$rootScope.$on('$stateChangeStart', function(evt, to, params)
+		$rootScope.$on('$stateChangeStart', function(evt, to, params, from)
 		{
 			var obj = {pos: jQuery(window).scrollTop()};
 
@@ -163,7 +168,12 @@ angular.module('xenon.controllers', []).
             delete $rootScope.currentPage.title;
 
             if (to.redirectTo) {
-		        $state.go(to.redirectTo, params);
+            	if(to.redirectTo == from.name){
+            		evt.preventDefault();
+            		return false;
+            	}
+		        $rootScope.changeRoute(to.redirectTo, params);
+		        evt.preventDefault();
 		    }
    
         });

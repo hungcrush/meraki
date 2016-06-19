@@ -83,7 +83,7 @@
         	</div>
         	<div class="panel-body">
                 <tabset>
-                    <tab ng-repeat="(key, value) in fn.pages" heading="{{value}}">
+                    <tab ng-repeat="(key, value) in fn.pages" heading="{{value.name}}">
         		      <ul id="nestable-list-{{key}}" ng-init="_menus = key" class="uk-nestable" ng-include="'menu-items-tpl'"></ul>
                     </tab>
                 </tabset>

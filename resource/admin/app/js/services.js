@@ -132,7 +132,7 @@ angular.module('xenon.services', []).
             
             if(!tn.isInArray(doState, avalibleMenu)){
                 if(doState.slice('-1') == '.')
-                doState = doState.substring(1, doState.length-1);
+                doState = doState.substring(0, doState.length-1);
                 
                 console.log('start find parent of menu');
                 while(!tn.isInArray(doState, avalibleMenu) || !tn.isInArray(doState+'.', avalibleMenu)){
