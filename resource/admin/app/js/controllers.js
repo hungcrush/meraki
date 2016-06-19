@@ -28,6 +28,7 @@ angular.module('xenon.controllers', []).
 		$rootScope.isLightLoginPage   = false;
 		$rootScope.isLockscreenPage   = false;
 		$rootScope.isMainPage         = true;
+		$rootScope.rolePage 		  = tinyCookies.getItem('rolepage') !== null ? tinyCookies.getItem('rolepage') : 1;	
 
 		$rootScope.layoutOptions = {
 			horizontalMenu: {
@@ -68,8 +69,15 @@ angular.module('xenon.controllers', []).
 			pageTitles: true,
 			userInfoNavVisible	: false
 		};
+
+		$scope.switchRolePage = function(page)
+		{
+			$rootScope.rolePage = page;
+			tinyCookies.setItem('rolepage', page, 604800); //-- 7 days
+			public_vars.$body.trigger('UpdateMenu');
+		}
         
-        $rootScope.reload = function reload() {
+        $rootScope.reload = function() {
             $state.transitionTo($state.current, $stateParams, { reload: true, inherit: true, notify: true });
         };
 
@@ -153,6 +161,10 @@ angular.module('xenon.controllers', []).
 			}});
             
             delete $rootScope.currentPage.title;
+
+            if (to.redirectTo) {
+		        $state.go(to.redirectTo, params);
+		    }
    
         });
         
@@ -200,9 +212,9 @@ angular.module('xenon.controllers', []).
             $tiny.ajax({
                 url: URL_SERVER+'admin/administrator/menu/Navigation'
             }).success(function(data){
-                $scope.menuItems = $sidebarMenuItems.prepareSidebarMenu(data.menu[1]).getAll();
+                $scope.menuItems = $sidebarMenuItems.prepareSidebarMenu(data.menu[$rootScope.rolePage]).getAll();
+
                 $rootScope._services = data.pages;
-                console.log(data);
                 setActice();
                 
                 // Trigger menu setup
@@ -237,6 +249,7 @@ angular.module('xenon.controllers', []).
                 location = location.replace(new RegExp(module___[1]), '');
             }
             
+            console.log(location);
 			var item = $sidebarMenuItems.setActive(location);
             if(!$rootScope.currentPage.title && item != null)
                 $rootScope.currentPage.title = item.title;

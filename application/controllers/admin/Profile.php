@@ -30,7 +30,7 @@ class Profile extends TINY_Controller {
     }
 
     public function Postfeed(){
-
+        return $this->feeds->Save($this->_post());
     }
 
     

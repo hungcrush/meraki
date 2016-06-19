@@ -819,8 +819,25 @@ angular.module('tiny.admin.controllers', []).
             $('#avatar_link').val(r.folder+'|'+r.filename);
         }
 
-        $scope.postTimeLine = function(){
-
+        $scope.postTimeLine = function(data){
+            $tiny.ajax({
+                url: tn.makeURL('postfeed', '/admin/profile'),
+                data: data
+            }).success(function(data){
+                if(data.content == 'OK')
+                {
+                    toastr.success('<i class="fa fa-check"></i> Success');
+                }
+            })
         }
+    }).
+    /*
+        Controller for CRM module
+    */
+    controller('CRMCtrl', function($scope, $rootScope){
+        $scope.crm_title = 'CRM';
+    }).
+    controller('CRMListCtrl', function(){
+
     })
 

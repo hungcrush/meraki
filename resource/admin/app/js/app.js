@@ -208,7 +208,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
                 },
             },
             controller: 'ProfileCtrl'
-        })
+        }).
         //------------------------------
         // CONTENT MANAGER
         //------------------------------
@@ -331,7 +331,26 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
                     return null;
                 }
             }
-        })        
+        }).
+        //------------------------------
+        // CRM MODULE
+        //------------------------------
+        state('admin.crm', {
+            url: '/crm',
+            templateUrl: URL_SERVER+'admin/crm',
+            controller: 'CRMCtrl',
+            redirectTo: 'admin.crm.list'
+        }).
+        state('admin.crm.list', {
+            url: '/lists',
+            views: {
+                content: {
+                    templateUrl: URL_SERVER + 'admin/crm/lists',
+                    controller: 'CRMListCtrl'
+                }
+            }
+        })
+
         
     $locationProvider.html5Mode({
       enabled: true,
