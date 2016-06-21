@@ -1,1 +1,32 @@
-STREAM
+<div class="crm-feed-wrap">
+   <div class="crm-feed">
+      <div id="crm__0_feed_menu" class="crm-feed-top-nav"><span id="crm__0_feed_add_message" class="crm-feed-top-nav-item">Message</span>
+         <span id="crm__0_feed_add_task" class="crm-feed-top-nav-item">Task</span>
+         <span id="crm__0_feed_add_meeting" class="crm-feed-top-nav-item">Meeting</span>
+         <span id="crm__0_feed_add_call" class="crm-feed-top-nav-item">Call</span>
+         <span id="crm__0_feed_add_email" class="crm-feed-top-nav-item">E-mail</span>
+      </div>
+      <div class="feed-wrap" style="position:relative;">
+         <div class="feed-add-post-block">
+            <div id="microblog-form">
+               <form action="/crm/stream/" id="crm__0_sl_event_editor" name="crm__0_sl_event_editor" method="POST" enctype="multipart/form-data" target="_self">
+                  <input type="hidden" name="sessid" id="sessid" value="53ca6f36d693d876cc61ef66387d964b">	
+                  <div id="feed-add-post-content-message">
+                     <div class="feed-add-post-title" id="crm__0_sl_event_editor_message_title_wrapper" style="display: none;">
+                        <input id="crm__0_sl_event_editor_message_title" type="text" name="POST_TITLE" class="feed-add-post-inp feed-add-post-inp-active" value="" placeholder="Subject">
+                        <input id="crm__0_sl_event_editor_enable_message_title" type="hidden" name="ENABLE_POST_TITLE" value="N">
+                        <div class="feed-add-close-icon" id="crm__0_sl_event_editor_message_title_close_btn"></div>
+                     </div>
+                     <span class="crm-feed-form-title-arrow"></span>
+                     <div class="feed-add-post-micro" id="microcrm__0_sl_event_editor_lhe" onclick="BX.onCustomEvent(this.nextSibling, 'OnControlClick'); if(this.nextSibling.style.display=='none'){BX.onCustomEvent(this.nextSibling, 'OnShowLHE', ['show']);}" dropzone="copy f:*/*" style="display: block;"><span class="feed-add-post-micro-title">Send message …</span></div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="crm-feed-message">
+      <p class="crm-empty">No messages...</p>
+   </div>
+</div>

@@ -352,6 +352,13 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
         }).
         state('admin.crm.contacts', {
             url: '/contact/',
+            resolve: {
+                deps: function($ocLazyLoad){
+                    return $ocLazyLoad.load([
+                        ASSETS.tables.datatables,
+                    ]);
+                },
+            },
             views: {
                 content: {
                     templateUrl: URL_SERVER + 'admin/crm/contact',

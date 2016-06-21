@@ -835,9 +835,16 @@ angular.module('tiny.admin.controllers', []).
         Controller for CRM module
     */
     controller('CRMCtrl', function($scope, $rootScope){
-        $scope.crm_title = 'CRM';
+        $scope.crm_title  = 'CRM';
+        $scope.crmCurrent = '';
+        $scope.setCrmCurrent = function(page)
+        {
+            console.log('Debug: ', page);
+            $scope.crmCurrent = page;
+        }
     }).
-    controller('CRMListCtrl', function(){
-
+    controller('CRMListCtrl', function($scope, $state){
+        var match = $state.current.name.match(/(stream|contacts)/);
+        if(match.length > 0) $scope.setCrmCurrent(match[0]);
     })
 

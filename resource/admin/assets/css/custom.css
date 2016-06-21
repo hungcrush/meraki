@@ -708,3 +708,253 @@ li.sort_li.ui-sortable-placeholder{
 .crm-menu-fixed-btn:hover {
     opacity: 1;
 }
+
+.crm-feed-wrap {
+    padding: 0;
+}
+
+.crm-feed {
+    overflow: hidden;
+    position: relative;
+}
+
+.crm-feed-cont {
+    padding-top: 30px;
+}
+
+.crm-feed-top-nav {
+    min-height: 32px;
+    overflow: hidden;
+    padding: 0 0 11px 14px;
+}
+
+.crm-feed-top-nav-item, .crm-feed-top-nav-item-more {
+    color: #989ca3;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 6px 15px 0;
+    vertical-align: top;
+}
+
+.crm-feed-top-nav-item:first-child {
+    margin-left: 0;
+}
+
+.crm-feed-top-nav-item:hover, .crm-feed-top-nav-item-more:hover {
+    text-decoration: underline;
+}
+
+.crm-feed-top-nav-item-active {
+    color: #5c6470;
+}
+
+.crm-feed-top-nav-item-more {
+    padding-right: 13px;
+    position: relative;
+}
+
+.crm-feed-top-nav-item-more:before {
+    background: url("images/crm/crm-control-panel-sprite-4.png") no-repeat -25px -1742px;
+    content: "";
+    height: 3px;
+    position: absolute;
+    right: 0;
+    top: 8px;
+    width: 6px;
+}
+
+.crm-feed-right-side {
+    float: right;
+    margin: 0 0 0 11px;
+    width: 262px;
+}
+
+.feed-post-title.crm-feed-activity-status {
+    border-bottom: none;
+    color: #6c6c6c !important;
+    display: block;
+    font-weight: normal;
+    margin-bottom: 5px;
+    vertical-align: top;
+}
+
+.feed-post-title.crm-feed-activity-status i {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.crm-post-deal-wrap {
+    overflow: hidden;
+    padding-left: 75px;
+    position: relative;
+}
+
+.crm-post-deal-wrap .crm-feed-calendar-icon {
+    left: 1px;
+    position: absolute;
+    top: 10px;
+}
+
+.crm-feed-info-table .crm-feed-company-avatar {
+    display: inline-block;
+    position: static;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.crm-feed-info-table .crm-feed-user-block {
+    display: inline-block;
+    cursor: pointer;
+    min-height: 29px;
+    text-decoration: none;
+    position: relative;
+}
+
+.crm-feed-client-name, .crm-feed-user-name {
+    color: #2067b0;
+    display: inline-block;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.crm-feed-user-avatar {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.crm-feed-company-avatar {
+    position: absolute;
+    top: 0;
+}
+
+.crm-feed-num-block {
+    display: inline-block;
+    padding-right: 25px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.crm-feed-client-block .crm-item-tel-num,
+.crm-feed-client-block .crm-item-tel-num:hover,
+.crm-feed-info-table .crm-item-tel-num,
+.crm-feed-info-table .crm-item-tel-num:hover {
+    line-height: normal;
+    text-decoration: none;
+    width: auto;
+}
+
+.crm-feed-client-block {
+    background-color: #f0f5f6;
+    border-radius: 3px;
+    display: block;
+    margin-bottom: 5px;
+    min-height: 42px;
+    min-width: 160px;
+    padding: 3px 10px 0 50px;
+    position: relative;
+}
+
+.crm-feed-client-alignment {
+    display: inline-block;
+    height: 42px;
+    margin-left: -1px;
+    vertical-align: middle;
+    width: 1px;
+}
+
+.crm-feed-client-right {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.crm-feed-client-company {
+    color: #848787;
+    display: block;
+    font-size: 12px;
+}
+
+.crm-feed-client-block .crm-feed-user-avatar {
+    left: 6px;
+    margin-top: -18px;
+    top: 50%;
+}
+
+.crm-feed-client-phone {
+    color: #1a60a9;
+    display: inline-block;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.crm-feed-deal-description {
+    border-bottom: 1px solid #ebeded;
+    border-top: 1px solid #ebeded;
+    color: #000;
+    font-size: 14px;
+    padding: 15px 0 16px;
+}
+
+.crm-feed-deal-descr-title {
+    color: #8d8d8d;
+    float: left;
+    padding-right: 11px;
+}
+
+.crm-feed-deal-descr-text {
+    overflow: hidden;
+}
+
+.crm-feed-info-bar-cont .crm-list-stage-bar {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.crm-feed-info-bar-cont {
+    display: block;
+}
+
+.feed-filter-fake-cont {
+    display: inline-block;
+    min-height: 32px;
+}
+
+
+.feed-post-text-block-inner-inner .data-table img {
+    height: auto;
+}
+
+.feed-add-post-micro,
+.crm-empty {
+    color: #80868e;
+    font-size: 18px;
+    margin: 0;
+    height: 18px;
+    padding: 19px 2px 27px 18px;
+    position: relative;
+    cursor: text;
+}
+.feed-add-post-micro-dnd-ready.feed-add-post-micro {
+    background: rgba(248,250,250,0.9);
+    border: 2px dashed #a7b0b5;
+    padding: 17px 0 25px 16px;
+    cursor: default;
+}
+.feed-add-post-micro .feed-add-post-micro-dnd,
+.feed-add-post-micro-dnd-ready.feed-add-post-micro .feed-add-post-micro-title{
+    display: none;
+}
+.feed-add-post-micro-dnd-ready.feed-add-post-micro .feed-add-post-micro-dnd {
+    display: block;
+}
+.crm-feed-message{
+    border-top: 5px solid #ddd;
+    margin-top: 2rem;
+}
+.crm-empty{
+    text-align: center;
+    width: 100%;
+    display: block;
+}

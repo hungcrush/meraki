@@ -28,7 +28,12 @@ angular.module('xenon.controllers', []).
 		$rootScope.isLightLoginPage   = false;
 		$rootScope.isLockscreenPage   = false;
 		$rootScope.isMainPage         = true;
-		$rootScope.rolePage 		  = tinyCookies.getItem('rolepage') !== null ? tinyCookies.getItem('rolepage') : 1;	
+		$rootScope.rolePage 		  = tinyCookies.getItem('rolepage') !== null ? $.parseJSON(tinyCookies.getItem('rolepage')) : [1, ''];
+
+		// Define Public Vars
+		public_vars.$body = jQuery("body");
+
+		public_vars.$body.addClass($rootScope.rolePage[1]);
 
 		$rootScope.layoutOptions = {
 			horizontalMenu: {
@@ -72,8 +77,8 @@ angular.module('xenon.controllers', []).
 
 		$scope.switchRolePage = function(page, skin)
 		{
-			$rootScope.rolePage = page;
-			tinyCookies.setItem('rolepage', page, 604800); //-- 7 days
+			$rootScope.rolePage = [page, skin];
+			tinyCookies.setItem('rolepage', JSON.stringify([page, skin]), 604800, '/'); //-- 7 days
 			public_vars.$body.trigger('UpdateMenu');
 
 			if($.trim(skin) != '')
@@ -107,8 +112,7 @@ angular.module('xenon.controllers', []).
 		};
 
 
-		// Define Public Vars
-		public_vars.$body = jQuery("body");
+		
 
 
 		// Init Layout Toggles
@@ -222,7 +226,7 @@ angular.module('xenon.controllers', []).
             $tiny.ajax({
                 url: URL_SERVER+'admin/administrator/menu/Navigation'
             }).success(function(data){
-                $scope.menuItems = $sidebarMenuItems.prepareSidebarMenu(data.menu[$rootScope.rolePage]).getAll();
+                $scope.menuItems = $sidebarMenuItems.prepareSidebarMenu(data.menu[$rootScope.rolePage[0]]).getAll();
 
                 $rootScope._services = data.pages;
                 setActice();

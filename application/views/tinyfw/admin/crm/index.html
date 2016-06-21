@@ -3,14 +3,14 @@
 <div class="panel panel-default crm_section">
 	<div class="panel-heading">
 		<div class="panel-title crm-menu-wrap">
-			<div class="crm-menu-item-wrap" id="crm_ctrl_panel_item_lead_edit_stream">
+			<div class="crm-menu-item-wrap" ng-class="{'crm-menu-item-active' : (crmCurrent == 'stream')}" id="crm_ctrl_panel_item_lead_edit_stream">
 				<a href="/admin/crm/stream/" class="crm-menu-item crm-menu-feed" title="CRM Activity Stream">
 					<span class="crm-menu-icon"></span>
 					<span class="crm-menu-name">Stream</span>
 					<span class="crm-menu-icon-counter crm-menu-icon-counter-grey" id="crm_menu_counter" style="display: none;">0</span>
 				</a>
 			</div>
-			<div class="crm-menu-item-wrap" id="crm_ctrl_panel_item_stream_contact">
+			<div class="crm-menu-item-wrap" ng-class="{'crm-menu-item-active' : (crmCurrent == 'contacts')}" id="crm_ctrl_panel_item_stream_contact">
 				<a href="/admin/crm/contact/" class="crm-menu-item crm-menu-contact" title="Contacts">
 					<span class="crm-menu-icon"></span>
 					<span class="crm-menu-name">Contacts</span>
