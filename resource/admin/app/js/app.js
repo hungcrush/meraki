@@ -351,7 +351,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
             }
         }).
         state('admin.crm.contacts', {
-            url: '/contact/',
+            url: '/contact/*module',
             resolve: {
                 deps: function($ocLazyLoad){
                     return $ocLazyLoad.load([
@@ -361,7 +361,12 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
             },
             views: {
                 content: {
-                    templateUrl: URL_SERVER + 'admin/crm/contact',
+                    templateUrl: function($stateParams){
+                        if($stateParams && jQuery.trim($stateParams.module) != '')
+                            return URL_SERVER + 'admin/crm/'+$stateParams.module;
+                        else
+                            return URL_SERVER + 'admin/crm/contact';
+                    },
                     controller: 'CRMListCtrl'
                 }
             }

@@ -958,3 +958,10 @@ li.sort_li.ui-sortable-placeholder{
     width: 100%;
     display: block;
 }
+.crm_section .panel{
+    margin-bottom: 0;
+}
+.crm_section .panel .panel-heading{
+    background: #F2F2F2;
+    padding: 1.5rem 1rem 1rem;
+}

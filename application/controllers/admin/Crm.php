@@ -19,6 +19,10 @@ class Crm extends TINY_Controller {
         $this->data['template'] = 'admin/crm/contacts.html';
     }
 
+    public function ContactAdd(){
+        $this->data['template'] = 'admin/crm/contacts-add.html';
+    }
+
     public function Stream(){
         $this->data['template'] = 'admin/crm/stream.html';
     }

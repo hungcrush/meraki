@@ -1,0 +1,204 @@
+<div class="row">
+	<div class="col-sm-12">
+		<form tiny-submit="contactSubmit(dataForm)" role="form" class="form-horizontal" role="form">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Customer Information</h3>
+				<div class="panel-options">
+					<a href="" data-toggle="panel">
+						<span class="collapse-icon">&ndash;</span>
+						<span class="expand-icon">+</span>
+					</a>
+					<a href="" data-toggle="remove">
+						&times;
+					</a>
+				</div>
+			</div>
+			<div class="panel-body">
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Name</label>
+
+						<div class="col-sm-5">
+							<input type="text" class="form-control" id="name" name="name" placeholder="Phan Kiều Lan">
+						</div>
+					</div>
+
+					<div class="form-group-separator"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="birthdate">​Birth of date</label>
+						
+						<div class="col-sm-2">
+							<div class="input-group">
+								<input type="text" class="form-control tiny-picker" id="birthdate" name="birthdate" data-format="dd-mm-yyyy" placeholder="​20-8-2016" />
+								
+								<div class="input-group-addon">
+									<i class="fa-calendar"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group-separator"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="address">​Address</label>
+
+						<div class="col-sm-5">
+							<input type="text" class="form-control" id="address" name="address" placeholder="Level 13, Room 12A.5, 45-47 Dang Thi Nhu, Nguyen Thai Binh ward, Ho Chi Minh">
+						</div>
+					</div>
+
+					<div class="form-group-separator"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="phone">Phone</label>
+
+						<div class="col-sm-5">
+							<input type="text" class="form-control" id="phone" name="phone" placeholder="(+84) 933 885 715">
+						</div>
+					</div>
+
+					<div class="form-group-separator"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="email">Email</label>
+
+						<div class="col-sm-5">
+							<input type="email" class="form-control" id="email" name="email" placeholder="tinygiant@gmail.com">
+						</div>
+					</div>
+
+					<div class="form-group-separator"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="messenger">Messenger</label>
+
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="messenger" name="messenger" placeholder="Keie Lan">
+						</div>
+
+						<div class="col-sm-2">
+							<select name="mess_type" class="form-control">
+								<option selected="" value="fb">Facebook</option>
+								<option value="sky">Skype</option>
+							</select>
+						</div>
+					</div>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">History</h3>
+				<div class="panel-options">
+					<a href="" data-toggle="panel">
+						<span class="collapse-icon">&ndash;</span>
+						<span class="expand-icon">+</span>
+					</a>
+					<a href="" data-toggle="remove">
+						&times;
+					</a>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="field-5">History</label>
+
+					<div class="col-sm-5">
+						<ul class="ul">
+							<li>
+								<div class="row">
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="subject" name="history[subject]" placeholder="Content of date">
+									</div>
+
+									<div class="col-sm-4">
+										<div class="input-group">
+											<input type="text" class="form-control tiny-picker" name="history[date]" data-format="dd-mm-yyyy" placeholder="​20-8-2016" />
+											
+											<div class="input-group-addon">
+												<i class="fa-calendar"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<br />
+								<div class="form-group-separator"></div>
+							</li>
+							
+							<li><a tiny-addmore parent="li" class="btn btn-warning btn-sm">Add More+</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Child of Customer</h3>
+				<div class="panel-options">
+					<a href="" data-toggle="panel">
+						<span class="collapse-icon">&ndash;</span>
+						<span class="expand-icon">+</span>
+					</a>
+					<a href="" data-toggle="remove">
+						&times;
+					</a>
+				</div>
+			</div>
+			<div class="panel-body">
+				
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="name">Name</label>
+
+					<div class="col-sm-5">
+						<input type="text" class="form-control" id="name" name="child[name]" placeholder="Phan Kiều Lan">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="phone">Phone</label>
+
+					<div class="col-sm-5">
+						<input type="text" class="form-control" id="phone" name="child[phone]" placeholder="(+84) 933 885 715">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="email">Email</label>
+
+					<div class="col-sm-5">
+						<input type="email" class="form-control" id="email" name="child[email]" placeholder="tinygiant@gmail.com">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="birthdate">​Birth of date</label>
+
+					<div class="col-sm-5">
+						<input type="text" class="form-control tiny-picker" id="birthdate" name="child[birthdate]" data-format="dd-mm-yyyy" placeholder="​20-8-2016">
+					</div>
+				</div>
+
+				<div class="form-group-separator"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">​</label>
+
+				<div class="col-sm-5">
+					<a tiny-addmore parent=".form-group" class="btn btn-warning btn-sm">Add More+</a>
+				</div>
+			</div>
+		</div>
+		<div class="form-group-separator"></div>
+
+		<div class="form-group text-center">
+			<button type="submit" class="btn btn-success btn-lg">Save</button>
+			<button type="submit" class="btn btn-gray btn-lg">Save and Add More</button>
+			<button type="button" class="btn btn-gray btn-lg">Cancel</button>
+		</div>
+	</form>
+	</div>
+</div>

@@ -128,6 +128,26 @@ angular.module('tinyfw.directive', [])
                 }   
             }
         })
+        .directive('tinyAddmore', function(){
+            return {
+                restrict: 'A',
+                link: function(scope, el, attrs){
+                    el.on('click', function(){
+                        var $target;
+                        if(attrs.partner)
+                        {
+                            $target = $(attrs.partner);
+                        }
+                        else
+                        {
+                            $target = el.parents(attrs.parent).prev();
+                        }
+                        $target.after($target.clone());
+                    })
+
+                }
+            }
+        })
         .directive('tinyUpload', function($timeout, $rootScope, $tiny){
             return {
                 restrict: 'A',

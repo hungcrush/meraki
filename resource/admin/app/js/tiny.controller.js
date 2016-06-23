@@ -846,5 +846,10 @@ angular.module('tiny.admin.controllers', []).
     controller('CRMListCtrl', function($scope, $state){
         var match = $state.current.name.match(/(stream|contacts)/);
         if(match.length > 0) $scope.setCrmCurrent(match[0]);
+
+        $scope.contactSubmit = function(data){
+            console.log(data);
+            return false;
+        }
     })
 
