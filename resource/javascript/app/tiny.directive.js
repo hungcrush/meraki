@@ -132,7 +132,7 @@ angular.module('tinyfw.directive', [])
             return {
                 restrict: 'A',
                 link: function(scope, el, attrs){
-                    var start = attrs.start ? parseInt(attrs.start) : 1;
+                    var start = attrs.start ? parseInt(attrs.start) : 0;
 
                     el.on('click', function(){
                         var $target, html;

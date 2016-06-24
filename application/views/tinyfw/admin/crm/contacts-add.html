@@ -111,12 +111,12 @@
 							<li>
 								<div class="row">
 									<div class="col-sm-8">
-										<input type="text" class="form-control" id="subject" name="history[subject]" placeholder="Content of date">
+										<input type="text" class="form-control" id="subject" name="history[0][subject]" placeholder="Content of date">
 									</div>
 
 									<div class="col-sm-4">
 										<div class="input-group">
-											<input type="text" class="form-control tiny-picker" name="history[date]" data-format="dd-mm-yyyy" placeholder="​20-8-2016" />
+											<input type="text" class="form-control tiny-picker" name="history[0][date]" data-format="dd-mm-yyyy" placeholder="​20-8-2016" />
 											
 											<div class="input-group-addon">
 												<i class="fa-calendar"></i>
@@ -128,7 +128,7 @@
 								<div class="form-group-separator"></div>
 							</li>
 							
-							<li><a tiny-addmore parent="li" class="btn btn-warning btn-sm">Add More+</a></li>
+							<li><a tiny-addmore parent="li" start="0" class="btn btn-warning btn-sm">Add More+</a></li>
 						</ul>
 					</div>
 				</div>
@@ -154,7 +154,7 @@
 					<label class="col-sm-2 control-label" for="name">Name</label>
 
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="name" name="child[name]" placeholder="Phan Kiều Lan">
+						<input type="text" class="form-control" id="name" name="child[0][name]" placeholder="Phan Kiều Lan">
 					</div>
 				</div>
 
@@ -162,7 +162,7 @@
 					<label class="col-sm-2 control-label" for="phone">Phone</label>
 
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="phone" name="child[phone]" placeholder="(+84) 933 885 715">
+						<input type="text" class="form-control" id="phone" name="child[0][phone]" placeholder="(+84) 933 885 715">
 					</div>
 				</div>
 
@@ -170,7 +170,7 @@
 					<label class="col-sm-2 control-label" for="email">Email</label>
 
 					<div class="col-sm-5">
-						<input type="email" class="form-control" id="email" name="child[email]" placeholder="tinygiant@gmail.com">
+						<input type="email" class="form-control" id="email" name="child[0][email]" placeholder="tinygiant@gmail.com">
 					</div>
 				</div>
 
@@ -178,7 +178,7 @@
 					<label class="col-sm-2 control-label" for="birthdate">​Birth of date</label>
 
 					<div class="col-sm-5">
-						<input type="text" class="form-control tiny-picker" id="birthdate" name="child[birthdate]" data-format="dd-mm-yyyy" placeholder="​20-8-2016">
+						<input type="text" class="form-control tiny-picker" id="birthdate" name="child[0][birthdate]" data-format="dd-mm-yyyy" placeholder="​20-8-2016">
 					</div>
 				</div>
 
@@ -188,7 +188,7 @@
 				<label class="col-sm-2 control-label">​</label>
 
 				<div class="col-sm-5">
-					<a tiny-addmore parent=".form-group" class="btn btn-warning btn-sm">Add More+</a>
+					<a tiny-addmore parent=".form-group" start="0" class="btn btn-warning btn-sm">Add More+</a>
 				</div>
 			</div>
 		</div>

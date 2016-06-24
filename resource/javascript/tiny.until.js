@@ -1,5 +1,4 @@
 $.fn.serializeObject = function(){
-
     var self = this,
         json = {},
         push_counters = {},
@@ -57,23 +56,6 @@ $.fn.serializeObject = function(){
             }
         }
 
-        var _k = Object.keys(merge)[0],
-            _r;
-        var _bk;
-        if(typeof merge[_k] == 'object' && typeof json[_k] === 'object')
-        {
-            _r = Object.keys(merge[_k])[0];
-            
-            if(typeof json[_k][_r] !== 'undefined')
-            {
-                console.log(json[_k]);
-                _bk = json[_k][_r];
-                json[_k] = [];
-                json[_k].push(_bk);
-                json[_k].push([]);
-                merge = {};
-            }
-        }
         json = $.extend(true, json, merge);
     });
 
