@@ -132,8 +132,10 @@ angular.module('tinyfw.directive', [])
             return {
                 restrict: 'A',
                 link: function(scope, el, attrs){
+                    var start = attrs.start ? parseInt(attrs.start) : 1;
+
                     el.on('click', function(){
-                        var $target;
+                        var $target, html;
                         if(attrs.partner)
                         {
                             $target = $(attrs.partner);
@@ -142,7 +144,12 @@ angular.module('tinyfw.directive', [])
                         {
                             $target = el.parents(attrs.parent).prev();
                         }
-                        $target.after($target.clone());
+
+                        html = $('<div />').html($target.clone()).html().replace(new RegExp('name="([^"]+)['+start+']', 'g'), function(match){
+                            return match.replace(new RegExp(start, 'g'), (start + 1));
+                        });
+                        start++;
+                        $target.after(html);
                     })
 
                 }
