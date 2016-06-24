@@ -128,7 +128,7 @@ angular.module('tinyfw.directive', [])
                 }   
             }
         })
-        .directive('tinyAddmore', function(){
+        .directive('tinyAddmore', function($compile){
             return {
                 restrict: 'A',
                 link: function(scope, el, attrs){
@@ -145,10 +145,13 @@ angular.module('tinyfw.directive', [])
                             $target = el.parents(attrs.parent).prev();
                         }
 
-                        html = $('<div />').html($target.clone()).html().replace(new RegExp('name="([^"]+)['+start+']', 'g'), function(match){
-                            return match.replace(new RegExp(start, 'g'), (start + 1));
-                        });
+                        html = $compile(
+                                $('<div />').html($target.clone()).html().replace(new RegExp('name="([^"]+)['+start+']', 'g'), function(match){
+                                    return match.replace(new RegExp(start, 'g'), (start + 1));
+                                })
+                            )( scope );
                         start++;
+
                         $target.after(html);
                     })
 

@@ -76,11 +76,11 @@
 						<label class="col-sm-2 control-label" for="messenger">Messenger</label>
 
 						<div class="col-sm-3">
-							<input type="text" class="form-control" id="messenger" name="messenger" placeholder="Keie Lan">
+							<input type="text" class="form-control" id="messenger" name="messenger[name]" placeholder="Keie Lan">
 						</div>
 
 						<div class="col-sm-2">
-							<select name="mess_type" class="form-control">
+							<select name="messenger[type]" class="form-control">
 								<option selected="" value="fb">Facebook</option>
 								<option value="sky">Skype</option>
 							</select>
@@ -154,7 +154,7 @@
 					<label class="col-sm-2 control-label" for="name">Name</label>
 
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="name" name="child[0][name]" placeholder="Phan Kiều Lan">
+						<input type="text" class="form-control" id="name" name="childs[0][name]" placeholder="Phan Kiều Lan">
 					</div>
 				</div>
 
@@ -162,15 +162,7 @@
 					<label class="col-sm-2 control-label" for="phone">Phone</label>
 
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="phone" name="child[0][phone]" placeholder="(+84) 933 885 715">
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="email">Email</label>
-
-					<div class="col-sm-5">
-						<input type="email" class="form-control" id="email" name="child[0][email]" placeholder="tinygiant@gmail.com">
+						<input type="text" class="form-control" id="phone" name="childs[0][phone]" placeholder="(+84) 933 885 715">
 					</div>
 				</div>
 
@@ -178,7 +170,7 @@
 					<label class="col-sm-2 control-label" for="birthdate">​Birth of date</label>
 
 					<div class="col-sm-5">
-						<input type="text" class="form-control tiny-picker" id="birthdate" name="child[0][birthdate]" data-format="dd-mm-yyyy" placeholder="​20-8-2016">
+						<input type="text" class="form-control tiny-picker" id="birthdate" name="childs[0][birthdate]" data-format="dd-mm-yyyy" placeholder="​20-8-2016">
 					</div>
 				</div>
 

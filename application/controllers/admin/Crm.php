@@ -23,6 +23,19 @@ class Crm extends TINY_Controller {
         $this->data['template'] = 'admin/crm/contacts-add.html';
     }
 
+    public function contactSave(){
+        $data = $this->_post();
+        $feilds = array(
+            'childs' => array()
+        );
+
+        $insert = $this->customers->insert_auto($data['form'], $feilds);
+        if($insert)
+        {
+            return 'OK';
+        }    
+    }
+
     public function Stream(){
         $this->data['template'] = 'admin/crm/stream.html';
     }

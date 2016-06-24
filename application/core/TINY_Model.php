@@ -33,6 +33,7 @@ class TINY_Model extends CI_Model
      * Used by the get(), update() and delete() functions.
      */
     protected $primary_key;
+    protected $primary_key_before = array();
 
     /**
      * Support for soft deletes and this model's 'deleted' key
@@ -281,6 +282,57 @@ class TINY_Model extends CI_Model
         {
             return FALSE;
         }
+    }
+
+    public function insert_auto($data, $fileds = array(), $table = FALSE)
+    {
+      $this->_table = $table ? $table : $this->_table;
+
+      //-- fetch all fields of this table
+      $this->_get_fields_table();
+
+      //-- apply primary key for other table
+      if($table != FALSE)
+        $this->_fetch_primary_key();
+
+      $dataInsert = array();
+      $dataInsertOther = array();
+      foreach($data as $key => $value)
+      {
+          if(!is_array($value))
+          {
+              $dataInsert[$key] = $value;
+          }
+          else
+          {
+              if(isset($fileds[$key]))
+              {
+                  $dataInsertOther[] = array($value, $fileds[$key], $key);
+              }else
+              {
+                  if(in_array($key, $this->list_fields) && is_string($key)){
+                      $dataInsert[$key] = json_encode($value);
+                  }else{
+                      $this->insert(array_merge($this->primary_key_before, $value));
+                  }
+              }
+          }
+      }
+
+      if(empty($dataInsert)) return;
+      
+      $id = $this->insert($dataInsert);
+
+      foreach($dataInsertOther as $insert)
+      {
+          $this->primary_key_before = array();
+          $this->primary_key_before[$this->primary_key] = $id;
+
+          $this->insert_auto($insert[0], $insert[1], $this->_table.'_'.$insert[2]);
+      }
+
+      return 'OK';
+
     }
 
     private function fields_exist(&$data)

@@ -843,12 +843,26 @@ angular.module('tiny.admin.controllers', []).
             $scope.crmCurrent = page;
         }
     }).
-    controller('CRMListCtrl', function($scope, $state){
+    controller('CRMListCtrl', function($scope, $state, $tiny){
         var match = $state.current.name.match(/(stream|contacts)/);
         if(match.length > 0) $scope.setCrmCurrent(match[0]);
 
+        $scope.accessToAction = 1; // 1: Save 2: Save and Add More
+        $scope.changeAccessTo = function(n)
+        {
+            $scope.accessToAction = n;
+        }
+
         $scope.contactSubmit = function(data){
-            console.log(data);
+            $tiny.ajax({
+                url: tn.makeURL('contactSave', '/admin/crm/'),
+                data: {
+                    form: data,
+                    access: $scope.accessToAction
+                }
+            }).success(function(){
+                
+            })
             return false;
         }
     })
