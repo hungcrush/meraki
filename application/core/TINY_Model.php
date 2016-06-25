@@ -307,6 +307,7 @@ class TINY_Model extends CI_Model
           {
               if(isset($fileds[$key]))
               {
+                if($this->_checkIsEmpty($fileds[$key]))
                   $dataInsertOther[] = array($value, $fileds[$key], $key);
               }else
               {
@@ -333,6 +334,23 @@ class TINY_Model extends CI_Model
 
       return 'OK';
 
+    }
+
+    private function _checkIsEmpty($arr)
+    {
+        if(is_array($arr))
+        {
+          $length = count($arr);
+          foreach ($arr as $value){
+              if(is_empty($value)){
+                break;
+                return FALSE;
+              }
+          }
+
+          return TRUE;
+        }
+        return FALSE;
     }
 
     private function fields_exist(&$data)
@@ -1090,13 +1108,20 @@ class TINY_Model extends CI_Model
     }
     
     public function _pagination($array = false){
-        $page = $this->__request('page') == '' ? 1 : $this->__request('page');
+        $page = $this->__request('page') == '' ? $this->current_page : $this->__request('page');
         $offset = ($page - 1) * $this->tiny->items_per_page;
         if($array){
             return array_splice($array, $offset, $this->tiny->items_per_page);
         }else
         $this->limit($this->tiny->items_per_page, $offset);
     }
+
+    /*
+      Init search apply for lazy code..
+      @arr_search : keyword and search_other
+        + keyword : @array => field name of table want search with keyword
+        + search_other: @array => other fields, get value via $_POST<$fields_name>
+    */
     
     public function _initSearch($arr_search = array()){
         if(!is_array($arr_search)) return FALSE;
@@ -1130,6 +1155,65 @@ class TINY_Model extends CI_Model
     
     public function formatTime($time_int = ''){
         return date('M d, Y', $time_int);
+    }
+
+    /*
+      Since: 25/6/2016
+      get rows via dataTables plugin
+      ---------------------
+      Array
+      (
+          [draw] => 1
+          [columns] => Array()
+          [order] => Array
+              (
+                  [0] => Array
+                      (
+                          [column] => 0
+                          [dir] => asc
+                      )
+              )
+          [start] => 0
+          [length] => 10
+          [search] => Array
+              (
+                  [value] => 
+                  [regex] => false
+              )
+          [_] => 1466820097481
+      )
+    */
+    public function getDataTable($dataTable)
+    {
+
+        $this->current_page = $dataTable['start'] / $dataTable['length'] + 1;
+        $this->tiny->initialize(array(
+            'items_per_page'  => $dataTable['length']
+        ));
+
+        //-- int Search with keyword if exist
+        if(isset($dataTable['keyword']))
+        {
+          $this->_initSearch(array(
+            'keyword' => array('name', 'address', 'phone', 'email')
+          ));
+        }
+
+        //-- get total fields => use count_by because want to search with keyword
+        $total = $this->count_by();
+        //-- Pageination before db get datas
+        $this->_pagination();
+        //-- order only array first
+        $indexOrder = $dataTable['order'][0];
+        $this->order_by($dataTable['columns'][$indexOrder['column']]['data'], $indexOrder['dir']);
+
+        $data = $this->get_all();
+        return array(
+            'draw'            => $dataTable['draw'],
+            'recordsTotal'    => $total,
+            'recordsFiltered' => $total,
+            'data'            => $data
+        );
     }
     
 }

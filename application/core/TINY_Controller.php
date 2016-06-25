@@ -41,7 +41,7 @@ class TINY_Controller extends REST_Controller
                     $this->data['template']  = 'admin/indexPage.htm';
             }
             
-            if(isset($_GET['debug'])) $this->debug($this->data);
+            if(isset($_GET['debug'])) debug($this->data);
                 
             $this->tiny->YU($this->data);
         }
@@ -52,12 +52,7 @@ class TINY_Controller extends REST_Controller
                 $this->tiny->__error();
         }
     }
-    
-    protected function debug($data){
-        echo '<pre>';
-        print_r($data);
-        exit;
-    }
+
     //-- Check permission [Important]
     protected function authorization($method, $params = array()){
         //-- if METHOD index not have permission

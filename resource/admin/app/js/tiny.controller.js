@@ -839,11 +839,19 @@ angular.module('tiny.admin.controllers', []).
         $scope.crmCurrent = '';
         $scope.setCrmCurrent = function(page)
         {
-            console.log('Debug: ', page);
             $scope.crmCurrent = page;
         }
+
+        $scope.parentobj = {
+            listchecked : []
+        };
+
+        $scope.checkHasSelected = function(){
+            console.log($scope.parentobj.listchecked);
+            return $scope.parentobj.listchecked.length;
+        }
     }).
-    controller('CRMListCtrl', function($scope, $state, $tiny){
+    controller('CRMListCtrl', function($rootScope, $scope, $state, $tiny, $location){
         var match = $state.current.name.match(/(stream|contacts)/);
         if(match.length > 0) $scope.setCrmCurrent(match[0]);
 
@@ -853,15 +861,42 @@ angular.module('tiny.admin.controllers', []).
             $scope.accessToAction = n;
         }
 
+        $scope.contactDeleteAll = function(){
+            $scope.contactDelete($scope.parentobj.listchecked);
+        }
+
+        $scope.contactDelete = function(customer_id){
+            $tiny.confirm({
+                data: {customer_id: customer_id},
+                link: '/admin/crm/contact-delete',
+                callback: function(){
+                    public_vars.$window.trigger('dataTable-reload');
+
+                    if(typeof customer_id == 'object')
+                        $scope.parentobj.listchecked = [];
+                }                        
+            })
+        }
+
+        $scope.Search = function(data) {
+            public_vars.$window.trigger('dataTable-reload', [data.keyword]);
+        }
+
         $scope.contactSubmit = function(data){
             $tiny.ajax({
-                url: tn.makeURL('contactSave', '/admin/crm/'),
+                url: tn.makeURL('contact-save', '/admin/crm/'),
                 data: {
                     form: data,
                     access: $scope.accessToAction
                 }
-            }).success(function(){
-                
+            }).success(function(data){
+                if(data.content == 'OK')
+                {
+                    if($scope.accessToAction == 1)
+                        $location.url('/admin/crm/contact/');
+                    else
+                        $rootScope.reload();
+                }
             })
             return false;
         }

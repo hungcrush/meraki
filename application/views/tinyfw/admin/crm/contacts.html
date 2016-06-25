@@ -1,172 +1,39 @@
+<div class="pull-left">
+	<form tiny-submit="Search(dataForm)" no-reset="true" style="margin-bottom: 20px;" role="form" class="form-inline">
+        <div class="form-group">
+            <div class="input-group input-group-minimal">
+				<input class="form-control" name="keyword" type="text" placeholder="Search..." />
+				
+				<div class="input-group-addon">
+					<a href=""><i class="fa-search"></i></a>
+				</div>
+			</div>
+        </div>
+    </form>
+</div>
 <div class="pull-right">
-    <a class="btn btn-secondary btn-icon btn-icon-standalone" href="contact-add">
+	<a ng-if="(parentobj.listchecked.length > 0)" ng-click="contactDeleteAll()" class="btn btn-danger btn-icon btn-icon-standalone">
+		<i class="fa-trash"></i>
+		<span>Delete All</span>
+	</a>
+    <a class="btn btn-primary btn-icon btn-icon-standalone" href="contact-add">
 		<i class="fa-plus"></i>
 		<span>Add Contact</span>
 	</a>
 </div>
-
-<table class="table table-bordered table-striped" id="example-2">
-	<thead>
-		<tr>
-			<th class="no-sorting">
-				<input type="checkbox" class="tiny-cbr">
-			</th>
-			<th>Student Name</th>
-			<th>Average Grade</th>
-			<th>Curriculum / Occupation</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	
-	<tbody class="middle-align">
-	
-		<tr>
-			<td>
-				<input type="checkbox" class="tiny-cbr">
-			</td>
-			<td>Randy S. Smith</td>
-			<td>8.7</td>
-			<td>Social and human service</td>
-			<td>
-				<a href="" class="btn btn-secondary btn-sm btn-icon icon-left">
-					Edit
-				</a>
-				
-				<a href="" class="btn btn-danger btn-sm btn-icon icon-left">
-					Delete
-				</a>
-				
-				<a href="" class="btn btn-info btn-sm btn-icon icon-left">
-					Profile
-				</a>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-				<input type="checkbox" class="tiny-cbr">
-			</td>
-			<td>Ellen C. Jones</td>
-			<td>7.2</td>
-			<td>Education and development manager</td>
-			<td>
-				<a href="" class="btn btn-secondary btn-sm btn-icon icon-left">
-					Edit
-				</a>
-				
-				<a href="" class="btn btn-danger btn-sm btn-icon icon-left">
-					Delete
-				</a>
-				
-				<a href="" class="btn btn-info btn-sm btn-icon icon-left">
-					Profile
-				</a>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-				<input type="checkbox" class="tiny-cbr">
-			</td>
-			<td>Carl D. Kaya</td>
-			<td>9.5</td>
-			<td>Express Merchant Service</td>
-			<td>
-				<a href="" class="btn btn-secondary btn-sm btn-icon icon-left">
-					Edit
-				</a>
-				
-				<a href="" class="btn btn-danger btn-sm btn-icon icon-left">
-					Delete
-				</a>
-				
-				<a href="" class="btn btn-info btn-sm btn-icon icon-left">
-					Profile
-				</a>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-				<input type="checkbox" class="tiny-cbr">
-			</td>
-			<td>Jennifer J. Jefferson</td>
-			<td>10</td>
-			<td>Maxillofacial surgeon</td>
-			<td>
-				<a href="" class="btn btn-secondary btn-sm btn-icon icon-left">
-					Edit
-				</a>
-				
-				<a href="" class="btn btn-danger btn-sm btn-icon icon-left">
-					Delete
-				</a>
-				
-				<a href="" class="btn btn-info btn-sm btn-icon icon-left">
-					Profile
-				</a>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-				<input type="checkbox" class="tiny-cbr">
-			</td>
-			<td>April L. Baker <span class="label label-success">New Applicant</span></td>
-			<td>6.8</td>
-			<td>Set and exhibit designer</td>
-			<td>
-				<a href="" class="btn btn-secondary btn-sm btn-icon icon-left">
-					Edit
-				</a>
-				
-				<a href="" class="btn btn-danger btn-sm btn-icon icon-left">
-					Delete
-				</a>
-				
-				<a href="" class="btn btn-info btn-sm btn-icon icon-left">
-					Profile
-				</a>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-				<input type="checkbox" class="tiny-cbr">
-			</td>
-			<td>Lillian J. Earl</td>
-			<td>7.6</td>
-			<td>Social and human service assistant</td>
-			<td>
-				<a href="" class="btn btn-secondary btn-sm btn-icon icon-left">
-					Edit
-				</a>
-				
-				<a href="" class="btn btn-danger btn-sm btn-icon icon-left">
-					Delete
-				</a>
-				
-				<a href="" class="btn btn-info btn-sm btn-icon icon-left">
-					Profile
-				</a>
-			</td>
-		</tr>
-		
-	</tbody>
-</table>
-
-<script type="text/javascript">
-jQuery(document).ready(function($)
-{
-	$("#example-2").dataTable({
-		dom: "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>",
-		aoColumns: [
-			{bSortable: false},
-			null,
-			null,
-			null,
-			null
-		],
-	});
-});
-</script>
+<div id="dataTable_contacts" class="dataTables_wrapper">
+	<div id="example_processing" class="dataTables_processing" style="display: none;">Processing...</div>
+	<table class="table table-bordered table-striped tiny-datatable">
+		<thead>
+			<tr>
+				<th style="width: 20px;padding-left: 12px;" class="no-sorting">
+					<input type="checkbox" target="#dataTable_contacts .dataTable-select" class="tiny-cbr tiny-selectall">
+				</th>
+				<th>Name</th>
+				<th>Phone</th>
+				<th>Email</th>
+				<th style="width: 200px;">Actions</th>
+			</tr>
+		</thead>
+	</table>
+</div>

@@ -19,21 +19,41 @@ class Crm extends TINY_Controller {
         $this->data['template'] = 'admin/crm/contacts.html';
     }
 
+    public function ContactList(){
+        $data = $this->_post();
+        return $this->customers->getDataTable($data);
+    }
+
     public function ContactAdd(){
         $this->data['template'] = 'admin/crm/contacts-add.html';
     }
 
     public function contactSave(){
         $data = $this->_post();
-        $feilds = array(
+        $fields = array(
             'childs' => array()
         );
-
-        $insert = $this->customers->insert_auto($data['form'], $feilds);
+        $insert = $this->customers->insert_auto($data['form'], $fields);
         if($insert)
         {
             return 'OK';
         }    
+    }
+
+    public function contactDelete(){
+        $customer_id = $this->_post('customer_id');
+
+        if(!is_array($customer_id)){
+            $this->customers->delete($customer_id);
+        }else{
+            $this->customers->delete_many($customer_id);
+        }
+
+        //-- delete childs of customers
+        $this->customers->_table = 'tiny_customers_childs';
+        $this->customers->delete_by('customer_id', $customer_id);
+
+        return 'OK';
     }
 
     public function Stream(){
