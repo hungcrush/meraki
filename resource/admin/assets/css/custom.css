@@ -19,6 +19,23 @@
 .bold{
     font-weight: bold !important;
 }
+
+::-webkit-input-placeholder {
+   color: #DDD !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #DDD !important;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #DDD !important;  
+}
+
+:-ms-input-placeholder {  
+   color: #DDD !important;  
+}
+
 .table .first{
     width: 15%;
 }

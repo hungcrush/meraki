@@ -635,28 +635,42 @@ angular.module('xenon.directives', []).
                     var $el    = angular.element(el);
                     
                     if(attrs.tinyModel)
-                        angular.element($input).click(function(){
+                    {
+                    	var model 		= attrs.tinyModel,
+                    		_variable 	= false;
+                        if(model.indexOf('|') !== -1)
+                        {
+                        	model = model.split('|');
+                        	model.forEach(function(v){
+                        		console.log(v)
+                        		_variable = _variable == false ? parent[v] : _variable[v];
+                        	})
+                        }else
+                        {
+                        	_variable = parent[model];
+                        }
+                        angular.element($input).on('change', function(){
                             var t = $(this);
-                            var model = attrs.tinyModel;
                             
                             if($el.is(':checked')){
-                                if(parent[model]){
-                                    parent[model].push($el.attr('value'));
+                                if(_variable){
+                                    _variable.push($el.attr('value'));
                                 }else{
-                                    parent[model] = [$el.attr('value')];
+                                    _variable = [$el.attr('value')];
                                 }
                                 if(scope.select){
                                     scope.select({input: tn.parseElement($el)})
                                 }
                             }else
-                                for(var i = 0; i < parent[model].length; i++){
-                                    if(parent[model][i] == $el.attr('value')){
-                                        parent[model].splice(i, 1);
+                                for(var i = 0; i < _variable.length; i++){
+                                    if(_variable[i] == $el.attr('value')){
+                                        _variable.splice(i, 1);
                                     }
                                 }
                                 
                             parent.$apply();
                         })
+                   	}
                  }, 100);
                 }
             }

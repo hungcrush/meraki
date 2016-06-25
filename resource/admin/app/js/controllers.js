@@ -22,7 +22,7 @@ angular.module('xenon.controllers', []).
 		$rootScope.isLockscreenPage   = true;
 		$rootScope.isMainPage         = false;
 	}).
-	controller('MainCtrl', function($scope, $rootScope, $location, $layout, $layoutToggles, $pageLoadingBar, Fullscreen, $tiny, $timeout, $state)
+	controller('MainCtrl', function($scope, $rootScope, $location, $layout, $layoutToggles, $pageLoadingBar, Fullscreen, $tiny, $timeout, $state, $stateParams)
 	{
 		$rootScope.isLoginPage        = false;
 		$rootScope.isLightLoginPage   = false;
@@ -32,6 +32,7 @@ angular.module('xenon.controllers', []).
 
 		// Define Public Vars
 		public_vars.$body = jQuery("body");
+		public_vars.$window = jQuery(window);
 
 		public_vars.$body.addClass($rootScope.rolePage[1]);
 
@@ -263,7 +264,6 @@ angular.module('xenon.controllers', []).
                 location = location.replace(new RegExp(module___[1]), '');
             }
             
-            console.log(location);
 			var item = $sidebarMenuItems.setActive(location);
             if(!$rootScope.currentPage.title && item != null)
                 $rootScope.currentPage.title = item.title;

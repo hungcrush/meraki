@@ -43,8 +43,10 @@ angular.module('xenon.constant', []).constant('ASSETS', {
 		'rwd': tinyConfig.assetPath('js/rwd-table/js/rwd-table.min.js'),
 
 		'datatables': [
-			tinyConfig.assetPath('js/datatables/dataTables.bootstrap.css'),
-			tinyConfig.assetPath('js/datatables/datatables-angular.js'),
+			tinyConfig.assetPath('js/datatables/css/jquery.dataTables.min.css'),
+			tinyConfig.assetPath('js/datatables/js/jquery.dataTables.min.js'),
+			tinyConfig.assetPath('js/datatables/dataTables.bootstrap.js'),
+			'//cdn.datatables.net/plug-ins/1.10.12/api/fnReloadAjax.js'
 		],
 
 	},

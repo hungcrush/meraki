@@ -136,13 +136,11 @@ angular.module('xenon.services', []).
                 
                 console.log('start find parent of menu');
                 while(!tn.isInArray(doState, avalibleMenu) || !tn.isInArray(doState+'.', avalibleMenu)){
-                	 console.group(doState);
                      if( doState.indexOf('.') === -1 || tn.isInArray(doState, avalibleMenu) ) break;
                      n = doState.lastIndexOf(".");
                      doState = doState.substr(0, n);
                 }
             }
-            console.warn('ne:', doState);
             this.iterateCheck(this.menuItems, doState);
             
             

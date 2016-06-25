@@ -158,6 +158,79 @@ angular.module('tinyfw.directive', [])
                 }
             }
         })
+        .directive('tinyDatatable', function($compile){
+            return {
+                restrict: 'C',
+                link: function(scope, el, attrs){
+                    el.on( 'processing.dt', function ( e, settings, processing ) {
+                            $('#example_processing').css( 'display', processing ? 'block' : 'none' );
+                    })
+
+                    var $table = el.dataTable({
+                        dom: "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>",
+                        "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+                        "processing": true,
+                        "serverSide": true,
+                        "columns": [
+                            { "data": "customer_id" },
+                            { "data": "name" },
+                            { "data": "phone" },
+                            { "data": "email" }
+                        ],
+                        "columnDefs": [
+                        {
+                            "render": function ( data, type, row ) {
+                                return '<input value="'+row.customer_id+'" type="checkbox" tiny-model="parentobj|listchecked" class="tiny-cbr dataTable-select">';
+                            },
+                            "orderable": false,
+                            "targets": 0
+                        },
+                        {
+                            render: function(data, type, row) {
+                                return '<td>\
+                                    <a href="" data-id="'+row.customer_id+'" class="btn btn-secondary btn-sm btn-icon icon-left">\
+                                        Edit\
+                                    </a>\
+                                    \
+                                    <a href="" ng-click="contactDelete('+row.customer_id+')" class="btn btn-danger btn-sm btn-icon icon-left">\
+                                        Delete\
+                                    </a>\
+                                    \
+                                    <a href="" data-id="'+row.customer_id+'" class="btn btn-info btn-sm btn-icon icon-left">\
+                                        Profile\
+                                    </a>\
+                                </td>';
+                            },
+                            targets: 4
+                        }],
+                        "createdRow": function ( row, data, index ) {
+                            $compile(
+                                angular.element(row).find('> td:first')
+                            )(scope);
+
+                            $compile(
+                                angular.element(row).find('> td:last')
+                            )(scope);
+                        },
+                        "ajax": {
+                            "url" : "/admin/crm/contact-list",
+                            "type": "POST",
+                            "data": function ( d ) {
+                                delete d.columns;
+                                d = angular.extend(d,{
+                                    json: 'yes'
+                                }, JSON.parse(Base64.decode(tinyConfig.tinyToken)));
+                            }
+                        }
+
+                    });
+
+                    public_vars.$window.on('dataTable-reload', function(){
+                        $table.fnReloadAjax();
+                    });
+                }
+            }
+        })
         .directive('tinyUpload', function($timeout, $rootScope, $tiny){
             return {
                 restrict: 'A',
