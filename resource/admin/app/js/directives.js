@@ -471,7 +471,7 @@ angular.module('xenon.directives', []).
 	})
     
     
-    .directive('tinyModal', function($modal, $rootScope, $controller){
+    .directive('tinyModal', function($modal, $rootScope){
             return {
                 restrict: 'A',
                 scope: {
@@ -728,11 +728,47 @@ angular.module('xenon.directives', []).
                 }
             }
         })
+        .directive('tinyParticipants', function($modal, $rootScope){
+        	return {
+        		restrict: 'A',
+        		scope: {
+        			onSubmit: '&'
+        		},
+        		link: function(scope, el, attrs){
+        			el.on('click', function(){
+        				$rootScope.currentModal = $modal.open({
+	        				templateUrl: tinyConfig.templatePathAjax('modal-participants'),
+	        				size: 'lg',
+	        				backdrop: 'static',
+	                        animation: true,
+	                        controller: function($scope, $tiny){
+	                        	$scope.lists = [];
+	                        	$scope.objChecked = {
+	                        		users: []
+	                        	};
+	                            $tiny.loadData('/admin/administrator/peoples').then(function(res){
+	                            	$scope.lists = res.lists;
+	                            })
+
+	                            $scope.submit = function(){
+	                            	var data = [];
+	                            	$scope.objChecked.users.forEach(function(v)
+	                            	{
+	                            		data.push(angular.fromJson(v));
+	                            	})
+	                            	scope.onSubmit({users: data});
+	                            }
+	                        }
+	        			});
+        			})
+        		}
+        	}
+        })
         .directive('logout', function(){
             return {
                 restrict: 'AC',
                 link: function(scope, el, attrs){
-                    jQuery(el).click(function(){
+                    el.click(function(){
                         jQuery.ajax({
                             url: URL_SERVER+'login/logout',
                             success: function(){

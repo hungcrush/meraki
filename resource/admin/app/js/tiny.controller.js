@@ -147,13 +147,13 @@ angular.module('tiny.admin.controllers', []).
         }
         $scope.save_edit = function(data){
             data.denied = [];
-            $('#permissions').find('input[name="permission-denied"]').each(function(){
+            $('#permissions').find('input[name="permission_denied"]').each(function(){
                 var t = $(this);
                 if(!t.is(':checked')){
                     data.denied.push(t.val());
                 }
             })
-            $('#permissions').find('input[name="permission-group"]:not(":checked")').each(function(){
+            $('#permissions').find('input[name="permission_group"]:not(":checked")').each(function(){
                 data.denied.push($(this).val());
             })
             
@@ -850,6 +850,10 @@ angular.module('tiny.admin.controllers', []).
             console.log($scope.parentobj.listchecked);
             return $scope.parentobj.listchecked.length;
         }
+
+        $scope.selectUser = function(users){
+            console.log(users);
+        }
     }).
     controller('CRMListCtrl', function($rootScope, $scope, $state, $tiny, $location){
         var match = $state.current.name.match(/(stream|contacts)/);
@@ -900,5 +904,8 @@ angular.module('tiny.admin.controllers', []).
             })
             return false;
         }
+    }).
+    controller('ProjectCtrl', function(){
+        
     })
 

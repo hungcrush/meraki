@@ -164,11 +164,11 @@ class User_model extends TINY_Model
                 $data['username'] = $this->input->post('username');
             }
             $data['full_name'] = $this->input->post('full_name');
-            if(!isset($_POST['group-parent']) && !isset($_POST['group'])){
+            if(!isset($_POST['group_parent']) && !isset($_POST['group'])){
                 return $this->___e('Please select group for user');
             }
             
-            $data['group_id'] = $_POST['group-parent'];
+            $data['group_id'] = $_POST['group_parent'];
             $secondary_group = '';
             $data['secondary_group'] = '';
             if(isset($_POST['group'])){
@@ -191,10 +191,10 @@ class User_model extends TINY_Model
             
         $this->_table = 'tiny_user_permission';
         $this->delete_by('user_id', $user_id);
-        if(isset($_POST['permission-user'])){
+        if(isset($_POST['permission_user'])){
             $data = array();
-            if(is_array($_POST['permission-user'])){
-                foreach($_POST['permission-user'] as $value){
+            if(is_array($_POST['permission_user'])){
+                foreach($_POST['permission_user'] as $value){
                     $data[] = array(
                         'user_id'       => $user_id,
                         'permission_id' => $value
@@ -203,7 +203,7 @@ class User_model extends TINY_Model
             }else{
                 $data[] = array(
                     'user_id'       => $user_id,
-                    'permission_id' => $_POST['permission-user']
+                    'permission_id' => $_POST['permission_user']
                 );
             }
             
@@ -215,7 +215,7 @@ class User_model extends TINY_Model
             $data['address'] = $this->input->post('address');
             $data['birth_date'] = strtotime($this->input->post('birthdate'));
             $data['phone'] = $this->input->post('phone');
-            $data['avatar_link'] = $this->input->post('avatar-link');
+            $data['avatar_link'] = $this->input->post('avatar_link');
             $this->_table = 'tiny_user_profile';
             if(count($this->get_by('user_id', $user_id)) > 0){
                 $this->update($user_id, $data);
@@ -232,6 +232,8 @@ class User_model extends TINY_Model
         if(isset($arrs['user_id']))
         {
             $this->update($arrs['user_id'], $arrs);
+
+            // - reset other table
             $this->_table = 'tiny_user_profile';
             $this->_get_fields_table();
             $this->update($arrs['user_id'], $arrs);

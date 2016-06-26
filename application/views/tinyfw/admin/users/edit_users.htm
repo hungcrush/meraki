@@ -120,7 +120,7 @@
 						<label class="control-label" for="birthdate">User Group</label>
 					</div>
 					<div class="col-sm-9">
-						<select required class="form-control tiny-selectbox" name="group-parent">
+						<select required class="form-control tiny-selectbox" name="group_parent">
                         	<option ng-selected="group.parent" ng-repeat="group in groups" value="{{group.user_group_id}}">{{group.title}}</option>
                         </select>
 					</div>
@@ -153,7 +153,7 @@
                 		<tr ng-repeat="i in list.list_permission">
                 			<td>{{i.title}} <small class="tiny-smallid">{{i.permission_id}}</small></td>
                 			<td class="action-group">
-                				<input ng-checked="i.checked != '' && i.checked != 'denied'" type="checkbox" class="tinyRadio" name="permission-{{i.checked != '' ? i.checked : 'user'}}" value="{{i.permission_id}}" />
+                				<input ng-checked="i.checked != '' && i.checked != 'denied'" type="checkbox" class="tinyRadio" name="permission_{{i.checked != '' ? i.checked : 'user'}}" value="{{i.permission_id}}" />
                 			</td>
                 		</tr>
                 		<tr ng-repeat-end></tr>                              
@@ -165,7 +165,7 @@
 		</div>
 	</div>
 <input ng-if="isEdit" type="hidden" name="user_id" value="{{user_id}}" />
-<input type="hidden" name="avatar-link" id="avatar_link" value="{{avatar_link}}" />
+<input type="hidden" name="avatar_link" id="avatar_link" value="{{avatar_link}}" />
 </form>
 <script type="text/javascript">
     jQuery(document).ready(function(){

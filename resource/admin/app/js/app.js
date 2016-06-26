@@ -370,8 +370,15 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
                     controller: 'CRMListCtrl'
                 }
             }
+        }).
+        //------------------------------
+        // PRODUCT MODULE
+        //------------------------------
+        state('admin.project', {
+            url: '/project',
+            templateUrl: URL_SERVER + 'admin/project',
+            controller: 'ProjectCtrl'
         })
-
         
     $locationProvider.html5Mode({
       enabled: true,

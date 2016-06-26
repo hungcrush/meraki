@@ -381,7 +381,16 @@ angular.module('tinyfw.directive', [])
                                         }
                                         
                                         $timeout(function(){
-                                            scope.onUploaded({respon: dataJson.response, file: file});
+                                            if(attrs.onUploaded){
+                                                scope.onUploaded({respon: dataJson.response, file: file});
+                                            }else{
+                                                if(attrs.inputId)
+                                                {
+                                                    var r = angular.fromJson(dataJson.response);
+                                                    $(attrs.inputId).val(r.folder+'|'+r.filename);
+                                                }
+                                            }
+
                                             setTimeout(function(){
                                                 //-- add delete button to image
                                                 if(attrs.onRemove){

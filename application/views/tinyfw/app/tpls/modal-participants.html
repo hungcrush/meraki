@@ -1,0 +1,50 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
+	<h4 class="modal-title">Custom Width Modal</h4>
+</div>
+
+<div class="modal-body">
+	<tabset>
+			<tab ng-repeat="list in lists" heading="{{list.title}}">
+
+				<table ng-init="currentPage[$index] = 1" class="table table-hover members-table middle-align">
+					<thead>
+						<tr>
+							<th></th>
+							<th class="hidden-xs hidden-sm"></th>
+							<th>Name and Role</th>
+							<th class="hidden-xs hidden-sm">E-Mail</th>
+							<th>ID</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="user in list.list_user">
+							<td class="user-cb">
+								<input tiny-model="objChecked|users" select="check(input)" type="checkbox" class="tiny-cbr" name="members-list-{{list.user_group_id}}[]" value='{{user | json}}' />
+							</td>
+							<td class="user-image hidden-xs hidden-sm">
+								<a href="">
+									<img ng-src="{{user.avatar != '' ? user.avatar : avatar_default}}" class="img-circle" alt="user-pic" />
+								</a>
+							</td>
+							<td class="user-name">
+								<a href="#!admin/administrator/peoples/edit/{{user.user_id}}" class="name">{{user.full_name}}</a>
+								<span>{{list.title}}</span>
+							</td>
+							<td class="hidden-xs hidden-sm">
+								<span class="email">{{user.email}}</span>
+							</td>
+							<td class="user-id">
+								{{user.user_id}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</tab>
+		</tabset>
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-white" ng-click="currentModal.close();">Close</button>
+	<button ng-if="objChecked.users.length" type="button" ng-click="submit()" class="btn btn-info" ng-click="currentModal.dismiss();">Save changes</button>
+</div>

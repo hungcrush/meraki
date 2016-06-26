@@ -307,7 +307,7 @@ class TINY_Model extends CI_Model
           {
               if(isset($fileds[$key]))
               {
-                if($this->_checkIsEmpty($fileds[$key]))
+                if($this->_checkIsEmpty($value))
                   $dataInsertOther[] = array($value, $fileds[$key], $key);
               }else
               {
@@ -336,18 +336,20 @@ class TINY_Model extends CI_Model
 
     }
 
-    private function _checkIsEmpty($arr)
+    private function _checkIsEmpty(&$arr)
     {
-        if(is_array($arr))
+        if(is_array($arr) && count($arr) > 0)
         {
-          $length = count($arr);
-          foreach ($arr as $value){
-              if(is_empty($value)){
+          //$length = count($arr);
+          foreach ($arr as $key => $values){
+            foreach($values as $value){
+              if(empty(trim($value))){
+                unset($arr[$key]);
                 break;
-                return FALSE;
               }
+            }
           }
-
+          if(empty($arr)) return FALSE;
           return TRUE;
         }
         return FALSE;
