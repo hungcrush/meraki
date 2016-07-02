@@ -309,12 +309,12 @@ angular.module('xenon.controllers', []).
 			$chat_conv.removeClass('is-open');
 		});
 	}).
-	controller('UIModalsCtrl', function($scope, $rootScope, $modal, $sce)
+	controller('UIModalsCtrl', function($scope, $rootScope, $uibModal, $sce)
 	{
 		// Open Simple Modal
 		$scope.openModal = function(modal_id, modal_size, modal_backdrop)
 		{
-			$rootScope.currentModal = $modal.open({
+			$rootScope.currentModal = $uibModal.open({
 				templateUrl: modal_id,
 				size: modal_size,
 				backdrop: typeof modal_backdrop == 'undefined' ? true : modal_backdrop
@@ -324,7 +324,7 @@ angular.module('xenon.controllers', []).
 		// Loading AJAX Content
 		$scope.openAjaxModal = function(modal_id, url_location)
 		{
-			$rootScope.currentModal = $modal.open({
+			$rootScope.currentModal = $uibModal.open({
 				templateUrl: modal_id,
 				resolve: {
 					ajaxContent: function($http)

@@ -82,11 +82,11 @@
         		</div>
         	</div>
         	<div class="panel-body">
-                <tabset>
-                    <tab ng-repeat="(key, value) in fn.pages" heading="{{value.name}}">
+                <uib-tabset>
+                    <uib-tab ng-repeat="(key, value) in fn.pages" heading="{{value.name}}">
         		      <ul id="nestable-list-{{key}}" ng-init="_menus = key" class="uk-nestable" ng-include="'menu-items-tpl'"></ul>
-                    </tab>
-                </tabset>
+                    </uib-tab>
+                </uib-tabset>
         	</div>
         </div>
     </div>

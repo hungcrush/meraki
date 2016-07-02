@@ -1,1 +1,89 @@
-This index of project
+<page-title ng-if="layoutOptions.pageTitles" title="Projects" description="Manager our customers">
+	<a class="btn btn-success btn-icon btn-icon-standalone" href="/admin/task/add">
+		<i class="fa-plus"></i>
+		<span>New Task</span>
+	</a>
+
+	<div class="btn-group" uib-dropdown>
+		<button type="button" class="btn btn-white btn-icon dropdown-toggle" uib-dropdown-toggle data-toggle="dropdown">
+			<i class="fa fa-list" aria-hidden="true"></i>
+			<span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+		</button>
+		
+		<ul uib-dropdown-menu class="dropdown-menu dropdown-left" role="menu">
+			<li>
+				<a href="">Action</a>
+			</li>
+			<li>
+				<a href="">Another action</a>
+			</li>
+			<li>
+				<a href="">Something else here</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="">Separated link</a>
+			</li>
+		</ul>
+	</div>
+</page-title>
+
+<div class="panel panel-default">
+    <div class="tasks-top-menu" id="task-menu-block">
+        <span class="tasks-top-item-wrap ">
+	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_STATE=sR400" onclick="this.blur();">
+	        	<span class="tasks-top-item-icon tasks-icon-do"></span><span class="tasks-top-item-text">Ongoing</span>
+	        	<span id="tasks-main-top-counter-my" class="tasks-top-item-counter">1</span>
+	        </a>
+        </span>
+
+        <span class="tasks-top-item-wrap ">
+	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_STATE=sR800" onclick="this.blur();">
+	        	<span class="tasks-top-item-icon tasks-icon-help"></span><span class="tasks-top-item-text">Assisting</span>
+	        	<span id="tasks-main-top-counter-accomplice" class="tasks-top-item-counter" style="display:none;">0</span>
+	        </a>
+        </span>
+
+        <span class="tasks-top-item-wrap ">
+        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_STATE=sRg00" onclick="this.blur();">
+        	<span class="tasks-top-item-icon tasks-icon-delegate"></span><span class="tasks-top-item-text">Set by me</span>
+        	<span id="tasks-main-top-counter-originator" class="tasks-top-item-counter" style="display:none;">0</span>
+        </a>
+        </span>
+
+        <span class="tasks-top-item-wrap ">
+	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_STATE=sRc00" onclick="this.blur();">
+	        	<span class="tasks-top-item-icon tasks-icon-watch"></span><span class="tasks-top-item-text">Following</span>
+	        	<span id="tasks-main-top-counter-auditor" class="tasks-top-item-counter" style="display:none;">0</span>
+	        </a>
+        </span>
+
+        <span class="tasks-top-item-wrap">
+	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_FILTER_SWITCH_PRESET=-10&amp;F_STATE[]=sCb0000">
+	        	<span class="tasks-top-item-icon tasks-icon-favorite"></span><span class="tasks-top-item-text">Favorites</span>
+	        </a>
+        </span>
+
+        <span class="tasks-top-item-wrap  tasks-top-item-wrap-all">
+	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_SECTION=ADVANCED">
+	        	<span class="tasks-top-item-icon tasks-icon-all"></span><span class="tasks-top-item-text">All</span>
+	        </a>
+        </span>
+
+        <span class="tasks-top-item-wrap  tasks-top-item-wrap-active">
+	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/projects/">
+	        	<span class="tasks-top-item-icon tasks-icon-projects"></span><span class="tasks-top-item-text">Projects</span>
+	        </a>
+        </span>
+
+        <span class="tasks-top-item-wrap ">
+	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/report/">
+	        	<span class="tasks-top-item-icon tasks-icon-reports"></span><span class="tasks-top-item-text">Reports</span>
+	        </a>
+        </span>
+    </div>
+</div>
+
+<div class="panel panel-default">
+ffdsfdsfdsfds
+</div>

@@ -34,8 +34,8 @@
 				</div>
 			</div>
             <hr />
-            <tabset>
-            <tab id="{{isEdit ? '' : 'isEdit'}}" heading="Account Infomation">
+            <uib-tabset>
+            <uib-tab id="{{isEdit ? '' : 'isEdit'}}" heading="Account Infomation">
 			<div class="member-form-inputs">
 				<div class="row">
 					<div class="col-sm-3">
@@ -142,9 +142,9 @@
 				</div>
             
 			</div>
-            </tab>
+            </uib-tab>
             
-            <tab ng-if="isEdit" heading="Permissions">
+            <uib-tab ng-if="isEdit" heading="Permissions">
                 <table class="table table-model-2 table-hover">
                 	<tbody id="permissions">
                 		<tr ng-repeat-start="list in permissions">
@@ -159,8 +159,8 @@
                 		<tr ng-repeat-end></tr>                              
                 	</tbody>
                 </table>
-            </tab>
-            </tabset>
+            </uib-tab>
+            </uib-tabset>
 
 		</div>
 	</div>

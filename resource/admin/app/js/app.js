@@ -22,14 +22,14 @@ var app = angular.module('xenon-app', [
     'xenon.constant'
 ]);
 
-app.run(function($rootScope, $modal, $state)
+app.run(function($rootScope, $uibModal, $state)
 {
     $rootScope.tinyDestroy = [];
     $rootScope.currentPage = {};
     $rootScope.item_page   = tinyConfig.item_page;
     
     $rootScope.isAdmin = function(){
-        $rootScope.currentModal = $modal.open({
+        $rootScope.currentModal = $uibModal.open({
 			templateUrl: tinyConfig.templatePathAjax('lost-session'),
 			size: null,
 			backdrop: 'static'
@@ -378,6 +378,20 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
             url: '/project',
             templateUrl: URL_SERVER + 'admin/project',
             controller: 'ProjectCtrl'
+        }).
+
+        //------------------------------
+        // ADD TASK MODULE
+        //------------------------------
+        state('admin.task', {
+            url: '/task',
+            templateUrl: URL_SERVER + 'admin/task',
+            controller: 'taskCtrl'
+        }).
+        state('admin.task.add', {
+            url: '/add',
+            templateUrl: URL_SERVER + 'admin/task/add',
+            controller: 'taskCtrl'
         })
         
     $locationProvider.html5Mode({

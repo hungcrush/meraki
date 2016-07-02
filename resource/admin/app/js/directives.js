@@ -64,6 +64,7 @@ angular.module('xenon.directives', []).
 		return {
 			restrict: 'E',
 			replace: true,
+			transclude: true,
 			templateUrl: tinyConfig.templatePath('layout/page-title'),
 			link: function(scope, el, attr){
 				scope.title = attr.title;
@@ -471,7 +472,7 @@ angular.module('xenon.directives', []).
 	})
     
     
-    .directive('tinyModal', function($modal, $rootScope){
+    .directive('tinyModal', function($uibModal, $rootScope){
             return {
                 restrict: 'A',
                 scope: {
@@ -492,7 +493,7 @@ angular.module('xenon.directives', []).
                     }
                     t.click(function(){
                         var htmlContent = $scope.htmlContent ? {htmlContent: $scope.htmlContent} : {};
-                        $rootScope.currentModal = $modal.open({
+                        $rootScope.currentModal = $uibModal.open({
             				templateUrl: id,
             				size: t.data('size') || null,
             				backdrop: t.data('backdrop') || 'static',
@@ -728,7 +729,7 @@ angular.module('xenon.directives', []).
                 }
             }
         })
-        .directive('tinyParticipants', function($modal, $rootScope){
+        .directive('tinyParticipants', function($uibModal, $rootScope){
         	return {
         		restrict: 'A',
         		scope: {
@@ -736,7 +737,7 @@ angular.module('xenon.directives', []).
         		},
         		link: function(scope, el, attrs){
         			el.on('click', function(){
-        				$rootScope.currentModal = $modal.open({
+        				$rootScope.currentModal = $uibModal.open({
 	        				templateUrl: tinyConfig.templatePathAjax('modal-participants'),
 	        				size: 'lg',
 	        				backdrop: 'static',

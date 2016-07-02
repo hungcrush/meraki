@@ -10,8 +10,8 @@
 
 	<div class="col-md-12">
 
-		<tabset>
-			<tab ng-repeat="list in lists" heading="{{list.title}}">
+		<uib-tabset>
+			<uib-tab ng-repeat="list in lists" heading="{{list.title}}">
 
 				<table ng-init="currentPage[$index] = 1" class="table table-hover members-table middle-align">
 					<thead>
@@ -81,8 +81,8 @@
                         <pagination boundary-links="false" total-items="list.maxLength" items-per-page="item_page" ng-model="currentPage[$index]" ng-change="changePage(currentPage[$index], '{{list.user_group_id}}')" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
                     </div>
 				</div>
-			</tab>
-		</tabset>
+			</uib-tab>
+		</uib-tabset>
 
 	</div>
 

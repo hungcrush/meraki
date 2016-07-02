@@ -906,6 +906,9 @@ angular.module('tiny.admin.controllers', []).
         }
     }).
     controller('ProjectCtrl', function(){
+
+    }).
+    controller('taskCtrl', function(){
         
     })
 
