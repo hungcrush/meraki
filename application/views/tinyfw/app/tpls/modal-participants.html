@@ -20,7 +20,9 @@
 					<tbody>
 						<tr ng-repeat="user in list.list_user">
 							<td class="user-cb">
-								<input tiny-model="objChecked|users" select="check(input)" type="checkbox" class="tiny-cbr" name="members-list-{{list.user_group_id}}[]" value='{{user | json}}' />
+								<input ng-if="!isOnly" tiny-model="objChecked|users" select="check(input)" type="checkbox" class="tiny-cbr" name="members-list-{{list.user_group_id}}[]" value='{{user | json}}' />
+
+								<input ng-if="isOnly" ng-model="objChecked['users']" select="check(input)" type="radio" class="tiny-radio" name="radio" value='{{user | json}}' />
 							</td>
 							<td class="user-image hidden-xs hidden-sm">
 								<a href="">

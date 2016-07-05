@@ -14,4 +14,11 @@ class Task extends TINY_Controller {
             'title_page'    => 'Tasks'
         );
     }
+
+    public function add(){
+        $this->data['template']  = 'admin/task/add.html';
+        $this->data['dataParse'] = array(
+            'title_page'    => 'Add Tasks'
+        );
+    }
 }

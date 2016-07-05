@@ -908,7 +908,19 @@ angular.module('tiny.admin.controllers', []).
     controller('ProjectCtrl', function(){
 
     }).
-    controller('taskCtrl', function(){
-        
+    controller('taskCtrl', function($scope, $tiny){
+        $scope.participants = [];
+
+        $scope.selectUser = function(obj, id)
+        {
+            var $el = angular.element('[access-tiny-id="'+id+'"]');
+            $el.text(obj[0].full_name);
+        }
+
+        $scope.selectParticipant = function(obj)
+        {
+            console.log(obj);
+            $scope.participants = obj;
+        }
     })
 

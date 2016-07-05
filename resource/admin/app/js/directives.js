@@ -527,18 +527,28 @@ angular.module('xenon.directives', []).
                 }
             }
         })
-        .directive('tinyRadio', function($ocLazyLoad, ASSETS){
+        .directive('tinyRadio', function($ocLazyLoad, ASSETS, $timeout){
             $ocLazyLoad.load([
     			ASSETS.forms.icheck
     		]);
             return {
                 restrict: 'AC',
-                link: function(scope, el){
+                require: 'ngModel',
+                scope: {
+                    cbrModel: '=',
+                    select: '&'
+                },
+                link: function(scope, el, attrs, ngModel){
                     tn.delayBeforeLoaded('iCheck', function(){
-                        jQuery(el).iCheck({
+                        el.iCheck({
                     		checkboxClass: 'icheckbox_square-blue',
                             radioClass: 'iradio_square-yellow'
                     	});
+                        console.log(ngModel)
+                    	el.on('ifChanged', function(){
+                            var t = $(this);
+                            ngModel.$setViewValue([t.attr('value')]);
+                        })
                      }, 1);
                 }
             }
@@ -643,7 +653,6 @@ angular.module('xenon.directives', []).
                         {
                         	model = model.split('|');
                         	model.forEach(function(v){
-                        		console.log(v)
                         		_variable = _variable == false ? parent[v] : _variable[v];
                         	})
                         }else
@@ -654,14 +663,25 @@ angular.module('xenon.directives', []).
                             var t = $(this);
                             
                             if($el.is(':checked')){
-                                if(_variable){
-                                    _variable.push($el.attr('value'));
-                                }else{
-                                    _variable = [$el.attr('value')];
-                                }
-                                if(scope.select){
-                                    scope.select({input: tn.parseElement($el)})
-                                }
+                            	console.log(1);
+                            	if($el.attr('type') == "checkbox")
+                            	{
+	                                if(_variable){
+	                                    _variable.push($el.attr('value'));
+	                                }else{
+	                                    _variable = [$el.attr('value')];
+	                                }
+	                                if(scope.select){
+	                                    scope.select({input: tn.parseElement($el)})
+	                                }
+	                            }else
+	                            {
+	                            	_variable = [$el.attr('value')];
+	                            	console.log(_variable);
+	                                if(scope.select){
+	                                    scope.select({input: tn.parseElement($el)})
+	                                }
+	                            }
                             }else
                                 for(var i = 0; i < _variable.length; i++){
                                     if(_variable[i] == $el.attr('value')){
@@ -743,6 +763,7 @@ angular.module('xenon.directives', []).
 	        				backdrop: 'static',
 	                        animation: true,
 	                        controller: function($scope, $tiny){
+	                        	$scope.isOnly = attrs.onlyOne != undefined ? true : false;
 	                        	$scope.lists = [];
 	                        	$scope.objChecked = {
 	                        		users: []
@@ -757,7 +778,8 @@ angular.module('xenon.directives', []).
 	                            	{
 	                            		data.push(angular.fromJson(v));
 	                            	})
-	                            	scope.onSubmit({users: data});
+	                            	scope.onSubmit({users: data, '$el': tn.parseElement(el)});
+	                            	$rootScope.currentModal.close();
 	                            }
 	                        }
 	        			});

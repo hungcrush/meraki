@@ -14,4 +14,11 @@ class Project extends TINY_Controller {
             'title_page'    => 'Projects'
         );
     }
+
+    public function add(){
+        $this->data['template']  = 'admin/project/add.html';
+        $this->data['dataParse'] = array(
+            'title_page'    => 'Add Project'
+        );
+    }
 }

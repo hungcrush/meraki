@@ -377,9 +377,20 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
         state('admin.project', {
             url: '/project',
             templateUrl: URL_SERVER + 'admin/project',
+            resolve: {
+                iCheck: function($ocLazyLoad){
+                    return $ocLazyLoad.load([
+                        ASSETS.forms.icheck,
+                    ]);
+                },
+            },
             controller: 'ProjectCtrl'
         }).
-
+        state('admin.project.add', {
+            url: '/add',
+            templateUrl: URL_SERVER + 'admin/project/add',
+            controller: 'ProjectCtrl'
+        }).
         //------------------------------
         // ADD TASK MODULE
         //------------------------------

@@ -1,0 +1,75 @@
+<div class="panel-heading">
+	<div class="panel-title">Hmmmmmmmmmmm</div>
+</div>
+<div class="panel-body">
+	<form>
+		<div class="form-group">
+	 		<label class="">Project Title</label>
+	 		<input required type="text" name="title" class="form-control" />
+		</div>
+
+		<div class="form-group">
+			<label class="">Responsible Person</label>
+			<div class="row">
+				<div class="col-md-4">
+					<input required type="text" name="res_person" value="Hung" class="form-control" />
+				</div>
+				<div class="col-md-4 col-sm-5">
+					<div class="row">
+						<div class="col-sm-3">
+							<span>Priority:</span>
+						</div>
+						<div class="col-sm-3">
+							<input class="icheck-4" type="radio" id="minimal-radio-1-1" name="minimal-radio-9">
+							<label class="color-low" for="minimal-radio-1-1">Low</label>
+						</div>
+						<div class="col-sm-3">
+							<input class="icheck-4" checked type="radio" id="minimal-radio-1-2" name="minimal-radio-9">
+							<label class="color-normal" for="minimal-radio-1-2">Normal</label>
+						</div>
+						<div class="col-sm-3">
+							<input class="icheck-4" type="radio" id="minimal-radio-1-3" name="minimal-radio-9">
+							<label class="color-high" for="minimal-radio-1-3">High</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group-separator"></div>
+
+		<div class="form-group">
+			Deadline is <input style="width: 50px" class="align-center" type="number" /> days after the project is created
+		</div>
+
+		<div class="form-group-separator"></div>
+
+		<div class="form-group">
+			<label><input type="checkbox" class="tiny-cbr" /> Responsible person may change deadline</label>
+			<br />
+			<label><input type="checkbox" class="tiny-cbr" /> Require approval to close task</label>
+		</div>
+
+		<div class="form-group">
+			<label>Project Description</label>
+			<textarea id="description_project" name="project_des" class="tiny-editor"></textarea>
+		</div>
+
+		<div class="form-group-separator"></div>
+
+		<button type="submit" class="btn btn-success">Save</button>
+		<button type="submit" class="btn btn-gray">Add task for this project</button>
+		<button type="button" class="btn btn-link">Cancel</button>
+	</form>
+</div>
+
+<script type="text/javascript">
+	(function($){
+		$(document).ready(function(){
+			$('input.icheck-4').iCheck({
+				checkboxClass: 'icheckbox_minimal-blue',
+				radioClass: 'iradio_minimal-blue'
+			});
+		})
+	})(jQuery)
+</script>
