@@ -905,11 +905,49 @@ angular.module('tiny.admin.controllers', []).
             return false;
         }
     }).
-    controller('ProjectCtrl', function(){
+    controller('ProjectBaseCtrl', function($scope, $stateParams){
+        $scope.objCondition = {
+            is_template: false
+        };     
+
+    }).
+    controller('ProjectCtrl', function($scope, $stateParams){
+        $scope.titleAdd                 = $stateParams.is_template ? 'Add templete' : 'Add project';
+        $scope.objCondition.is_template = $stateParams.is_template ? true : false;
+
+        $scope.addProject = function(data)
+        {
+            console.log(data);
+        }
+    }).
+    controller('taskBaseCtrl', function($scope){
+        var defaultdata = {
+            participants: [],
+            listTodo : [],
+            info: {}
+        };
+        $scope.dataTask = [defaultdata];
+        //--------------------
+        $scope.formData = angular.copy(defaultdata);
+        $scope.currentTab = 0;
+
+        $scope.changeTabtoTask = function(type){
+            var number = (type == 'next') ? $scope.currentTab + 1 : parseInt(type);
+            $scope.dataTask[$scope.currentTab] = $scope.formData;
+            if(typeof $scope.dataTask[number] == 'undefined')
+            {
+                $scope.dataTask[number] = angular.copy(defaultdata);
+            }
+            //-- set formData to next/prev tab
+            $scope.formData = $scope.dataTask[number]; 
+            //-- set CurrentTab
+            $scope.currentTab = number;
+
+            console.log(number, $scope.formData);
+        }
 
     }).
     controller('taskCtrl', function($scope, $tiny){
-        $scope.participants = [];
 
         $scope.selectUser = function(obj, id)
         {
@@ -920,7 +958,31 @@ angular.module('tiny.admin.controllers', []).
         $scope.selectParticipant = function(obj)
         {
             console.log(obj);
-            $scope.participants = obj;
+            $scope.formData.participants = obj;
         }
+
+        $scope.addTodo = function(type)
+        {
+            switch(type)
+            {
+                case 1: // check list
+                    $scope.formData.listTodo.push({
+                        type: 'check_list',
+                        text: '',
+                        require: false,
+                        assign: ''
+                    });
+                    break;
+                case 2: // note
+                    $scope.formData.listTodo.push({
+                        type: 'note',
+                        text: '',
+                        assign: ''
+                    });
+                    break;
+            }
+        }
+
+        
     })
 

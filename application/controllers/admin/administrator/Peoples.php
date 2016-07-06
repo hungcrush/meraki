@@ -52,4 +52,13 @@ class Peoples extends TINY_Controller {
         return $this->users->Remove();
     }
 
+    public function getUserAjax(){
+        $fakeData = array(
+            array('value' => 'Hung Tran', 'user_id' => 1),
+            array('value' => 'Vi Lan', 'user_id' => 2)
+        );
+
+        exit(json_encode($fakeData));
+    }
+
 }

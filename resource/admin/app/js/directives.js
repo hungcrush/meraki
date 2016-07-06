@@ -533,7 +533,7 @@ angular.module('xenon.directives', []).
     		]);
             return {
                 restrict: 'AC',
-                require: 'ngModel',
+                require: '^?ngModel',
                 scope: {
                     cbrModel: '=',
                     select: '&'
@@ -544,11 +544,13 @@ angular.module('xenon.directives', []).
                     		checkboxClass: 'icheckbox_square-blue',
                             radioClass: 'iradio_square-yellow'
                     	});
-                        console.log(ngModel)
-                    	el.on('ifChanged', function(){
-                            var t = $(this);
-                            ngModel.$setViewValue([t.attr('value')]);
-                        })
+                        
+                        if(attrs.ngModel){
+	                    	el.on('ifChanged', function(){
+	                            var t = $(this);
+	                            ngModel.$setViewValue([t.attr('value')]);
+	                        })
+	                    }
                      }, 1);
                 }
             }
@@ -784,6 +786,50 @@ angular.module('xenon.directives', []).
 	                        }
 	        			});
         			})
+        		}
+        	}
+        })
+        .directive('tinyAutocomplete', function(ASSETS, $ocLazyLoad){
+        	return {
+        		restrict: 'AC',
+        		require: '^?ngModel',
+        		scope: {
+        			onSelect: '&'
+        		},
+        		link: function(scope, el, attrs, ngModel){
+        			$ocLazyLoad.load([
+						ASSETS.forms.typeahead,
+					]).then(function(){
+						var name_randomizer = new Bloodhound({
+							datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+							queryTokenizer: Bloodhound.tokenizers.whitespace,
+							remote: attrs.url + '?q=%QUERY'
+						});
+						
+						name_randomizer.initialize();
+						
+						el.typeahead({
+							hint: true,
+							highlight: true
+						}, {
+							name: 'string-randomizer',
+							displayKey: 'value',
+							source: name_randomizer.ttAdapter()
+						});
+
+						el.on('typeahead:selected', function (e, datum) {
+						    if(attrs.ngModel)
+						    {
+						    	ngModel.$setViewValue(datum.id);
+						    }
+						    else
+						    {
+						    	scope.onSelect({item: datum});
+						    }
+						});
+					})
+				
+        			
         		}
         	}
         })

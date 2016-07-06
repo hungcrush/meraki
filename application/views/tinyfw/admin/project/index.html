@@ -26,13 +26,13 @@
 			</li>
 			<li class="divider"></li>
 			<li>
-				<a href="">Separated link</a>
+				<a href="/admin/project/add?is_template=1">Add Template</a>
 			</li>
 		</ul>
 	</div>
 </page-title>
 
-<div class="panel panel-default">
+<div ng-if="!objCondition.is_template" class="panel panel-default">
     <div class="tasks-top-menu" id="task-menu-block">
         <span class="tasks-top-item-wrap ">
 	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_STATE=sR400" onclick="this.blur();">

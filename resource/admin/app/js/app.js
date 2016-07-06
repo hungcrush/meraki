@@ -384,10 +384,10 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
                     ]);
                 },
             },
-            controller: 'ProjectCtrl'
+            controller: 'ProjectBaseCtrl'
         }).
         state('admin.project.add', {
-            url: '/add',
+            url: '/add?is_template',
             templateUrl: URL_SERVER + 'admin/project/add',
             controller: 'ProjectCtrl'
         }).
@@ -397,10 +397,10 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
         state('admin.task', {
             url: '/task',
             templateUrl: URL_SERVER + 'admin/task',
-            controller: 'taskCtrl'
+            controller: 'taskBaseCtrl'
         }).
         state('admin.task.add', {
-            url: '/add',
+            url: '/add?project_id',
             templateUrl: URL_SERVER + 'admin/task/add',
             controller: 'taskCtrl'
         })
