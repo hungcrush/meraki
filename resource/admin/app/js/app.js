@@ -401,6 +401,15 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
         }).
         state('admin.task.add', {
             url: '/add?project_id',
+            resolve: {
+                projectData: function($stateParams, $tiny){
+                    if($stateParams.project_id)
+                    {
+                        return $tiny.loadData('/admin/project/load-project-info/' + $stateParams.project_id);
+                    }
+                    return false;
+                }
+            },
             templateUrl: URL_SERVER + 'admin/task/add',
             controller: 'taskCtrl'
         })
@@ -413,7 +422,6 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 
 app.filter('unsafe', function($sce) {
     return function(val) {
-        console.log(val);
         return $sce.trustAsHtml(val);
     };
 })
@@ -422,3 +430,17 @@ app.filter('unsafe', function($sce) {
         return $sce.trustAsResourceUrl(val);
     };
 }])
+.filter('keytolabel', function(){
+    return function(val) {
+        var str = '';
+        if(typeof val == 'string')
+        {
+            val = val.split(/_/);
+            val.forEach(function(v, k){
+                str += (k > 0) ? ' ' + tn.firstToUpperCase(v) : tn.firstToUpperCase(v);
+            })
+        }
+
+        return str;
+    }
+})

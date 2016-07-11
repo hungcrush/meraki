@@ -288,6 +288,7 @@ class TINY_Model extends CI_Model
     {
       $this->_table = $table ? $table : $this->_table;
 
+
       //-- fetch all fields of this table
       $this->_get_fields_table();
 
@@ -301,7 +302,17 @@ class TINY_Model extends CI_Model
       {
           if(!is_array($value))
           {
-              $dataInsert[$key] = $value;
+            if(!preg_match("/(created|date)/", $key) || $value != 0)
+            {
+                $dataInsert[$key] = $value;
+            }
+            else
+            {
+              if($key == 'priority') 
+                {var_dump($key); exit;}
+
+                $dataInsert[$key] = time();
+            }
           }
           else
           {
@@ -321,7 +332,6 @@ class TINY_Model extends CI_Model
       }
 
       if(empty($dataInsert)) return;
-      
       $id = $this->insert($dataInsert);
 
       foreach($dataInsertOther as $insert)
@@ -332,7 +342,7 @@ class TINY_Model extends CI_Model
           $this->insert_auto($insert[0], $insert[1], $this->_table.'_'.$insert[2]);
       }
 
-      return 'OK';
+      return $id;
 
     }
 
@@ -370,7 +380,7 @@ class TINY_Model extends CI_Model
                     case (preg_match('/password/', $key)):
                         $val = $this->__encode($val);
                         break;
-                    case (preg_match('/date/', $key)):
+                    case (preg_match('/(date|deadline)/', $key)):
                         $val = strtotime($val);
                         break;
                 }

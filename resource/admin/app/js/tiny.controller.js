@@ -908,25 +908,47 @@ angular.module('tiny.admin.controllers', []).
     controller('ProjectBaseCtrl', function($scope, $stateParams){
         $scope.objCondition = {
             is_template: false
-        };     
-
+        };
+        $scope.formData = {};
     }).
-    controller('ProjectCtrl', function($scope, $stateParams){
+    controller('ProjectCtrl', function($scope, $stateParams, $tiny, $rootScope){
+        var baseURL = '/admin/project/';
         $scope.titleAdd                 = $stateParams.is_template ? 'Add templete' : 'Add project';
         $scope.objCondition.is_template = $stateParams.is_template ? true : false;
 
+        $scope.selectParticipant = function(obj)
+        {
+            $scope.formData.participants = obj;
+        }
+
         $scope.addProject = function(data)
         {
-            console.log(data);
+            // check condition
+
+            // Ajax
+            $tiny.ajax({
+                url: tn.makeURL('save-project', baseURL),
+                data: {
+                    project_info: data
+                }
+            })
+            .success(function(data){
+                $rootScope.changeRoute('admin.task.add', {project_id: data.project_id});
+            })
         }
     }).
     controller('taskBaseCtrl', function($scope){
         var defaultdata = {
             participants: [],
             listTodo : [],
-            info: {}
+            info: {},
+            options: {}
         };
         $scope.dataTask = [defaultdata];
+        $scope.dataProject = {
+            title: 'Add new Task',
+            description: 'Add new task for someone'
+        };
         //--------------------
         $scope.formData = angular.copy(defaultdata);
         $scope.currentTab = 0;
@@ -947,12 +969,15 @@ angular.module('tiny.admin.controllers', []).
         }
 
     }).
-    controller('taskCtrl', function($scope, $tiny){
+    controller('taskCtrl', function($scope, $tiny, projectData){
+        if(projectData){
+            $scope.dataProject.title        = projectData.data.title;
+            $scope.dataProject.description  = projectData.data.description;
+        }
 
-        $scope.selectUser = function(obj, id)
+        $scope.selectUser = function(obj, id, index)
         {
-            var $el = angular.element('[access-tiny-id="'+id+'"]');
-            $el.text(obj[0].full_name);
+            $scope.formData.listTodo[index].assign = [obj[0].user_id, obj[0].full_name]
         }
 
         $scope.selectParticipant = function(obj)
@@ -970,14 +995,14 @@ angular.module('tiny.admin.controllers', []).
                         type: 'check_list',
                         text: '',
                         require: false,
-                        assign: ''
+                        assign: []
                     });
                     break;
                 case 2: // note
                     $scope.formData.listTodo.push({
                         type: 'note',
                         text: '',
-                        assign: ''
+                        assign: []
                     });
                     break;
             }

@@ -1,7 +1,14 @@
 <form class="tiny-flat-form">
 	<div class="form-group flat">
+		<ul class="list-flat-options">
+			<li><a ng-click="formData.options.start_date = !formData.options.start_date" ng-class="{'active': formData.options.start_date}" href="javascript:void(0)">Start Date</a></li>
+			<li><a ng-click="formData.options.end_date = !formData.options.end_date" ng-class="{'active': formData.options.end_date}" href="javascript:void(0)">End Date</a></li>
+		</ul>
+
 		<input ng-model="formData.info.title" type="text" class="form-control" id="title" placeholder="Title">
 		<textarea ng-model="formData.info.description" placeholder="Description..." rows="5" class="form-control autogrow" id="description"></textarea>
+
+		<input type="text" ng-repeat="(option, v) in formData.options" ng-if="v" class="tiny-picker form-control" name="options[{{option}}]" placeholder="{{option | keytolabel}}" />
 	</div>
 
 	<div style="margin: 1rem;" class="panel panel-gray">
@@ -39,7 +46,7 @@
 						</div>
 
 						<div class="form-group">
-							<a class="link" href="javascript:void(0)" data-index="{{$index}}" only-one on-submit="selectUser(users, $el)" tiny-participants>Assign to</a>
+							<a class="link" href="javascript:void(0)" data-index="{{$index}}" only-one on-submit="selectUser(users, $el, $index)" tiny-participants>{{formData.listTodo[$index].assign.length ? formData.listTodo[$index].assign[1] : 'Assign To'}}</a>
 						</div>
 					</li>
 
@@ -51,7 +58,7 @@
 						</div>
 
 						<div class="form-group">
-							<a class="link" href="javascript:void(0)" data-index="{{$index}}" only-one on-submit="selectUser(users, $el)" tiny-participants>Assign to</a>
+							<a class="link" href="javascript:void(0)" data-index="{{$index}}" only-one on-submit="selectUser(users, $el, $index)" tiny-participants>{{formData.listTodo[$index].assign.length ? formData.listTodo[$index].assign[1] : 'Assign To'}}</a>
 						</div>
 					</li>
 				</li-section>

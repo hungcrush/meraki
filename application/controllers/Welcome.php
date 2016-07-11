@@ -18,7 +18,13 @@ class Welcome extends TINY_Controller {
     }
     
     public function testDuLieu(){
-        die('OK ^^');
+        $str = 'priority';
+        if(!preg_match("/(created|date)/", $str))
+        {
+            echo 'OK';
+            exit;
+        }
+        exit('AAAA');
     }
     
     //-- function load Template for angular

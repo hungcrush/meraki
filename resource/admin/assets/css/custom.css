@@ -501,6 +501,9 @@ li.sort_li.ui-sortable-placeholder{
     display: inline-block;
     width: 100%;
 }
+.tiny-flat-form .form-group.flat{
+    position: relative;
+}
 .tiny-flat-form .form-group.flat .form-control{
     border: 0;
     border-bottom: 1px solid #ccc;
@@ -511,6 +514,31 @@ li.sort_li.ui-sortable-placeholder{
 .tiny-flat-form .form-group.flat textarea.form-control{
     padding: 10px 20px;
     font-size: 14px;
+}
+.list-flat-options{
+    list-style: none;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    background: #f7fbff;
+    padding: 0 5px;
+}
+.list-flat-options li {
+    display: inline-block;
+}
+.list-flat-options li a{
+    line-height: 5.6rem;
+    color: #d2d2d2;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 0 5px;
+    text-decoration: none;
+}
+.list-flat-options li a:hover{
+    color: #bbbbbb;
+}
+.list-flat-options li a.active{
+    color: #888;
 }
 .color-low{
     color: #888;

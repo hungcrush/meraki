@@ -37,7 +37,7 @@
         <span class="tasks-top-item-wrap ">
 	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_STATE=sR400" onclick="this.blur();">
 	        	<span class="tasks-top-item-icon tasks-icon-do"></span><span class="tasks-top-item-text">Ongoing</span>
-	        	<span id="tasks-main-top-counter-my" class="tasks-top-item-counter">1</span>
+	        	<span id="tasks-main-top-counter-my" class="tasks-top-item-counter" style="display:none;">0</span>
 	        </a>
         </span>
 
@@ -48,26 +48,6 @@
 	        </a>
         </span>
 
-        <span class="tasks-top-item-wrap ">
-        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_STATE=sRg00" onclick="this.blur();">
-        	<span class="tasks-top-item-icon tasks-icon-delegate"></span><span class="tasks-top-item-text">Set by me</span>
-        	<span id="tasks-main-top-counter-originator" class="tasks-top-item-counter" style="display:none;">0</span>
-        </a>
-        </span>
-
-        <span class="tasks-top-item-wrap ">
-	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_STATE=sRc00" onclick="this.blur();">
-	        	<span class="tasks-top-item-icon tasks-icon-watch"></span><span class="tasks-top-item-text">Following</span>
-	        	<span id="tasks-main-top-counter-auditor" class="tasks-top-item-counter" style="display:none;">0</span>
-	        </a>
-        </span>
-
-        <span class="tasks-top-item-wrap">
-	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_FILTER_SWITCH_PRESET=-10&amp;F_STATE[]=sCb0000">
-	        	<span class="tasks-top-item-icon tasks-icon-favorite"></span><span class="tasks-top-item-text">Favorites</span>
-	        </a>
-        </span>
-
         <span class="tasks-top-item-wrap  tasks-top-item-wrap-all">
 	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/?F_CANCEL=Y&amp;F_SECTION=ADVANCED">
 	        	<span class="tasks-top-item-icon tasks-icon-all"></span><span class="tasks-top-item-text">All</span>
@@ -75,13 +55,13 @@
         </span>
 
         <span class="tasks-top-item-wrap  tasks-top-item-wrap-active">
-	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/projects/">
+	        <a class="tasks-top-item" href="/admin/project">
 	        	<span class="tasks-top-item-icon tasks-icon-projects"></span><span class="tasks-top-item-text">Projects</span>
 	        </a>
         </span>
 
         <span class="tasks-top-item-wrap ">
-	        <a class="tasks-top-item" href="/company/personal/user/1/tasks/report/">
+	        <a class="tasks-top-item" href="/admin/project/reports">
 	        	<span class="tasks-top-item-icon tasks-icon-reports"></span><span class="tasks-top-item-text">Reports</span>
 	        </a>
         </span>
@@ -89,5 +69,20 @@
 </div>
 
 <div class="panel panel-default" ui-view>
-	
+	<table class="table table-bordered table-striped tiny-datatable">
+		<thead>
+			<tr>
+				<th style="width: 20px;padding-left: 12px;" class="no-sorting">
+					<input type="checkbox" target="#dataTable_contacts .dataTable-select" class="tiny-cbr tiny-selectall">
+				</th>
+				<th>Title</th>
+				<th>
+					<i class="fa fa-bars" aria-hidden="true"></i>
+				</th>
+				<th>% Done</th>
+				<th>Status</th>
+				<th>Created</th>
+			</tr>
+		</thead>
+	</table>
 </div>

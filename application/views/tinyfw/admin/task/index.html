@@ -1,4 +1,4 @@
-<page-title ng-if="layoutOptions.pageTitles" title="Projects" description="Manager our customers">
+<page-title ng-if="layoutOptions.pageTitles" title="{{dataProject.title}}" description="{{dataProject.description | unsafe}}">
 	<a class="btn btn-link btn-icon" href="/admin/project/add">
 		<i class="fa fa-long-arrow-left" aria-hidden="true"></i>
 		<span>Back to Project</span>
