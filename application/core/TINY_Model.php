@@ -308,8 +308,6 @@ class TINY_Model extends CI_Model
             }
             else
             {
-              if($key == 'priority') 
-                {var_dump($key); exit;}
 
                 $dataInsert[$key] = time();
             }
@@ -318,7 +316,7 @@ class TINY_Model extends CI_Model
           {
               if(isset($fileds[$key]))
               {
-                if($this->_checkIsEmpty($value))
+                //if($this->_checkIsEmpty($value))
                   $dataInsertOther[] = array($value, $fileds[$key], $key);
               }else
               {
@@ -386,6 +384,18 @@ class TINY_Model extends CI_Model
                         break;
                 }
             }
+          }
+      }
+    }
+
+    private function fileds_output_process(&$data)
+    {
+      foreach ($data as $key => &$value) {
+          switch(true)
+          {
+              case (preg_match('/(date|deadline|created)/', $key)):
+                  $value = $this->formatTime($value);
+                  break;
           }
       }
     }
@@ -1221,6 +1231,10 @@ class TINY_Model extends CI_Model
         $this->order_by($dataTable['columns'][$indexOrder['column']]['data'], $indexOrder['dir']);
 
         $data = $this->get_all();
+        foreach($data as &$row)
+        {
+          $this->fileds_output_process($row);
+        }
         return array(
             'draw'            => $dataTable['draw'],
             'recordsTotal'    => $total,

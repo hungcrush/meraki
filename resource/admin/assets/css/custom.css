@@ -520,7 +520,6 @@ li.sort_li.ui-sortable-placeholder{
     margin: 0;
     position: absolute;
     right: 0;
-    background: #f7fbff;
     padding: 0 5px;
 }
 .list-flat-options li {
@@ -568,4 +567,7 @@ li.sort_li.ui-sortable-placeholder{
     top: 0;
     background: #ffedae;
     left: 0;
+}
+.dataTable .progress{
+    margin-top: 5px;
 }

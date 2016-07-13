@@ -12,7 +12,10 @@ class Project_model extends TINY_Model
     	$projects = $this->get_many_by('status <> 3');
     	foreach($projects as $project)
     	{
-    		
+    		$project['created_at'] = $this->formatTime($project['created_at']);
+    		$dataOut[] = $project;
     	}
+
+    	return $dataOut;
     }
 }

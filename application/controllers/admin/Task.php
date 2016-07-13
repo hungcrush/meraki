@@ -21,4 +21,14 @@ class Task extends TINY_Controller {
             'title_page'    => 'Add Tasks'
         );
     }
+
+    public function save(){
+        $dataForm = $this->_post('tasks');
+
+        foreach($dataForm as $data)
+        {
+            $insert = $this->tasks->insert_auto($data, array('todos' => array()), 'tiny_tasks');
+        }
+        return $insert;
+    }
 }

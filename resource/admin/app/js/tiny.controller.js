@@ -910,6 +910,9 @@ angular.module('tiny.admin.controllers', []).
             is_template: false
         };
         $scope.formData = {};
+        $scope.parentobj = {
+            listchecked : []
+        };
     }).
     controller('ProjectCtrl', function($scope, $stateParams, $tiny, $rootScope){
         var baseURL = '/admin/project/';
@@ -942,7 +945,8 @@ angular.module('tiny.admin.controllers', []).
             participants: [],
             listTodo : [],
             info: {},
-            options: {}
+            options: {},
+            opt: {}
         };
         $scope.dataTask = [defaultdata];
         $scope.dataProject = {
@@ -970,6 +974,7 @@ angular.module('tiny.admin.controllers', []).
 
     }).
     controller('taskCtrl', function($scope, $tiny, projectData){
+        console.log(projectData)
         if(projectData){
             $scope.dataProject.title        = projectData.data.title;
             $scope.dataProject.description  = projectData.data.description;
@@ -977,7 +982,8 @@ angular.module('tiny.admin.controllers', []).
 
         $scope.selectUser = function(obj, id, index)
         {
-            $scope.formData.listTodo[index].assign = [obj[0].user_id, obj[0].full_name]
+            $scope.formData.listTodo[index].assign      = [obj[0].user_id, obj[0].full_name]
+            $scope.formData.listTodo[index].assign_to   = obj[0].user_id;
         }
 
         $scope.selectParticipant = function(obj)
@@ -994,7 +1000,6 @@ angular.module('tiny.admin.controllers', []).
                     $scope.formData.listTodo.push({
                         type: 'check_list',
                         text: '',
-                        require: false,
                         assign: []
                     });
                     break;
@@ -1006,6 +1011,27 @@ angular.module('tiny.admin.controllers', []).
                     });
                     break;
             }
+        }
+
+        $scope.SaveTask  = function()
+        {
+            $scope.changeTabtoTask($scope.currentTab);
+            console.log($scope.dataTask)
+            var dataForm = [];
+            angular.copy($scope.dataTask).forEach(function(obj, k){
+                dataForm.push({
+                    title           : obj.info.title,
+                    description     : obj.info.description,
+                    participants    : obj.participants,
+                    options         : obj.options,
+                    project_id      : projectData ? projectData.data.project_id : 0,
+                    todos           : obj.listTodo
+                })
+            });
+            $tiny.ajax({
+                url: tn.makeURL('save', '/admin/task/'),
+                data: {tasks: dataForm}
+            })
         }
 
         

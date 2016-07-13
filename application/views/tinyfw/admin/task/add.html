@@ -1,14 +1,14 @@
-<form class="tiny-flat-form">
+<form tiny-submit="SaveTask(dataForm)" no-reset class="tiny-flat-form">
 	<div class="form-group flat">
 		<ul class="list-flat-options">
-			<li><a ng-click="formData.options.start_date = !formData.options.start_date" ng-class="{'active': formData.options.start_date}" href="javascript:void(0)">Start Date</a></li>
-			<li><a ng-click="formData.options.end_date = !formData.options.end_date" ng-class="{'active': formData.options.end_date}" href="javascript:void(0)">End Date</a></li>
+			<li><a ng-click="formData.opt.start_date = !formData.opt.start_date" ng-class="{'active': formData.opt.start_date}" href="javascript:void(0)">Start Date</a></li>
+			<li><a ng-click="formData.opt.end_date = !formData.opt.end_date" ng-class="{'active': formData.opt.end_date}" href="javascript:void(0)">End Date</a></li>
 		</ul>
 
 		<input ng-model="formData.info.title" type="text" class="form-control" id="title" placeholder="Title">
 		<textarea ng-model="formData.info.description" placeholder="Description..." rows="5" class="form-control autogrow" id="description"></textarea>
 
-		<input type="text" ng-repeat="(option, v) in formData.options" ng-if="v" class="tiny-picker form-control" name="options[{{option}}]" placeholder="{{option | keytolabel}}" />
+		<input type="text" ng-repeat="(option, v) in formData.opt" ng-if="v" ng-model="formData.options[option]" class="tiny-picker form-control" placeholder="{{option | keytolabel}}" />
 	</div>
 
 	<div style="margin: 1rem;" class="panel panel-gray">
@@ -38,11 +38,7 @@
 						<span class="li-title">{{$index + 1}}. Check list</span>
 						<div class="form-group">
 							<label>Text</label>
-							<input ng-model="listTodo[$index]['text']" class="form-control" type="text" name="todo_text" />
-						</div>
-
-						<div class="form-group">
-							<label><input class="tiny-cbr" ng-model="listTodo[$index]['require']" value="1" type="checkbox" name="todo_require_approval"> Require approval to complete</label>
+							<input ng-model="formData.listTodo[$index]['text']" class="form-control" type="text" name="todo_text" />
 						</div>
 
 						<div class="form-group">
@@ -54,7 +50,7 @@
 						<span class="li-title">{{$index + 1}}. Note</span>
 						<div class="form-group">
 							<label>Text</label>
-							<input ng-model="listTodo[$index]['text']" class="form-control" type="text" name="todo_text" />
+							<input ng-model="formData.listTodo[$index]['text']" class="form-control" type="text" name="todo_text" />
 						</div>
 
 						<div class="form-group">
@@ -82,7 +78,7 @@
 	<div class="form-group-separator"></div>
 
 	<div class="tiny-group-btn align-center">
-		<button class="btn btn-success">Submit</button>
+		<button type="submit" class="btn btn-success">Submit</button>
 		<button type="button" ng-click="changeTabtoTask('next')" class="btn btn-gray">Add next Task</button>
 	</div>
 </form>

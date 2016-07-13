@@ -907,9 +907,6 @@ angular.module('xenon.directives', []).
 
                     });
 
-                    setTimeout(function(){
-                        console.log($table);
-                    }, 3000)
 
                     public_vars.$window.on('dataTable-reload', function(e, _keyword){
                         if(_keyword !== undefined) keyword = _keyword;
@@ -937,8 +934,8 @@ angular.module('xenon.directives', []).
                         "columns": [
                             { "data": false },
                             { "data": "title" },
-                            { "data": false },
-                            { "data": false },
+                            { "data": "deadline" },
+                            { "data": "percent" },
                             { "data": "status" },
                             { "data": "created_at" }
                         ],
@@ -949,6 +946,40 @@ angular.module('xenon.directives', []).
                                 },
                                 "orderable": false,
                                 "targets": 0
+                            },
+                            {
+                            	"render": function ( data, type, row ) {
+                                    return [
+                                    	'<div class="progress">',
+										  '<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">',
+										    '<span class="sr-only">40% Complete (success)</span>',
+										  '</div>',
+										'</div>'
+                                    ].join('');
+                                },
+                                "orderable": false,
+                                "targets": 3
+                            },
+                            {
+                            	"render": function ( data, type, row ) {
+                                    var label = '';
+                                    console.log(row.status);
+                                    switch(row.status)
+                                    {
+
+                                    	case '1': //-- Progress
+                                    		label = '<span class="label label-warning">Progress</span>';
+                                    		break;
+                                    	case '2': //-- completed
+                                    		label = '<span class="label label-danger">Completed</span>';
+                                    		break;
+                                    	case '3':
+                                    		label = '<span class="label label-default">Holding</span>';
+                                    }
+
+                                    return label;
+                                },
+                                "targets": 4
                             }
                         ],
                         "createdRow": function ( row, data, index ) {
@@ -974,10 +1005,6 @@ angular.module('xenon.directives', []).
                         }
 
                     });
-
-                    setTimeout(function(){
-                        console.log($table);
-                    }, 3000)
 
                     public_vars.$window.on('dataTable-reload', function(e, _keyword){
                         if(_keyword !== undefined) keyword = _keyword;

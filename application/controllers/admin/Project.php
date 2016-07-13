@@ -40,4 +40,10 @@ class Project extends TINY_Controller {
     {
         return array('data' => $this->projects->get($project_id));
     }
+
+    public function projectList()
+    {
+        $data = $this->_post();
+        return $this->projects->getDataTable($data);
+    }
 }

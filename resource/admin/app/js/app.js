@@ -383,6 +383,11 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
                         ASSETS.forms.icheck,
                     ]);
                 },
+                deps: function($ocLazyLoad){
+                    return $ocLazyLoad.load([
+                        ASSETS.tables.datatables,
+                    ]);
+                }
             },
             controller: 'ProjectBaseCtrl'
         }).
