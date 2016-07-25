@@ -147,7 +147,7 @@ class TINY_Model extends CI_Model
             $this->_database->where($this->soft_delete_key, (bool)$this->_temporary_only_deleted);
         }
 
-		$this->_set_where($where);
+		    $this->_set_where($where);
 
         $this->trigger('before_get');
 

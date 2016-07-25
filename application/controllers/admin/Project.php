@@ -6,6 +6,8 @@ class Project extends TINY_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('Project_model', 'projects');
+        $this->load->model('Task_model', 'tasks');
+        $this->load->model('Tasks_todo_model', 'todos');
     }
     
     public function index(){
@@ -41,9 +43,28 @@ class Project extends TINY_Controller {
         return array('data' => $this->projects->get($project_id));
     }
 
+    public function loadTasks($project_id = 0)
+    {
+        return $this->tasks->loadTaskProject($project_id);
+    }
+
     public function projectList()
     {
         $data = $this->_post();
         return $this->projects->getDataTable($data);
+    }
+
+    public function projectView()
+    {
+        $this->data['template']  = 'admin/project/view.html';
+        $this->data['dataParse'] = array(
+            'title_page'    => 'View Project'
+        );
+    }
+
+    public function todoComplete()
+    {
+        $data = $this->_post();
+        $this->todos->update($data['todo_id'], array('is_complete' => $data['is_complete']));
     }
 }

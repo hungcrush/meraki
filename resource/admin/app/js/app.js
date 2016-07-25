@@ -396,6 +396,19 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
             templateUrl: URL_SERVER + 'admin/project/add',
             controller: 'ProjectCtrl'
         }).
+        state('admin.project.detail', {
+            url: '/project-view/{project_id:[0-9]}',
+            templateUrl: URL_SERVER + 'admin/project/project-view',
+            resolve: {
+                projectData: function($stateParams, $tiny){
+                    return $tiny.loadData('/admin/project/load-project-info/' + $stateParams.project_id);
+                },
+                tasks: function($stateParams, $tiny){
+                    return $tiny.loadData('/admin/project/load-tasks/' + $stateParams.project_id);
+                }
+            },
+            controller: 'ProjectViewCtrl'
+        }).
         //------------------------------
         // ADD TASK MODULE
         //------------------------------

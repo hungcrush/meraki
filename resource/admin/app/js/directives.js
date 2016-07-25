@@ -548,7 +548,7 @@ angular.module('xenon.directives', []).
                         if(attrs.ngModel){
 	                    	el.on('ifChanged', function(){
 	                            var t = $(this);
-	                            ngModel.$setViewValue([t.attr('value')]);
+	                            ngModel.$setViewValue(t.is(':checked'));
 	                        })
 	                    }
                      }, 1);
@@ -946,6 +946,12 @@ angular.module('xenon.directives', []).
                                 },
                                 "orderable": false,
                                 "targets": 0
+                            },
+                            {
+                                "render": function ( data, type, row ) {
+                                    return '<a class="link-href" href="/admin/project/project-view/'+row.project_id+'">'+row.title+'</a>';
+                                },
+                                "targets": 1
                             },
                             {
                             	"render": function ( data, type, row ) {

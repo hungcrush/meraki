@@ -919,6 +919,8 @@ angular.module('tiny.admin.controllers', []).
         $scope.titleAdd                 = $stateParams.is_template ? 'Add templete' : 'Add project';
         $scope.objCondition.is_template = $stateParams.is_template ? true : false;
 
+        $scope.parentobj.taskData = false;
+
         $scope.selectParticipant = function(obj)
         {
             $scope.formData.participants = obj;
@@ -937,6 +939,23 @@ angular.module('tiny.admin.controllers', []).
             })
             .success(function(data){
                 $rootScope.changeRoute('admin.task.add', {project_id: data.project_id});
+            })
+        }
+    }).
+    controller('ProjectViewCtrl', function($scope, projectData, tasks, $tiny){
+        var baseURL = '/admin/project/';
+        $scope.projectData          = projectData.data;
+        $scope.processing           = tasks.processing;
+        $scope.parentobj.taskData   = tasks.data;
+
+        $scope.todoComplete = function(item)
+        {
+            $tiny.ajax({
+                url: tn.makeURL('todo-complete', baseURL),
+                data: {
+                    todo_id: item.todo_id,
+                    is_complete: item.completed ? 1 : 0
+                }
             })
         }
     }).
@@ -1025,7 +1044,9 @@ angular.module('tiny.admin.controllers', []).
                     participants    : obj.participants,
                     options         : obj.options,
                     project_id      : projectData ? projectData.data.project_id : 0,
-                    todos           : obj.listTodo
+                    todos           : obj.listTodo,
+                    //-- miss condition
+                    status          : k == 0 ? 1 : 0
                 })
             });
             $tiny.ajax({

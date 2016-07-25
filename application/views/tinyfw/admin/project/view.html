@@ -1,0 +1,150 @@
+<div class="panel-heading">
+	<div class="panel-title">{{processing.title}}</div>
+</div>
+<div class="panel-body">
+	<div class="row">
+		<!-- Tasks display on each tab -->
+		<div class="col-md-9">
+			
+			<div class="task-view-todo-list">
+				<div ng-repeat="todo in processing.todo_list" class="task-view-todo profile-env" ng-class="{'todo-completed': todo.completed}">
+					<div class="task-view-todo-title">
+						{{todo.text}}
+						<label class="pull-right"><input ng-change="todoComplete(todo)" ng-model="todo.completed" type="checkbox" class="tiny-radio"> Completed</label>
+					</div>
+					<div class="task-view-todo-info user-timeline-stories">
+						<div class="task-view-activity timeline-story">
+							<ul class="list-unstyled story-comments">
+								<li>
+									
+									<div class="story-comment">
+										<a href="" class="comment-user-img">
+											<img src="http://themes.laborator.co/xenon/assets/images/user-2.png" alt="user-img" class="img-circle img-responsive">
+										</a>
+										
+										<div class="story-comment-content">
+											<a href="" class="story-comment-user-name">
+												Arlind Nushi
+												<time>15 July 2016 - 17:53</time>
+											</a>
+											
+											<p>Him these are visit front end for seven walls. Money eat scale now ask law learn.</p>
+										</div>
+									</div>
+									
+								</li>
+								<li>
+									
+									<div class="story-comment">
+										<a href="" class="comment-user-img">
+											<img src="http://themes.laborator.co/xenon/assets/images/user-3.png" alt="user-img" class="img-circle img-responsive">
+										</a>
+										
+										<div class="story-comment-content">
+											<a href="" class="story-comment-user-name">
+												Eroll Maxhuni
+												<time>18 June 2016 - 17:53</time>
+											</a>
+											
+											<p>Taken no great widow spoke of it small. Genius use except son esteem merely her limits.</p>
+										</div>
+									</div>
+									
+								</li>
+							</ul>
+							<form method="post" action="" class="story-comment-form">
+								<textarea class="form-control input-unstyled autogrow" placeholder="Reply..." style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 58px;"></textarea>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Project information -->
+		<div class="col-md-3">
+			<div class="project-detail-sidebar">
+				<div class="project-detail-sidebar-content">
+					<div ng-bind-html="projectData.description | unsafe" class="project-detail-sidebar-status"></div>
+
+					<div class="project-detail-sidebar-item">
+						<div class="project-detail-sidebar-item-title">
+							Deadline:
+						</div>
+						<div class="project-detail-sidebar-item-value">
+							12/2/2016
+						</div>
+					</div>
+
+					<div class="project-detail-sidebar-item">
+						<div class="project-detail-sidebar-item-title">
+							Priority:
+						</div>
+						<div ng-switch="projectData.priority" class="project-detail-sidebar-item-value">
+							<span ng-switch-when="1">Low</span>
+							<span ng-switch-when="2">Normal</span>
+							<span ng-switch-when="3">High</span>
+						</div>
+					</div>
+
+					<div class="project-detail-sidebar-item">
+						<div class="project-detail-sidebar-item-title">
+							Created on:
+						</div>
+						<div class="project-detail-sidebar-item-value">
+							12/2/2016
+						</div>
+					</div>
+
+					<div class="project-detail-sidebar-info-title">
+						Created By
+					</div>
+					<div class="project-detail-sidebar-status">
+						<div class="tiny-user-title">
+							<a><img class="img-circle" src="http://studio-meraki.com/uploads/tiny/thumbs/12291245_779612285499134_3688792501311501328_o.jpg" /></a>
+							<a href="">Trần Vĩnh Hưng</a>
+						</div>
+					</div>
+
+					<div class="project-detail-sidebar-info-title">
+						Responsible person
+					</div>
+					<div class="project-detail-sidebar-status">
+						<div class="tiny-user-title">
+							<a><img class="img-circle" src="http://studio-meraki.com/uploads/tiny/thumbs/12291245_779612285499134_3688792501311501328_o.jpg" /></a>
+							<a href="">Trần Vĩnh Hưng</a>
+						</div>
+					</div>
+
+					<div class="project-detail-sidebar-info-title">
+						Participants
+					</div>
+					<div class="project-detail-sidebar-status">
+						<div class="tiny-user-title">
+							<a><img class="img-circle" src="http://studio-meraki.com/uploads/tiny/thumbs/12291245_779612285499134_3688792501311501328_o.jpg" /></a>
+							<a href="">Trần Vĩnh Hưng</a>
+						</div>
+					</div>
+					<div class="project-detail-sidebar-status">
+						<div class="tiny-user-title">
+							<a><img class="img-circle" src="http://studio-meraki.com/uploads/tiny/thumbs/12291245_779612285499134_3688792501311501328_o.jpg" /></a>
+							<a href="">Trần Vĩnh Hưng</a>
+						</div>
+					</div>
+					<div class="project-detail-sidebar-status">
+						<div class="tiny-user-title">
+							<a><img class="img-circle" src="http://studio-meraki.com/uploads/tiny/thumbs/12291245_779612285499134_3688792501311501328_o.jpg" /></a>
+							<a href="">Trần Vĩnh Hưng</a>
+						</div>
+					</div>
+					<div class="project-detail-sidebar-status">
+						<div class="tiny-user-title">
+							<a><img class="img-circle" src="http://studio-meraki.com/uploads/tiny/thumbs/12291245_779612285499134_3688792501311501328_o.jpg" /></a>
+							<a href="">Trần Vĩnh Hưng</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
