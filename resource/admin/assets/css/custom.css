@@ -23,6 +23,8 @@
     width: 100%;
     display: inline-block;
 }
+.m-0{margin: 0}
+.pull-b-right{position: absolute; right: 0}
 
 ::-webkit-input-placeholder {
    color: #DDD !important;

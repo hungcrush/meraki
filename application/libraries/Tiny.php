@@ -102,6 +102,13 @@ class Tiny {
         }
     }
 
+    public function loadUserInfo($user_id)
+    {
+        $this->CI->load->model('User_model', 'usersssss');
+        $user_info      = $this->CI->usersssss->LoadSingle($user_id, TRUE);
+        return $user_info;
+    }
+
 
     // --------------------------------------------------------------------
     

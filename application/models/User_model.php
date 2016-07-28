@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class User_model extends TINY_Model
 {
+    private $cacheUsers = array();
+
     public function __construct(){
         parent::__construct();
         $this->_temporary_return_type = 'array';
@@ -41,11 +43,18 @@ class User_model extends TINY_Model
         );
     }
     
-    public function LoadSingle($user_id = 0){
+    public function LoadSingle($user_id = 0, $justInfo = FALSE){
+        if($justInfo && isset($this->cacheUsers[$user_id])) return $this->cacheUsers[$user_id];
+
         $user_info = '';
         if($user_id != 0){
             $user_info = $this->get($user_id) + $this->load_profile($user_id);
         }
+
+        $this->cacheUsers[$user_id] = $user_info;
+
+        if($justInfo) return $user_info;
+
         $groups = $this->load_group();
             
         if(is_array($user_info))
@@ -57,7 +66,7 @@ class User_model extends TINY_Model
         );
     }
     
-    private function load_profile($user_id){
+    public function load_profile($user_id){
         $this->_table = 'tiny_user_profile';
         $data = $this->get($user_id);
         $data['birth_date'] = date('d-m-Y', $data['birth_date']);

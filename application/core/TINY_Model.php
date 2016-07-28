@@ -388,16 +388,30 @@ class TINY_Model extends CI_Model
       }
     }
 
-    private function fileds_output_process(&$data)
+    public function fileds_output_process(&$data)
     {
+      $extData = array();
+
       foreach ($data as $key => &$value) {
-          switch(true)
+          if(is_array($value))
           {
-              case (preg_match('/(date|deadline|created)/', $key)):
-                  $value = $this->formatTime($value);
-                  break;
+              $this->fileds_output_process($value);
+          }
+          else
+          {
+              switch(true)
+              {
+                  case (preg_match('/(date|deadline|created)/', $key)):
+                      $value = $this->formatTime($value);
+                      break;
+                  case ($key == 'user_id'):
+                      $extData['info_user'] = $this->tiny->loadUserInfo($value);
+                      break;
+              }
           }
       }
+
+      $data = array_replace_recursive($data, $extData);
     }
 
     /**

@@ -944,9 +944,57 @@ angular.module('tiny.admin.controllers', []).
     }).
     controller('ProjectViewCtrl', function($scope, projectData, tasks, $tiny){
         var baseURL = '/admin/project/';
-        $scope.projectData          = projectData.data;
-        $scope.processing           = tasks.processing;
-        $scope.parentobj.taskData   = tasks.data;
+        $scope.projectData              = projectData.data;
+        $scope.processing               = tasks.processing;
+        $scope.parentobj.taskData       = tasks.data;
+        $scope.parentobj.todoCompleted  = tasks.is_complete == 1 ? true : false;
+
+        var getTodoIDs = function()
+        {
+            var s = [];
+            $scope.processing.todo_list.forEach(function(entry, k){
+                s.push(entry.todo_id);
+            })
+
+            return s;
+        },
+        getNextTask = function()
+        {
+            var _obj = false;
+            $scope.parentobj.taskData.some(function(obj, k){
+                if(obj.status == 0)
+                {
+                    _obj = obj;
+                    console.log('fdsfds')
+                    return true;
+                }
+            })
+
+            return _obj;
+        }
+
+        $scope.commentForTodo = function(index)
+        {
+            $tiny.ajax({
+                url: tn.makeURL('load-comments', baseURL),
+                data: {
+                    todo_id: typeof index != 'undefined' ? $scope.processing.todo_list[index].todo_id : getTodoIDs()
+                }
+            })
+            .success(function(data){
+                console.log('Debug comments', data);
+                angular.forEach(data.comments, function(comment, key){
+                    $scope.processing.todo_list.forEach(function(obj, k){
+                        if(obj.todo_id == key)
+                        {
+                            $scope.processing.todo_list[k].comments = comment;
+                        }
+                    })
+                })
+            })
+        }
+
+        $scope.commentForTodo();
 
         $scope.todoComplete = function(item)
         {
@@ -954,7 +1002,48 @@ angular.module('tiny.admin.controllers', []).
                 url: tn.makeURL('todo-complete', baseURL),
                 data: {
                     todo_id: item.todo_id,
-                    is_complete: item.completed ? 1 : 0
+                    is_complete: item.completed ? 1 : 0,
+                    task_id: item.task_id
+                }
+            })
+            .success(function(data){
+                $scope.parentobj.todoCompleted = data.is_complete == 1 ? true : false;
+            })
+        }
+
+        $scope.postComment = function(todo_id, index)
+        {
+            $tiny.ajax({
+                url: tn.makeURL('post-comment', baseURL),
+                data: {
+                    todo_id: todo_id,
+                    content: $scope.formData.comment[todo_id]
+                }
+            })
+            .success(function(data){
+                if(data.content == 'OK')
+                {
+                    $scope.commentForTodo(index);
+                }
+            })
+        }
+
+        $scope.nextTask = function()
+        {
+            $tiny.ajax({
+                url: tn.makeURL('next-task', baseURL),
+                data: {
+                    task_id: $scope.processing.task_id,
+                    next_task_id: getNextTask().task_id,
+                    project_id: $scope.projectData.project_id
+                }
+            })
+            .success(function(data){
+                if(data.status == 'OK')
+                {
+                    $scope.processing               = data.processing;
+                    $scope.parentobj.taskData       = data.data;
+                    $scope.parentobj.todoCompleted  = false;
                 }
             })
         }

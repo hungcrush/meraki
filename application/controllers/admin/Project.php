@@ -8,6 +8,7 @@ class Project extends TINY_Controller {
         $this->load->model('Project_model', 'projects');
         $this->load->model('Task_model', 'tasks');
         $this->load->model('Tasks_todo_model', 'todos');
+        $this->load->model('Todo_comment_model', 'comments');
     }
     
     public function index(){
@@ -45,7 +46,14 @@ class Project extends TINY_Controller {
 
     public function loadTasks($project_id = 0)
     {
-        return $this->tasks->loadTaskProject($project_id);
+        $taskData = $this->tasks->loadTaskProject($project_id);
+        return array_merge($taskData, array('is_complete' => $this->todos->Check_complete($taskData['processing']['task_id'])));
+    }
+
+    public function loadComments()
+    {
+        $todo_id = $this->_post('todo_id');
+        return array('comments' => $this->comments->Load($todo_id));
     }
 
     public function projectList()
@@ -66,5 +74,17 @@ class Project extends TINY_Controller {
     {
         $data = $this->_post();
         $this->todos->update($data['todo_id'], array('is_complete' => $data['is_complete']));
+
+        return array('is_complete' => $this->todos->Check_complete($data['task_id']));
+    }
+
+    public function postComment()
+    {
+        return $this->comments->Save($this->_post());
+    }
+
+    public function nextTask()
+    {
+        return $this->tasks->nextTask($this->_post());
     }
 }

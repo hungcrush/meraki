@@ -1,5 +1,8 @@
 <div class="panel-heading">
-	<div class="panel-title">{{processing.title}}</div>
+	<div class="panel-title">
+		{{processing.title}}
+	</div>
+	<button class="btn btn-success pull-b-right m-0" ng-if="parentobj.todoCompleted" ng-click="nextTask()">Next</button>
 </div>
 <div class="panel-body">
 	<div class="row">
@@ -15,45 +18,27 @@
 					<div class="task-view-todo-info user-timeline-stories">
 						<div class="task-view-activity timeline-story">
 							<ul class="list-unstyled story-comments">
-								<li>
+								<li ng-repeat="comment in todo.comments | orderBy: 'id'">
 									
 									<div class="story-comment">
 										<a href="" class="comment-user-img">
-											<img src="http://themes.laborator.co/xenon/assets/images/user-2.png" alt="user-img" class="img-circle img-responsive">
+											<img ng-src="{{comment.info_user.avatar}}" alt="user-img" class="img-circle img-responsive">
 										</a>
 										
 										<div class="story-comment-content">
 											<a href="" class="story-comment-user-name">
-												Arlind Nushi
-												<time>15 July 2016 - 17:53</time>
+												{{comment.info_user.full_name}}
+												<time>{{comment.date}}</time>
 											</a>
 											
-											<p>Him these are visit front end for seven walls. Money eat scale now ask law learn.</p>
-										</div>
-									</div>
-									
-								</li>
-								<li>
-									
-									<div class="story-comment">
-										<a href="" class="comment-user-img">
-											<img src="http://themes.laborator.co/xenon/assets/images/user-3.png" alt="user-img" class="img-circle img-responsive">
-										</a>
-										
-										<div class="story-comment-content">
-											<a href="" class="story-comment-user-name">
-												Eroll Maxhuni
-												<time>18 June 2016 - 17:53</time>
-											</a>
-											
-											<p>Taken no great widow spoke of it small. Genius use except son esteem merely her limits.</p>
+											<p>{{comment.content}}</p>
 										</div>
 									</div>
 									
 								</li>
 							</ul>
 							<form method="post" action="" class="story-comment-form">
-								<textarea class="form-control input-unstyled autogrow" placeholder="Reply..." style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 58px;"></textarea>
+								<textarea ng-enter="postComment(todo.todo_id, $index)" ng-model="formData.comment[todo.todo_id]" class="form-control input-unstyled autogrow" placeholder="Reply..." style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 58px;"></textarea>
 							</form>
 						</div>
 					</div>

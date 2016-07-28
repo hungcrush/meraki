@@ -43,4 +43,16 @@ class Task_model extends TINY_Model
 
         return $todos;
     }
+
+    public function nextTask($dataPost)
+    {   
+        if(empty($dataPost)) return;
+
+        $this->update($dataPost['task_id'], array('status' => 3));
+        $this->update($dataPost['next_task_id'], array('status' => 1));
+
+        return array_merge($this->loadTaskProject($dataPost['project_id']), array(
+            'status'    => 'OK'
+        ));
+    }
 }
