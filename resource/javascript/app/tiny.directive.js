@@ -133,27 +133,50 @@ angular.module('tinyfw.directive', [])
                 link: function(scope, el, attrs){
                     var start = attrs.start ? parseInt(attrs.start) : 0;
 
-                    el.on('click', function(){
-                        var $target, html;
-                        if(attrs.partner)
-                        {
-                            $target = $(attrs.partner);
-                        }
-                        else
-                        {
-                            $target = el.parents(attrs.parent).prev();
-                        }
+                    if(el.is('input') && el.attr('type') != 'button')
+                    {
+                        el.bind("keydown keypress", function(event) {
+                            var $target, html;
+                            if(event.which === 13) {
+                                if (!event.shiftKey) {
+                                    if(attrs.partner)
+                                    {
+                                        $target = $(attrs.partner);
+                                    }
+                                    else
+                                    {
+                                        $target = el.parents(attrs.parent).prev();
+                                    }
 
-                        html = $compile(
-                                $('<div />').html($target.clone()).html().replace(new RegExp('name="([^"]+)['+start+']', 'g'), function(match){
-                                    return match.replace(new RegExp(start, 'g'), (start + 1));
-                                })
-                            )( scope );
-                        start++;
+                                    
+                                    event.preventDefault();
+                                }
+                            }
+                        });
+                    }
+                    else
+                    {
+                        el.on('click', function(){
+                            var $target, html;
+                            if(attrs.partner)
+                            {
+                                $target = $(attrs.partner);
+                            }
+                            else
+                            {
+                                $target = el.parents(attrs.parent).prev();
+                            }
 
-                        $target.after(html);
-                    })
+                            html = $compile(
+                                    $('<div />').html($target.clone()).html().replace(new RegExp('name="([^"]+)['+start+']', 'g'), function(match){
+                                        return match.replace(new RegExp(start, 'g'), (start + 1));
+                                    })
+                                )( scope );
+                            start++;
 
+                            $target.after(html);
+                        })
+                    }
                 }
             }
         })
