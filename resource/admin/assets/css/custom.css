@@ -25,6 +25,7 @@
 }
 .m-0{margin: 0}
 .pull-b-right{position: absolute; right: 0}
+.pointer{cursor: pointer;}
 
 ::-webkit-input-placeholder {
    color: #DDD !important;
@@ -688,4 +689,8 @@ li.sort_li.ui-sortable-placeholder{
     background-color: #b785a3;
     color: #FFF;
   }
+}
+
+.reportarea .report-am{
+    width: 100%;
 }

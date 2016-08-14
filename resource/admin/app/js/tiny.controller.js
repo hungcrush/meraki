@@ -1213,5 +1213,11 @@ angular.module('tiny.admin.controllers', []).
         }
 
         
+    }).
+    controller('dailyreportCtrl', function($scope){
+        $scope.parentObj = {panelActive: ''};
+    }).
+    controller('dailyreportAddCtrl', function($scope){
+        $scope.parentObj.panelActive = 'add';
     })
 

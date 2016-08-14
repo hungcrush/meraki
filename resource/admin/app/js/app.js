@@ -434,6 +434,19 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
             },
             templateUrl: URL_SERVER + 'admin/task/add',
             controller: 'taskCtrl'
+        }).
+        //------------------------------
+        // DAILY REPORTS
+        //------------------------------
+        state('admin.dailyreport', {
+            url: '/dailyreport',
+            templateUrl: URL_SERVER + 'admin/dailyreport',
+            controller: 'dailyreportCtrl'
+        }).
+        state('admin.dailyreport.add', {
+            url: '/report-writer',
+            templateUrl: URL_SERVER + 'admin/dailyreport/reportWriter',
+            controller: 'dailyreportAddCtrl'
         })
         
     $locationProvider.html5Mode({

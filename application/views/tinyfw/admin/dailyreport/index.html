@@ -1,0 +1,48 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Daily Report" description="Manager our customers">
+	
+</page-title>
+<div class="panel panel-default crm_section">
+	<div class="panel-heading">
+		<div class="panel-title">
+			<form tiny-submit="Search(dataForm)" no-reset="true" role="form" class="form-inline">
+		        <div class="form-group">
+		            <div class="input-group input-group-minimal">
+						<input class="form-control" name="keyword" type="text" placeholder="Search..." />
+						
+						<div class="input-group-addon">
+							<a href=""><i class="fa-search"></i></a>
+						</div>
+					</div>
+		        </div>
+		    </form>
+		</div>
+		
+		<div class="pull-right">
+			<a class="btn btn-success btn-icon btn-icon-standalone" href="/admin/dailyreport/report-writer">
+				<i class="fa-plus"></i>
+				<span>New Report</span>
+			</a>
+		</div>
+	</div>
+	<div ng-show="parentObj.panelActive==''" class="panel-body">
+		<div id="dataTable_contacts" class="dataTables_wrapper">
+			<div id="example_processing" class="dataTables_processing" style="display: none;">Processing...</div>
+			<table class="table table-bordered table-striped tiny-datatable">
+				<thead>
+					<tr>
+						<th style="width: 20px;padding-left: 12px;" class="no-sorting">
+							<input type="checkbox" target="#dataTable_contacts .dataTable-select" class="tiny-cbr tiny-selectall">
+						</th>
+						<th>Name</th>
+						<th>Phone</th>
+						<th>Email</th>
+						<th style="width: 200px;">Actions</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+	<div ng-show="parentObj.panelActive=='add'" ui-view="" class="panel-body">
+
+	</div>
+</div>
