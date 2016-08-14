@@ -101,7 +101,7 @@
 			<section class="user-timeline-stories">
 				
 				<!-- Timeline Story Type: Status -->
-				<article class="timeline-story">
+				<article ng-repeat="feed in feeds" class="timeline-story">
 					
 					<i class="fa-paper-plane-empty block-icon"></i>
 					
@@ -109,19 +109,19 @@
 					<header>
 						
 						<a href="" class="user-img">
-							<img ng-src="{{::userinfo.avatar}}" alt="user-img" class="img-responsive img-circle" />
+							<img ng-src="{{::feed.info_user.avatar}}" alt="user-img" class="img-responsive img-circle" />
 						</a>
 						
 						<div class="user-details">
-							<a href="">Art Ramadani</a> posted a status <a href="">update</a>.
-							<time>12 hours ago</time>
+							<a href="">{{feed.info_user.full_name}}</a> posted a status <a href="">update</a>.
+							<time>{{feed.created_at}} ago</time>
 						</div>
 						
 					</header>
 					
 					<div class="story-content">
 						<!-- Story Content Wrapped inside Paragraph -->
-						<p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>
+						<p>{{feed.content}}</p>
 						
 						<!-- Story Options Links -->
 						<div class="story-options-links">
@@ -134,14 +134,14 @@
 							<a href="">
 								<i class="linecons-comment"></i>
 								Comments
-								<span>(5)</span>
+								<span>({{comments[feed.feed_id].total || 0}})</span>
 							</a>
 						</div>
 						
 						
 						<!-- Story Comments -->
 						<ul class="list-unstyled story-comments">
-							<li>
+							<li ng-repeat="comment in comments[feed.feed_id]">
 								
 								<div class="story-comment">
 									<a href="" class="comment-user-img">
@@ -159,28 +159,10 @@
 								</div>
 								
 							</li>
-							<li>
-								
-								<div class="story-comment">
-									<a href="" class="comment-user-img">
-										<img ng-src="{{::userinfo.avatar}}" alt="user-img" class="img-circle img-responsive" />
-									</a>
-									
-									<div class="story-comment-content">
-										<a href="" class="story-comment-user-name">
-											Eroll Maxhuni
-											<time>04 November 2014 - 17:54</time>
-										</a>
-										
-										<p>Taken no great widow spoke of it small. Genius use except son esteem merely her limits.</p>
-									</div>
-								</div>
-								
-							</li>
 						</ul>
 						
 						<form method="post" action="" class="story-comment-form">
-							<textarea class="form-control input-unstyled autogrow" placeholder="Reply..."></textarea>
+							<textarea ng-enter="postComment(feed.feed_id, $index)" ng-model="feed.commentContent" class="form-control input-unstyled autogrow" placeholder="Reply..."></textarea>
 						</form>
 					</div>
 					
@@ -194,7 +176,7 @@
 	
 </section>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	loadGoogleMaps( 3 ).done(function(){
 		var $ = jQuery,
 			map_canvas = $("#sample-checkin");
@@ -212,4 +194,4 @@
 			map: map
 		});
 	});
-</script>
+</script> -->

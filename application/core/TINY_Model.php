@@ -388,21 +388,22 @@ class TINY_Model extends CI_Model
       }
     }
 
-    public function fileds_output_process(&$data)
+    public function fileds_output_process(&$data, $methods = array())
     {
       $extData = array();
 
       foreach ($data as $key => &$value) {
           if(is_array($value))
           {
-              $this->fileds_output_process($value);
+              $this->fileds_output_process($value, $methods);
           }
           else
           {
               switch(true)
               {
                   case (preg_match('/(date|deadline|created)/', $key)):
-                      $value = $this->formatTime($value);
+                      $time_since = in_array('time_since', $methods) ? TRUE : FALSE;
+                      $value = $this->formatTime($value, $time_since);
                       break;
                   case ($key == 'user_id'):
                       $extData['info_user'] = $this->tiny->loadUserInfo($value);
@@ -410,7 +411,6 @@ class TINY_Model extends CI_Model
               }
           }
       }
-
       $data = array_replace_recursive($data, $extData);
     }
 
@@ -1190,8 +1190,11 @@ class TINY_Model extends CI_Model
         $this->_database->stop_cache();
     }
     
-    public function formatTime($time_int = ''){
-        return date('M d, Y', $time_int);
+    public function formatTime($time_int = '', $time_since = FALSE){
+        if(!$time_since)
+          return date('M d, Y', $time_int);
+        else
+          return $this->lib->time_since($time_int);
     }
 
     /*
@@ -1222,7 +1225,6 @@ class TINY_Model extends CI_Model
     */
     public function getDataTable($dataTable)
     {
-
         $this->current_page = $dataTable['start'] / $dataTable['length'] + 1;
         $this->tiny->initialize(array(
             'items_per_page'  => $dataTable['length']
@@ -1243,6 +1245,14 @@ class TINY_Model extends CI_Model
         //-- order only array first
         $indexOrder = $dataTable['order'][0];
         $this->order_by($dataTable['columns'][$indexOrder['column']]['data'], $indexOrder['dir']);
+
+        if(isset($dataTable['where']))
+        {
+            foreach($dataTable['where'] as $key => $where)
+            {
+                $this->_database->where($key, $where);
+            }
+        }
 
         $data = $this->get_all();
         foreach($data as &$row)

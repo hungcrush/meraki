@@ -1,6 +1,30 @@
 'use strict';
 
 angular.module('tiny.admin.controllers', []).
+    controller('HomeCtrl', function($scope, $tiny, statusPunch){
+         $scope.yutest = 99.9;
+         $scope.wasPunchIn = statusPunch.check;
+
+         $scope.punchIn = function()
+         {
+            $tiny.ajax({
+                url: '/admin/hr/punch-in'
+            })
+            .success(function(data){
+                $scope.wasPunchIn = 1;
+            })
+         }
+
+         $scope.punchOut = function()
+         {
+            $tiny.ajax({
+                url: '/admin/hr/punch-out'
+            })
+            .success(function(data){
+                $scope.wasPunchIn = 2;
+            })
+         }
+    }).
     controller('PermissionCtrl', function($stateParams, $rootScope, $tiny, $scope, Load, g){
         $scope.lists        = Load.list_1;
         $scope.listsUser    = Load.list_0;
@@ -65,6 +89,7 @@ angular.module('tiny.admin.controllers', []).
         $scope.fn.listAdmin = {};
         $scope.fn.listUser  = {};
         $scope.fn.createGroup = function(t){
+            
             if(t.permission && typeof t.permission == 'object')
                 t.permissions = t.permission.join(',');
             else if(typeof t.permission == 'string')
@@ -801,7 +826,10 @@ angular.module('tiny.admin.controllers', []).
     /*
         Controller for Profile, Timline
     */
-    controller('ProfileCtrl', function($scope, $tiny){
+    controller('ProfileCtrl', function($scope, $tiny, timelines){
+        $scope.feeds = timelines.data;
+        $scope.comments = [];
+
         $scope.save_edit = function(data){
             $tiny.ajax({
                 url: tn.makeURL('save', '/admin/profile'),
@@ -827,6 +855,25 @@ angular.module('tiny.admin.controllers', []).
                 if(data.content == 'OK')
                 {
                     toastr.success('<i class="fa fa-check"></i> Success');
+                    $scope.reloadTimelines();
+                }
+            })
+        }
+
+        $scope.reloadTimelines = function()
+        {
+            $tiny.loadData('/admin/profile/load-timelines').then(function(res){
+                $scope.feeds = res.data;
+            })
+        }
+
+        $scope.postComment = function(feed_id, index)
+        {
+            $tiny.ajax({
+                url: tn.makeURL('post-feed-comment', 'admin/profile'),
+                data: {
+                    content: $scope.feeds[index].commentContent,
+                    feed_id: feed_id
                 }
             })
         }
@@ -946,6 +993,7 @@ angular.module('tiny.admin.controllers', []).
         var baseURL = '/admin/project/';
         $scope.projectData              = projectData.data;
         $scope.processing               = tasks.processing;
+        $scope.parentobj.currentStatus  = $scope.processing.task_id;
         $scope.parentobj.taskData       = tasks.data;
         $scope.parentobj.todoCompleted  = tasks.is_complete == 1 ? true : false;
 
@@ -1044,7 +1092,27 @@ angular.module('tiny.admin.controllers', []).
                     $scope.processing               = data.processing;
                     $scope.parentobj.taskData       = data.data;
                     $scope.parentobj.todoCompleted  = false;
+
+                    $scope.parentobj.currentStatus  = $scope.processing.task_id;
+
                 }
+            })
+        }
+
+        $scope.parentobj.changeTabtoTask = function(task)
+        {
+            if(task.status == 0) return;
+            $tiny.ajax({
+                url: tn.makeURL('change-to-task', baseURL),
+                data: {
+                    task_id: task.task_id
+                }
+            })
+            .success(function(data){
+                $scope.processing               = data.content;
+                $scope.parentobj.currentStatus  = task.task_id;
+                // reload comment for the above todos
+                $scope.commentForTodo();
             })
         }
     }).

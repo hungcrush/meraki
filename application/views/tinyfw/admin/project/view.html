@@ -2,7 +2,10 @@
 	<div class="panel-title">
 		{{processing.title}}
 	</div>
-	<button class="btn btn-success pull-b-right m-0" ng-if="parentobj.todoCompleted" ng-click="nextTask()">Next</button>
+	<div class="pull-b-right">
+		<button class="btn btn-danger m-0" tiny-modal data-id="admin/project/changeStatus.html"><i class="fa fa-star-half-o" aria-hidden="true"></i> Change Status</button>
+		<button class="btn btn-success m-0" ng-click="nextTask()"><i class="fa fa-step-forward" aria-hidden="true"></i> Next Task</button>
+	</div>
 </div>
 <div class="panel-body">
 	<div class="row">
@@ -18,11 +21,15 @@
 					<div class="task-view-todo-info user-timeline-stories">
 						<div class="task-view-activity timeline-story">
 							<ul class="list-unstyled story-comments">
+
+								<li ng-if="!todo.comments">
+									No Comments yet
+								</li>
 								<li ng-repeat="comment in todo.comments | orderBy: 'id'">
 									
 									<div class="story-comment">
 										<a href="" class="comment-user-img">
-											<img ng-src="{{comment.info_user.avatar}}" alt="user-img" class="img-circle img-responsive">
+											<img ng-src="{{comment.info_user.avatar != '' ? comment.info_user.avatar : avatar_default}}" alt="user-img" class="img-circle img-responsive">
 										</a>
 										
 										<div class="story-comment-content">
@@ -96,36 +103,18 @@
 					</div>
 					<div class="project-detail-sidebar-status">
 						<div class="tiny-user-title">
-							<a><img class="img-circle" src="http://studio-meraki.com/uploads/tiny/thumbs/12291245_779612285499134_3688792501311501328_o.jpg" /></a>
-							<a href="">Trần Vĩnh Hưng</a>
+							<a><img class="img-circle" ng-src="{{projectData.response_person.avatar}}" /></a>
+							<a href="">{{projectData.response_person.full_name}}</a>
 						</div>
 					</div>
 
 					<div class="project-detail-sidebar-info-title">
 						Participants
 					</div>
-					<div class="project-detail-sidebar-status">
+					<div ng-repeat="part in projectData.participants" class="project-detail-sidebar-status">
 						<div class="tiny-user-title">
-							<a><img class="img-circle" src="http://studio-meraki.com/uploads/tiny/thumbs/12291245_779612285499134_3688792501311501328_o.jpg" /></a>
-							<a href="">Trần Vĩnh Hưng</a>
-						</div>
-					</div>
-					<div class="project-detail-sidebar-status">
-						<div class="tiny-user-title">
-							<a><img class="img-circle" src="http://studio-meraki.com/uploads/tiny/thumbs/12291245_779612285499134_3688792501311501328_o.jpg" /></a>
-							<a href="">Trần Vĩnh Hưng</a>
-						</div>
-					</div>
-					<div class="project-detail-sidebar-status">
-						<div class="tiny-user-title">
-							<a><img class="img-circle" src="http://studio-meraki.com/uploads/tiny/thumbs/12291245_779612285499134_3688792501311501328_o.jpg" /></a>
-							<a href="">Trần Vĩnh Hưng</a>
-						</div>
-					</div>
-					<div class="project-detail-sidebar-status">
-						<div class="tiny-user-title">
-							<a><img class="img-circle" src="http://studio-meraki.com/uploads/tiny/thumbs/12291245_779612285499134_3688792501311501328_o.jpg" /></a>
-							<a href="">Trần Vĩnh Hưng</a>
+							<a><img class="img-circle" ng-src="{{part.avatar}}" /></a>
+							<a href="">{{part.full_name}}</a>
 						</div>
 					</div>
 				</div>

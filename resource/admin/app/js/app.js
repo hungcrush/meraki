@@ -130,11 +130,12 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 					return $ocLazyLoad.load([
 						ASSETS.icons.meteocons
 					]);
-				}
+				},
+                statusPunch: function($tiny) {
+                    return $tiny.loadData('/admin/hr/check-status-punch');
+                }
 			},
-			controller: function($scope, $tiny){
-			     $scope.yutest = 99.9;
-			}
+			controller: 'HomeCtrl'
 		}).
         //------------------------------
         // ADMINISTRATOR - MANAGE WEBSITE
@@ -206,6 +207,9 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
                         ASSETS.icons.elusive,
                     ]);
                 },
+                timelines: function($tiny) {
+                    return $tiny.loadData('/admin/profile/load-timelines');
+                }
             },
             controller: 'ProfileCtrl'
         }).

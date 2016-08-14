@@ -499,6 +499,8 @@ angular.module('xenon.directives', []).
             				backdrop: t.data('backdrop') || 'static',
                             animation: true,
                             controller: function($scope){
+                            	console.log(fn);
+                            	console.log(t.data());
                                 $scope = angular.extend($scope, fn, t.data(), htmlContent);
                             }
             			});
@@ -1003,7 +1005,8 @@ angular.module('xenon.directives', []).
                             "data": function ( d ) {
                                 //delete d.columns;
                                 d = angular.extend(d,{
-                                    json: 'yes'
+                                    json: 'yes',
+                                    where: {'is_template': 0}
                                 }, JSON.parse(Base64.decode(tinyConfig.tinyToken)));
 
                                 if(keyword !== false && $.trim(keyword) != '') d.keyword = keyword;
@@ -1019,6 +1022,20 @@ angular.module('xenon.directives', []).
                 }
             }
         })
+		.directive('tinyClock', function($tiny){
+			return {
+				restrict: 'AC',
+				link: function(scope, el, attrs){
+					$tiny.loadData('/welcome/load-time').then(function(res){
+						var d = new Date(Date.UTC(res.year, res.mon, res.mday, res.hours, res.minutes, res.seconds));
+					    setInterval(function() {
+					        d.setSeconds(d.getSeconds() + 1);
+					        el.text(( tn.alwaysBiggerZero(d.getHours()) +':' + tn.alwaysBiggerZero(d.getMinutes()) + ':' + tn.alwaysBiggerZero(d.getSeconds()) ));
+					    }, 1000);
+					})
+				}
+			}
+		})
         .directive('logout', function(){
             return {
                 restrict: 'AC',

@@ -63,7 +63,7 @@
 </div>
 
 <ul class="breadcrumb_tiny" ng-if="parentobj.taskData.length">
-	<li ng-repeat="task in parentobj.taskData track by $index" ng-click="changeTabtoTask(task, $event)" ng-class="{'active': (task.status == 1), 'disabled' : (task.status == 0)}"><a href="#">{{task.title}}</a></li>
+	<li ng-repeat="task in parentobj.taskData track by $index" ng-click="parentobj.changeTabtoTask(task, $event)" ng-class="{'active': (parentobj.currentStatus == task.task_id), 'disabled' : (task.status == 0)}"><a href="#">{{$index + 1}}. {{task.title}}</a></li>
 </ul>
 
 <div class="panel panel-default" ui-view>

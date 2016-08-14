@@ -16,11 +16,7 @@ class Task_model extends TINY_Model
     		if($task['status'] == 1)
     		{
     			$procesing_task = $task;
-    			$this->_table = 'tiny_tasks_todos';
-    			$todos = $this->get_many_by('task_id', $task['task_id']);
-
-
-    			$procesing_task['todo_list'] = $this->_checkCompleteTodos($todos);
+    			$procesing_task['todo_list'] = $this->_checkCompleteTodos($this->_loadTodo($task['task_id']));
     			break;
     		}
     	}
@@ -29,6 +25,15 @@ class Task_model extends TINY_Model
     		'data' 			=> $tasks,
     		'processing' 	=> $procesing_task
     	);
+    }
+
+    public function loadTaskById($task_id)
+    {
+        $data = $this->get($task_id);
+        $data['todo_list'] = $this->_checkCompleteTodos($this->_loadTodo($task_id));
+
+        return $data;
+
     }
 
     private function _checkCompleteTodos(&$todos)
@@ -41,6 +46,16 @@ class Task_model extends TINY_Model
             }
         }
 
+        return $todos;
+    }
+
+    private function _loadTodo($task_id)
+    {
+        $this->_table = 'tiny_tasks_todos';
+        $todos = $this->get_many_by('task_id', $task_id);
+
+        //- back to current Table
+        $this->_table = 'tiny_task';
         return $todos;
     }
 

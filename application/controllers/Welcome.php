@@ -76,4 +76,10 @@ class Welcome extends TINY_Controller {
         }
         show_404();
     }
+
+    public function loadTime()
+    {
+        // - year - mon - mday - hours - minutes - seconds
+        return getdate();
+    }
 }

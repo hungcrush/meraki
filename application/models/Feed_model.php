@@ -4,6 +4,7 @@ class Feed_model extends TINY_Model
 {   
     public function __construct(){
         parent::__construct();
+
     }
     /*
         Save new feed to database
@@ -21,6 +22,18 @@ class Feed_model extends TINY_Model
         $this->insert($feed);
 
         return 'OK';
+    }
+
+    public function Load()
+    {
+        $user_id = $this->tiny->userData['user_id'];
+
+        $this->order_by('feed_id', 'DESC');
+        $data = $this->get_many_by('user_id', $user_id);
+
+        $this->fileds_output_process($data, array('time_since'));
+
+        return $data;
     }
     
 }

@@ -28,8 +28,8 @@
                 <label class="col-sm-1 control-label" for="title">For</label>
                 
                 <div ng-init="type = 1" class="col-sm-11">
-                    <select ng-model="type" required class="form-control tiny-selectbox" name="type">
-                    	<option value="1">Admin</option>
+                    <select required class="form-control tiny-selectbox" name="type">
+                    	<option selected value="1">Admin</option>
                         <option value="0">Users</option>
                     </select>
                 </div>
@@ -43,7 +43,7 @@
             		<tr ng-repeat="i in list.list_permission">
             			<td>{{i.title}} <small class="tiny-smallid">{{i.permission_id}}</small></td>
             			<td class="action-group">
-            				<label><input ng-checked="(permissions.indexOf(i.permission_id) > -1)" type="checkbox" class="tinyRadio" name="permission" value="{{i.permission_id}}" /></label>
+            				<label><input ng-checked="(permissions.indexOf(i.permission_id) > -1)" type="checkbox" class="tinyRadio" name="permission[]" value="{{i.permission_id}}" /></label>
             			</td>
             		</tr>
             		<tr ng-repeat-end></tr>                              
@@ -58,7 +58,7 @@
             		<tr ng-repeat="i in list.list_permission">
             			<td>{{i.title}} <small class="tiny-smallid">{{i.permission_id}}</small></td>
             			<td class="action-group">
-            				<input ng-checked="(permissions.indexOf(i.permission_id) > -1)" type="checkbox" class="tinyRadio" name="permission" value="{{i.permission_id}}" />
+            				<input ng-checked="(permissions.indexOf(i.permission_id) > -1)" type="checkbox" class="tinyRadio" name="permission[]" value="{{i.permission_id}}" />
             			</td>
             		</tr>
             		<tr ng-repeat-end></tr>                              

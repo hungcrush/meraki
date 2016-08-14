@@ -644,3 +644,48 @@ li.sort_li.ui-sortable-placeholder{
 .task-view-todo.todo-completed .task-view-todo-info{
     display: none;
 }
+
+.tiny-icon-btn{
+    cursor: pointer;
+}
+.tiny-icon-btn.in > i{
+    border: 1px solid #000;
+    animation-duration: 0.7s;
+    animation-name: borderChange;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes borderChange {
+  from {
+    border-color: #b0e288;
+    background-color: #FFF;
+    color: #888;
+  }
+
+  to {
+    border-color: #FFF;
+    background-color: #b0e288;
+    color: #FFF;
+  }
+}
+
+.tiny-icon-btn.out > i{
+    border: 1px solid #000;
+    animation-duration: 0.7s;
+    animation-name: borderChange2;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes borderChange2 {
+  from {
+    border-color: #b8287e;
+    background-color: #FFF;
+    color: #888;
+  }
+
+  to {
+    border-color: #FFF;
+    background-color: #b785a3;
+    color: #FFF;
+  }
+}

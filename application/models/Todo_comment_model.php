@@ -52,6 +52,7 @@ class Todo_comment_model extends TINY_Model
     	$dataOut = array();
     	foreach($data as $row)
     	{
+    		$row['content'] = $this->lib->unescape($row['content']);
     		$dataOut[$row['todo_id']][] = $row;
     	}
     	return $dataOut;

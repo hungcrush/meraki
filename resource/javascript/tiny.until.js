@@ -122,6 +122,10 @@ var tn = {
     isInArray: function(value, array) {
         return array.indexOf(value) > -1;
     },
+    alwaysBiggerZero: function(num) {
+        num = parseInt(num);
+        return num  >= 10 ? num : '0'+num; 
+    },
     strInArray: function(value, array){
         if(value === undefined || value === 'home') return false;
         var c = false;

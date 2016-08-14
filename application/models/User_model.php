@@ -46,10 +46,12 @@ class User_model extends TINY_Model
     public function LoadSingle($user_id = 0, $justInfo = FALSE){
         if($justInfo && isset($this->cacheUsers[$user_id])) return $this->cacheUsers[$user_id];
 
+        $this->_table = 'tiny_users';
         $user_info = '';
         if($user_id != 0){
             $user_info = $this->get($user_id) + $this->load_profile($user_id);
-        }
+            unset($user_info['password']);
+        }        
 
         $this->cacheUsers[$user_id] = $user_info;
 

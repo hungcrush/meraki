@@ -41,7 +41,7 @@ class Project extends TINY_Controller {
 
     public function loadProjectInfo($project_id = 0)
     {
-        return array('data' => $this->projects->get($project_id));
+        return array('data' => $this->projects->loadProjectView($project_id));
     }
 
     public function loadTasks($project_id = 0)
@@ -81,6 +81,11 @@ class Project extends TINY_Controller {
     public function postComment()
     {
         return $this->comments->Save($this->_post());
+    }
+
+    public function changeToTask()
+    {
+        return array('content' => $this->tasks->loadTaskById($this->_post('task_id')));
     }
 
     public function nextTask()

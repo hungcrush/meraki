@@ -33,5 +33,13 @@ class Profile extends TINY_Controller {
         return $this->feeds->Save($this->_post());
     }
 
+    public postFeedComment(){
+        
+    }
+
+    public function loadTimelines()
+    {
+        return array('data' => $this->feeds->Load());
+    }
     
 }
