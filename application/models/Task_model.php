@@ -55,7 +55,7 @@ class Task_model extends TINY_Model
         $todos = $this->get_many_by('task_id', $task_id);
 
         //- back to current Table
-        $this->_table = 'tiny_task';
+        $this->_table = 'tiny_tasks';
         return $todos;
     }
 
@@ -63,11 +63,34 @@ class Task_model extends TINY_Model
     {   
         if(empty($dataPost)) return;
 
+        //-- set this task is completed
         $this->update($dataPost['task_id'], array('status' => 3));
+        //-- set next task is Processing
         $this->update($dataPost['next_task_id'], array('status' => 1));
 
         return array_merge($this->loadTaskProject($dataPost['project_id']), array(
             'status'    => 'OK'
         ));
+    }
+
+    public function _calcTaskPercent($task_id = 0)
+    {
+        $todos = $this->_loadTodo($task_id);
+
+        if($todos)
+        {
+            $total      = count($todos);
+            $completed  = 0;
+            foreach($todos as $todo)
+            {
+                if($todo['is_complete'] == 1)
+                {
+                    $completed++;
+                }
+            }
+
+            $percent = ($completed / $total) * 100;
+            $this->update($task_id, array('percent' => $percent));
+        }
     }
 }

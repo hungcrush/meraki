@@ -5,7 +5,7 @@ class Dailyreport extends TINY_Controller {
     
     public function __construct(){
         parent::__construct();
-        $this->load->model('Customer_model', 'customers');
+        $this->load->model('Daily_model', 'dailys');
     }
     
     public function index(){
@@ -18,5 +18,19 @@ class Dailyreport extends TINY_Controller {
     public function reportWriter()
     {
         $this->data['template'] = 'admin/dailyreport/report-add.html';
+    }
+
+    public function Save()
+    {
+        $data = $this->_post();
+        $this->dailys->insert_auto($data);
+
+        return 'OK';
+    }
+
+    public function dailiesList()
+    {
+        $data = $this->_post();
+        return $this->dailys->getDataTable($data);
     }
 }

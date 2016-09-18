@@ -11,6 +11,7 @@ angular.module('tiny.admin.controllers', []).
                 url: '/admin/hr/punch-in'
             })
             .success(function(data){
+                toastr.success('<i class="fa fa-check"></i> Success');
                 $scope.wasPunchIn = 1;
             })
          }
@@ -21,6 +22,7 @@ angular.module('tiny.admin.controllers', []).
                 url: '/admin/hr/punch-out'
             })
             .success(function(data){
+                toastr.success('<i class="fa fa-check"></i> Success');
                 $scope.wasPunchIn = 2;
             })
          }
@@ -954,7 +956,8 @@ angular.module('tiny.admin.controllers', []).
     }).
     controller('ProjectBaseCtrl', function($scope, $stateParams){
         $scope.objCondition = {
-            is_template: false
+            is_template: false,
+            isView: false
         };
         $scope.formData = {};
         $scope.parentobj = {
@@ -965,6 +968,7 @@ angular.module('tiny.admin.controllers', []).
         var baseURL = '/admin/project/';
         $scope.titleAdd                 = $stateParams.is_template ? 'Add templete' : 'Add project';
         $scope.objCondition.is_template = $stateParams.is_template ? true : false;
+        $scope.objCondition.isView      = false;
 
         $scope.parentobj.taskData = false;
 
@@ -996,6 +1000,7 @@ angular.module('tiny.admin.controllers', []).
         $scope.parentobj.currentStatus  = $scope.processing.task_id;
         $scope.parentobj.taskData       = tasks.data;
         $scope.parentobj.todoCompleted  = tasks.is_complete == 1 ? true : false;
+        $scope.objCondition.isView      = true;
 
         var getTodoIDs = function()
         {
@@ -1217,7 +1222,14 @@ angular.module('tiny.admin.controllers', []).
     controller('dailyreportCtrl', function($scope){
         $scope.parentObj = {panelActive: ''};
     }).
-    controller('dailyreportAddCtrl', function($scope){
+    controller('dailyreportAddCtrl', function($scope, $tiny){
         $scope.parentObj.panelActive = 'add';
+        $scope.addReport = function(data)
+        {
+            $tiny.ajax({
+                url: '/admin/dailyreport/save',
+                data: data
+            })
+        }
     })
 

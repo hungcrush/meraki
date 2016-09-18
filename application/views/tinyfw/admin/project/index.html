@@ -1,28 +1,30 @@
 <page-title ng-if="layoutOptions.pageTitles" title="Projects" description="Manager our customers">
-	<a class="btn btn-success btn-icon btn-icon-standalone" href="/admin/project/add">
-		<i class="fa-plus"></i>
-		<span>New Project</span>
-	</a>
-	<a class="btn btn-warning btn-icon btn-icon-standalone" href="/admin/task/add">
-		<i class="fa-plus"></i>
-		<span>New Task</span>
-	</a>
+	<div ng-if="!objCondition.isView">
+		<a class="btn btn-success btn-icon btn-icon-standalone" href="/admin/project/add">
+			<i class="fa-plus"></i>
+			<span>New Project</span>
+		</a>
+		<a class="btn btn-warning btn-icon btn-icon-standalone" href="/admin/task/add">
+			<i class="fa-plus"></i>
+			<span>New Task</span>
+		</a>
 
-	<div class="btn-group" uib-dropdown>
-		<button type="button" class="btn btn-white btn-icon dropdown-toggle" uib-dropdown-toggle data-toggle="dropdown">
-			<i class="fa fa-list" aria-hidden="true"></i>
-			<span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
-		</button>
-		
-		<ul uib-dropdown-menu class="dropdown-menu dropdown-left" role="menu">
-			<li>
-				<a href="">Template 1</a>
-			</li>
-			<li class="divider"></li>
-			<li>
-				<a href="/admin/project/add?is_template=1">Add Template</a>
-			</li>
-		</ul>
+		<div class="btn-group" uib-dropdown>
+			<button type="button" class="btn btn-white btn-icon dropdown-toggle" uib-dropdown-toggle data-toggle="dropdown">
+				<i class="fa fa-list" aria-hidden="true"></i>
+				<span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+			</button>
+			
+			<ul uib-dropdown-menu class="dropdown-menu dropdown-left" role="menu">
+				<li>
+					<a href="">Template 1</a>
+				</li>
+				<li class="divider"></li>
+				<li>
+					<a href="/admin/project/add?is_template=1">Add Template</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </page-title>
 
@@ -63,7 +65,11 @@
 </div>
 
 <ul class="breadcrumb_tiny" ng-if="parentobj.taskData.length">
-	<li ng-repeat="task in parentobj.taskData track by $index" ng-click="parentobj.changeTabtoTask(task, $event)" ng-class="{'active': (parentobj.currentStatus == task.task_id), 'disabled' : (task.status == 0)}"><a href="#">{{$index + 1}}. {{task.title}}</a></li>
+	<li ng-repeat="task in parentobj.taskData track by $index" ng-click="parentobj.changeTabtoTask(task, $event)" ng-class="{'active': (parentobj.currentStatus == task.task_id), 'disabled' : (task.status == 0)}"><a href="#">{{$index + 1}}. {{task.title}}
+	<span ng-if="task.percent < 100" style="margin:0 0 0 12px" class="label label-default pull-right" ng-class="{'hidden-collapsed': item.label.collapsedHide}">{{task.percent}}%</span>
+	<span ng-if="task.percent == 100" style="margin:0 0 0 12px" class="label label-danger pull-right" ng-class="{'hidden-collapsed': item.label.collapsedHide}">
+	{{task.percent}}%</span>
+	</a></li>
 </ul>
 
 <div class="panel panel-default" ui-view>

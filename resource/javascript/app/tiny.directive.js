@@ -136,7 +136,7 @@ angular.module('tinyfw.directive', [])
                     if(el.is('input') && el.attr('type') != 'button')
                     {
                         el.bind("keydown keypress", function(event) {
-                            var $target, html;
+                            var $target, $area, html;
                             if(event.which === 13) {
                                 if (!event.shiftKey) {
                                     if(attrs.partner)
@@ -145,9 +145,20 @@ angular.module('tinyfw.directive', [])
                                     }
                                     else
                                     {
-                                        $target = el.parents(attrs.parent).prev();
+                                        $target = el.parent().prev();
                                     }
 
+                                    $area = !attrs.area ? el.prev() : $(attrs.area);
+
+                                    html = $compile(
+                                        $target.html()
+                                        .replace(new RegExp('{number}', 'g'), start)
+                                        .replace(new RegExp('{text}', 'g'), el.val())
+                                    )( scope );
+                                    start++;
+
+                                    $area.append(html);
+                                    el.val('');
                                     
                                     event.preventDefault();
                                 }

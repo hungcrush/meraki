@@ -609,6 +609,9 @@ angular.module('xenon.directives', []).
                     var t = jQuery(el);
                     tn.delayBeforeLoaded('datepicker', function(){
                         t.datepicker(t.data());
+
+                        if(attrs.setCurrent) t.datepicker("setDate", new Date());
+
                         var $this = angular.element(el),
                             $n = $this.next(),
         					$p = $this.prev();
@@ -1014,6 +1017,76 @@ angular.module('xenon.directives', []).
                         }
 
                     });
+
+                    public_vars.$window.on('dataTable-reload', function(e, _keyword){
+                        if(_keyword !== undefined) keyword = _keyword;
+                        $table.fnReloadAjax();
+                    });
+                }
+            }
+        })
+		.directive('tinyDatatableDaily', function($compile){
+            return {
+                restrict: 'C',
+                link: function(scope, el, attrs){
+                    var keyword = false;
+
+                    el.on( 'processing.dt', function ( e, settings, processing ) {
+                            $('#example_processing').css( 'display', processing ? 'block' : 'none' );
+                    })
+
+                    var $table = el.dataTable({
+                        dom: "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>",
+                        "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+                        "order": [[ 4, "desc" ]],
+                        "processing": true,
+                        "serverSide": true,
+                        "columns": [
+                            { "data": false },
+                            { "data": "title" },
+                            { "data": "workdate" },
+                            { "data": "views" },
+                            { "data": "daily_id" }
+                        ],
+                        "columnDefs": [
+                            {
+                                "render": function ( data, type, row ) {
+                                    return '<input value="'+row.daily_id+'" type="checkbox" tiny-model="parentobj|listchecked" class="tiny-cbr dataTable-select">';
+                                },
+                                "orderable": false,
+                                "targets": 0
+                            },
+                            {
+                            	"render": function (data, type, row) {
+                            		return '<a class="link" href="/admin/dailyreport/'+row.daily_id+'">'+row.title+'</a>';
+                            	},
+                            	"targets": 1
+                            }
+                        ],
+                        "createdRow": function ( row, data, index ) {
+                            $compile(
+                                angular.element(row).find('> td:first')
+                            )(scope);
+
+                            $compile(
+                                angular.element(row).find('> td:last')
+                            )(scope);
+                        },
+                        "ajax": {
+                            "url" : "/admin/dailyreport/dailies-list",
+                            "type": "POST",
+                            "data": function ( d ) {
+                                //delete d.columns;
+                                d = angular.extend(d,{
+                                    json: 'yes'
+                                }, JSON.parse(Base64.decode(tinyConfig.tinyToken)));
+
+                                if(keyword !== false && $.trim(keyword) != '') d.keyword = keyword;
+                            }
+                        }
+
+                    });
+
 
                     public_vars.$window.on('dataTable-reload', function(e, _keyword){
                         if(_keyword !== undefined) keyword = _keyword;

@@ -88,6 +88,17 @@
 						</div>
 					</div>
 
+					<div class="project-detail-sidebar-item">
+						<div class="project-detail-sidebar-item-title">
+							Status / %:
+						</div>
+						<div ng-switch="projectData.status" class="project-detail-sidebar-item-value">
+							<span class="label label-warning" ng-switch-when="1">Processing / {{projectData.percent}}%</span>
+							<span class="label label-danger" ng-switch-when="2">Completed / {{projectData.percent}}%</span>
+							<span class="label label-default" ng-switch-when="3">Hold / {{projectData.percent}}%</span>
+						</div>
+					</div>
+
 					<div class="project-detail-sidebar-info-title">
 						Created By
 					</div>

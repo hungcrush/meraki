@@ -441,7 +441,14 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
         state('admin.dailyreport', {
             url: '/dailyreport',
             templateUrl: URL_SERVER + 'admin/dailyreport',
-            controller: 'dailyreportCtrl'
+            controller: 'dailyreportCtrl',
+            resolve: {
+                deps: function($ocLazyLoad){
+                    return $ocLazyLoad.load([
+                        ASSETS.tables.datatables,
+                    ]);
+                }
+            },
         }).
         state('admin.dailyreport.add', {
             url: '/report-writer',

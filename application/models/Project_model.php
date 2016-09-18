@@ -40,4 +40,12 @@ class Project_model extends TINY_Model
 
         return $data;
     }
+
+    public function calcPercentProject($project_id)
+    {
+        $this->_table = 'tiny_tasks';
+        $tasks = $this->get_many_by('project_id', $project_id);
+
+        
+    }
 }

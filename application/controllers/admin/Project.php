@@ -74,6 +74,8 @@ class Project extends TINY_Controller {
     {
         $data = $this->_post();
         $this->todos->update($data['todo_id'], array('is_complete' => $data['is_complete']));
+        //-- calc percent for task
+        $this->tasks->_calcTaskPercent($data['task_id']);
 
         return array('is_complete' => $this->todos->Check_complete($data['task_id']));
     }

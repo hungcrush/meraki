@@ -1,6 +1,6 @@
-<form no-reset tiny-submit="addProject(dataForm)">
+<form no-reset tiny-submit="addReport(dataForm)">
 	<div class="form-group">
- 		<label class="">Project Title</label>
+ 		<label class="">Title</label>
  		<input required type="text" name="title" class="form-control" />
 	</div>
 
@@ -9,7 +9,7 @@
 	<div class="form-group">
 		<label>Work Date</label>
 		<div class="input-group col-sm-3">
-			<input type="text" name="deadline" class="form-control tiny-picker" data-format="dd-mm-yyyy">
+			<input type="text" name="workdate" class="form-control tiny-picker" set-current="true" data-format="dd-mm-yyyy">
 			
 			<div class="input-group-addon">
 				<a href=""><i class="linecons-calendar"></i></a>
@@ -25,13 +25,15 @@
 			<table class="report-am">
 				<tbody>
 					<tr>
-						<td valign="top"><p>AM</p></td>
+						<td><p>AM</p></td>
 						<td>
-							<ul class="m-0">
-								<li>fdsfdsfdsfds</li>
-							</ul>
+							<ul id="ul-report-am" class="m-0"></ul>
+							<div template-area class="hide">
+								<li>{text}</li>
+								<input type="hidden" value="{text}" name="report[am][{number}]" />
+							</div>
 							<div class="input-group col-sm-6">
-								<input type="text" class="form-control" />
+								<input type="text" class="form-control" tiny-addmore area="#ul-report-am" />
 								
 								<div class="input-group-addon">
 									<a href=""><i class="fa fa-plus"></i></a>
@@ -40,12 +42,20 @@
 						</td>
 					</tr>
 					<tr>
-						<td valign="top"><p>PM</p></td>
+						<td><p>PM</p></td>
 						<td>
-							<ul class="m-0">
-								<li>fdsfdsfdsfds</li>
-							</ul>
-							<input type="text" class="form-control" />
+							<ul id="ul-report-pm" class="m-0"></ul>
+							<div template-area class="hide">
+								<li>{text}</li>
+								<input type="hidden" value="{text}" name="report[pm][{number}]" />
+							</div>
+							<div class="input-group col-sm-6">
+								<input type="text" class="form-control" tiny-addmore area="#ul-report-pm" />
+								
+								<div class="input-group-addon">
+									<a href=""><i class="fa fa-plus"></i></a>
+								</div>
+							</div>
 						</td>
 					</tr>
 				</tbody>
@@ -55,10 +65,9 @@
 
 	<div class="form-group-separator"></div>
 
-	<input type="hidden" name="is_template" value="{{objCondition.is_template ? 1 : 0}}">
 	<input type="hidden" name="created_at" value="0" />
+	<input type="hidden" name="user_id" value="0" />
 
 	<button type="submit" class="btn btn-success">Save</button>
-	<button type="submit" class="btn btn-gray">Add task for this project</button>
 	<button type="button" class="btn btn-link">Cancel</button>
 </form>

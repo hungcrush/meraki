@@ -302,15 +302,7 @@ class TINY_Model extends CI_Model
       {
           if(!is_array($value))
           {
-            if(!preg_match("/(created|date)/", $key) || $value != 0)
-            {
-                $dataInsert[$key] = $value;
-            }
-            else
-            {
-
-                $dataInsert[$key] = time();
-            }
+              $dataInsert[$key] = $value;
           }
           else
           {
@@ -379,8 +371,15 @@ class TINY_Model extends CI_Model
                     case (preg_match('/password/', $key)):
                         $val = $this->__encode($val);
                         break;
-                    case (preg_match('/(date|deadline)/', $key) && preg_match($regex, $val)):
-                        $val = strtotime($val);
+                    case (preg_match('/(date|deadline|created)/', $key)):
+                        if(preg_match($regex, $val))
+                          $val = strtotime($val);
+                        else
+                          $val = time();
+                        break;
+                    case (preg_match('/user_id/', $key)):
+                        if($val == 0)
+                          $val = $this->tiny->userData['user_id'];
                         break;
                 }
             }
