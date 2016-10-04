@@ -6,9 +6,8 @@
   <title ng-bind-template="Tiny - {{currentPage.title || '{title_page}' }}">Tiny</title>
 
   <!-- CSS  -->
-  <link href="{r}/materialize/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{r}/css/maiyet/app.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{r}/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="{r}/css/media.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{r}/ionicons/css/ionicons.min.css" type="text/css" rel="stylesheet" />
   <link rel="stylesheet" href="{r}/admin/assets/css/fonts/line-icons-2/line-icons.css">
   
@@ -21,6 +20,9 @@
   <script src="{r}/javascript/angular-animate.js"></script>
   <script src="{r}/admin/app/js/oc-lazyload/ocLazyLoad.min.js"></script>
   <script src="{r}/javascript/tiny.base64.js"></script>
+
+  <script src="{r}/javascript/tiny.plugins.js"></script>
+
   <script type="text/javascript">
   <!--
         var hs = false;
@@ -30,80 +32,245 @@
             
         var tinyConfig = {
             dirTemp: '{r}',
-    		templatesDir: '{dirTemp}app/tpls',
-    		assetsDir: '{r}/admin/assets',
+        templatesDir: '{dirTemp}app/tpls',
+        assetsDir: '{r}/admin/assets',
             tinyToken: '{hash}',
             thumbSize: {w: 100, h: 90},
-    		templatePath: function(view_name)
-    		{
-    			return this.templatesDir + '/' + view_name + '.html?17';
-    		},
+        templatePath: function(view_name)
+        {
+          return this.templatesDir + '/' + view_name + '.html?17';
+        },
             
             templatePathAjax: function(view_name)
-    		{
-    			return URL_SERVER+'welcome/load/?template=app/tpls/' + view_name + '.html&isTemp=true';
-    		},
+        {
+          return URL_SERVER+'welcome/load/?template=app/tpls/' + view_name + '.html&isTemp=true';
+        },
     
-    		assetPath: function(file_path)
-    		{
-    			return this.assetsDir + '/' + file_path;
-    		}
-   	    };
+        assetPath: function(file_path)
+        {
+          return this.assetsDir + '/' + file_path;
+        }
+        };
+
+        window._window = jQuery(window);
   -->
   </script>
 </head>
-<body>
-<section class="tiny-fw tiny-navigation">
-  <nav class="white" id="tinyNavbar" role="navigation">
-    <div class="container">
-      <div class="nav-wrapper">
-        <div class="tiny-mobile">
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-            
-            <div class="col s4 m4 l2 center-align"><a id="logo-container" ui-sref="home" class="center">MERAKI</a></div>
-            
-            <ul id="nav-mobile" class="side-nav fixed">
-                <li><a ui-sref="home.products">Product</a></li>
-                <li><a ui-sref="home.blog">Blog</a></li>
-                <li><a href="home/LANVIs">About Us</a></li>
-                <li><a href="#">Login</a></li>
-                <li><a ui-sref="/" href="home/LANVIs">Help</a></li>
-                <li><a ui-sref="home">Contact Us</a></li>
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col s4 m4 l5 center-align">
-                <ul id="nav-mobile-left">
-                  <li ng-class="{'active': (isActive == 'product')}"><a ui-sref="home.products">Product</a></li>
-                  <li ui-sref-active="active"><a ui-sref="home.blog">Blog</a></li>
-                  <li ui-sref-active="active"><a ui-sref="home.aboutus">About Us</a></li>
-                </ul>
-            </div>
-            
-            <div class="col s4 m4 l2 center-align"><a id="logo-container" ui-sref="home" class="center">MERAKI</a></div>
-            
-            <div class="col s4 m4 l5 center-align">
-                <ul id="nav-mobile-right">
-                  <li><a href="#">Login</a></li>
-                  <li><a ui-sref="/" href="home/LANVIs">Help</a></li>
-                  <li><a ui-sref="home">Contact Us</a></li>
-                </ul>
-            </div>
-            
-        </div>
-      </div>
+<body ng-class="{'template-collection' : !templateConlection, 'search-open' : searchOpen, 'js-drawer-open js-drawer-open-right' : cartOpen}" ng-controller="tinyWapper">
+<div id="SearchBar" class="search-bar js-search-bar" ng-class="{'open' : searchOpen}">
+  <!-- /snippets/search-bar.liquid -->
+
+
+<form action="/search" method="get" class="input-group search-bar-form" role="search">
+  <input type="hidden" name="type" value="product">
+  <div class="search--icon">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><path d="M98.3,90.671L72.163,64.393c0.737-1.001,1.253-1.704,1.613-2.198l0.044-0.06c0.294-0.387,0.578-0.776,0.854-1.173  l0.025-0.034h-0.001c10.239-14.716,7.972-35.529-5.57-49.07C61.561,4.29,51.5,0.123,40.8,0.123S20.041,4.29,12.473,11.857  C4.906,19.424,0.738,29.485,0.738,40.187c0,10.701,4.167,20.763,11.735,28.329c7.546,7.547,17.582,11.703,28.258,11.703c0,0,0,0,0,0  c6.4,0,12.777-1.549,18.482-4.499c0.641-0.361,2.542-1.465,4.068-2.699l26.545,25.936c0.159,0.159,1.016,0.954,2.262,0.954  c0.546,0,1.362-0.161,2.151-0.928l1.326-1.28c1.013-0.975,2.078-2.001,2.841-2.763C99.889,93.456,99.17,91.59,98.3,90.671z   M40.615,10.904c16.128,0,29.248,13.121,29.248,29.249c0,16.126-13.12,29.248-29.248,29.248S11.366,56.279,11.366,40.153  C11.366,24.025,24.487,10.904,40.615,10.904z"></path></svg>
+  </div>
+  <input type="search" name="q" value="" placeholder="     Search Products..." class="input-group-field" aria-label="Search our store">
+  <span class="input-group-btn">
+    <!-- <button type="submit" class="btn icon-fallback-text">
+      <span class="icon icon-search" aria-hidden="true"></span>
+      <span class="fallback-text">Search</span>
+    </button> -->
+  </span>
+  <div ng-click="toggleSearch(false)" class="close--search js-close-search">
+    <span class="cross"></span>
+  </div>
+</form>
+
+</div>
+
+<div id="CartDrawer" class="drawer drawer--right">
+  <div class="drawer--header">
+    <h3 class="drawer--title">Your Bag</h3>
+    <div ng-click="toggleCart(false)" class="drawer--close js-drawer-close">
+      <span class="drawer--close-icon"></span>
     </div>
-  </nav>
+  </div>
+  <div id="CartContainer">
+    <form action="/cart" method="post" novalidate="" class="cart ajaxcart">
+      <div class="ajaxcart__inner">
+        
+        <div class="ajaxcart__product">
+          <div class="ajaxcart__row" data-line="1">
+            <div class="cart--side-product">
+
+              <div class="cart--side-product-image">
+                <a href="/products/long-peplum-gown?variant=27699541827" class="ajaxcart__product-image"><img src="https://cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55722_small.jpg?v=1475015546" alt=""></a>
+              </div>
+              <div class="cart--side-product-info">
+                  <a href="/products/long-peplum-gown?variant=27699541827" class="ajaxcart__product-name">LONG PEPLUM GOWN</a>
+                  <div class="grid__item display-table-cell one-half text-right">
+                    $1,895.00
+                  </div>
+                  
+                    <span class="ajaxcart__product-meta">VERMILLION / 6</span>
+                  
+                  
+                  
+                <div>QTY: 1</div>
+
+                </div>
+
+                <div class="ajaxcart__remove js-cart-remove"><div class="cross"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        
+          <!-- <div>
+            <label for="CartSpecialInstructions">Special instructions for seller</label>
+            <textarea name="note" class="input-full" id="CartSpecialInstructions"></textarea>
+          </div> -->
+        
+      
+      <div class="ajaxcart__footer">
+        <div class="grid--full">
+          <div class="grid__item two-thirds">
+            <h5>Subtotal: $1,895.00</h5>
+          </div>
+        </div>
+        <!-- <p class="text-center">Shipping &amp; taxes calculated at checkout</p> -->
+        <button type="submit" class="btn--secondary btn--full cart__checkout" name="checkout">
+          Check Out
+        </button>
+        
+          <!-- <div class="additional_checkout_buttons"><input alt="Btn xpresscheckout" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif" id="paypal-express-button" name="goto_pp" value="paypal_express" /></div> -->
+        
+      </div>
+    </form>
+  </div>
+</div>
+<header class="header">
+
+  <div class="header--wrapper">
+    <div class="mobile-navigation js-mobile-open">
+      <div class="mobile-navigation--bars"></div>
+    </div>
+    <nav class="navigation navigation--shopping">
+      <ul>
+        <li class="navigation--shopping-nested">
+          <a href="#!product/15-photo-books" class="navigation--dropdown">Shop</a>
+          <ul class="">
+            
+             <li class="navigation--featured"><a href="/collections/ethically-produced-cashmere-clothing" title="">FAIR Cashmere</a></li>
+            
+             <li class="navigation--featured"><a href="/collections/new-arrivals" title="">New Arrivals</a></li>
+            
+             <li class="navigation--featured"><a href="/collections/sale" title="">Sale</a></li>
+            
+            
+             <li class="navigation--normal-1"><a href="/collections/tops" title="">Tops</a></li>
+            
+             <li class="navigation--normal-2"><a href="/collections/knitwear" title="">Knitwear</a></li>
+            
+             <li class="navigation--normal-3"><a href="/collections/bottoms" title="">Bottoms</a></li>
+            
+             <li class="navigation--normal-4"><a href="/collections/dresses" title="">Dresses</a></li>
+            
+             <li class="navigation--normal-5"><a href="/collections/outerwear" title="">Outerwear</a></li>
+            
+             <li class="navigation--normal-6"><a href="/collections/bags" title="">Bags</a></li>
+            
+             <li class="navigation--normal-7"><a href="/collections/shoes" title="">Shoes</a></li>
+            
+             <li class="navigation--normal-8"><a href="/collections/jewelry" title="">Jewelry</a></li>
+            
+          </ul>
+        </li>
+        <li>
+          <a href="/pages/collections">Collections</a>
+        </li>
+        <li class="navigation--shopping-nested">
+          <a href="#" class="navigation--dropdown">World of Maiyet</a>
+          <ul class="">
+            
+             <li><a href="/pages/our-story" title="">Our Story</a></li>
+            
+             <li><a href="/pages/news-events" title="">News & Events</a></li>
+            
+             <li><a href="/pages/projects" title="">Projects</a></li>
+            
+            <li><a href="http://maiyet.tumblr.com/" target="_blank">Blog</a>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header--logo">
+      <a href="/" itemprop="url" class="site-header__logo-link">
+        Meraki
+      </a>
+    </div>
+
+    <nav class="navigation navigation--cart">
+      <ul>
+        <li class="our-story mobile--hide"><a href="/pages/our-story">Our Story</a></li>
+        
+        <li ng-click="toggleSearch()" class="search js-search mobile--hide">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><path d="M98.3,90.671L72.163,64.393c0.737-1.001,1.253-1.704,1.613-2.198l0.044-0.06c0.294-0.387,0.578-0.776,0.854-1.173  l0.025-0.034h-0.001c10.239-14.716,7.972-35.529-5.57-49.07C61.561,4.29,51.5,0.123,40.8,0.123S20.041,4.29,12.473,11.857  C4.906,19.424,0.738,29.485,0.738,40.187c0,10.701,4.167,20.763,11.735,28.329c7.546,7.547,17.582,11.703,28.258,11.703c0,0,0,0,0,0  c6.4,0,12.777-1.549,18.482-4.499c0.641-0.361,2.542-1.465,4.068-2.699l26.545,25.936c0.159,0.159,1.016,0.954,2.262,0.954  c0.546,0,1.362-0.161,2.151-0.928l1.326-1.28c1.013-0.975,2.078-2.001,2.841-2.763C99.889,93.456,99.17,91.59,98.3,90.671z   M40.615,10.904c16.128,0,29.248,13.121,29.248,29.249c0,16.126-13.12,29.248-29.248,29.248S11.366,56.279,11.366,40.153  C11.366,24.025,24.487,10.904,40.615,10.904z"></path></svg>
+        </li>
+        
+        <li ng-click="toggleCart()">
+          <a class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
+           <span class="cart-small-font" id="CartCount">0</span>
+            <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 49.81"><title>bag</title><path d="M29.2,11.13a11.2,11.2,0,0,0-22.39,0H0V49.81H36V11.13H29.2ZM18,3a8.21,8.21,0,0,1,8.2,8.13H9.8A8.21,8.21,0,0,1,18,3ZM33,46.81H3V14.13H33V46.81Z" transform="translate(0 0)"/></svg>
+          
+          
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
   <nav class="white"></nav>
-  <div id="main" ng-class="{'container': isContainer}" ui-view></div>
+  <main class="wrapper main-content" role="main" id="main" ui-view></main>
+  <div class="footer--logo footer--separate">
+    <svg xmlns="http://www.w3.org/2000/svg" width="181" height="42" viewBox="0 0 181 42"><path d="M25.6 33.1l-4.7-7.5c-.3-.6-.7-1.2-1.1-1.9-.4-.7-.8-1.4-1.1-2l-.1.1c0 .7.1 1.6.1 2.5v2.5l-.1 9.9-1 .5-8.1-5.9c-.6-.4-1.2-.9-1.9-1.4-.7-.6-1.4-1.1-2-1.6h-.1c.3.7.6 1.4.9 2.2.3.7.6 1.3.8 1.9l3.2 8.2-2.3 1.2L.9 23.6l1.6-.8 9.2 6.6c.7.5 1.4 1.1 2.2 1.7.8.6 1.6 1.2 2.2 1.7 0-.8-.1-1.7-.1-2.7v-2.9l.2-11.2 1.6-.9 10.3 16.7-2.5 1.3zm32.1-10l-3.2-4.4-7.4 1.8-.9 5.4-2.8.7 3.5-21.2 1-.3 12.7 17.3-2.9.7zm-7.8-10.6c-.2-.3-.4-.6-.6-1-.3-.4-.5-.8-.7-1.2l-.1.1v1.3c-.1.4-.2.8-.2 1.2l-.8 5.1 5.4-1.3-3-4.2zm28.1 8L76.8 1l3-.2L81 20.3l-3 .2zm31.5-8.2l-1 8.9-2.9-.3 1-9L100.3.7l3.2.3 3.3 5.9c.3.5.5.9.8 1.5.2.5.5 1 .7 1.5h.1c.3-.4.7-.9 1.1-1.3.4-.5.7-.9 1.1-1.3l4.4-5 3.1.3-8.6 9.7zm22.7 13.4L138 7.1l10 3.1-.7 2.4-7.2-2.2-1.8 5.7 6.1 1.8-.8 2.5-6-1.9-1.8 5.7 8.2 2.6-.7 2.4-11.1-3.5zm41.2-1.5l-7.9 15-2.6-1.4 7.9-15-5.6-2.9 1.2-2.3 13.8 7.2-1.2 2.3-5.6-2.9z" fill-rule="evenodd"></path></svg>
+
+  </div>
+  <div id="footer">
+     <div data-reactid=".1">
+        <footer data-reactid=".1.0">
+           <div class="footer" data-reactid=".1.0.0">
+              <div class="footer--links" data-reactid=".1.0.0.0">
+                 <ul data-reactid=".1.0.0.0.0">
+                    <li class="footer--links-block" data-reactid=".1.0.0.0.0.0">
+                       <h5 data-reactid=".1.0.0.0.0.0.0">Contact</h5>
+                       <p data-reactid=".1.0.0.0.0.0.1"><a href="/pages/contact" data-reactid=".1.0.0.0.0.0.1.0">Contact Us</a><br data-reactid=".1.0.0.0.0.0.1.1"><a href="tel:+12123439999" data-reactid=".1.0.0.0.0.0.1.2">212-343-9999</a></p>
+                    </li>
+                    <li class="footer--links-block" data-reactid=".1.0.0.0.0.1">
+                       <h5 data-reactid=".1.0.0.0.0.1.0">Stores</h5>
+                       <p data-reactid=".1.0.0.0.0.1.1"><a href="/pages/store/" data-reactid=".1.0.0.0.0.1.1.0">Maiyet Store</a><br data-reactid=".1.0.0.0.0.1.1.1"><a href="/pages/stockists/" data-reactid=".1.0.0.0.0.1.1.2">Search Stockists</a></p>
+                    </li>
+                    <li class="footer--links-block" data-reactid=".1.0.0.0.0.2">
+                       <h5 data-reactid=".1.0.0.0.0.2.0">Info</h5>
+                       <p data-reactid=".1.0.0.0.0.2.1"><a href="/pages/shipping-and-returns" data-reactid=".1.0.0.0.0.2.1.0">Shipping &amp; Returns</a><br data-reactid=".1.0.0.0.0.2.1.1"><a href="/pages/product-care" data-reactid=".1.0.0.0.0.2.1.2">Product Care</a></p>
+                    </li>
+                 </ul>
+              </div>
+              <div class="footer--social-links" data-reactid=".1.0.0.1">
+                 <ul data-reactid=".1.0.0.1.0">
+                    <li data-reactid=".1.0.0.1.0.1:$0"><a href="https://www.facebook.com/maiyetworld" target="_blank" data-reactid=".1.0.0.1.0.1:$0.0"><i class="fa fa-facebook" data-reactid=".1.0.0.1.0.1:$0.0.0"></i></a></li>
+                    <li data-reactid=".1.0.0.1.0.1:$1"><a href="http://instagram.com/maiyet" target="_blank" data-reactid=".1.0.0.1.0.1:$1.0"><i class="fa fa-instagram" data-reactid=".1.0.0.1.0.1:$1.0.0"></i></a></li>
+                    <li data-reactid=".1.0.0.1.0.1:$2"><a href="http://maiyet.tumblr.com" target="_blank" data-reactid=".1.0.0.1.0.1:$2.0"><i class="fa fa-tumblr" data-reactid=".1.0.0.1.0.1:$2.0.0"></i></a></li>
+                    <li data-reactid=".1.0.0.1.0.1:$3"><a href="https://twitter.com/maiyet" target="_blank" data-reactid=".1.0.0.1.0.1:$3.0"><i class="fa fa-twitter" data-reactid=".1.0.0.1.0.1:$3.0.0"></i></a></li>
+                    <li data-reactid=".1.0.0.1.0.1:$4"><a href="http://pinterest.com/maiyet" target="_blank" data-reactid=".1.0.0.1.0.1:$4.0"><i class="fa fa-pinterest" data-reactid=".1.0.0.1.0.1:$4.0.0"></i></a></li>
+                 </ul>
+                 <div class="footer--reserve" data-reactid=".1.0.0.1.1">
+                    <p data-reactid=".1.0.0.1.1.0">
+                      <span data-reactid=".1.0.0.1.1.0.0">All Rights Reserved 2016. </span>
+                      <a href="/pages/privacy-policy" data-reactid=".1.0.0.1.1.0.1">Developed by TranVinhHung.Com</a>
+                    </p>
+                 </div>
+              </div>
+           </div>
+        </footer>
+     </div>
+  </div>
 </section>
-  <footer class="page-footer grey darken-3">
-    <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="">#LV YU+</a>
-      </div>
-    </div>
-  </footer>
 
   <script src="{r}/loading-bar/loading-bar.js"></script>
   <link href="{r}/loading-bar/loading-bar.css" type="text/css" rel="stylesheet" />

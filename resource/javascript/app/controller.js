@@ -1,5 +1,21 @@
 'use strict';
 angular.module('yuyu.controller', [])
+    //-- Basic Controler, not related to the controlers below
+    .controller('tinyWapper', function($scope, $rootScope, $state){
+        $scope.searchOpen = false;
+        $scope.toggleSearch = function(value){
+            $scope.searchOpen = value !== undefined ? value : !$scope.searchOpen;
+        }
+
+        $scope.cartOpen = false;
+        $scope.toggleCart = function(value){
+            $scope.cartOpen = value !== undefined ? value : !$scope.cartOpen;
+        }
+
+        _window.on('addToCart', function(e, data){
+            console.log(data);
+        })
+    })
     .controller('HomeCtrl', function($rootScope, $state)
     {
         $rootScope.isContainer = false;

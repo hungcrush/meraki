@@ -131,3 +131,27 @@ angular.module('yuyu.directive', [])
     			}
             }
         })
+        .directive('productThumbnails', function(){
+            return {
+                restrict: 'AC',
+                scope: true,
+                link: function(scope, el, attrs){
+                    var ProductThumbs = el.find('#ProductThumbs'),
+                        ProductPhoto  = el.find('#ProductPhoto');
+
+                    ProductThumbs.find('li > a').on('click', function(e){
+                        e.preventDefault();
+                        var href = $(this).attr('href');
+                        ProductPhoto.css('background-image', 'url('+href+')');
+                    })
+                }
+            }
+        })
+        .directive('tinySelectDropdown', function(){
+            return {
+                restrict: 'AC',
+                link: function(scope, el, attrs){
+                    el.tinyDropdown();
+                }
+            }
+        })
