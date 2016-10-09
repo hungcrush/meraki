@@ -1,7 +1,9 @@
-<section id="hung">
-	
-		
-</section>
+<section id="hung"></section>
+
+<form onsubmit="return processCode(this)">
+	<textarea name="code"></textarea>
+	<button type="submit">Submit</button>
+</form>
 
 <script type="text/javascript">
 	function getAllElementsWithAttribute(attribute)
@@ -18,11 +20,24 @@
 	  }
 	  return matchingElements;
 	}
+
+	function processCode(el)
+	{
+		console.log(el);
+
+		document.getElementById('hung').innerHTML = el.code.value;
+
+		var data = getAllElementsWithAttribute('data-reactid');
 	
-	var data = getAllElementsWithAttribute('data-reactid');
+		data.forEach(function(e){
+			e.removeAttribute('data-reactid')
+		})
+
+		el.code.value = document.getElementById('hung').innerHTML;
+
+		return false;
+	}
 	
-	data.forEach(function(e){
-		e.removeAttribute('data-reactid')
-	})
+	
 	
 </script>
