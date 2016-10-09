@@ -111,5 +111,45 @@
 				}
 			}
 		})
+
+		return retval || lists;
+	}
+
+	function tinyHeader(element, options)
+	{
+		var $el 	= $(element),
+			event 	= 'scroll.' + $el.data('tinyHeaderId');
+		_window.on(event, function(){
+			console.log('AAAAA')
+			if(_window.scrollTop() > 100)
+			{
+				$el.addClass('background');
+			}
+			else
+			{
+				$el.removeClass('background');
+			}
+		})
+
+		$el.one('$destroy', function(){
+			_window.off(event);
+			$el.data('tinyHeader', null);
+		})
+	}
+
+	$.fn.tinyHeader = function(params)
+	{
+		var lists  	= this,
+			retval	= this;
+
+		lists.each(function(){
+			var plugin = $.data(this, 'tinyHeader');
+			if (!plugin) {
+				$.data(this, 'tinyHeader', new tinyHeader(this, params));
+				$.data(this, 'tinyHeader-id', new Date().getTime());
+			}
+		})
+
+		return retval || lists;
 	}
 })(jQuery, window, document)

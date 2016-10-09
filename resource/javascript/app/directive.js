@@ -155,3 +155,23 @@ angular.module('yuyu.directive', [])
                 }
             }
         })
+        .directive('tinyHeader', function(){
+            return {
+                restrict: 'C',
+                scope: {templateConlection: '='},
+                link: function(scope, el, attrs){
+                    
+
+                    scope.$watch("templateConlection", function(){
+                        if(scope.templateConlection)
+                        {
+                            el.tinyHeader();
+                        }
+                        else
+                        {
+                            el.trigger("$destroy");
+                        }
+                    })
+                }
+            }
+        })

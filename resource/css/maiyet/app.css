@@ -756,7 +756,7 @@ body {
     padding-bottom: 20px; }
     /* line 173, /Users/mattkennerson/Desktop/shopify-react/lib/scss/includes/_header.scss */
     .header.background a, .header.product a, .header.background.white a {
-      color: black; }
+      color: black !important; }
     /* line 178, /Users/mattkennerson/Desktop/shopify-react/lib/scss/includes/_header.scss */
     .header.background .header--logo svg, .header.product .header--logo svg, .header.background.white .header--logo svg {
       fill: black; }

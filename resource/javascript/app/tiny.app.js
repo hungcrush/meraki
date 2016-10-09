@@ -126,7 +126,9 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     .state('home.aboutus', {
         url: 'aboutus',
         templateUrl: URL_SERVER+'aboutus',
-        controller: 'AboutCtrl'
+        controller: 'AboutCtrl',
+        templateConlection: true,
+        pageClass: 'our-story'
     })
     
     $locationProvider.html5Mode({

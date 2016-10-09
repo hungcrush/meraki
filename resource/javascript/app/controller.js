@@ -15,6 +15,14 @@ angular.module('yuyu.controller', [])
         _window.on('addToCart', function(e, data){
             console.log(data);
         })
+
+        $rootScope.templateConlection = false;
+        $rootScope.$on('$stateChangeStart', 
+        function(event, toState, toParams, fromState, fromParams){ 
+            console.log(toState)
+            $scope.templateConlection = !!(toState.templateConlection);
+            $scope.pageClass = toState.pageClass;
+        })
     })
     .controller('HomeCtrl', function($rootScope, $state)
     {
