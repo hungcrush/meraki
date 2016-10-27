@@ -1,6 +1,7 @@
 @import url("fonts/brandon_blk.css");
 
-.header--logo a {
+.header--logo a,
+a.logo {
     font-size: 3rem;
     font-weight: 300;
     text-transform: uppercase;

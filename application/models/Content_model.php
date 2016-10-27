@@ -68,8 +68,8 @@ class Content_model extends TINY_Model
     public function Save($content_id = ''){
         $type           = $content_id;
         $title          = $this->__request('title');
-        $description    = $this->lib->escape($this->__request('description'));
-        $content        = $this->lib->escape($this->input->post('content'));
+        $description    = ($this->__request('description'));
+        $content        = ($this->input->post('content'));
         
         if(empty($type)) return 'FALSE';
         $data = array(

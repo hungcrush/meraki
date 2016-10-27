@@ -398,10 +398,10 @@ angular.module('tiny.admin.controllers', []).
                 if(!check){
                     t['content'] = JSON.stringify(angular.extend(save_data, {
                         path: $scope.home.path,
-                        content: tn.escapeHtml(t.content)
+                        content: t.content
                     }))
                 }
-                
+                console.log(t);
                 $tiny.ajax({
                     url: tn.makeURL('save'),
                     data: t
@@ -470,7 +470,7 @@ angular.module('tiny.admin.controllers', []).
         
         $scope.fn.formSubmit = function(t, s){
             
-            if($.trim(t.image) == '' && s != 'add-post'){
+            if( (t.item_image === '' || t.image === '') && s != 'add-post'){
                 console.log($scope.itemImages);
                 $tiny.alert('Please upload product image');
                 return false;

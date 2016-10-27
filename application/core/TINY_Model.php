@@ -284,6 +284,12 @@ class TINY_Model extends CI_Model
         }
     }
 
+    /*
+      AUTHOR: TRAN VINH HUNG
+      - INSERT AND UPDATE AUTO
+      @DATA => PARAMS FROM REQUEST, GET IT AND PROCESS IT
+    */
+
     public function insert_auto($data, $fileds = array(), $table = FALSE)
     {
       $this->_table = $table ? $table : $this->_table;
@@ -312,7 +318,7 @@ class TINY_Model extends CI_Model
                   $dataInsertOther[] = array($value, $fileds[$key], $key);
               }else
               {
-                  if(in_array($key, $this->list_fields) && is_string($key)){
+                  if(in_array($key, $this->list_fields) && is_string($key) || $key == '_update_key'){
                       $dataInsert[$key] = json_encode($value);
                   }else{
                       $this->insert(array_merge($this->primary_key_before, $value));
@@ -322,7 +328,15 @@ class TINY_Model extends CI_Model
       }
 
       if(empty($dataInsert)) return;
-      $id = $this->insert($dataInsert);
+      
+      if(!isset($dataInsert['_update_key']))
+        $id = $this->insert($dataInsert);
+      else
+      {
+        $id = $dataInsert['_update_key'];
+        unset($dataInsert['_update_key']);
+        $this->update($id, $dataInsert);
+      }
 
       foreach($dataInsertOther as $insert)
       {

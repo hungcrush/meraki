@@ -177,3 +177,25 @@ angular.module('tinyfw.factory',[])
             }
           };
     })
+    .filter('mkurl', function($sce) {
+        return function(val) {
+            return val.replace('.html', '');
+        };
+    })
+    .filter('unsafe', function($sce) {
+        return function(val) {
+            return $sce.trustAsHtml(val);
+        };
+    })
+    .filter('tinyimage', function(){
+        return function(val) {
+            if($.trim(val) == '') return '';
+
+            var $path   = val.split('|'),
+                $file   = $path[1],
+                $folder = $path[0];
+
+            return [URL_SERVER + 'uploads', $folder, 'thumbs', $file].join('/');
+
+        }
+    })

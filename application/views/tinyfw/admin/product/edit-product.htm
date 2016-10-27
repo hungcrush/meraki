@@ -7,30 +7,54 @@
 	<div class="modal-body">
             
             <div class="form-group">
-				<label class="col-sm-3 control-label" for="name">Product Name</label>
+				<label class="col-sm-3 control-label" for="item_name">Name</label>
 
 				<div class="col-sm-9">
-					<input data-validate="required" type="text" ng-model="titlePer" class="form-control" name="name" id="name" placeholder="Product Name">
+					<input data-validate="required" type="text" ng-model="titlePer" class="form-control" name="item_name" id="item_name" placeholder="Title">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="code">Product Code</label>
+
+				<div class="col-sm-9">
+					<input data-validate="required" type="text" class="form-control" name="code" id="code" placeholder="Code....">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="price">Price</label>
+
+				<div class="col-sm-9">
+					<input data-validate="required" type="text" class="form-control" name="price" id="price" placeholder="Price....">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="remain">Remain</label>
+
+				<div class="col-sm-9">
+					<input data-validate="required" type="text" class="form-control" name="remain" id="remain" placeholder="Remain....">
 				</div>
 			</div>
             
             <div class="form-group">
-				<label class="col-sm-3 control-label" for="description">Description</label>
+				<label class="col-sm-3 control-label" for="item_description">Description</label>
 
 				<div class="col-sm-9">
-					<textarea class="form-control" name="description" rows="4" placeholder="Product Description">{{description}}</textarea>
+					<textarea class="form-control" name="item_description" rows="4" placeholder="Product Description">{{description}}</textarea>
 				</div>
 			</div>
             
             <div class="form-group">
-				<label class="col-sm-3 control-label" for="title">Product Image</label>
+				<label class="col-sm-3 control-label" for="title">Feature Image</label>
 
 				<div id="main" class="col-sm-9">
-					<a id="drop-element" class="thumbnail drop-target" thumb-size="330,297" make-lazy="true" not-thumb="true" on-uploaded="uploadComplete(respon, file)" folder="product2" tiny-upload="true"><img image_target ng-src="{{imagethumb}}" class="img-responsive" /></a>
+					<a id="drop-element" class="thumbnail drop-target" make-lazy="true" thumb-size="305,205" not-thumb="true" on-uploaded="uploadComplete(respon, file)" folder="product2" tiny-upload="true"><img image_target ng-src="{{imagethumb}}" class="img-responsive" /></a>
 				</div>
 			</div>
             <input type="hidden" ng-if="productid" ng-value="productid" name="product_id" />
-            <input type="hidden" name="image" ng-value="image" id="image_src" />
+            <input type="hidden" name="item_image" ng-value="image" id="image_src" />
             
             <input type="hidden" name="image_size" ng-value="size" id="image_size" />
 	</div>

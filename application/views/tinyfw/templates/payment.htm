@@ -1,0 +1,232 @@
+<div class="payment-page account-page">
+    <div class="account-page--wrapper payment-wrap">
+        <div class="payment--sidebar">
+            <div class="sidebar--header">
+
+            </div>
+
+            <div class="order-summary__section product--list">
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody data-order-summary-section="line-items">
+                        <tr class="product" data-product-id="8282255811" data-variant-id="27245745987" data-product-type="Default">
+                            <td class="product__image">
+                                <div class="product-thumbnail">
+                                    <div class="product-thumbnail__wrapper">
+                                        <img alt="V-NECK SHEATH DRESS" class="product-thumbnail__image" src="/image_demo/EAOO3D.jpg">
+                                    </div>
+                                    <span class="product-thumbnail__quantity" aria-hidden="true">1</span>
+                                </div>
+                            </td>
+                            <td class="product__description">
+                                <span class="product__description__name order-summary__emphasis">V-NECK SHEATH DRESS</span>
+                                <span class="product__description__variant order-summary__small-text">Black / 4</span>
+
+                            </td>
+                            <td class="product__quantity visually-hidden">
+                                1
+                            </td>
+                            <td class="product__price">
+                                <span class="order-summary__emphasis">$1,195.00</span>
+                            </td>
+                        </tr>
+                        <tr class="product" data-product-id="8364917827" data-variant-id="27699541763" data-product-type="Default">
+                            <td class="product__image">
+                                <div class="product-thumbnail">
+                                    <div class="product-thumbnail__wrapper">
+                                        <img alt="LONG PEPLUM GOWN" class="product-thumbnail__image" src="/image_demo/EAOO1B.jpg">
+                                    </div>
+                                    <span class="product-thumbnail__quantity" aria-hidden="true">1</span>
+                                </div>
+
+                            </td>
+                            <td class="product__description">
+                                <span class="product__description__name order-summary__emphasis">LONG PEPLUM GOWN</span>
+                                <span class="product__description__variant order-summary__small-text">VERMILLION / 4</span>
+
+                            </td>
+                            <td class="product__quantity visually-hidden">
+                                1
+                            </td>
+                            <td class="product__price">
+                                <span class="order-summary__emphasis">$1,895.00</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="order-summary__section product--discount anyflexbox">
+                <form>
+                    <div class="field">
+                        <div class="field__input-btn-wrapper">
+                            <div class="field__input-wrapper tiny-input t10">
+                                <label class="field__label" for="checkout_reduction_code">Discount</label>
+                                <input placeholder="Discount" class="field__input" data-discount-field="true" autocomplete="off" size="30" type="text" name="checkout[reduction_code]" id="checkout_reduction_code">
+                            </div>
+
+                            <button type="submit" class="btn btn--full field__input-btn">
+                                <span class="btn__content visually-hidden-on-mobile">Apply</span>
+                                <i class="btn__content shown-on-mobile icon icon--arrow"></i>
+                                <i class="btn__spinner icon icon--button-spinner"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="order-summary__section">
+                <table class="total-line-table">
+                  <caption class="visually-hidden">Cost summary</caption>
+                  <thead>
+                      <tr>
+                          <th scope="col"><span class="visually-hidden">Description</span>
+                          </th>
+                          <th scope="col"><span class="visually-hidden">Price</span>
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr class="total-line total-line--subtotal">
+                          <td class="total-line__name">Subtotal</td>
+                          <td class="total-line__price">
+                              <span class="order-summary__emphasis" data-checkout-subtotal-price-target="309000">
+                          $3,090.00
+                        </span>
+                          </td>
+                      </tr>
+
+
+                      <tr class="total-line total-line--shipping">
+                          <td class="total-line__name">Shipping</td>
+                          <td class="total-line__price">
+                              <span class="order-summary__emphasis" data-checkout-total-shipping-target="10000">
+                            $100.00
+                          </span>
+                          </td>
+                      </tr>
+
+                      <tr class="total-line total-line--taxes " data-checkout-taxes="">
+                          <td class="total-line__name">Taxes</td>
+                          <td class="total-line__price">
+                              <span class="order-summary__emphasis" data-checkout-total-taxes-target="30900">$309.00</span>
+                          </td>
+                      </tr>
+
+                  </tbody>
+                  <tfoot class="total-line-table__footer">
+                      <tr class="total-line">
+                          <td class="total-line__name payment-due-label">
+                              <span class="payment-due-label__total">Total</span>
+                          </td>
+                          <td class="total-line__price payment-due">
+                              <span class="payment-due__currency">USD</span>
+                              <span class="payment-due__price" data-checkout-payment-due-target="349900">
+                          $3,499.00
+                        </span>
+                          </td>
+                      </tr>
+                  </tfoot>
+              </table>
+            </div>
+        </div>
+
+        <div class="payment--main">
+            <div class="main--header">
+                <a class="align-center">
+                    Check out
+                </a>
+            </div>
+            <div class="main--body">
+              <form method="post" action="/account/addresses" id="address_form_new" accept-charset="UTF-8">
+    <input type="hidden" value="customer_address" name="form_type">
+    <input type="hidden" name="utf8" value="✓">
+
+    <div class="payment-title-wrapper align-left">
+        <h4>Customer information</h4>
+    </div>
+
+    <div class="tiny-input">
+        <label for="customer_info">Email</label>
+        <input type="text" id="customer_info" class="input-full" name="customer_email" value="" placeholder="Email" autocapitalize="words">
+    </div>
+
+    <div class="payment-title-wrapper align-left">
+        <h4>Shipping address</h4>
+    </div>
+
+    <div class="grid">
+
+        <div class="one-half">
+            <div class="tiny-input">
+                <label for="AddressFirstNameNew">First Name</label>
+                <input type="text" id="AddressFirstNameNew" class="input-full" name="address[first_name]" value="" autocapitalize="words" placeholder="First Name">
+            </div>
+        </div>
+
+        <div class="one-half">
+            <div class="tiny-input">
+                <label for="AddressLastNameNew">Last Name</label>
+                <input type="text" id="AddressLastNameNew" class="input-full" name="address[last_name]" value="" autocapitalize="words" placeholder="Last Name">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="tiny-input">
+        <label for="AddressCompanyNew">Company</label>
+        <input type="text" id="AddressCompanyNew" class="input-full" name="address[company]" value="" autocapitalize="words" placeholder="Company">
+    </div>
+    <div class="tiny-input">
+        <label for="AddressAddress1New">Address1</label>
+        <input type="text" id="AddressAddress1New" class="input-full" name="address[address1]" value="" autocapitalize="words" placeholder="Address1">
+    </div>
+    <div class="tiny-input">
+        <label for="AddressAddress2New">Address2</label>
+        <input type="text" id="AddressAddress2New" class="input-full" name="address[address2]" value="" autocapitalize="words" placeholder="Address2">
+    </div>
+    <div class="grid">
+        <div class="grid__item large--one-half">
+            <div class="tiny-input">
+                <label for="AddressCityNew">City</label>
+                <input type="text" id="AddressCityNew" class="input-full" name="address[city]" value="" autocapitalize="words" placeholder="City">
+            </div>
+        </div>
+
+        <div class="grid__item large--one-half">
+            <div class="tiny-input">
+                <label for="AddressZipNew">Postal/Zip Code</label>
+                <input type="text" id="AddressZipNew" class="input-full" name="address[zip]" value="" autocapitalize="characters" placeholder="Postal/Zip Code">
+            </div>
+        </div>
+
+        <div class="grid__item large--one-half">
+            <div class="tiny-input">
+                <label for="AddressPhoneNew">Phone</label>
+                <input type="tel" id="AddressPhoneNew" class="input-full" name="address[phone]" value="" placeholder="Phone">
+            </div>
+        </div>
+    </div>
+
+    <p class="default-box">
+        <input type="checkbox" id="address_default_address_new" name="address[default]" value="1">
+        <label for="address_default_address_new" class="inline">Set as default address</label>
+    </p>
+
+    <p>
+        <input type="submit" class="btn btn--full" value="Submit">
+    </p>
+    <p class="align-center"><a href="#" class="link-default" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">Cancel</a>
+    </p>
+</form>
+            </div>
+        </div>
+    </div>
+</div>

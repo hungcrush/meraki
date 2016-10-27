@@ -152,4 +152,95 @@
 
 		return retval || lists;
 	}
+
+	function tinyTabs(element, options)
+	{
+		this.$el = $(element);
+		this.tabHeader 	= this.$el.find('> div:first');
+		this.tabBody 	= this.$el.find('> div:last');
+
+		this.init();
+	}
+
+	tinyTabs.prototype = {
+		init: function() {
+			var _self = this;
+
+			_self.tabHeader.find('> .visisble').on('click', function(){
+				var t = $(this);
+
+				_self.tabHeader.find('.active').removeClass('active');
+				_self.tabBody.find('.active').removeClass('active');
+
+				t.addClass('active');
+				_self.tabBody.find('> .'+ t.data('change')).addClass('active');
+			})
+		}
+	}
+
+	$.fn.tinyTabs = function(params)
+	{
+		var lists  	= this,
+			retval	= this;
+
+		lists.each(function(){
+			var plugin = $.data(this, 'tinyTabs');
+			if (!plugin) {
+				$.data(this, 'tinyTabs', new tinyTabs(this, params));
+				$.data(this, 'tinyTabs-id', new Date().getTime());
+			}
+		})
+
+		return retval || lists;
+	}
+
+	/*
+		Input placeholder to label
+	*/
+
+	function tinyInput(element, options)
+	{
+		this.$el = $(element);
+		this.init();
+	}
+
+	tinyInput.prototype = {
+		className: 'field--show-floating-label',
+		init: function() {
+			var _self = this, el = this.$el;
+
+			el.find('input').not('[type="hidden"]')
+			.on('keyup', function(e){
+				var t = $(this);
+				t.off('blur');
+				if($.trim(t.val()) != '')
+				{
+					el.addClass(_self.className);
+				}
+				else
+				{
+					t.on('blur', function(){
+						t.off('blur');
+						el.removeClass(_self.className);
+					})
+				}
+			})
+		}
+	}
+
+	$.fn.tinyInput = function(params)
+	{
+		var lists  	= this,
+			retval	= this;
+
+		lists.each(function(){
+			var plugin = $.data(this, 'tinyInput');
+			if (!plugin) {
+				$.data(this, 'tinyInput', new tinyInput(this, params));
+				$.data(this, 'tinyInput-id', new Date().getTime());
+			}
+		})
+
+		return retval || lists;
+	}
 })(jQuery, window, document)

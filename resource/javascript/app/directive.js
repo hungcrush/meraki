@@ -105,6 +105,14 @@ angular.module('yuyu.directive', [])
                 }
             }
         })
+        .directive('tinyTabs', function(){
+            return {
+                restrict: 'A',
+                link: function(scope, el, attrs) {
+                    el.tinyTabs();
+                }
+            }
+        })
         .directive('slideHome', function(){
             return {
                 restrict: 'AC',
@@ -139,10 +147,12 @@ angular.module('yuyu.directive', [])
                     var ProductThumbs = el.find('#ProductThumbs'),
                         ProductPhoto  = el.find('#ProductPhoto');
 
-                    ProductThumbs.find('li > a').on('click', function(e){
-                        e.preventDefault();
-                        var href = $(this).attr('href');
-                        ProductPhoto.css('background-image', 'url('+href+')');
+                    _window.one('ngRepeatFinished.product', function(){
+                        ProductThumbs.find('li > a').off().on('click', function(e){
+                            e.preventDefault();
+                            var href = $(this).attr('href');
+                            ProductPhoto.css('background-image', 'url('+href+')');
+                        })
                     })
                 }
             }
@@ -152,6 +162,14 @@ angular.module('yuyu.directive', [])
                 restrict: 'AC',
                 link: function(scope, el, attrs){
                     el.tinyDropdown();
+                }
+            }
+        })
+        .directive('tinyInput', function(){
+            return {
+                restrict: 'AC',
+                link: function(scope, el, attrs){
+                    el.tinyInput();
                 }
             }
         })

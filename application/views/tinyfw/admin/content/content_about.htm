@@ -16,9 +16,9 @@
 	</div>
 	
 	<div class="panel-body">
-        <alert type="success" close="success = false" class="ng-hide-animate" ng-show="success == true">
+        <div uib-alert close="success = false" class="alert-success ng-hide-animate" ng-show="success == true">
 			<strong><i class="fa fa-check"></i> Success!</strong> Product update success. <a target="_blank" ng-href="#!{href}">View Post</a></a>.
-		</alert>
+		</div>
 	
 		<form role="form" tiny-submit="formSubmit(dataForm)" method="post">
 			
@@ -27,9 +27,11 @@
 				<input type="text" class="form-control" name="title" value="{content_title}" placeholder="Title" />
 			</div>
             
-            <div ng-if="!required_des" class="form-group">
-				<label class="control-label">Description</label>
-                <textarea class="form-control" name="description" placeholder="Description">{content_des}</textarea>
+            <div ng-if="!required_des" id="main" class="form-group">
+				<label class="control-label">Cover</label> <br />
+                <button class="btn btn-success" folder="contents" tiny-upload="true">Choose Image</button>
+                <img image_target ng-src="{{'{content_des}' | tinyimage}}" />
+                <input input_target type="hidden" name="description" value="{content_des}" />
 			</div>
             
             <div class="form-group">

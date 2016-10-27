@@ -25,10 +25,12 @@ $.fn.serializeObject = function(){
 
     $.each($(this).serializeArray(), function(){
 
-        // skip invalid keys
-        if(!patterns.validate.test(this.name)){
-            return;
-        }
+        console.log(this);
+
+        // // skip invalid keys
+        // if(!patterns.validate.test(this.name)){
+        //     return;
+        // }
 
         var k,
             keys = this.name.match(patterns.key),

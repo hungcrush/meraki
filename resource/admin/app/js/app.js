@@ -462,11 +462,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
     });
 });
 
-app.filter('unsafe', function($sce) {
-    return function(val) {
-        return $sce.trustAsHtml(val);
-    };
-})
+app
 .filter('trustAsResourceUrl', ['$sce', function($sce) {
     return function(val) {
         return $sce.trustAsResourceUrl(val);

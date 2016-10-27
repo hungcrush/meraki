@@ -19,7 +19,7 @@ class Content extends TINY_Controller {
         $this->data['template']  = 'admin/content/content_about.htm';
         $this->data['dataParse'] = array(
             'title_page'    => 'About Content',
-            'description'   => 'Setup content for about page',
+            'description'   => 'Setup content for Our Story...',
             'href'          => 'aboutus'
         );
         $this->content->Load('about_content', $this->data['dataParse']);

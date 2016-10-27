@@ -1,0 +1,104 @@
+<div class="account-page">
+
+  <div class="account-page--wrapper">
+
+
+    <div class="account-login">
+      
+      <div class="note form-success" id="ResetSuccess" style="display:none;">
+        We've sent you an email with a link to update your password.
+      </div>
+
+      <div id="CustomerLoginForm" class="form-vertical">
+        <form method="post" action="https://maiyet.com/account/login" id="customer_login" accept-charset="UTF-8"><input type="hidden" value="customer_login" name="form_type"><input type="hidden" name="utf8" value="✓">
+
+          <div class="login-title-wrapper">
+            <h2 class="login-title">Login</h2>
+          </div>
+
+          <div class="form-error"></div>
+
+          <label for="CustomerEmail" class="hidden-label">Email</label>
+          <input type="email" name="customer[email]" id="CustomerEmail" class="input-full" placeholder="Email" autocorrect="off" autocapitalize="off" autofocus="">
+
+          
+            <label for="CustomerPassword" class="hidden-label">Password</label>
+            <input type="password" value="" name="customer[password]" id="CustomerPassword" class="input-full" placeholder="Password">
+          
+
+          <p>
+            <input type="submit" class="btn btn--full" value="Sign In">
+          </p>
+
+          
+            <p class="link-recovery-wrapper"><a href="#recover" id="RecoverPassword" class="link-default">Forgot your password?</a></p>
+          
+
+        <input type="hidden" name="checkout_url" value="https://checkout.shopify.com/11374602/checkouts/e46e0ebb3f1502ee3e48bf43722faa0d?step=contact_information"></form>
+      </div>
+
+      
+      <div id="RecoverPasswordForm" style="display: none;">
+
+        <div class="login-title-wrapper">
+          <h2 class="login-title">Reset your password</h2>
+          <p>We will send you an email to reset your password.</p>
+        </div>
+
+        <div class="form-vertical">
+          <form method="post" action="/account/recover" accept-charset="UTF-8"><input type="hidden" value="recover_customer_password" name="form_type"><input type="hidden" name="utf8" value="✓">
+
+            <div class="form-error"></div>
+
+            
+            
+
+            <label for="RecoverEmail" class="hidden-label">Email</label>
+            <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="Email" autocorrect="off" autocapitalize="off">
+
+            <p>
+              <input type="submit" class="btn btn--full" value="Submit">
+            </p>
+
+            <p class="link-recovery-wrapper">
+              <a href="#" id="HideRecoverPasswordLink" class="link-default">Cancel</a>
+            </p>
+          <input type="hidden" name="checkout_url" value="https://checkout.shopify.com/11374602/checkouts/e46e0ebb3f1502ee3e48bf43722faa0d?step=contact_information"></form>
+        </div>
+
+      </div>
+      
+    </div>
+
+    <div class="account-register">
+
+      <div class="login-title-wrapper">
+        <h2 class="login-title">Create Account</h2>
+      </div>
+
+        <form method="post" action="https://maiyet.com/account" id="create_customer" accept-charset="UTF-8"><input type="hidden" value="create_customer" name="form_type"><input type="hidden" name="utf8" value="✓">
+
+          
+
+          <label for="FirstName" class="hidden-label">First Name</label>
+          <input type="text" name="customer[first_name]" id="FirstName" class="input-full" placeholder="First Name" autocapitalize="words" autofocus="">
+
+          <label for="LastName" class="hidden-label">Last Name</label>
+          <input type="text" name="customer[last_name]" id="LastName" class="input-full" placeholder="Last Name" autocapitalize="words">
+
+          <label for="Email" class="hidden-label">Email</label>
+          <input type="email" name="customer[email]" id="Email" class="input-full" placeholder="Email" autocorrect="off" autocapitalize="off">
+
+          <label for="CreatePassword" class="hidden-label">Password</label>
+          <input type="password" name="customer[password]" id="CreatePassword" class="input-full" placeholder="Password">
+
+          <p>
+            <input type="submit" value="Create" class="btn btn--full">
+          </p>
+        </form>
+
+      </div>
+
+  </div>
+
+</div>

@@ -5,13 +5,13 @@
 
     <div class="product product--main">
         <div class="product--header">
-            <div class="product--mobile-slideshow">
+            <!-- <div class="product--mobile-slideshow">
 
                 <div class="product--slideshow-items" id="ProductSlideshow">
 
 
                     <div class="product--slideshow-item">
-                        <img src="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55722_1024x1024.jpg?v=1473433502" alt="LONG PEPLUM GOWN">
+                        <img src="/image_demo/EAOO3D.jpg" alt="LONG PEPLUM GOWN">
                     </div>
 
                     <div class="product--slideshow-item">
@@ -31,50 +31,22 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
+
             <div product-thumbnails="" class="product--thumbnails">
 
+                <div class="product-single__photos product--main-image" id="ProductPhoto" style="background-image: url({{first_image.origin}})">
 
-                <div class="product-single__photos product--main-image" id="ProductPhoto" style="background-image: url(//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55722_1024x1024.jpg?v=1473433502)">
-
-                    <img src="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55722_1024x1024.jpg?v=1473433502" alt="LONG PEPLUM GOWN" id="ProductPhotoImg">
+                    <img ng-src="{{first_image.origin}}" alt="LONG PEPLUM GOWN" id="ProductPhotoImg">
                 </div>
-
-
 
                 <ul class="product-single__thumbnails product--thumbnail-images" id="ProductThumbs">
 
-
-                    <li class="grid__item one-quarter">
-                        <a href="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55722_1024x1024.jpg?v=1473433502" class="product-single__thumbnail">
-                            <img src="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55722_compact.jpg?v=1473433502" alt="LONG PEPLUM GOWN">
+                    <li ng-repeat="image in itemData.images" repeat-complete="product" class="grid__item one-quarter">
+                        <a href="{{image.origin}}" class="product-single__thumbnail">
+                            <img ng-src="{{image.src}}" alt="LONG PEPLUM GOWN">
                         </a>
                     </li>
-
-                    <li class="grid__item one-quarter">
-                        <a href="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55739_1024x1024.jpg?v=1473433504" class="product-single__thumbnail">
-                            <img src="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55739_compact.jpg?v=1473433504" alt="LONG PEPLUM GOWN">
-                        </a>
-                    </li>
-
-                    <li class="grid__item one-quarter">
-                        <a href="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55725_1024x1024.jpg?v=1473433505" class="product-single__thumbnail">
-                            <img src="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55725_compact.jpg?v=1473433505" alt="LONG PEPLUM GOWN">
-                        </a>
-                    </li>
-
-                    <li class="grid__item one-quarter">
-                        <a href="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55766_1024x1024.jpg?v=1473433507" class="product-single__thumbnail">
-                            <img src="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55766_compact.jpg?v=1473433507" alt="LONG PEPLUM GOWN">
-                        </a>
-                    </li>
-
-                    <li class="grid__item one-quarter">
-                        <a href="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55757_1024x1024.jpg?v=1473433509" class="product-single__thumbnail">
-                            <img src="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55757_compact.jpg?v=1473433509" alt="LONG PEPLUM GOWN">
-                        </a>
-                    </li>
-
 
                 </ul>
 
@@ -82,7 +54,7 @@
 
             <div class="product--details">
                 <div class="product--details-wrapper">
-                    <h1 itemprop="name">LONG PEPLUM GOWN</h1>
+                    <h1 itemprop="name">{{itemData.item_name}}</h1>
 
                     <div id="product-additional" data-id="8364917827">
                         <div>
@@ -93,7 +65,7 @@
                     </div>
 
                     <div class="product--price">
-                        <span id="ProductPrice" class="h2" itemprop="price">$1,895.00</span>
+                        <span id="ProductPrice" class="h2" itemprop="price">{{itemData.price}} ₫</span>
 
 
                     </div>
@@ -148,13 +120,16 @@
                     <div class="product--extended" id="product-extend" data-id="8364917827">
                         <div>
                             <div class="product--extended-info">
-                                <div class="product--extended-wrapper">
-                                    <div class="product--extended-header"><span class="visisble design active" data-change="design">Design</span><span class="visisble details" data-change="details">Details</span><span class="visisble size" data-change="size">Size</span>
+                                <div tiny-tabs class="product--extended-wrapper">
+                                    <div style="display: none" class="product--extended-header">
+                                        <span class="visisble design active" data-change="design">Design</span>
+                                        <span class="visisble details" data-change="details">Details</span>
+                                        <span class="visisble size" data-change="size">Size</span>
                                     </div>
                                     <div class="product--extended-copy">
                                         <div class="visisble design active">
-                                            <div>
-                                                <p>The Long Peplum Gown is a simple yet unforgettable eveningwear piece. Thin straps crisscross and dip into a dramatic low arc to reveal an open back as panels of rich vermillion georgette unfold in an extended floating train.</p>
+                                            <div tiny-html="itemData.item_detail">
+                                                
                                             </div>
                                         </div>
                                         <div class="visisble details">
@@ -336,7 +311,7 @@
         <div ng-repeat="product in [0,1,2,3]" class="linkcious_ads">
             <div class="linkcious_img">
                 <a href="">
-                    <img src="https://linkcious-products.s3.amazonaws.com/ee5b663b3c.jpg" alt="LONG SLEEVE TEE" title="LONG SLEEVE TEE">
+                    <img src="/image_demo/EAOO4A.jpg" alt="LONG SLEEVE TEE" title="LONG SLEEVE TEE">
                 </a>
             </div>
 

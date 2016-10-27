@@ -1,7 +1,7 @@
 'use strict';
 angular.module('yuyu.controller', [])
     //-- Basic Controler, not related to the controlers below
-    .controller('tinyWapper', function($scope, $rootScope, $state){
+    .controller('tinyWapper', function($scope, $rootScope, $state, $tiny){
         $scope.searchOpen = false;
         $scope.toggleSearch = function(value){
             $scope.searchOpen = value !== undefined ? value : !$scope.searchOpen;
@@ -23,6 +23,25 @@ angular.module('yuyu.controller', [])
             $scope.templateConlection = !!(toState.templateConlection);
             $scope.pageClass = toState.pageClass;
         })
+
+        //-- load menu
+        var sortByFeature = function(data)
+        {   
+            var feature = [];
+            angular.copy(data).forEach(function(obj, k){
+                if(obj.feature == 1)
+                {
+                    feature.push(obj);
+                    data.splice(k, 1);
+                }
+            })
+
+            return feature.concat(data);
+        }
+        $tiny.loadData(URL_SERVER + 'welcome/get-navbar').then(function(data){
+            $scope.navbarShop = sortByFeature(data.product);
+            $rootScope.productn = data.productn;
+        });
     })
     .controller('HomeCtrl', function($rootScope, $state)
     {
@@ -38,61 +57,17 @@ angular.module('yuyu.controller', [])
     {
         $rootScope.isActive = 'product';
     })
-    .controller('PhotobookCtrl', function($scope, $rootScope)
+    .controller('PhotobookCtrl', function($scope, $rootScope, productData, $stateParams)
     {
-        $rootScope.isActive = 'product';
-        $scope.objExplore = [
-            {
-                src: URL_SERVER+'explore_1.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'explore_2.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'explore_3.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'explore_4.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'explore_5.jpg',
-                link: '#'
-            }
-        ];
+        $scope.category_data = productData.category.product;
+        $scope.products = productData.items.product;
+
+        console.log('Debug products', $scope.products);
     })
-    .controller('ChildPhotobookCtrl', function($scope, $rootScope)
+    .controller('ChildPhotobookCtrl', function($scope, $rootScope, itemsData)
     {
-        $rootScope.isActive = 'product';
-        $scope.objPhotobook = [
-            {
-                src: URL_SERVER+'photobook_1.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'photobook_2.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'photobook_3.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'photobook_4.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'photobook_5.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'photobook_6.jpg',
-                link: '#'
-            }
-        ];
+        $scope.itemData = itemsData.item_data.product;
+        $scope.first_image = $scope.itemData.images[0];
     })
     .controller('DetailPhotobookCtrl', function($rootScope, $scope)
     {

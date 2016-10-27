@@ -50,14 +50,14 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     .state('home', {
         url: PATH_,
         resolve: {
-			owlSlider: function($ocLazyLoad){
-				return $ocLazyLoad.load([
-                    tinyConfig.dirTemp+'/owl-carousel/owl.carousel.css',
-                    tinyConfig.dirTemp+'/owl-carousel/owl.theme.css',
-                    tinyConfig.dirTemp+'/owl-carousel/owl-carousel-custom.css',
-                    tinyConfig.dirTemp+'/owl-carousel/owl.carousel.js'
-				]);
-			}
+			// owlSlider: function($ocLazyLoad){
+			// 	return $ocLazyLoad.load([
+   //                  tinyConfig.dirTemp+'/owl-carousel/owl.carousel.css',
+   //                  tinyConfig.dirTemp+'/owl-carousel/owl.theme.css',
+   //                  tinyConfig.dirTemp+'/owl-carousel/owl-carousel-custom.css',
+   //                  tinyConfig.dirTemp+'/owl-carousel/owl.carousel.js'
+			// 	]);
+			// }
         },
         templateUrl: URL_SERVER,
         controller: 'HomeCtrl'
@@ -77,9 +77,12 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     
     .state('home.photobook', {
         url: 'product/{id:[0-9a-fA-F]{1,8}}:SEO',
-        templateUrl: function($stateParams){
-            return URL_SERVER+'product/'+$stateParams.id
+        resolve: {
+            productData: function($tiny, $stateParams) {
+                return $tiny.loadData(URL_SERVER + 'products/load-data/' + $stateParams.id);
+            }
         },
+        templateUrl: URL_SERVER+'products/product',
         controller: 'PhotobookCtrl'
     })
     
@@ -87,9 +90,12 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     
     .state('home.photobook.child', {
         url: '/{photobook_id:[0-9a-fA-F]{1,8}}:SEO_2',
-        templateUrl: function($stateParams){
-            return URL_SERVER+'product/'+$stateParams.id+'/'+$stateParams.photobook_id
+        resolve: {
+            itemsData: function($tiny, $stateParams){
+                return $tiny.loadData(URL_SERVER + 'products/load-data-item/' + $stateParams.id + '/' + $stateParams.photobook_id);
+            }
         },
+        templateUrl: URL_SERVER+'products/photobook',
         controller: 'ChildPhotobookCtrl'
     })
     
@@ -129,6 +135,28 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
         controller: 'AboutCtrl',
         templateConlection: true,
         pageClass: 'our-story'
+    })
+
+    //------------------------------
+    // ACCOUNT
+    //------------------------------
+
+    .state('home.account', {
+        url: 'account',
+        templateUrl: URL_SERVER+'account',
+        controller: 'AboutCtrl',
+        templateConlection: true,
+        pageClass: 'template-customers-login '
+    })
+
+    //------------------------------
+    // PAYMENT
+    //------------------------------
+
+    .state('home.payment', {
+        url: 'payment',
+        templateUrl: URL_SERVER+'payment',
+        controller: 'AboutCtrl'
     })
     
     $locationProvider.html5Mode({

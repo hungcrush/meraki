@@ -1,9 +1,18 @@
 <div ui-view="" class="template-index">
-    <header class="header--module visible" style="background-image:url(https://maiyet.s3.amazonaws.com/maiyet-store/maiyet-fw16-arrivals2-a91-9bf8bf442411.jpg);">
-        <a href="/collections/new-arrivals" class="full-link"></a>
-        <div class="header--module-text-center">
-            <h5>Just In</h5>
-            <h1>Fall Winter 2016</h1><a href="/product/15-photo-books" class="underlined white">Shop Now</a>
+    <header ng-init="type = '{content_title}'" class="header--module visible" style="background-image:url({background});">
+        <a href="/product/15-white-page-conflict" class="full-link"></a>
+        <div ng-switch="type" class="header--module-text-center">
+            <div ng-switch-when="video" class="video-container no-controls">
+                <iframe src="{src}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div ng-switch-when="image">
+                <img class="responsive-img" ng-src="{content}" />
+            </div>
+            <div ng-switch-when="text">
+                {content}
+            </div>
+
+            <a href="/product/15-white-page-conflict" class="underlined white">Shop Now</a>
         </div>
     </header>
     <div class="footer--social visible">
@@ -28,13 +37,13 @@
             </li>
         </ul>
         <div class="footer--social-insta">
-            <a href="http://instagram.com/maiyet" target="_blank"><img src="https://maiyet.s3.amazonaws.com/maiyet-store/maiyet-icon-mini-messenger-dc9-8e1718819d02.jpg">
+            <a href="http://instagram.com/maiyet" target="_blank"><img src="/image_demo/EAOO3D.jpg">
             </a>
-            <a href="http://instagram.com/maiyet" target="_blank"><img src="https://maiyet.s3.amazonaws.com/maiyet-store/maiyet-fw16-02c-7d6aa684e77f.jpg">
+            <a href="http://instagram.com/maiyet" target="_blank"><img src="/image_demo/EAOO1B.jpg">
             </a>
-            <a href="http://instagram.com/maiyet" target="_blank"><img src="https://maiyet.s3.amazonaws.com/maiyet-store/maiyet-mongolian-cashmere-8e1-ec975eecac2a.jpg">
+            <a href="http://instagram.com/maiyet" target="_blank"><img src="/image_demo/EAOO4A.jpg">
             </a>
-            <a href="http://instagram.com/maiyet" target="_blank"><img src="https://maiyet.s3.amazonaws.com/maiyet-store/maiyet-fair-cashmere-1-fd1-febec03ae144.jpg">
+            <a href="http://instagram.com/maiyet" target="_blank"><img src="/image_demo/EAOO6A.jpg">
             </a>
         </div>
     </div>

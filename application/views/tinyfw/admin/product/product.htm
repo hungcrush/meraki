@@ -2,17 +2,17 @@
     <div class="gallery-sidebar">
 
         <div class="album-header s">
-            <h2>Product</h2>
-            <a tiny-modal="true" ng-if="p.productadd" data-id="admin/product/edit-product.htm?6" class="upload-sm"><i tooltip="Upload" class="fa-upload"></i></a>
+            <h2>Categories</h2>
+            <a tiny-modal="true" ng-if="p.productadd" data-id="admin/product/edit-category.htm?6" class="upload-sm"><i tooltip="Upload" class="fa-upload"></i></a>
             <ul class="album-options list-unstyled list-inline">
                 <li>
                     <input type="checkbox" class="tiny-cbr tiny-selectall" target=".album-image input[type='checkbox']" id="select-all2" />
                     <label for="select-all2">Select all</label>
                 </li>
                 <li ng-if="p.productadd">
-                    <a tiny-modal="true" data-id="admin/product/edit-product.htm?5" href="">
+                    <a tiny-modal="true" data-id="admin/product/edit-category.htm" href="">
                         <i class="fa-upload"></i>
-                        Add Images
+                        Add Category
                     </a>
                 </li>
                 <li>
@@ -53,7 +53,7 @@
                     <span>{{product.name}}</span>
                 </a>
                 <div class="image-options">
-                    <a data-imagethumb="{{product.image}}" data-image="{{product.origin_img}}" data-productid="{{product.product_id}}" data-title-per="{{product.name}}" data-description="{{product.description}}" tiny-modal="true" data-id="admin/product/edit-product.htm?2" href="" data-action="add-product"><i class="fa-pencil"></i></a>
+                    <a data-imagethumb="{{product.image}}" data-image="{{product.origin_img}}" data-productid="{{product.product_id}}" data-title-per="{{product.name}}" data-description="{{product.description}}" tiny-modal="true" data-id="admin/product/edit-category.htm" href="" data-action="add-product"><i class="fa-pencil"></i></a>
                     <a ng-click="Remove(product.product_id, '')" href="" data-action="trash"><i class="fa-trash"></i></a>
                 </div>
             </li>

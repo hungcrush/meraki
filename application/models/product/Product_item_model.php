@@ -23,6 +23,12 @@ class Product_item_model extends TINY_Model
                 $row['name']  = $row['item_name'];  
                 $row['image'] = $this->getImageLink($image[0], $image[1])->origin;
                 $row['thumb'] = $this->getImageLink($image[0], $image[1])->src;
+
+                $row['item_detail'] = $this->lib->unescape($row['item_detail']);
+
+                $row['url']   = $this->lib->makeURLSEO($row['product_item_id'], $row['item_name']);
+
+                $row['price'] = number_format($row['price']);
                 
                 if($item_id > 0){
                     $row['detail'] = $row['item_detail'];
@@ -32,7 +38,7 @@ class Product_item_model extends TINY_Model
             }
         }
         return array(
-            'product'   => $dataOut,
+            'product'   => $item_id == 0 ? $dataOut : $dataOut[0],
             'product_id'=> $product_id
         );
     }
@@ -56,30 +62,33 @@ class Product_item_model extends TINY_Model
         return $Image;
     }
     
-    public function Save(){
-        $name           = $this->input->post('name');
-        $description    = $this->input->post('description');
-        $image          = $this->input->post('image');
-        $product_id     = $this->input->post('product_id');
+    public function Save($params){
+        // $name           = $this->input->post('name');
+        // $description    = $this->input->post('description');
+        // $image          = $this->input->post('image');
+        // $product_id     = $this->input->post('product_id');
         
-        $item_id        = $this->input->post('item_id');
+        // $item_id        = $this->input->post('item_id');
         
-        $data_insert = array(
-            'product_id'         => $product_id,
-            'item_name'          => $this->lib->escape($name),
-            'item_description'   => $this->lib->escape($description),
-            'item_image'         => $image
-        );
-        if($item_id == FALSE)
-            $id = $this->insert($data_insert);
-        else{
-            $this->update($item_id, $data_insert);
+        // $data_insert = array(
+        //     'product_id'         => $product_id,
+        //     'item_name'          => $this->lib->escape($name),
+        //     'item_description'   => $this->lib->escape($description),
+        //     'item_image'         => $image
+        // );
+        // if($item_id == FALSE)
+        //     $id = $this->insert($data_insert);
+        // else{
+        //     $this->update($item_id, $data_insert);
             
-            if(isset($_POST['image_list'])){
-                //-- save image detail
+        //     if(isset($_POST['image_list'])){
+        //         //-- save image detail
                 
-            }
-        }
+        //     }
+        // }
+        $product_id = $params['product_id'];
+
+        $this->insert_auto($params);
         return array(
             'content'   => 'OK',
             '_id'       => $id,

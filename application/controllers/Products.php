@@ -38,4 +38,24 @@ class Products extends TINY_Controller {
             'description'   => 'Move your photos off your device and into your life with our line of premium quality photo books. Featuring interior pages printed on 100% recycled paper. Our collection of photo books includes fabric-bound hardcover photo books and softcover photo books renowned for their textured paper cover.'
         );
     }
+
+    public function loadData($category_id)
+    {
+        $this->load->model('product/Product_item_model', 'item');
+        $this->load->model('product/Product_model', 'product');
+
+        return array(
+            'items'     => $this->item->Load($category_id),
+            'category'  => $this->product->Load($category_id)
+        );
+    }
+
+    public function loadDataItem($category_id, $item_id)
+    {
+        $this->load->model('product/Product_item_model', 'item');
+
+        return array(
+            'item_data' => $this->item->Load($category_id, $item_id)
+        );
+    }
 }

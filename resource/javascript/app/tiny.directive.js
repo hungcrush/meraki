@@ -19,10 +19,10 @@ angular.module('tinyfw.directive', [])
                             
                             if(r !== false){
                                 $form.find('[type="submit"]').prop('disabled', true);
-                                if(typeof attrs.noReset == 'undefined'){
-                                    $form.trigger('reset');
-                                }else
-                                    console.log('No Reset');
+                                // if(typeof attrs.noReset == 'undefined'){
+                                //     $form.trigger('reset');
+                                // }else
+                                //     console.log('No Reset');
                             }
                         }, __time);
                     
@@ -289,6 +289,14 @@ angular.module('tinyfw.directive', [])
                                 						</div>');
                                                     });
                                                 }
+
+                                                //-- 27/10/2016 : When lazy...
+                                                console.log('LAzy', $image_target, $file_list);
+                                                if($image_target == null && $file_list == null)
+                                                {
+                                                    $main.append('<img class="tiny_image_target" />');
+                                                    $image_target = $main.find('img.tiny_image_target');
+                                                }
                                           }
                                           attrs.init.start();
                                       });
@@ -332,10 +340,14 @@ angular.module('tinyfw.directive', [])
                                             if(attrs.onUploaded){
                                                 scope.onUploaded({respon: dataJson.response, file: file});
                                             }else{
+                                                var r = angular.fromJson(dataJson.response);
                                                 if(attrs.inputId)
                                                 {
-                                                    var r = angular.fromJson(dataJson.response);
                                                     $(attrs.inputId).val(r.folder+'|'+r.filename);
+                                                }
+                                                else if($main.find('[input_target]').length)
+                                                {
+                                                    $main.find('[input_target]').val(r.folder+'|'+r.filename);
                                                 }
                                             }
 
@@ -482,11 +494,16 @@ angular.module('tinyfw.directive', [])
         .directive('repeatComplete', function($timeout){
             return {
                 restrict: 'A',
-                link: function (scope, element, attr) {
+                link: function (scope, element, attrs) {
                     if (scope.$last === true) {
                         $timeout(function () {
                             scope.$emit('ngRepeatFinished');
                         });
+
+                        if(attrs.repeatComplete != '')
+                        {
+                            _window.trigger('ngRepeatFinished.' + attrs.repeatComplete);
+                        }
                     }
                 }
             }

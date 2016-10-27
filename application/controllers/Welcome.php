@@ -6,6 +6,7 @@ class Welcome extends TINY_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('content_model', 'content');
+        $this->load->model('product/Product_model', 'product');
     }
     
     public function index(){
@@ -15,6 +16,11 @@ class Welcome extends TINY_Controller {
             'template'  => 'templates/indexPage.htm',
             'dataParse' => $data['data']
         );
+    }
+
+    public function getNavbar()
+    {
+        return $this->product->Load();
     }
     
     public function testDuLieu(){

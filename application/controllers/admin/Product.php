@@ -55,15 +55,16 @@ class Product extends TINY_Controller {
     }
     
     public function Add($action = ''){
+        $params = $this->_post();
         //-- add product
         if($action == '')
-            return $this->product->Save();
+            return $this->product->Save($params);
         //-- Add Item
         else if($action == 'item')
-            return $this->item->Save();
+            return $this->item->Save($params);
         //-- Add Post
         else if($action == 'post')
-            return $this->post->Save();
+            return $this->post->Save($params);
         //-- Add Post
         else if($action == 'detail')
             return $this->item->Update_detail();

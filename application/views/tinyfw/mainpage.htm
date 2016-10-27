@@ -93,7 +93,7 @@
                         <div class="cart--side-product">
 
                             <div class="cart--side-product-image">
-                                <a href="/products/long-peplum-gown?variant=27699541827" class="ajaxcart__product-image"><img src="https://cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55722_small.jpg?v=1475015546" alt="">
+                                <a href="/products/long-peplum-gown?variant=27699541827" class="ajaxcart__product-image"><img src="/image_demo/EAOO3D.jpg" alt="">
                                 </a>
                             </div>
                             <div class="cart--side-product-info">
@@ -125,9 +125,9 @@
                     </div>
                 </div>
                 <!-- <p class="text-center">Shipping &amp; taxes calculated at checkout</p> -->
-                <button type="submit" class="btn--secondary btn--full cart__checkout" name="checkout">
+                <a href="/payment" class="btn--secondary btn--full cart__checkout button" name="checkout">
                     Check Out
-                </button>
+                </a>
             </div>
         </form>
     </div>
@@ -144,38 +144,8 @@
                     <a href="#!product/15-photo-books" class="navigation--dropdown">Shop</a>
                     <ul class="">
 
-                        <li class="navigation--featured"><a href="/collections/ethically-produced-cashmere-clothing" title="">FAIR Cashmere</a>
-                        </li>
-
-                        <li class="navigation--featured"><a href="/collections/new-arrivals" title="">New Arrivals</a>
-                        </li>
-
-                        <li class="navigation--featured"><a href="/collections/sale" title="">Sale</a>
-                        </li>
-
-
-                        <li class="navigation--normal-1"><a href="/collections/tops" title="">Tops</a>
-                        </li>
-
-                        <li class="navigation--normal-2"><a href="/collections/knitwear" title="">Knitwear</a>
-                        </li>
-
-                        <li class="navigation--normal-3"><a href="/collections/bottoms" title="">Bottoms</a>
-                        </li>
-
-                        <li class="navigation--normal-4"><a href="/collections/dresses" title="">Dresses</a>
-                        </li>
-
-                        <li class="navigation--normal-5"><a href="/collections/outerwear" title="">Outerwear</a>
-                        </li>
-
-                        <li class="navigation--normal-6"><a href="/collections/bags" title="">Bags</a>
-                        </li>
-
-                        <li class="navigation--normal-7"><a href="/collections/shoes" title="">Shoes</a>
-                        </li>
-
-                        <li class="navigation--normal-8"><a href="/collections/jewelry" title="">Jewelry</a>
+                        <li ng-repeat="navbar in navbarShop" ng-class="{'navigation--featured': navbar.feature == 1, 'navigation--normal-1': navbar.feature == 0}">
+                            <a ng-href="{{navbar.url}}" title="">{{navbar.name}}</a>
                         </li>
 
                     </ul>
@@ -183,7 +153,9 @@
                 <li>
                     <a href="/blog">Blog</a>
                 </li>
-                <li class="navigation--shopping-nested">
+                <li><a href="/aboutus">Our Story</a>
+                </li>
+                <!-- <li class="navigation--shopping-nested">
                     <a href="#" class="navigation--dropdown">Other Menu</a>
                     <ul class="">
 
@@ -199,7 +171,7 @@
                         <li><a href="http://maiyet.tumblr.com/" target="_blank">Blog</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </nav>
 
@@ -211,7 +183,7 @@
 
         <nav class="navigation navigation--cart">
             <ul>
-                <li class="our-story mobile--hide"><a href="/aboutus">Our Story</a>
+                <li class="our-story mobile--hide"><a href="/account">My Account</a>
                 </li>
 
                 <li ng-click="toggleSearch()" class="search js-search mobile--hide">
@@ -254,7 +226,7 @@
                         </li>
                         <li class="footer--links-block">
                             <h5>Stores</h5>
-                            <p><a href="/pages/store/">Maiyet Store</a>
+                            <p><a href="/pages/store/">Meraki Store</a>
                                 <br><a href="/pages/stockists/">Search Stockists</a>
                             </p>
                         </li>
