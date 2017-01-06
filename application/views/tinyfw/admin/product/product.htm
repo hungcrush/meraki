@@ -3,24 +3,26 @@
 
         <div class="album-header s">
             <h2>Categories</h2>
-            <a tiny-modal="true" ng-if="p.productadd" data-id="admin/product/edit-category.htm?6" class="upload-sm"><i tooltip="Upload" class="fa-upload"></i></a>
+            <a tiny-modal="true" modal-data="listProduct" ng-if="p.productadd" data-id="admin/product/edit-category.htm?6" class="upload-sm"><i tooltip="Upload" class="fa-upload"></i></a>
+            <a href="" element="sortable-product-child" data-items=">li:not(:first)" cancel-btn="cancel-product-child" on-save="saveSort(serilaze, '')" class="tiny-sort upload-sm">
+                <i class="fa-arrows"></i>
+            </a>
+
             <ul class="album-options list-unstyled list-inline">
                 <li>
                     <input type="checkbox" class="tiny-cbr tiny-selectall" target=".album-image input[type='checkbox']" id="select-all2" />
                     <label for="select-all2">Select all</label>
                 </li>
+                <li ng-if="!isLarge">
+                    
+                </li>
                 <li ng-if="p.productadd">
-                    <a tiny-modal="true" data-id="admin/product/edit-category.htm" href="">
+                    <a modal-data="listProduct" tiny-modal="true" data-id="admin/product/edit-category.htm" href="">
                         <i class="fa-upload"></i>
                         Add Category
                     </a>
                 </li>
-                <li>
-                    <a href="" element="sortable-product-child" cancel-btn="cancel-product-child" on-save="saveSort(serilaze, '')" class="tiny-sort">
-                        <i class="fa-arrows"></i>
-                        Re-order
-                    </a>
-                </li>
+                
                 <li>
                     <a ng-click="test()" href="" data-action="trash">
                         <i class="fa-trash"></i>
@@ -44,26 +46,29 @@
             </div>
         </div>
         
+        <a href="javascript:void(0)" ng-click="backPrevParent()" ng-if="parent_current.prevParent"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back</a>
         <div class="clearfix"></div>
         <center ng-if="!listProduct.length"><h3>No Product</h3></center>
-        <ul ng-if="!isLarge" class="list-unstyled list-product-small">
-            <li ng-class="{'active': (product_id == product.product_id)}" ng-repeat="product in listProduct">
-                <a ng-href="{{_module}}{{product.product_id}}{{product.product_item_id ? '/'+product.product_item_id : ''}}">
+        <ul ng-if="!isLarge" id="sortable-product-child" class="list-unstyled list-product-small">
+            <li data-id="{{product.product_id}}" ng-class="{'active': (product_id == product.product_id)}" ng-repeat="product in listProduct | filter:filterByParent">
+                <a  ng-href="{{_module}}{{product.product_id}}{{product.product_item_id ? '/'+product.product_item_id : ''}}"
+                    ng-click="selectParent(product)"
+                >
                     <img ng-src="{{product.thumb}}" class="responsive-img" />
                     <span>{{product.name}}</span>
                 </a>
-                <div class="image-options">
-                    <a data-imagethumb="{{product.image}}" data-image="{{product.origin_img}}" data-productid="{{product.product_id}}" data-title-per="{{product.name}}" data-description="{{product.description}}" tiny-modal="true" data-id="admin/product/edit-category.htm" href="" data-action="add-product"><i class="fa-pencil"></i></a>
+                <div ng-if="product.product_id > 0" class="image-options">
+                    <a data-imagethumb="{{product.image}}" data-image="{{product.origin_img}}" data-productid="{{product.product_id}}" data-title-per="{{product.name}}" data-description="{{product.description}}" data-parent="{{product.parent_obj}}" modal-data="listProduct" tiny-modal="true" data-id="admin/product/edit-category.htm" href="" data-action="add-product"><i class="fa-pencil"></i></a>
                     <a ng-click="Remove(product.product_id, '')" href="" data-action="trash"><i class="fa-trash"></i></a>
                 </div>
             </li>
         </ul>
         
-        <div ng-if="isLarge" id="sortable-product-child" class="album-images row">
+        <div ng-if="isLarge" class="album-images row">
             <div ng-repeat="product in listProduct" data-id="{{product.product_id}}" class="col-md-3 col-sm-4 col-xs-6 ui-sorable-tiny">
                 <div class="album-image">
                     <a ng-href="{{_module}}{{product.product_id}}" class="thumb" data-action="edit">
-                        <img ng-src="{{product.image}}" class="img-responsive" />
+                        <img ng-src="{{product.thumb}}" class="img-responsive" />
                     </a>
 
                     <a href="" class="name">
@@ -71,7 +76,7 @@
                     </a>
 
                     <div class="image-options">
-                        <a data-imagethumb="{{product.image}}" data-image="{{product.origin_img}}" data-productid="{{product.product_id}}" data-title-per="{{product.name}}" data-description="{{product.description}}" tiny-modal="true" data-id="admin/product/edit-product.htm?1" href="" data-action="add-product"><i class="fa-pencil"></i></a>
+                        <a data-imagethumb="{{product.image}}" data-image="{{product.origin_img}}" data-productid="{{product.product_id}}" data-title-per="{{product.name}}" data-description="{{product.description}}" tiny-modal="true" data-id="admin/product/edit-category.htm?1" href="" data-action="add-product"><i class="fa-pencil"></i></a>
                         <a ng-click="Remove(product.product_id, '')" href="" data-action="trash"><i class="fa-trash"></i></a>
                     </div>
 

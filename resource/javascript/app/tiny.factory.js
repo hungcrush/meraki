@@ -154,7 +154,9 @@ angular.module('tinyfw.factory',[])
     .factory('tinyajaxHanding', function($q, $rootScope) {
           return {
             request: function(config) {
-              return config;
+                config.headers['is_frontpage'] = 1;
+                console.log(config);
+                return config;
             },
         
             // optional method

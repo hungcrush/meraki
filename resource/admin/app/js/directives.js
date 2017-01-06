@@ -470,6 +470,20 @@ angular.module('xenon.directives', []).
 			}
 		}
 	})
+
+	.directive('convertToNumber', function() {
+	  return {
+	    require: 'ngModel',
+	    link: function(scope, element, attrs, ngModel) {
+	      ngModel.$parsers.push(function(val) {
+	        return val != null ? parseInt(val, 10) : null;
+	      });
+	      ngModel.$formatters.push(function(val) {
+	        return val != null ? '' + val : null;
+	      });
+	    }
+	  };
+	})
     
     
     .directive('tinyModal', function($uibModal, $rootScope){
@@ -477,31 +491,31 @@ angular.module('xenon.directives', []).
                 restrict: 'A',
                 scope: {
                     onOpened: '&',
+                    modalData: '=',
                     htmlContent: '='
                 },
-                link: function($scope, el, attrs){
-                    var fn = $scope.$parent.fn,
+                link: function(scope, el, attrs){
+                    var fn = scope.$parent.fn,
                         t = angular.element(el),
                         id = 'myModal';
                         
-                    if(fn === undefined && typeof $scope.$parent.$parent.fn != 'undefined'){
-                        fn = angular.extend($scope.$parent.$parent.fn);
+                    if(fn === undefined && typeof scope.$parent.$parent.fn != 'undefined'){
+                        fn = angular.extend(scope.$parent.$parent.fn);
                     }
                     
                     if(t.data('id')){
                         id = t.data('id').match(new RegExp('.htm')) ? tinyConfig.dirTempHtm+t.data('id') : t.data('id');
                     }
                     t.click(function(){
-                        var htmlContent = $scope.htmlContent ? {htmlContent: $scope.htmlContent} : {};
+                        var htmlContent = scope.htmlContent ? {htmlContent: scope.htmlContent} : {};
                         $rootScope.currentModal = $uibModal.open({
             				templateUrl: id,
             				size: t.data('size') || null,
             				backdrop: t.data('backdrop') || 'static',
                             animation: true,
                             controller: function($scope){
-                            	console.log(fn);
-                            	console.log(t.data());
-                                $scope = angular.extend($scope, fn, t.data(), htmlContent);
+
+                                $scope = angular.extend($scope, fn, t.data(), htmlContent, {modalData: angular.copy(scope.modalData)});
                             }
             			});
                     })

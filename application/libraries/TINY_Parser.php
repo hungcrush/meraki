@@ -10,7 +10,6 @@ class TINY_Parser extends CI_Parser{
 	{
         //-- Replace
 	    $template = str_replace('#!', $this->CI->tiny->URL___, $template);
-           
         parent::_parse($template, $data, $return);
 	}
 }

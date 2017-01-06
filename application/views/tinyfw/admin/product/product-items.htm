@@ -9,18 +9,18 @@
                         <input type="checkbox" class="tiny-cbr tiny-selectall" target=".album-image input[type='checkbox']" id="select-all" />
                         <label for="select-all">Select all</label>
                     </li>
-                    <li>
-                        <a href="" data-action="add-item" data-productid="{{product_id}}" tiny-modal="true" data-id="admin/product/edit-product.htm">
+                    <li ng-if="product_id > 0">
+                        <a href="" data-action="add-item" data-productid="{{product_id}}" modal-data="productCategories" tiny-modal="true" data-id="admin/product/edit-product.htm">
                             <i class="fa-upload"></i>
                             Add Product
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="" element="sortable-product" cancel-btn="cancel-product" on-save="saveSort(serilaze, 'item')" class="tiny-sort">
                             <i class="fa-arrows"></i>
                             Re-order
                         </a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="" data-action="trash">
                             <i class="fa-trash"></i>
@@ -64,7 +64,7 @@
                     <div ng-repeat="product in listItems" data-id="{{product.product_item_id}}" class="col-md-3 col-sm-4 col-xs-6 ui-sorable-tiny">
                         <div class="album-image">
                             <a href="{{_module+product.product_id+'/'+product.product_item_id}}" class="thumb">
-                                <img ng-src="{{product.image}}" class="img-responsive" />
+                                <img ng-src="{{product.thumb}}" class="img-responsive" />
                             </a>
     
                             <a href="" class="name">
@@ -72,7 +72,8 @@
                             </a>
     
                             <div class="image-options">
-                                <a html-content="product.name" data-imagethumb="{{product.image}}" data-image="{{product.origin_img}}" data-productid="{{product.product_id}}" data-itemid="{{product.product_item_id}}" data-title-per="{{product.name}}" data-description="{{product.description}}" tiny-modal="true" data-id="admin/product/edit-product.htm?5" href="" data-action="add-item"><i class="fa-pencil"></i></a>
+                                <a html-content="product.name" data-imagethumb="{{product.image}}" data-image="{{product.origin_img}}" data-productid="{{product.product_id}}" data-itemid="{{product.product_item_id}}" data-title-per="{{product.name}}" data-description="{{product.description}}" data-code="{{product.code}}" data-remain="{{product.remain}}" data-price="{{product.price}}" data-cateitems="{{product.category_list}}" modal-data="productCategories" tiny-modal="true" data-id="admin/product/edit-product.htm?5" href="" data-action="add-item"><i class="fa-pencil"></i></a>
+
                                 <a ng-click="Remove(product.product_item_id, 'item')" href="" data-action="trash"><i class="fa-trash"></i></a>
                             </div>
     

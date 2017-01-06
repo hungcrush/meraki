@@ -288,6 +288,9 @@ class TINY_Model extends CI_Model
       AUTHOR: TRAN VINH HUNG
       - INSERT AND UPDATE AUTO
       @DATA => PARAMS FROM REQUEST, GET IT AND PROCESS IT
+
+      @param $files ARRAY
+        key (from data)
     */
 
     public function insert_auto($data, $fileds = array(), $table = FALSE)
@@ -319,9 +322,9 @@ class TINY_Model extends CI_Model
               }else
               {
                   if(in_array($key, $this->list_fields) && is_string($key) || $key == '_update_key'){
-                      $dataInsert[$key] = json_encode($value);
+                      $dataInsert[$key] = json_encode($value, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
                   }else{
-                      $this->insert(array_merge($this->primary_key_before, $value));
+                      //$this->insert(array_merge($this->primary_key_before, $value));
                   }
               }
           }
@@ -330,12 +333,16 @@ class TINY_Model extends CI_Model
       if(empty($dataInsert)) return;
       
       if(!isset($dataInsert['_update_key']))
+      {
         $id = $this->insert($dataInsert);
+      }
       else
       {
         $id = $dataInsert['_update_key'];
+        
         unset($dataInsert['_update_key']);
         $this->update($id, $dataInsert);
+
       }
 
       foreach($dataInsertOther as $insert)
@@ -1061,7 +1068,16 @@ class TINY_Model extends CI_Model
                 {
                     if (is_int($field))
                     {
+                      if(strpos($filter, 'OR ') !== FALSE)
+                      {
+                        $filter = str_replace('OR ', '', $filter);
+                        $this->_database->or_where($filter);
+                        
+                      }
+                      else
+                      {
                         $this->_database->where($filter);
+                      }
                     }
                     else
                     {

@@ -15,6 +15,17 @@ class Product_model extends TINY_Model
         {
             $this->_database->where('product_id', $product_id);
         }
+
+        if($this->tiny->isAdmin())
+        {   
+            //-- All category
+            $dataOut[] = array(
+                'product_id'    => 0,
+                'name'          => 'ALL PRODUCTS',
+                'thumb'         => 'http://merakistores.com/resource/images/logo-f.png',
+                'parent'        => 0
+            );
+        }
          
         $this->order_by('order');
         $data = $this->get_all();
@@ -24,6 +35,8 @@ class Product_model extends TINY_Model
                 $row['origin_img'] = $row['image'];
                 $row['image'] = $this->getImageLink($image[0], $image[1])->origin;
                 $row['thumb'] = $this->getImageLink($image[0], $image[1])->src;
+
+                $row['parent_obj'] = $this->_getParentObj($data, $row['parent']);
 
                 //-- url
                 $row['url'] = '/product/' . $this->lib->makeURLSEO($row['product_id'], $row['name']);
@@ -35,6 +48,21 @@ class Product_model extends TINY_Model
             'product'   => $product_id != 0 ? $dataOut[0] : $dataOut,
             'productn'  => $listProductName //-- list product name
         );
+    }
+
+    private function _getParentObj($data, $selected)
+    {
+        $selectedData = array();
+        foreach($data as $item)
+        {
+            if($item['product_id'] == $selected)
+            {
+                $selectedData = $item;
+                break;
+            }
+        }
+
+        return $selectedData;
     }
     
     public function Save($params){

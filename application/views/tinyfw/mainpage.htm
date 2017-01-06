@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title ng-bind-template="Tiny - {{currentPage.title || '{title_page}' }}">Tiny</title>
+  <title ng-bind-template="Meraki - {{currentPage.title || '{title_page}' }}">Meraki</title>
 
   <!-- CSS  -->
   <link href="{r}/css/maiyet/app.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -132,6 +132,12 @@
         </form>
     </div>
 </div>
+<script type="text/ng-template" id="navbar-items-tpl">
+    <li ng-repeat="navbar in subItems">
+        <a ng-href="{{navbar.url}}" title="">{{navbar.name}}</a>
+        <ul ng-include="'navbar-items-tpl'" ng-if="navbar.childs.length" ng-init="subItems = navbar.childs"></ul>
+    </li>
+</script>
 <header class="header tiny-header" template-conlection="templateConlection">
 
     <div class="header--wrapper">
@@ -141,11 +147,13 @@
         <nav class="navigation navigation--shopping">
             <ul>
                 <li class="navigation--shopping-nested">
-                    <a href="#!product/15-photo-books" class="navigation--dropdown">Shop</a>
+                    <a href="" class="navigation--dropdown">Shop</a>
                     <ul class="">
 
-                        <li ng-repeat="navbar in navbarShop" ng-class="{'navigation--featured': navbar.feature == 1, 'navigation--normal-1': navbar.feature == 0}">
+                        <!-- <li ng-repeat="navbar in navbarShop" ng-class="{'navigation--featured': navbar.feature == 1, 'navigation--normal-1': navbar.feature == 0}"> -->
+                        <li ng-repeat="navbar in navbarShop" class="navigation--featured">
                             <a ng-href="{{navbar.url}}" title="">{{navbar.name}}</a>
+                            <ul ng-include="'navbar-items-tpl'" ng-if="navbar.childs.length" ng-init="subItems = navbar.childs"></ul>
                         </li>
 
                     </ul>
@@ -176,9 +184,10 @@
         </nav>
 
         <div class="header--logo">
-            <a href="/" itemprop="url" class="site-header__logo-link">
-        Meraki
-      </a>
+            <a href="/" itemprop="url" class="logo-link">
+                <img class="f" src="{r}/images/logo-f.png" />
+                <img class="white" src="{r}/images/logo-white.png" />
+            </a>
         </div>
 
         <nav class="navigation navigation--cart">
@@ -214,14 +223,15 @@
 </div>
 <div id="footer">
     <div>
+        {content}
         <footer>
             <div class="footer">
                 <div class="footer--links">
                     <ul>
                         <li class="footer--links-block">
                             <h5>Contact</h5>
-                            <p><a href="/pages/contact">Contact Us</a>
-                                <br><a href="tel:+12123439999">212-343-9999</a>
+                            <p><a href="/contact">Contact Us</a>
+                                <br><a href="tel:+12123439999">{phone}</a>
                             </p>
                         </li>
                         <li class="footer--links-block">
@@ -240,16 +250,17 @@
                 </div>
                 <div class="footer--social-links">
                     <ul>
-                        <li><a href="https://www.facebook.com/maiyetworld" target="_blank"><i class="ion-social-facebook"></i></a>
+                        <li><a href="https://www.facebook.com/stores.meraki/" target="_blank"><i class="ion-social-facebook"></i></a>
                         </li>
-                        <li><a href="http://instagram.com/maiyet" target="_blank"><i class="ion-social-instagram-outline"></i></a>
+                        <li><a href="https://www.instagram.com/merakistores/" target="_blank"><i class="ion-social-instagram-outline"></i></a>
                         </li>
-                        <li><a href="http://maiyet.tumblr.com" target="_blank"><i class="ion-social-tumblr"></i></a>
+        }
+<!--                         <li><a href="http://maiyet.tumblr.com" target="_blank"><i class="ion-social-tumblr"></i></a>
                         </li>
                         <li><a href="https://twitter.com/maiyet" target="_blank"><i class="ion-social-twitter"></i></a>
                         </li>
                         <li><a href="http://pinterest.com/maiyet" target="_blank"><i class="ion-social-pinterest"></i></a>
-                        </li>
+                        </li> -->
                     </ul>
                     <div class="footer--reserve">
                         <p>
@@ -260,10 +271,10 @@
                 </div>
             </div>
         </footer>
+        {/content}
     </div>
 </div>
-
-
+  
   <script src="{r}/loading-bar/loading-bar.js"></script>
   <link href="{r}/loading-bar/loading-bar.css" type="text/css" rel="stylesheet" />
   <!-- Tiny Resource -->

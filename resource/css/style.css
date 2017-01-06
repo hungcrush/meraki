@@ -7,6 +7,50 @@ a.logo {
     text-transform: uppercase;
 }
 
+.logo-link img{
+    width: 180px;
+}
+.logo-link img.f{
+    display: none;
+}
+.template-collection .logo-link img.white,
+.header:hover .logo-link img.white,
+.header.background .logo-link img.white{
+    display: none;
+}
+.template-collection .logo-link img.f,
+.header:hover .logo-link img.f,
+.header.background .logo-link img.f{
+    display: block;
+}
+
+
+.useFlex{
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.useFlex.c{
+    align-items: center;
+    flex-direction: column;
+}
+
+.blog-post-info{
+    background: #FFF;
+    padding: 1rem;
+    width: 80%;
+    text-align: center;
+    margin-top: -20%;
+}
+.blog-post-info h2{
+    font-family: serif;
+    font-weight: normal;
+    text-transform: capitalize;
+    line-height: 1.4
+}
+
 /* Have to set height explicity on ui-view 
 to prevent collapsing during animation*/
 

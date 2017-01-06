@@ -1,15 +1,40 @@
 <div id="our-story-techniques" class="our-story--techniques" data-id="136058051">
-    <div>
+    <div ng-init="cTitle = '{content_title}'">
+        {content}
         <div class="wrapper">
             <header class="white our-story--header">
-                <div class="our-story--header-image" style="background-image:url(https://maiyet.s3.amazonaws.com/maiyet-store/our-story-header-4-aa5-1cbe7d61a136.jpg);"></div>
-                <h1>Our Story</h1>
+                <div class="our-story--header-image" style="background-image:url({cover});"></div>
+                <h1>{{cTitle}}</h1>
             </header>
             <div class="our-story--about">
                 <div class="our-story--about-wrapper">
-                fdsfds
+                    <div class="our-story--about-flex" tiny-animate-scroll>
+                        <div class="our-story--about-copy">
+                            {content1}
+                        </div>
+                        <div class="our-story--about-image"><img src="{image1}">
+                        </div>
+                    </div>
+                    <div class="our-story--about-flex" tiny-animate-scroll>
+                        <div class="our-story--about-copy">
+                            {content2}
+                        </div>
+                        <div class="our-story--about-image"><img src="{image2}">
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="our-story--artisans">
+                <div class="our-story--artisans-wrapper">
+                    <div class="our-story--artisans-wrapper">
+                        <div>
+                            {footer}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/content}
         </div>
+        
     </div>
 </div>

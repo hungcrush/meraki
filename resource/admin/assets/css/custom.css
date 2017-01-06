@@ -705,3 +705,9 @@ li.sort_li.ui-sortable-placeholder{
 .reportarea .report-am tr:first-child td{
     background-color: #fcffe4
 }
+.main-about-upload{
+    display: inline-block;
+}
+.main-about-upload.w168{
+    width: 168px;
+}

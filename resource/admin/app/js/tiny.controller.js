@@ -294,6 +294,10 @@ angular.module('tiny.admin.controllers', []).
     }).
     controller('AboutCtrl', function($scope, $tiny, Load, $rootScope, $stateParams, g, $sce){
         $scope.required_title = true;
+        $scope.required_des = true;
+        $scope.required_another_images = true;
+        $scope.required_cover = true;
+
         $scope.success = false;
         $scope.formSubmit = function(t){
             
@@ -430,6 +434,50 @@ angular.module('tiny.admin.controllers', []).
         $scope._module = URL_SERVER+'admin/product/';
         $scope.isLarge = Load.product.length > 0 ? false : true;
 
+        $scope.parent_current = {};
+        var initParentCurrent = function($product_id)
+        {
+            var outObj = {};
+            Load.product.forEach(function(obj){
+                if(obj.product_id == $product_id)
+                {
+                    outObj = obj;
+
+                    if(obj.parent != 0)
+                    {
+                        outObj['prevParent'] = initParentCurrent(obj.parent);
+                    }else if($product_id > 0){
+                        outObj['prevParent'] = {'product_id': 0};
+                    }
+                    return;
+                }
+            })
+
+            if(!outObj.prevParent)
+            {
+                outObj = {product_id: 0};
+            }
+
+            return outObj;
+        }
+
+        
+        $scope.selectParent = function(obj)
+        {
+            if(obj.product_id > 0)
+                $scope.parent_current = angular.extend(obj, {prevParent: $scope.parent_current});
+        }
+        $scope.backPrevParent = function()
+        {
+            $scope.parent_current = $scope.parent_current.prevParent;
+            $rootScope.changeRoute('admin.product.list.items', {module: $scope.parent_current.product_id});
+        }
+
+        $scope.filterByParent = function(item)
+        {
+            return !!(item.parent == $scope.parent_current.product_id);
+        }
+
 
         var productn = Load.productn;
         $scope.listProduct  = Load.product;
@@ -455,6 +503,10 @@ angular.module('tiny.admin.controllers', []).
         
         $scope.product_id = 0;
         $scope.toProduct_id = function($id){
+            if(Object.keys($scope.parent_current).length == 0)
+            {
+                $scope.parent_current = initParentCurrent($id);
+            }
             $scope.product_id = $id;
         }
         
@@ -513,7 +565,7 @@ angular.module('tiny.admin.controllers', []).
                             $rootScope.currentModal.close();
                             toastr.success('<i class="fa fa-check"></i> Success');
                             
-                            $scope.loadItems(data.product_id);
+                            $scope.loadItems($scope.parent_current.product_id);
                         }
                     })
                     break;
@@ -542,9 +594,14 @@ angular.module('tiny.admin.controllers', []).
             var r = angular.fromJson(respon);
             angular.element('#image_src').val(r.folder+'|'+r.filename);
         }
+
+        $scope.fn.contains = function(arr, value)
+        {
+            return arr.indexOf(value) !== -1;
+        }
         
         $scope.loadItems = function($product_id, callback){
-            if($product_id == 0) return false;
+            //if($product_id == 0) return false;
             $scope.item_name = productn[$product_id];
             
             $tiny.loadData($scope._module+$product_id).then(function(response){
@@ -555,7 +612,7 @@ angular.module('tiny.admin.controllers', []).
         }
         
         $scope.loadPosts = function($product_id){
-            if(!$product_id || $product_id == 0) return false;
+            //if(!$product_id || $product_id == 0) return false;
             
             $tiny.loadData($scope._module+'post/'+$product_id).then(function(response){
                 $scope.listPosts = response.posts;
@@ -607,7 +664,7 @@ angular.module('tiny.admin.controllers', []).
         
         $scope.$on('$stateChangeSuccess', function(evt, toState){
             if(toState.name == 'admin.product.list' && $scope.listProduct.length){
-                $rootScope.changeRoute('admin.product.list.items', {module: $scope.listProduct[0].product_id});
+                $rootScope.changeRoute('admin.product.list.items', {module: 0});
             }
         })
     }).
@@ -619,6 +676,9 @@ angular.module('tiny.admin.controllers', []).
             
             $scope.loadItems($scope.product_id);
             $scope.loadPosts($scope.product_id);
+
+            var categories = new convertCategories($scope.listProduct);
+            $scope.productCategories = categories.parseCategory(0);
         }
         
     }).
@@ -631,8 +691,8 @@ angular.module('tiny.admin.controllers', []).
         if($scope.listItems.length == 0)
             $scope.loadItems($scope.product_id);
         
-        $scope.itemData   = itemData.product[0];
-        $scope.itemImages = itemData.product[0].images;
+        $scope.itemData   = itemData.product;
+        $scope.itemImages = itemData.product.images;
         $scope.toItem_id($stateParams.detail_id);
         
         $scope.backToList = function(){

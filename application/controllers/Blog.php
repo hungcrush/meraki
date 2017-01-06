@@ -5,6 +5,7 @@ class Blog extends TINY_Controller {
     
     public function __construct(){
         parent::__construct();
+        $this->load->model('Blog_model', 'blog');
     }
     
     public function index(){
@@ -13,6 +14,8 @@ class Blog extends TINY_Controller {
             'title_page'    => 'Blog',
             'description'   => 'Create your own photo books, prints and gifts with our ease-to-use online designer.'
         );
+
+        $this->blog->Load(FALSE, $this->data['dataParse']);
     }
     
     public function Detail($id = 0){
@@ -21,5 +24,7 @@ class Blog extends TINY_Controller {
             'title_page'    => 'Blog',
             'description'   => 'Create your own photo books, prints and gifts with our ease-to-use online designer.'
         );
+
+        $this->blog->Load($id, $this->data['dataParse']);
     }
 }

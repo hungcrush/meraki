@@ -193,3 +193,11 @@ angular.module('yuyu.directive', [])
                 }
             }
         })
+        .directive('tinyAnimateScroll', function(){
+            return {
+                restrict: 'A',
+                link: function(scope, el, attrs){
+                    el.tinyAnimateScroll();
+                }
+            }
+        })

@@ -9,13 +9,28 @@ class Product_item_model extends TINY_Model
     
     public function Load($product_id = 0, $item_id = 0){
         $dataOut = array();
+        $this->_ctrl->load->model('product/product_items_cate', 'cates');
+
+        $where = $product_id != 0 ? array('product_id' => $product_id) : array();
+        //-- get other categories
+        if($product_id != 0)
+        {
+            $otherCates = $this->_ctrl->cates->Load($product_id);
+
+            if(!empty($otherCates))
+            {
+                
+                //$where['product_item_id'] = NULL;
+                $where[1] = 'OR product_item_id IN ('.implode(',', $otherCates).')';
+            }
+        }
         
-        $this->order_by('order');
-        $where = array('product_id' => $product_id);
         if($item_id != 0){
             $where['product_item_id'] = $item_id;
         }
+        $this->order_by('order');
         $data = $this->get_many_by($where);
+        //debug($this->_database->last_query());
         if(count($data) > 0){
             foreach($data as $row){
                 $image = explode('|', $row['item_image']);
@@ -29,6 +44,11 @@ class Product_item_model extends TINY_Model
                 $row['url']   = $this->lib->makeURLSEO($row['product_item_id'], $row['item_name']);
 
                 $row['price'] = number_format($row['price']);
+
+                if($this->tiny->isAdmin())
+                {
+                    $row['category_list'] = $this->cates->Load_by_item($row['product_item_id']);
+                }
                 
                 if($item_id > 0){
                     $row['detail'] = $row['item_detail'];
@@ -88,10 +108,21 @@ class Product_item_model extends TINY_Model
         // }
         $product_id = $params['product_id'];
 
-        $this->insert_auto($params);
+        $item_id = $this->insert_auto($params);
+
+        if(isset($params['categories']) && is_numeric($item_id))
+        {
+            $this->_table = 'tiny_product_items_cates';
+            $this->delete_by('product_item_id', $item_id);
+            foreach($params['categories'] as $product_id)
+            {
+                $this->insert(array('product_id' => $product_id, 'product_item_id' => $item_id));
+            }
+        }
+
         return array(
             'content'   => 'OK',
-            '_id'       => $id,
+            '_id'       => $item_id,
             'product_id'=> $product_id
         );
     }

@@ -57,6 +57,8 @@ $route['uploads/([\s\S]+)']= "welcome/dataupload/file/$1";
 $route['home'] = 'welcome/home/';
 $route['drag'] = 'welcome/drag/';
 
+$route['pages/(:any)'] = "pages/index/$1";
+
 $route['blog/(:num)-(:any)'] = "Blog/Detail/$1";
 $route['blog/(:num)'] = "Blog/Detail/$1";
 

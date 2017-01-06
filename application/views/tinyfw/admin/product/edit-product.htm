@@ -18,7 +18,7 @@
 				<label class="col-sm-3 control-label" for="code">Product Code</label>
 
 				<div class="col-sm-9">
-					<input data-validate="required" type="text" class="form-control" name="code" id="code" placeholder="Code....">
+					<input data-validate="required" type="text" ng-value="code" class="form-control" name="code" id="code" placeholder="Code....">
 				</div>
 			</div>
 
@@ -26,7 +26,7 @@
 				<label class="col-sm-3 control-label" for="price">Price</label>
 
 				<div class="col-sm-9">
-					<input data-validate="required" type="text" class="form-control" name="price" id="price" placeholder="Price....">
+					<input data-validate="required" type="text" ng-value="price" class="form-control" name="price" id="price" placeholder="Price....">
 				</div>
 			</div>
 
@@ -34,15 +34,29 @@
 				<label class="col-sm-3 control-label" for="remain">Remain</label>
 
 				<div class="col-sm-9">
-					<input data-validate="required" type="text" class="form-control" name="remain" id="remain" placeholder="Remain....">
+					<input data-validate="required" type="text" ng-value="remain" class="form-control" name="remain" id="remain" placeholder="Remain....">
 				</div>
 			</div>
             
-            <div class="form-group">
+            <div style="display: none" class="form-group">
 				<label class="col-sm-3 control-label" for="item_description">Description</label>
 
 				<div class="col-sm-9">
 					<textarea class="form-control" name="item_description" rows="4" placeholder="Product Description">{{description}}</textarea>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="item_description">Categories Attr</label>
+
+				<div class="col-sm-9">
+					<ul style="padding-left: 20px;">
+						<li ng-repeat="cate in modalData">
+							<label class="checkbox">
+								<input ng-checked="contains(cateitems, cate.product_id)" type="checkbox" name="categories[]" value="{{cate.product_id}}" /> {{cate.name}}
+							</label>
+						</li>
+					</ul>
 				</div>
 			</div>
             
@@ -53,7 +67,9 @@
 					<a id="drop-element" class="thumbnail drop-target" make-lazy="true" thumb-size="305,205" not-thumb="true" on-uploaded="uploadComplete(respon, file)" folder="product2" tiny-upload="true"><img image_target ng-src="{{imagethumb}}" class="img-responsive" /></a>
 				</div>
 			</div>
+            <input type="hidden" ng-if="itemid" ng-value="itemid" name="_update_key" />
             <input type="hidden" ng-if="productid" ng-value="productid" name="product_id" />
+            
             <input type="hidden" name="item_image" ng-value="image" id="image_src" />
             
             <input type="hidden" name="image_size" ng-value="size" id="image_size" />

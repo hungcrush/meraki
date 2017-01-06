@@ -17,7 +17,7 @@ class Product extends TINY_Controller {
     }
     
     public function test($text = ''){
-        echo 'OK'.$text; exit;
+        debug($this->tiny->userData);
     }
     
     public function index(){
@@ -29,7 +29,7 @@ class Product extends TINY_Controller {
     }
     
     public function Items($product_id = 0){
-        if($product_id != 0 && $this->tiny->isJson){
+        if($this->tiny->isJson){
             return $this->item->Load($product_id);
         }
     }

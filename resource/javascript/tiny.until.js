@@ -162,6 +162,60 @@ if (!Object.prototype.unwatch) {
     });
 }
 
+
+/*
+Parse categories follow childs - parent
+*/
+function convertCategories($cateObj)
+{
+    this.cates  = angular.copy($cateObj);
+    this.temp   = [];
+
+    this.initObj();
+}
+
+convertCategories.prototype = {
+    initObj : function()
+    {
+        var self = this;
+        this.cates.forEach(function(obj){
+            if(obj.product_id == 0) return;
+            if(typeof self.temp[obj['parent']] == 'undefined') self.temp[obj['parent']] = [];
+            self.temp[obj['parent']].push(obj);
+        })
+    },
+    parseCategory: function(parent, attr)
+    {
+        var self = this;
+        var _obj = [];
+        attr = attr || '';
+        if(typeof this.temp[parent] != 'undefined')
+        {
+            if(parent != 0)
+                attr = attr + '-- ';
+            this.temp[parent].forEach(function(obj){
+                obj.name = attr + obj.name;
+                _obj.push(obj);
+                _obj = _obj.concat(self.parseCategory(obj.product_id, attr));
+            })
+        }
+        return _obj;
+    },
+    parseObjCategory: function(parent)
+    {
+        var self    = this,
+            _obj    = [];
+        if(typeof self.temp[parent] != 'undefined')
+        {
+            self.temp[parent].forEach(function(obj){
+                obj.childs = self.parseObjCategory(obj.product_id);
+                _obj.push(obj);
+            })
+        }
+        return _obj;
+    }
+}
+
 /*************************/
 //-- Common functions --/
 /**********************/
@@ -280,6 +334,9 @@ var tn = {
                         break;
                     case 2: // check element exist
                         c = !plugin ? $(condition).length : $(condition).length && typeof jQuery.fn[plugin] != 'undefined';
+                        break;
+                    case 3: // check if variable is not undefined
+                        c = typeof window[condition] != 'undefined';
                         break;
                 }
                 if(c){

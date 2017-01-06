@@ -4,17 +4,19 @@
                 <h1 class="section-header__title section-header__left">Blog</h1>
             </header>
             
-            <div class="blog-grid page--content">
-                <div class="blog-post-item">
+            <div class="blog-grid page--content" ui-view>
+                {blogs}
+                <div class="blog-post-item useFlex c">
                     <div class="blog-post-cover">
-                        <img src="/image_demo/blog-feature.jpg" />
+                        <img src="{image}" />
                     </div>
                     <div class="blog-post-info">
-                        <h2>Image Deconstructed: Kate Moss by Patrick Demarchelier (Part One: The Shoot)</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed arcu lorem, convallis a nisl tempus, tempus vestibulum dolor. Proin tristique urna a nulla vulputate, at malesuada turpis iaculis.</p>
+                        <h2>{title}</h2>
+                        <p>{description}</p>
                     </div>
-                    <a class="btn--black">Read More</a>
+                    <a href="{blog_url}" class="btn--black">Read More</a>
                 </div>
+                {/blogs}
             </div>
         </div>
     </div>

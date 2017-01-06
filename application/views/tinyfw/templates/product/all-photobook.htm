@@ -1,8 +1,8 @@
 <section ui-view>
-    <div class="shipping-module">
+    <div ng-if="category_data.description != ''" class="shipping-module">
         <h5>{{category_data.description}}</h5>
     </div>
-    <div class="collections-header" style="background-image: url('{{category_data.image}}');"></div>
+    <div ng-if="category_data.image != ''" class="collections-header" style="background-image: url('{{category_data.image}}');"></div>
     <div class="main-content--inner">
         <div class="wrapper collections-list">
             <header class="section-header">
@@ -16,10 +16,10 @@
                             <a href="{{category_data.url | mkurl}}/{{product.url}}">
                                 <img ng-src="{{product.thumb}}" alt="{{product.item_name}}" class="grid__image">
 
-                            </a>
+                            </a><!-- 
                             <a href="{{category_data.url | mkurl}}/{{product.url}}" class="product--grid-hover-image">
                                 <img src="/image_demo/EAOO3D.jpg">
-                            </a>
+                            </a> -->
                         </div>
                         <div class="product--grid-item-info">
 

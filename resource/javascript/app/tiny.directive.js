@@ -407,7 +407,7 @@ angular.module('tinyfw.directive', [])
         })
         
         .directive('tinyEditor', function(){
-            
+            tn.loadJs(tinyConfig.dirTemp+'/tinymce/tinymce.min.js');
             return {
                 restrict: 'AC',
                 link: function(scope, element, attr){
@@ -442,19 +442,11 @@ angular.module('tinyfw.directive', [])
                     }
                     //-- init upload
                     var timeout = attr.timeout || 100;
-                    if(typeof tinymce == 'undefined'){
-                        tn.loadJs(tinyConfig.dirTemp+'/tinymce/tinymce.min.js', function(){
-                            setTimeout(function(){
-                                init();
-                            }, timeout)
-                        });
-                    }else{
-                        
+                    tn.delayBeforeLoaded('tinymce', function(){
                         setTimeout(function(){
                             init();
                         }, timeout)
-                        
-                    }
+                    }, 3);
                     
                     scope.$on(
     					"$destroy",

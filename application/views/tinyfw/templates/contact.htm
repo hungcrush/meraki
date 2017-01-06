@@ -1,0 +1,53 @@
+<div class="main-content--inner">
+
+    <div class="wrapper contact">
+    {content}
+        <div class="main-content--header">
+            <h1>Contact</h1>
+        </div>
+
+        <div class="contact--page">
+            <div class="contact--page-inquiry">
+                <ul>
+                    <li>
+                        <h3>Address</h3>
+                        {address}
+                    </li>
+                    <li>
+                        <h3>Phone</h3>
+                        <p>{phone}</p>
+                    </li>
+                    <li>
+                        <h3>Email</h3>
+                        <a href="mailto:{email}">{email}</a>
+                    </li>
+                    <li>
+                        <h3>Working Hours</h3>
+                        <p>{working}</p>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="contact--page-form">
+                <form method="post" action="/contact#contact_form" id="contact_form" class="contact-form" accept-charset="UTF-8">
+                    <input type="hidden" value="contact" name="form_type">
+                    <input type="hidden" name="utf8" value="✓">
+
+                    <label for="ContactFormName" class="hidden-label">Name*</label>
+                    <input type="text" id="ContactFormName" class="input-full" name="contact[name]" placeholder="Name" autocapitalize="words" value="">
+
+                    <label for="ContactFormEmail" class="hidden-label">Email*</label>
+                    <input type="email" id="ContactFormEmail" class="input-full" name="contact[email]" placeholder="Email" autocorrect="off" autocapitalize="off" value="">
+
+                    <label for="ContactFormMessage" class="hidden-label">Message</label>
+                    <textarea rows="10" id="ContactFormMessage" class="input-full" name="contact[body]" placeholder="Message"></textarea>
+
+                    <input type="submit" class="btn btn-submit" value="Send">
+
+                </form>
+            </div>
+        </div>
+    {/content}
+    </div>
+</div>

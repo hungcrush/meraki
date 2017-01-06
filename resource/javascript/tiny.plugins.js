@@ -243,4 +243,52 @@
 
 		return retval || lists;
 	}
+
+	/*
+		Our Story
+		Scroll to element and add class animate-image animate
+	*/
+	function tinyAnimateScroll($element)
+	{
+		this.$el = $($element);
+
+		this.classes = 'animate-image animate';
+		this.elOffset = this.$el.offset().top - 650;
+
+		var _self = this;
+		_self.event = 'scroll.' + new Date().getTime() + this.$el.index();
+		_self.init();
+		
+	}
+
+	tinyAnimateScroll.prototype = {
+		init: function() {
+			var _self = this;
+			_window.on(_self.event, function(){
+
+				if(_window.scrollTop() >= _self.elOffset)
+				{
+					_self.$el.addClass(_self.classes);
+					_window.off(_self.event);
+				}
+			})
+		}
+	}
+
+	$.fn.tinyAnimateScroll = function(params)
+	{
+		var lists  	= this,
+			retval	= this;
+
+		lists.each(function(){
+			var plugin = $.data(this, 'tinyAnimateScroll');
+			if (!plugin) {
+				$.data(this, 'tinyAnimateScroll', new tinyAnimateScroll(this, params));
+				$.data(this, 'tinyAnimateScroll-id', new Date().getTime());
+			}
+		})
+
+		return retval || lists;
+	}
+
 })(jQuery, window, document)

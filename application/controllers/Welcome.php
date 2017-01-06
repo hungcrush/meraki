@@ -11,6 +11,7 @@ class Welcome extends TINY_Controller {
     
     public function index(){
         $data = $this->content->loadContentIndex();
+
         unset($data['data']['path']);
         $this->data = array(
             'template'  => 'templates/indexPage.htm',

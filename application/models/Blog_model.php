@@ -8,7 +8,7 @@ class Blog_model extends TINY_Model
         parent::__construct();
     }
     
-    public function Load($post_id = 0){
+    public function Load($post_id = 0, &$dataParse = FALSE){
         $Count   = 1;
         $dataOut = array();
 
@@ -28,9 +28,17 @@ class Blog_model extends TINY_Model
         foreach($data as $row){
             $row['created_at'] = $this->formatTime($row['created_at']);
             $row['image'] = $this->lib->catch_that_image($row['content']);
-            $row['description'] = $this->lib->truncate_words($row['content']);;
+            $row['description'] = $this->lib->truncate_words($row['content']);
+            $row['blog_url'] = '/blog/' . $this->lib->makeURLSEO($row['blog_id'], $row['title']);
+            $row['content'] = $this->lib->unescape($row['content']);
             $dataOut[] = $row;
         }
+
+        if($dataParse)
+        {
+            $dataParse['blogs'] = $dataOut;
+        }
+
         return array(
             'lists' => $dataOut,
             'count' => $Count

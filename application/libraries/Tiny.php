@@ -15,7 +15,7 @@ class Tiny {
     var $URL___     = ''; 
     
     //-- Pagination default
-    var $items_per_page = 2;
+    var $items_per_page = 15;
 
     public $userData = array();
 
@@ -77,6 +77,8 @@ class Tiny {
         if(!$this->isTemp){
             //$data['content_tiny'] = $this->CI->parser->parse($template, $data, true);
             $template = self::DIR_TEMP.$this->mainpage;
+            $this->CI->load->model('Content_model', 'content');
+            $this->CI->content->Load('contact_content', $data);
         }else if($this->noLogin == 1){
             $this->ReturnYU();
             exit;
@@ -107,6 +109,11 @@ class Tiny {
         $this->CI->load->model('User_model', 'usersssss');
         $user_info      = $this->CI->usersssss->LoadSingle($user_id, TRUE);
         return $user_info;
+    }
+
+    public function isAdmin()
+    {
+        return (!empty($this->userData) && (int)$this->CI->input->get_request_header('is_frontpage') != 1);
     }
 
 

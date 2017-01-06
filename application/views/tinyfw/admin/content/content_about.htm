@@ -22,29 +22,42 @@
 	
 		<form role="form" tiny-submit="formSubmit(dataForm)" method="post">
 			
-			<div ng-if="!required_title" class="form-group">
+			<div ng-if="required_title" class="form-group">
 				<label class="control-label">Title</label>
 				<input type="text" class="form-control" name="title" value="{content_title}" placeholder="Title" />
 			</div>
             
-            <div ng-if="!required_des" id="main" class="form-group">
-				<label class="control-label">Cover</label> <br />
-                <button class="btn btn-success" folder="contents" tiny-upload="true">Choose Image</button>
-                <img image_target ng-src="{{'{content_des}' | tinyimage}}" />
-                <input input_target type="hidden" name="description" value="{content_des}" />
+            {content}
+            <div ng-if="'image' == '{type}'" id="main" class="form-group main-about-upload">
+				<label class="control-label">{label}</label> <br />
+				<img image_target ng-src="{{'{value}' | tinyimage}}" />
+                <a class="" href="javascript:void(0)" folder="contents" thumb-size="168,94" tiny-upload="true">Change</a>
+                
+                <input input_target type="hidden" name="content[{name}]" value="{value}" />
 			</div>
+
+			<div ng-if="'text' == '{type}'" class="form-group">
+				<label class="control-label">{label}</label>
+                <textarea class="form-control tiny-editor" timeout="0" id="{name}" rows="5" name="content[{name}]" placeholder="Content">{value}</textarea>
+			</div>
+
+			<div ng-if="'stext' == '{type}'" class="form-group">
+				<label class="control-label">{label}</label>
+                <input type="text" name="content[{name}]" placeholder="{label}" value="{value}" class="form-control" />
+			</div>
+
+			<hr />
+
+			{/content}
             
-            <div class="form-group">
-				<label class="control-label">Content</label>
-                <textarea class="form-control tiny-editor" timeout="0" id="content" rows="5" name="content" placeholder="Content">{content_html}</textarea>
-			</div>
+            
 			
 			<div class="form-group">
 				<button type="submit" class="btn btn-success">Validate</button>
 				<button type="reset" class="btn btn-white">Reset</button>
 			</div>
 		  
-            <input type="hidden" name="type" value="{type}" />
+            <input type="hidden" name="content_id" value="{type}" />
 		</form>
 	
 	</div>

@@ -138,6 +138,31 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     })
 
     //------------------------------
+    // CONTACT - GET IN TOUCH
+    //------------------------------
+    
+    .state('home.contact', {
+        url: 'contact',
+        templateUrl: URL_SERVER+'contact',
+        controller: 'ContactCtrl',
+        pageClass: 'contact-us'
+    })
+
+    //------------------------------
+    // ANOTHER PAGES
+    //------------------------------
+    
+    .state('home.pages', {
+        url: 'pages/*page',
+        templateUrl: function($stateParams){
+            var $page = $stateParams.page.split('-')[0];
+            return URL_SERVER+'pages/' + $page;
+        },
+        controller: 'PagesCtrl',
+        pageClass: 'contact-us'
+    })
+
+    //------------------------------
     // ACCOUNT
     //------------------------------
 

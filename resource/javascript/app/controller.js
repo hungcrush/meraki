@@ -39,7 +39,9 @@ angular.module('yuyu.controller', [])
             return feature.concat(data);
         }
         $tiny.loadData(URL_SERVER + 'welcome/get-navbar').then(function(data){
-            $scope.navbarShop = sortByFeature(data.product);
+            //$scope.navbarShop = sortByFeature(data.product);
+            var categories = new convertCategories(data.product);
+            $scope.navbarShop = categories.parseObjCategory(0);
             $rootScope.productn = data.productn;
         });
     })
@@ -160,4 +162,10 @@ angular.module('yuyu.controller', [])
     .controller('AboutCtrl', function($rootScope)
     {
         $rootScope.isActive = 'about';
+    })
+    .controller('ContactCtrl', function(){
+
+    })
+    .controller('PagesCtrl', function(){
+        
     })
