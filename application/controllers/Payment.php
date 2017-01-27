@@ -14,4 +14,10 @@ class Payment extends TINY_Controller {
             'description'   => ''
         );
     }
+
+    public function Submit(){
+        $data = $this->_post('payment_data');
+
+        debug($data);
+    }
 }

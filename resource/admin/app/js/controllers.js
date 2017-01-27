@@ -226,7 +226,7 @@ angular.module('xenon.controllers', []).
             $scope.menuItems = [];
             $tiny.ajax({
                 url: URL_SERVER+'admin/administrator/menu/Navigation'
-            }).success(function(data){
+            }).then(function(data){
                 $scope.menuItems = $sidebarMenuItems.prepareSidebarMenu(data.menu[$rootScope.rolePage[0]]).getAll();
 
                 $rootScope._services = data.pages;

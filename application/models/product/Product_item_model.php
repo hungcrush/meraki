@@ -11,24 +11,32 @@ class Product_item_model extends TINY_Model
         $dataOut = array();
         $this->_ctrl->load->model('product/product_items_cate', 'cates');
 
-        $where = $product_id != 0 ? array('product_id' => $product_id) : array();
-        //-- get other categories
-        if($product_id != 0)
+        // new code 14/01/2017
+        if(!is_array($product_id))
         {
-            $otherCates = $this->_ctrl->cates->Load($product_id);
-
-            if(!empty($otherCates))
+            $where = $product_id != 0 ? array('product_id' => $product_id) : array();
+            //-- get other categories
+            if($product_id != 0)
             {
-                
-                //$where['product_item_id'] = NULL;
-                $where[1] = 'OR product_item_id IN ('.implode(',', $otherCates).')';
+                $otherCates = $this->_ctrl->cates->Load($product_id);
+
+                if(!empty($otherCates))
+                {
+                    
+                    //$where['product_item_id'] = NULL;
+                    $where[1] = 'OR product_item_id IN ('.implode(',', $otherCates).')';
+                }
             }
+            
+            if($item_id != 0){
+                $where['product_item_id'] = $item_id;
+            }
+            $this->order_by('order');
         }
-        
-        if($item_id != 0){
-            $where['product_item_id'] = $item_id;
+        else
+        {
+            $where['product_item_id'] = $product_id;
         }
-        $this->order_by('order');
         $data = $this->get_many_by($where);
         //debug($this->_database->last_query());
         if(count($data) > 0){

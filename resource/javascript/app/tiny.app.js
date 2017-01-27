@@ -3,7 +3,8 @@
 var tinyfw = angular.module('tinyfw',     
 [
     "ui.router", 
-    "ngAnimate", 
+    "ngAnimate",
+    "ngCookies",
     "tinyfw.factory", 
     "tinyfw.directive", 
     "oc.lazyLoad", 
@@ -50,14 +51,14 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     .state('home', {
         url: PATH_,
         resolve: {
-			// owlSlider: function($ocLazyLoad){
-			// 	return $ocLazyLoad.load([
-   //                  tinyConfig.dirTemp+'/owl-carousel/owl.carousel.css',
-   //                  tinyConfig.dirTemp+'/owl-carousel/owl.theme.css',
-   //                  tinyConfig.dirTemp+'/owl-carousel/owl-carousel-custom.css',
-   //                  tinyConfig.dirTemp+'/owl-carousel/owl.carousel.js'
-			// 	]);
-			// }
+			owlSlider: function($ocLazyLoad){
+				return $ocLazyLoad.load([
+                    tinyConfig.dirTemp+'/owl-carousel/owl.carousel.css',
+                    tinyConfig.dirTemp+'/owl-carousel/owl.theme.css',
+                    tinyConfig.dirTemp+'/owl-carousel/owl-carousel-custom.css',
+                    tinyConfig.dirTemp+'/owl-carousel/owl.carousel.js'
+				]);
+			}
         },
         templateUrl: URL_SERVER,
         controller: 'HomeCtrl'
@@ -181,7 +182,10 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     .state('home.payment', {
         url: 'payment',
         templateUrl: URL_SERVER+'payment',
-        controller: 'AboutCtrl'
+        onEnter: function($rootScope){
+            $rootScope.toggleCart(false);
+        },
+        controller: 'PaymentCtrl'
     })
     
     $locationProvider.html5Mode({

@@ -26,14 +26,7 @@
             </li>
         </ul>
         <div class="footer--social-insta">
-            <a href="https://www.instagram.com/merakistores/" target="_blank"><img src="/image_demo/EAOO3D.jpg">
-            </a>
-            <a href="https://www.instagram.com/merakistores/" target="_blank"><img src="/image_demo/EAOO1B.jpg">
-            </a>
-            <a href="https://www.instagram.com/merakistores/" target="_blank"><img src="/image_demo/EAOO4A.jpg">
-            </a>
-            <a href="https://www.instagram.com/merakistores/" target="_blank"><img src="/image_demo/EAOO6A.jpg">
-            </a>
+            <a style="cursor: pointer;" ng-repeat="item in instagrams" href="{{item.link}}" target="_blank"><img ng-src="{{item.src}}"></a>
         </div>
     </div>
 

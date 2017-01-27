@@ -14,6 +14,12 @@
 		this.el 		= $(element);
 		this.options 	= $.extend({}, default__, options, this.el.data());
 
+		// Input clone name send to form
+		this.$input 	= $('<input type="hidden" />').attr('name', this.el.attr('name')).appendTo(this.el.parents('form'));
+
+		// remove attr name
+		this.el.removeAttr('name');
+
 		this.events 	= {
 			click: 'click.' + this.el.data('tinyDropdownId')
 		}
@@ -36,28 +42,32 @@
 			this.$tpl.append(this.renderOptions(this.$selected));
 
 			this.el.replaceWith(this.$tpl);
+
+			this.$input.val(this.$selected.attr('value'));
 		},
 		renderOptions: function()
 		{
-			var ul 		= $('<ul />'),
-				_self	= this;;
+			this.ul 		= $('<ul />');
+			var _self 		= this;
 			this.el.find('option').each(function(){
 				var opt = $(this);
-				ul.append('<li class="'+ ((opt.text() == _self.$selected.text()) ? "active" : "")+ '">' + opt.text() + '</li>');
+				_self.ul.append('<li data-value="'+opt.attr('value')+'" class="'+ ((opt.text() == _self.$selected.text()) ? "active" : "")+ '">' + opt.text() + '</li>');
 			})
 
-			ul.find('li').on('click', function(e){
-				var t = $(this);
-				ul.find('.active').removeClass('active');
-				t.addClass('active');
-				_self.$tpl.find('.selected').text(t.text());
+			_self.ul.find('li').on('click', $.context(this, 'onChange'));
 
-				_self.onToggle(true);
-			})
-
-			this.$div = $('<div />').append(ul);
+			this.$div = $('<div />').append(_self.ul);
 
 			return this.$div;
+		},
+		onChange: function(e){
+			var t = $(e.target);
+			this.ul.find('.active').removeClass('active');
+			t.addClass('active');
+			this.$tpl.find('.selected').text(t.text());
+
+			this.onToggle(true);
+			this.$input.val(t.text());
 		},
 		onToggle: function(_value){
 			var _self = this;

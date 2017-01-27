@@ -89,4 +89,28 @@ class Welcome extends TINY_Controller {
         // - year - mon - mday - hours - minutes - seconds
         return getdate();
     }
+
+    public function getRecentInstagram($instagram_user = 'merakistores')
+    {
+        $limit = 8;
+        $medias = array();
+
+        $data = file_get_contents('https://www.instagram.com/'.$instagram_user.'/media/');
+        $data = json_decode($data);
+
+        $instagramMedia = $data->items;
+
+        foreach($instagramMedia as $key => $item)
+        {
+            if($key + 1 > $limit) break;
+            $medias[] = array(
+                'link'  => $item->link,
+                'src'   => $item->images->low_resolution->url,
+                'hash'  => '#'
+            );
+        }
+
+        return array('medias' => $medias);
+
+    }
 }

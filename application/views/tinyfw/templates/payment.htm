@@ -16,47 +16,25 @@
                         </tr>
                     </thead>
                     <tbody data-order-summary-section="line-items">
-                        <tr class="product" data-product-id="8282255811" data-variant-id="27245745987" data-product-type="Default">
+                        <tr class="product" ng-repeat="item in shopCart">
                             <td class="product__image">
                                 <div class="product-thumbnail">
                                     <div class="product-thumbnail__wrapper">
-                                        <img alt="V-NECK SHEATH DRESS" class="product-thumbnail__image" src="/image_demo/EAOO3D.jpg">
+                                        <img alt="V-NECK SHEATH DRESS" class="product-thumbnail__image" ng-src="{{item.image}}">
                                     </div>
-                                    <span class="product-thumbnail__quantity" aria-hidden="true">1</span>
+                                    <span class="product-thumbnail__quantity" aria-hidden="true">{{item.quantity}}</span>
                                 </div>
                             </td>
                             <td class="product__description">
-                                <span class="product__description__name order-summary__emphasis">V-NECK SHEATH DRESS</span>
-                                <span class="product__description__variant order-summary__small-text">Black / 4</span>
+                                <span class="product__description__name order-summary__emphasis">{{item.name}}</span>
+                                <span class="product__description__variant order-summary__small-text">Size: {{item.size}}</span>
 
                             </td>
                             <td class="product__quantity visually-hidden">
-                                1
+                                {{item.quantity}}
                             </td>
                             <td class="product__price">
-                                <span class="order-summary__emphasis">$1,195.00</span>
-                            </td>
-                        </tr>
-                        <tr class="product" data-product-id="8364917827" data-variant-id="27699541763" data-product-type="Default">
-                            <td class="product__image">
-                                <div class="product-thumbnail">
-                                    <div class="product-thumbnail__wrapper">
-                                        <img alt="LONG PEPLUM GOWN" class="product-thumbnail__image" src="/image_demo/EAOO1B.jpg">
-                                    </div>
-                                    <span class="product-thumbnail__quantity" aria-hidden="true">1</span>
-                                </div>
-
-                            </td>
-                            <td class="product__description">
-                                <span class="product__description__name order-summary__emphasis">LONG PEPLUM GOWN</span>
-                                <span class="product__description__variant order-summary__small-text">VERMILLION / 4</span>
-
-                            </td>
-                            <td class="product__quantity visually-hidden">
-                                1
-                            </td>
-                            <td class="product__price">
-                                <span class="order-summary__emphasis">$1,895.00</span>
+                                <span class="order-summary__emphasis">{{item.price | number}} VND</span>
                             </td>
                         </tr>
                     </tbody>
@@ -97,8 +75,8 @@
                       <tr class="total-line total-line--subtotal">
                           <td class="total-line__name">Subtotal</td>
                           <td class="total-line__price">
-                              <span class="order-summary__emphasis" data-checkout-subtotal-price-target="309000">
-                          $3,090.00
+                              <span class="order-summary__emphasis">
+                          {{calcSubTotal() | number}} VND
                         </span>
                           </td>
                       </tr>
@@ -108,7 +86,7 @@
                           <td class="total-line__name">Shipping</td>
                           <td class="total-line__price">
                               <span class="order-summary__emphasis" data-checkout-total-shipping-target="10000">
-                            $100.00
+                            0
                           </span>
                           </td>
                       </tr>
@@ -116,7 +94,7 @@
                       <tr class="total-line total-line--taxes " data-checkout-taxes="">
                           <td class="total-line__name">Taxes</td>
                           <td class="total-line__price">
-                              <span class="order-summary__emphasis" data-checkout-total-taxes-target="30900">$309.00</span>
+                              <span class="order-summary__emphasis" data-checkout-total-taxes-target="30900">0</span>
                           </td>
                       </tr>
 
@@ -127,9 +105,9 @@
                               <span class="payment-due-label__total">Total</span>
                           </td>
                           <td class="total-line__price payment-due">
-                              <span class="payment-due__currency">USD</span>
+                              <span class="payment-due__currency"></span>
                               <span class="payment-due__price" data-checkout-payment-due-target="349900">
-                          $3,499.00
+                          {{calcSubTotal() | number}} VND
                         </span>
                           </td>
                       </tr>
@@ -145,9 +123,8 @@
                 </a>
             </div>
             <div class="main--body">
-              <form method="post" action="/account/addresses" id="address_form_new" accept-charset="UTF-8">
+              <form method="post" tiny-submit="submitPayment(dataForm)" accept-charset="UTF-8">
     <input type="hidden" value="customer_address" name="form_type">
-    <input type="hidden" name="utf8" value="✓">
 
     <div class="payment-title-wrapper align-left">
         <h4>Customer information</h4>
@@ -155,7 +132,7 @@
 
     <div class="tiny-input">
         <label for="customer_info">Email</label>
-        <input type="text" id="customer_info" class="input-full" name="customer_email" value="" placeholder="Email" autocapitalize="words">
+        <input type="email" required id="customer_info" class="input-full" name="customer_email" value="" placeholder="Email" autocapitalize="words">
     </div>
 
     <div class="payment-title-wrapper align-left">
@@ -167,14 +144,14 @@
         <div class="one-half">
             <div class="tiny-input">
                 <label for="AddressFirstNameNew">First Name</label>
-                <input type="text" id="AddressFirstNameNew" class="input-full" name="address[first_name]" value="" autocapitalize="words" placeholder="First Name">
+                <input type="text" required id="AddressFirstNameNew" class="input-full" name="address[first_name]" value="" autocapitalize="words" placeholder="First Name">
             </div>
         </div>
 
         <div class="one-half">
             <div class="tiny-input">
                 <label for="AddressLastNameNew">Last Name</label>
-                <input type="text" id="AddressLastNameNew" class="input-full" name="address[last_name]" value="" autocapitalize="words" placeholder="Last Name">
+                <input type="text" required class="input-full" name="address[last_name]" value="" autocapitalize="words" placeholder="Last Name">
             </div>
         </div>
 
@@ -182,11 +159,11 @@
 
     <div class="tiny-input">
         <label for="AddressCompanyNew">Company</label>
-        <input type="text" id="AddressCompanyNew" class="input-full" name="address[company]" value="" autocapitalize="words" placeholder="Company">
+        <input type="text" class="input-full" name="address[company]" value="" autocapitalize="words" placeholder="Company">
     </div>
     <div class="tiny-input">
         <label for="AddressAddress1New">Address1</label>
-        <input type="text" id="AddressAddress1New" class="input-full" name="address[address1]" value="" autocapitalize="words" placeholder="Address1">
+        <input type="text" class="input-full" required name="address[address1]" value="" autocapitalize="words" placeholder="Address1">
     </div>
     <div class="tiny-input">
         <label for="AddressAddress2New">Address2</label>
@@ -196,21 +173,21 @@
         <div class="grid__item large--one-half">
             <div class="tiny-input">
                 <label for="AddressCityNew">City</label>
-                <input type="text" id="AddressCityNew" class="input-full" name="address[city]" value="" autocapitalize="words" placeholder="City">
+                <input type="text" required class="input-full" name="address[city]" value="" autocapitalize="words" placeholder="City">
             </div>
         </div>
 
         <div class="grid__item large--one-half">
             <div class="tiny-input">
                 <label for="AddressZipNew">Postal/Zip Code</label>
-                <input type="text" id="AddressZipNew" class="input-full" name="address[zip]" value="" autocapitalize="characters" placeholder="Postal/Zip Code">
+                <input type="text" required class="input-full" name="address[zip]" value="" autocapitalize="characters" placeholder="Postal/Zip Code">
             </div>
         </div>
 
         <div class="grid__item large--one-half">
             <div class="tiny-input">
                 <label for="AddressPhoneNew">Phone</label>
-                <input type="tel" id="AddressPhoneNew" class="input-full" name="address[phone]" value="" placeholder="Phone">
+                <input type="tel" required class="input-full" name="address[phone]" value="" placeholder="Phone">
             </div>
         </div>
     </div>
@@ -223,7 +200,7 @@
     <p>
         <input type="submit" class="btn btn--full" value="Submit">
     </p>
-    <p class="align-center"><a href="#" class="link-default" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">Cancel</a>
+    <p class="align-center"><a href="/" class="link-default">Cancel</a>
     </p>
 </form>
             </div>

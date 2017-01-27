@@ -10,7 +10,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: '/admin/hr/punch-in'
             })
-            .success(function(data){
+            .then(function(data){
                 toastr.success('<i class="fa fa-check"></i> Success');
                 $scope.wasPunchIn = 1;
             })
@@ -21,7 +21,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: '/admin/hr/punch-out'
             })
-            .success(function(data){
+            .then(function(data){
                 toastr.success('<i class="fa fa-check"></i> Success');
                 $scope.wasPunchIn = 2;
             })
@@ -54,7 +54,7 @@ angular.module('tiny.admin.controllers', []).
                 url: tn.makeURL('Add'),
                 data: t
             })
-            ajax.success(function(data){
+            ajax.then(function(data){
                 if(data.content == 'OK'){
                     toastr.success('<i class="fa fa-check"></i> Success');
                     $rootScope.currentModal.close();
@@ -71,7 +71,7 @@ angular.module('tiny.admin.controllers', []).
                 url: tn.makeURL('AddGroup'),
                 data: t
             })
-            ajax.success(function(data){
+            ajax.then(function(data){
                 if(data.content == 'OK'){
                     toastr.success('<i class="fa fa-check"></i> Success');
                     $rootScope.currentModal.close();
@@ -101,7 +101,7 @@ angular.module('tiny.admin.controllers', []).
                 url: tn.makeURL('add'),
                 data: t
             })
-            ajax.success(function(data){
+            ajax.then(function(data){
                 if(data.content == 'OK'){
                     toastr.success('<i class="fa fa-check"></i> Success');
                     $rootScope.currentModal.close();
@@ -156,7 +156,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: g.URL($stateParams),
                 data: {page: page, group_id: group_id, load_data: true}
-            }).success(function(data){
+            }).then(function(data){
                 //-- data return only have 1 object
                 angular.forEach($scope.lists, function(obj, i){
                     if(obj.user_group_id == group_id){
@@ -187,7 +187,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: tn.makeURL('save'),
                 data: data
-            }).success(function(response){
+            }).then(function(response){
                 if(response.content == 'OK'){
                     toastr.success('<i class="fa fa-check"></i> Success');
                     $rootScope.changeRoute('admin.administrator', {module: 'peoples'});
@@ -239,7 +239,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: tn.makeURL('sort'),
                 data: {data: JSON.stringify($scope.json)}
-            }).success(function(data){
+            }).then(function(data){
                 if(data.content == 'OK'){
                     $scope.isUpdate = false;
                     $scope.$apply();
@@ -266,7 +266,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: tn.makeURL('Add'),
                 data: data
-            }).success(function(data){
+            }).then(function(data){
                 if(data.content == 'OK'){
                     $rootScope.currentModal.close();
                     toastr.success('<i class="fa fa-check"></i> Success');
@@ -304,7 +304,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: URL_SERVER+'admin/content/save/about_content',
                 data: t
-            }).success(function(){
+            }).then(function(){
                 $scope.success = true;
             })
         }
@@ -409,7 +409,7 @@ angular.module('tiny.admin.controllers', []).
                 $tiny.ajax({
                     url: tn.makeURL('save'),
                     data: t
-                }).success(function(data){
+                }).then(function(data){
                     toastr.success('<i class="fa fa-check"></i> Success');
                     
                     if(!check){
@@ -533,7 +533,7 @@ angular.module('tiny.admin.controllers', []).
                     $tiny.ajax({
                         url: tn.makeURL('add', $scope._module),
                         data: t
-                    }).success(function(data){
+                    }).then(function(data){
                         if(data.content == 'OK'){
                             $rootScope.currentModal.close();
                             toastr.success('<i class="fa fa-check"></i> Success');
@@ -560,7 +560,7 @@ angular.module('tiny.admin.controllers', []).
                     $tiny.ajax({
                         url: tn.makeURL('add/item', $scope._module),
                         data: t
-                    }).success(function(data){
+                    }).then(function(data){
                         if(data.content == 'OK'){
                             $rootScope.currentModal.close();
                             toastr.success('<i class="fa fa-check"></i> Success');
@@ -574,7 +574,7 @@ angular.module('tiny.admin.controllers', []).
                     $tiny.ajax({
                         url: tn.makeURL('add/post', $scope._module),
                         data: t
-                    }).success(function(data){
+                    }).then(function(data){
                         if(data.content == 'OK'){
                             $rootScope.currentModal.close();
                             toastr.success('<i class="fa fa-check"></i> Success');
@@ -623,7 +623,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: tn.makeURL('sort/' + type, $scope._module),
                 data: {sortarr: JSON.stringify(data)}
-            }).success(function(data){
+            }).then(function(data){
                 if(data.content == 'OK'){
                     toastr.success('<i class="fa fa-check"></i> Success');
                 }else{
@@ -710,7 +710,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: tn.makeURL('add/detail', $scope._module),
                 data: t
-            }).success(function(data){
+            }).then(function(data){
                 if(data.content == 'OK'){
                     //toastr.success('<i class="fa fa-check"></i> Success');
                     $scope.success = true;
@@ -779,7 +779,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: URL_SERVER+'admin/blog',
                 data: t
-            }).success(function(data){
+            }).then(function(data){
                 $scope.listBlogs = data.lists;
                 $scope.countBlog = data.count;
                 $scope.currentPage = t.page;
@@ -829,7 +829,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: tn.makeURL('add'),
                 data: t
-            }).success(function(data){
+            }).then(function(data){
                 if(data.content == 'OK')
                     $scope.success = true;
             })
@@ -848,7 +848,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: URL_SERVER + 'admin/blog/add',
                 data: t
-            }).success(function(){
+            }).then(function(){
                 $scope.success = true;
             })
         }
@@ -860,7 +860,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: tn.makeURL('add'),
                 data: t
-            }).success(function(data){
+            }).then(function(data){
                 g.Categories($tiny).then(function(respon){
                     $scope.listcates = respon.cate_list;
                     if($rootScope.currentModal.close)
@@ -896,7 +896,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: tn.makeURL('save', '/admin/profile'),
                 data: data
-            }).success(function(data){
+            }).then(function(data){
                 if(data.content == 'OK')
                 {
                     toastr.success('<i class="fa fa-check"></i> Success');
@@ -913,7 +913,7 @@ angular.module('tiny.admin.controllers', []).
             $tiny.ajax({
                 url: tn.makeURL('postfeed', '/admin/profile'),
                 data: data
-            }).success(function(data){
+            }).then(function(data){
                 if(data.content == 'OK')
                 {
                     toastr.success('<i class="fa fa-check"></i> Success');
@@ -1002,7 +1002,7 @@ angular.module('tiny.admin.controllers', []).
                     form: data,
                     access: $scope.accessToAction
                 }
-            }).success(function(data){
+            }).then(function(data){
                 if(data.content == 'OK')
                 {
                     if($scope.accessToAction == 1)
@@ -1048,7 +1048,7 @@ angular.module('tiny.admin.controllers', []).
                     project_info: data
                 }
             })
-            .success(function(data){
+            .then(function(data){
                 $rootScope.changeRoute('admin.task.add', {project_id: data.project_id});
             })
         }
@@ -1094,7 +1094,7 @@ angular.module('tiny.admin.controllers', []).
                     todo_id: typeof index != 'undefined' ? $scope.processing.todo_list[index].todo_id : getTodoIDs()
                 }
             })
-            .success(function(data){
+            .then(function(data){
                 console.log('Debug comments', data);
                 angular.forEach(data.comments, function(comment, key){
                     $scope.processing.todo_list.forEach(function(obj, k){
@@ -1119,7 +1119,7 @@ angular.module('tiny.admin.controllers', []).
                     task_id: item.task_id
                 }
             })
-            .success(function(data){
+            .then(function(data){
                 $scope.parentobj.todoCompleted = data.is_complete == 1 ? true : false;
             })
         }
@@ -1133,7 +1133,7 @@ angular.module('tiny.admin.controllers', []).
                     content: $scope.formData.comment[todo_id]
                 }
             })
-            .success(function(data){
+            .then(function(data){
                 if(data.content == 'OK')
                 {
                     $scope.commentForTodo(index);
@@ -1151,7 +1151,7 @@ angular.module('tiny.admin.controllers', []).
                     project_id: $scope.projectData.project_id
                 }
             })
-            .success(function(data){
+            .then(function(data){
                 if(data.status == 'OK')
                 {
                     $scope.processing               = data.processing;
@@ -1173,7 +1173,7 @@ angular.module('tiny.admin.controllers', []).
                     task_id: task.task_id
                 }
             })
-            .success(function(data){
+            .then(function(data){
                 $scope.processing               = data.content;
                 $scope.parentobj.currentStatus  = task.task_id;
                 // reload comment for the above todos

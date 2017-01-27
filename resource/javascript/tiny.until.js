@@ -1,3 +1,30 @@
+jQuery.extend(true,
+{
+    /**
+     * Sets the context of 'this' within a called function.
+     * Takes identical parameters to $.proxy, but does not
+     * enforce the one-elment-one-method merging that $.proxy
+     * does, allowing multiple objects of the same type to
+     * bind to a single element's events (for example).
+     *
+     * @param function|object Function to be called | Context for 'this', method is a property of fn
+     * @param function|string Context for 'this' | Name of method within fn to be called
+     *
+     * @return function
+     */
+    context: function(fn, context)
+    {
+        if (typeof context == 'string')
+        {
+            var _context = fn;
+            fn = fn[context];
+            context = _context;
+        }
+
+        return function() { return fn.apply(context, arguments); };
+    }
+});
+
 $.fn.serializeObject = function(){
     var self = this,
         json = {},
@@ -227,6 +254,9 @@ var tn = {
     alwaysBiggerZero: function(num) {
         num = parseInt(num);
         return num  >= 10 ? num : '0'+num; 
+    },
+    parseInt: function(val) {
+        return parseInt(val.replace(new RegExp(',', 'gi'), ''));
     },
     strInArray: function(value, array){
         if(value === undefined || value === 'home') return false;
