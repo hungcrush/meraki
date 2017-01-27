@@ -5,6 +5,8 @@ class Products extends TINY_Controller {
     
     public function __construct(){
         parent::__construct();
+        $this->load->model('product/Product_item_model', 'item');
+        $this->load->model('product/Product_model', 'product');
     }
     
     public function index(){
@@ -41,8 +43,7 @@ class Products extends TINY_Controller {
 
     public function loadData($category_id)
     {
-        $this->load->model('product/Product_item_model', 'item');
-        $this->load->model('product/Product_model', 'product');
+        
 
         return array(
             'items'     => $this->item->Load($category_id),
@@ -52,10 +53,18 @@ class Products extends TINY_Controller {
 
     public function loadDataItem($category_id, $item_id)
     {
-        $this->load->model('product/Product_item_model', 'item');
-
         return array(
-            'item_data' => $this->item->Load($category_id, $item_id)
+            'item_data' => $this->item->Load(0, $item_id)
         );
+    }
+
+    public function loadDataItems()
+    {
+        $items = $this->_post('items');
+        if(!empty($items))
+        {
+            return $this->item->Load($items);
+        }
+
     }
 }

@@ -1,5 +1,5 @@
 angular.module('tinyfw.factory',[])
-    .factory('$tiny', function($http, $timeout, $ocLazyLoad, $rootScope, $stateParams){    
+    .factory('$tiny', function($http, $timeout, $ocLazyLoad, $rootScope, $stateParams, $q){    
         
         return {
             getLoad: function(){
@@ -21,9 +21,11 @@ angular.module('tinyfw.factory',[])
                     data: $.param(_data),
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 },options);
+
+                var deferred = $q.defer();
                 
-                return $http(_options)
-                        .success(function(data){
+                $http(_options)
+                        .then(function(data){
                             if(!notForm){
                                 var $form = jQuery('body').find('form[tiny-submit]');
                                 
@@ -35,9 +37,12 @@ angular.module('tinyfw.factory',[])
                             if(data.error){
                                 $$this.alert(data.error, 'Error', 'error');
                             }
-                        })
-                        .error(function(data, status, headers, config){
+                            deferred.resolve(data.data);
+                        },
+                        function(data, status, headers, config){
                             var errorStatus;
+
+                            deferred.reject(data);
                             
                             if (status === 0) {
                                errorStatus = 'No connection. Verify application is running.';
@@ -52,6 +57,8 @@ angular.module('tinyfw.factory',[])
                             }
                             $$this.alert(errorStatus, 'Error', 'error');
                         })
+                    return deferred.promise;
+
             },
             alert: function(mess, title, objOptions){
                 if(typeof objOptions != 'object'){
@@ -155,7 +162,6 @@ angular.module('tinyfw.factory',[])
           return {
             request: function(config) {
                 config.headers['is_frontpage'] = 1;
-                console.log(config);
                 return config;
             },
         

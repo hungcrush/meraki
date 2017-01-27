@@ -6,8 +6,7 @@ angular.module('yuyu.directive', [])
                 replace: true,
                 templateUrl: tinyConfig.templatePath('layout/slider-banner'),
                 scope: {
-                    objSlider: '=',
-                    responsive: '='
+                    objSlider: '='
                 },
                 controller: function($scope, $element){
                     $scope.id = tn.randomUidd();

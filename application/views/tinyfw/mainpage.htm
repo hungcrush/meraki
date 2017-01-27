@@ -7,22 +7,23 @@
 
   <!-- CSS  -->
   <link href="{r}/css/maiyet/app.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="{r}/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{r}/css/style.css?v=33" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{r}/ionicons/css/ionicons.min.css" type="text/css" rel="stylesheet" />
   <link rel="stylesheet" href="{r}/admin/assets/css/fonts/line-icons-2/line-icons.css">
   
   
   <!--  Scripts-->
-  <script src="{r}/javascript/jquery.js"></script>
-  <script src="{r}/javascript/jquery-ui-custom.js"></script>
-  <script src="{r}/materialize/js/materialize.min.js"></script>
-  <script src="{r}/javascript/angular.min.js"></script>
-  <script src="{r}/javascript/angular-ui-router.js"></script>
-  <script src="{r}/javascript/angular-animate.js"></script>
-  <script src="{r}/admin/app/js/oc-lazyload/ocLazyLoad.min.js"></script>
-  <script src="{r}/javascript/tiny.base64.js"></script>
+  <script src="{r}/javascript/jquery.js?v=33"></script>
+  <script src="{r}/javascript/jquery-ui-custom.js?v=33"></script>
+  <script src="{r}/materialize/js/materialize.min.js?v=33"></script>
+  <script src="{r}/javascript/angular.min.js?v=33"></script>
+  <script src="{r}/javascript/angular-ui-router.js?v=33"></script>
+  <script src="{r}/javascript/angular-animate.min.js?v=33"></script>
+  <script src="{r}/javascript/angular-cookies.min.js?v=33"></script>
+  <script src="{r}/admin/app/js/oc-lazyload/ocLazyLoad.min.js?v=33"></script>
+  <script src="{r}/javascript/tiny.base64.js?v=33"></script>
 
-  <script src="{r}/javascript/tiny.plugins.js"></script>
+  <script src="{r}/javascript/tiny.plugins.js?v=33"></script>
 
   <script type="text/javascript">
   <!--
@@ -57,9 +58,9 @@
   -->
   </script>
 </head>
-<body ng-class="{'template-collection' : !templateConlection, 'search-open' : searchOpen, 'js-drawer-open js-drawer-open-right' : cartOpen}" ng-controller="tinyWapper" class="{{pageClass ? pageClass : ''}}">
+<body ng-class="{'template-collection' : !templateConlection, 'search-open' : searchOpen, 'js-drawer-open js-drawer-open-right' : cartOpen, 'mobile--nav-open' : mobileNavShow}" ng-controller="tinyWapper" class="{{pageClass ? pageClass : ''}}">
 
-<div id="SearchBar" class="search-bar js-search-bar" ng-class="{'open' : searchOpen}">
+<div id="SearchBar" class="search-bar js-search-bar tiny-handle-drop" ng-class="{'open' : searchOpen}">
     <form action="/search" method="get" class="input-group search-bar-form" role="search">
         <input type="hidden" name="type" value="product">
         <div class="search--icon">
@@ -77,7 +78,7 @@
 
 </div>
 
-<div id="CartDrawer" class="drawer drawer--right">
+<div id="CartDrawer" class="drawer drawer--right tiny-handle-drop">
     <div class="drawer--header">
         <h3 class="drawer--title">Your Bag</h3>
         <div ng-click="toggleCart(false)" class="drawer--close js-drawer-close">
@@ -90,27 +91,27 @@
 
                 <div class="ajaxcart__product">
                     <div class="ajaxcart__row" data-line="1">
-                        <div class="cart--side-product">
+                        <div ng-repeat="item in shopCart" class="cart--side-product">
 
                             <div class="cart--side-product-image">
-                                <a href="/products/long-peplum-gown?variant=27699541827" class="ajaxcart__product-image"><img src="/image_demo/EAOO3D.jpg" alt="">
+                                <a href="/products/long-peplum-gown?variant=27699541827" class="ajaxcart__product-image"><img ng-src="{{item.image}}" alt="">
                                 </a>
                             </div>
                             <div class="cart--side-product-info">
-                                <a href="/products/long-peplum-gown?variant=27699541827" class="ajaxcart__product-name">LONG PEPLUM GOWN</a>
+                                <a href="/products/long-peplum-gown?variant=27699541827" class="ajaxcart__product-name">{{item.name}}</a>
                                 <div class="grid__item display-table-cell one-half text-right">
-                                    $1,895.00
+                                    {{item.price | number}} VND
                                 </div>
 
-                                <span class="ajaxcart__product-meta">VERMILLION / 6</span>
+                                <span class="ajaxcart__product-meta">Size: {{item.size}}</span>
 
 
 
-                                <div>QTY: 1</div>
+                                <div>QTY: {{item.quantity}}</div>
 
                             </div>
 
-                            <div class="ajaxcart__remove js-cart-remove">
+                            <div ng-click="removeItemCart($index)" class="ajaxcart__remove js-cart-remove">
                                 <div class="cross"></div>
                             </div>
                         </div>
@@ -121,7 +122,7 @@
             <div class="ajaxcart__footer">
                 <div class="grid--full">
                     <div class="grid__item two-thirds">
-                        <h5>Subtotal: $1,895.00</h5>
+                        <h5>Subtotal: {{calcSubTotal() | number}} VND</h5>
                     </div>
                 </div>
                 <!-- <p class="text-center">Shipping &amp; taxes calculated at checkout</p> -->
@@ -141,8 +142,10 @@
 <header class="header tiny-header" template-conlection="templateConlection">
 
     <div class="header--wrapper">
-        <div class="mobile-navigation js-mobile-open">
-            <div class="mobile-navigation--bars"></div>
+        <div ng-click="showMobileNav()" class="mobile-nav js-mobile-open">
+                <div class="mobile-navigation--bars"></div>
+                <div class="mobile-navigation--bars"></div>
+                <div class="mobile-navigation--bars"></div>
         </div>
         <nav class="navigation navigation--shopping">
             <ul>
@@ -203,7 +206,7 @@
 
                 <li ng-click="toggleCart()">
                     <a class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
-                        <span class="cart-small-font" id="CartCount">0</span>
+                        <span class="cart-small-font" id="CartCount">{{shopCart.length}}</span>
                         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 49.81">
                             <title>bag</title>
                             <path d="M29.2,11.13a11.2,11.2,0,0,0-22.39,0H0V49.81H36V11.13H29.2ZM18,3a8.21,8.21,0,0,1,8.2,8.13H9.8A8.21,8.21,0,0,1,18,3ZM33,46.81H3V14.13H33V46.81Z" transform="translate(0 0)"></path>
@@ -217,6 +220,34 @@
     </div>
 </header>
 <nav class="white"></nav>
+<nav class="navigation mobile-navigation--drawer" ng-class="{'open': mobileNavShow}">
+ 
+  <div ng-click="showMobileNav(false)" class="mobile-navigation js-mobile-open">
+    <div class="close"></div>
+  </div>
+  
+  <div class="mobile-menu-image">
+
+  <a href="#">
+    <img src="//cdn.shopify.com/s/files/1/1137/4602/t/2/assets/mobile_menu_image.png?15194591246196886836" alt="">
+  </a>
+  </div>
+
+  <ul class="">
+
+        <!-- <li ng-repeat="navbar in navbarShop" ng-class="{'navigation--featured': navbar.feature == 1, 'navigation--normal-1': navbar.feature == 0}"> -->
+        <li ng-repeat="navbar in navbarShop" class="navigation--featured">
+            <a ng-href="{{navbar.url}}" title="">{{navbar.name}}</a>
+            <ul ng-include="'navbar-items-tpl'" ng-if="navbar.childs.length" ng-init="subItems = navbar.childs"></ul>
+        </li>
+
+        <hr />
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/aboutus">Our Story</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+    </ul>  
+    
+</nav>
 <main class="wrapper main-content" role="main" id="main" ui-view=""></main>
 <div class="footer--logo footer--separate">
     <!-- This is logo -->
@@ -254,7 +285,7 @@
                         </li>
                         <li><a href="https://www.instagram.com/merakistores/" target="_blank"><i class="ion-social-instagram-outline"></i></a>
                         </li>
-        }
+        
 <!--                         <li><a href="http://maiyet.tumblr.com" target="_blank"><i class="ion-social-tumblr"></i></a>
                         </li>
                         <li><a href="https://twitter.com/maiyet" target="_blank"><i class="ion-social-twitter"></i></a>

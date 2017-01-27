@@ -6,31 +6,10 @@
 */
 $userid = "merakistores";
 $accessToken = "4738014d756048b8b7c7d1d3fdc5f02c";
-// Get our data
-function fetchData($url){
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-	$result = curl_exec($ch);
-	curl_close($ch);
-	return $result;
-}
-// Pull and parse data.
-$result = fetchData("https://api.instagram.com/v1/users/{$userid}/media/recent/?access_token={$accessToken}");
+
+
+$data = file_get_contents('https://www.instagram.com/'.$userid.'/media/');
+$data = json_decode($data);
+
 echo '<pre>';
-print_r($result);
-exit;
-
-$result = json_decode($result);
-?>
-
-<?php $limit = 8; // Amount of images to show ?>
-<?php $i = 0; ?>
-
-<?php foreach ($result->data as $post): ?>
-	<?php if ($i < $limit ): ?>
-		<a href="<?= $post->images->standard_resolution->url ?>"><img src="<?= $post->images->standard_resolution->url ?>" width="500" height="500"></a>
-		<?php $i ++; ?>
-	<?php endif; ?>
-<?php endforeach; ?>
+print_r($data->items);

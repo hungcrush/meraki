@@ -5,33 +5,18 @@
 
     <div class="product product--main">
         <div class="product--header">
-            <!-- <div class="product--mobile-slideshow">
+            <div class="product--mobile-slideshow">
 
                 <div class="product--slideshow-items" id="ProductSlideshow">
 
 
                     <div class="product--slideshow-item">
-                        <img src="/image_demo/EAOO3D.jpg" alt="LONG PEPLUM GOWN">
+                        <img style="margin: auto;" ng-src="{{first_image.origin}}" alt="LONG PEPLUM GOWN">
                     </div>
 
-                    <div class="product--slideshow-item">
-                        <img src="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55739_1024x1024.jpg?v=1473433504" alt="LONG PEPLUM GOWN">
-                    </div>
-
-                    <div class="product--slideshow-item">
-                        <img src="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55725_1024x1024.jpg?v=1473433505" alt="LONG PEPLUM GOWN">
-                    </div>
-
-                    <div class="product--slideshow-item">
-                        <img src="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55766_1024x1024.jpg?v=1473433507" alt="LONG PEPLUM GOWN">
-                    </div>
-
-                    <div class="product--slideshow-item">
-                        <img src="//cdn.shopify.com/s/files/1/1137/4602/products/FW16_2120331A_LongPeplumGown_Vermillion_55757_1024x1024.jpg?v=1473433509" alt="LONG PEPLUM GOWN">
-                    </div>
                 </div>
 
-            </div> -->
+            </div>
 
             <div product-thumbnails="" class="product--thumbnails">
 
@@ -74,19 +59,24 @@
                         <meta itemprop="priceCurrency" content="USD">
                         <link itemprop="availability" href="http://schema.org/InStock">
 
-                        <form tiny-submit="AddToCart(dataForm)" method="post" enctype="multipart/form-data" id="AddToCartForm" class="product--form">
+                        <form tiny-submit="addToCart(dataForm)" method="post" enctype="multipart/form-data" id="AddToCartForm" class="product--form">
 
 
                             <div class="selector-wrapper">
-                                <label for="productSelect-option-0">Color</label>
-                                <select class="tinySelectDropdown">
-                                    <option value="VERMILLION">VERMILLION</option>
+                                <label for="productSelect-option-0">Size</label>
+                                <select name="size" class="tinySelectDropdown">
+                                    <option value="One Size">One Size</option>
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
                                 </select>
                             </div>
 
                             <div class="selector-wrapper">
-                                <label for="productSelect-option-1">Size</label>
-                                <select class="tinySelectDropdown">
+                                <label for="productSelect-option-1">Quantity</label>
+                                <select name="quantity" class="tinySelectDropdown">
                                     <option value="2">2</option>
                                     <option value="4">4</option>
                                     <option value="6">6</option>
@@ -101,14 +91,13 @@
                                     <span class="icon icon-minus" aria-hidden="true"></span>
                                     <span class="fallback-text">−</span>
                                 </button>
-                                <input type="text" class="js-qty__num" value="1" min="1" data-id="" aria-label="quantity" pattern="[0-9]*" name="quantity" id="Quantity">
                                 <button type="button" class="js-qty__adjust js-qty__adjust--plus icon-fallback-text" data-id="" data-qty="11">
                                     <span class="icon icon-plus" aria-hidden="true"></span>
                                     <span class="fallback-text">+</span>
                                 </button>
                             </div>
 
-
+                            <input type="hidden" name="product_id" value="{{itemData.product_item_id}}">
 
                             <button type="submit" name="add" id="AddToCart" class="btn product--add-to-cart">
                                 <span id="AddToCartText">Add to Bag</span>
@@ -148,113 +137,6 @@
                                                 <div class="product--extended-size-header"><span class="fit active product-table" data-filter="fit">Fit Guide</span><span class="size product-table" data-filter="size">Size Guide</span>
                                                 </div>
                                                 <div class="product--extended-size-tables">
-                                                    <table class="fit active  product-table">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="table-left">Size</td>
-                                                                <td>0</td>
-                                                                <td>2</td>
-                                                                <td>4</td>
-                                                                <td>6</td>
-                                                                <td>8</td>
-                                                                <td>10</td>
-                                                                <td>12</td>
-                                                                <td>14</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="table-left">Bust</td>
-                                                                <td>31.5</td>
-                                                                <td>32.5</td>
-                                                                <td>33.5</td>
-                                                                <td>34.5</td>
-                                                                <td>35.5</td>
-                                                                <td>36.5</td>
-                                                                <td>38</td>
-                                                                <td>39.5</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="table-left">Waist</td>
-                                                                <td>24.5</td>
-                                                                <td>25.5</td>
-                                                                <td>26.5</td>
-                                                                <td>27.5</td>
-                                                                <td>28.5</td>
-                                                                <td>29.5</td>
-                                                                <td>31</td>
-                                                                <td>32.5</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="table-left">Hip</td>
-                                                                <td>34.5</td>
-                                                                <td>35.5</td>
-                                                                <td>36.5</td>
-                                                                <td>37.5</td>
-                                                                <td>38.5</td>
-                                                                <td>39.5</td>
-                                                                <td>41</td>
-                                                                <td>42.5</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <table class="size  product-table">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="table-left">Maiyet</td>
-                                                                <td>0</td>
-                                                                <td>2</td>
-                                                                <td>4</td>
-                                                                <td>6</td>
-                                                                <td>8</td>
-                                                                <td>10</td>
-                                                                <td>12</td>
-                                                                <td>14</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="table-left">US</td>
-                                                                <td>0</td>
-                                                                <td>2</td>
-                                                                <td>4</td>
-                                                                <td>6</td>
-                                                                <td>8</td>
-                                                                <td>10</td>
-                                                                <td>12</td>
-                                                                <td>14</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="table-left">France</td>
-                                                                <td>32</td>
-                                                                <td>34</td>
-                                                                <td>36</td>
-                                                                <td>38</td>
-                                                                <td>40</td>
-                                                                <td>42</td>
-                                                                <td>44</td>
-                                                                <td>46</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="table-left">Italy</td>
-                                                                <td>36</td>
-                                                                <td>38</td>
-                                                                <td>40</td>
-                                                                <td>42</td>
-                                                                <td>44</td>
-                                                                <td>46</td>
-                                                                <td>48</td>
-                                                                <td>50</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="table-left">UK</td>
-                                                                <td>4</td>
-                                                                <td>6</td>
-                                                                <td>8</td>
-                                                                <td>10</td>
-                                                                <td>12</td>
-                                                                <td>14</td>
-                                                                <td>16</td>
-                                                                <td>18</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -282,7 +164,7 @@
                             </ul>
                         </div>
                         <div class="product--contact-us">
-                            <p>Need help? <a href="https://maiyet.com/pages/contact">Contact Us</a>
+                            <p>Need help? <a href="/contact">Contact Us</a>
                             </p>
                         </div>
                     </div>

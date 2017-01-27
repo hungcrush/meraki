@@ -104,7 +104,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
                     var a = function(){
                         $tiny.ajax({
                             url: URL_SERVER+'admin/session',
-                        }, true).success(function(data){
+                        }, true).then(function(data){
                             if(!data.noLogin)
                                 setTimeout(function(){
                                     a();

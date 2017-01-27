@@ -60,7 +60,8 @@
 									tinyuser: $(form).find('#tinyuser').val(),
 									tinypass: $(form).find('#tinypass').val()
                                 }
-                            }).success(function(resp){
+                            }).then(function(resp){
+                            	alert(1)
                                 showLoadingBar({
 									delay: .5,
 									pct: 100,
