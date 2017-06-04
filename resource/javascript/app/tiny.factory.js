@@ -29,9 +29,9 @@ angular.module('tinyfw.factory',[])
                             if(!notForm){
                                 var $form = jQuery('body').find('form[tiny-submit]');
                                 
-                                    $form.find(':button[type=submit]').prop('disabled', true);
+                                    //$form.find(':button[type=submit]').prop('disabled', true);
                                     $timeout(function(){
-                                        $form.find(':button[type=submit]').prop('disabled', false);
+                                        //$form.find(':button[type=submit]').prop('disabled', false);
                                     }, 2000);
                             }    
                             if(data.error){

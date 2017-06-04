@@ -1,5 +1,8 @@
 'use strict';
 
+var copy = angular.copy,
+    forEach = angular.forEach;
+
 var tinyfw = angular.module('tinyfw',     
 [
     "ui.router", 
@@ -49,17 +52,21 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
   
   $stateProvider
     .state('home', {
-        url: PATH_,
         resolve: {
-			owlSlider: function($ocLazyLoad){
-				return $ocLazyLoad.load([
-                    tinyConfig.dirTemp+'/owl-carousel/owl.carousel.css',
-                    tinyConfig.dirTemp+'/owl-carousel/owl.theme.css',
-                    tinyConfig.dirTemp+'/owl-carousel/owl-carousel-custom.css',
-                    tinyConfig.dirTemp+'/owl-carousel/owl.carousel.js'
-				]);
-			}
+			// owlSlider: function($ocLazyLoad){
+			// 	return $ocLazyLoad.load([
+   //                  tinyConfig.dirTemp+'/owl-carousel/owl.carousel.css',
+   //                  tinyConfig.dirTemp+'/owl-carousel/owl.theme.css',
+   //                  tinyConfig.dirTemp+'/owl-carousel/owl-carousel-custom.css',
+   //                  tinyConfig.dirTemp+'/owl-carousel/owl.carousel.js'
+			// 	]);
+			// }
         },
+        template: '<div ui-view="" class="template-index"></div>'
+    })
+
+    .state('home.index', {
+        url: PATH_,
         templateUrl: URL_SERVER,
         controller: 'HomeCtrl'
     })
@@ -69,7 +76,7 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     //------------------------------
     
     .state('home.products', {
-        url: 'products',
+        url: '/products',
         templateUrl: URL_SERVER+'products',
         controller: 'ProductCtrl'
     })
@@ -77,7 +84,7 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     //-- PHOTOBOOK
     
     .state('home.photobook', {
-        url: 'product/{id:[0-9a-fA-F]{1,8}}:SEO',
+        url: '/product/{id:[0-9a-fA-F]{1,8}}:SEO',
         resolve: {
             productData: function($tiny, $stateParams) {
                 return $tiny.loadData(URL_SERVER + 'products/load-data/' + $stateParams.id);
@@ -97,7 +104,7 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
             }
         },
         templateUrl: URL_SERVER+'products/photobook',
-        controller: 'ChildPhotobookCtrl'
+        controller: 'ProductDetailCtrl'
     })
     
     //-- DETAIL PHOTOBOOK
@@ -115,7 +122,7 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     //------------------------------
     
     .state('home.blog', {
-        url: 'blog',
+        url: '/blog',
         templateUrl: URL_SERVER+'blog',
         controller: 'BlogCtrl'
     })
@@ -131,7 +138,7 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     //------------------------------
     
     .state('home.aboutus', {
-        url: 'aboutus',
+        url: '/aboutus',
         templateUrl: URL_SERVER+'aboutus',
         controller: 'AboutCtrl',
         templateConlection: true,
@@ -143,7 +150,7 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     //------------------------------
     
     .state('home.contact', {
-        url: 'contact',
+        url: '/contact',
         templateUrl: URL_SERVER+'contact',
         controller: 'ContactCtrl',
         pageClass: 'contact-us'
@@ -154,7 +161,7 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     //------------------------------
     
     .state('home.pages', {
-        url: 'pages/*page',
+        url: '/pages/*page',
         templateUrl: function($stateParams){
             var $page = $stateParams.page.split('-')[0];
             return URL_SERVER+'pages/' + $page;
@@ -168,7 +175,7 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     //------------------------------
 
     .state('home.account', {
-        url: 'account',
+        url: '/account',
         templateUrl: URL_SERVER+'account',
         controller: 'AboutCtrl',
         templateConlection: true,
@@ -180,12 +187,32 @@ tinyfw.config(function($stateProvider, $urlRouterProvider, $locationProvider, $h
     //------------------------------
 
     .state('home.payment', {
-        url: 'payment',
+        url: '/payment',
         templateUrl: URL_SERVER+'payment',
         onEnter: function($rootScope){
             $rootScope.toggleCart(false);
         },
         controller: 'PaymentCtrl'
+    })
+        .state('home.payment.responsive', {
+            url: '/*params',
+            views: {
+                'paymentPage': {
+                    templateUrl: function($stateParams) {
+                        return [URL_SERVER, 'payment/', $stateParams.params].join('');
+                    }
+                }
+            }
+        })
+
+    //------------------------------
+    // SEARCH
+    //------------------------------
+
+    .state('home.search', {
+        url: '/search?type&q',
+        templateUrl: URL_SERVER + 'search'
+        controller: 'SearchCtrl'
     })
     
     $locationProvider.html5Mode({

@@ -1,4 +1,4 @@
-<div class="payment-page account-page">
+<div ui-view="paymentPage" class="payment-page account-page">
     <div class="account-page--wrapper payment-wrap">
         <div class="payment--sidebar">
             <div class="sidebar--header">
@@ -123,6 +123,7 @@
                 </a>
             </div>
             <div class="main--body">
+            {addr_default}
               <form method="post" tiny-submit="submitPayment(dataForm)" accept-charset="UTF-8">
     <input type="hidden" value="customer_address" name="form_type">
 
@@ -144,14 +145,14 @@
         <div class="one-half">
             <div class="tiny-input">
                 <label for="AddressFirstNameNew">First Name</label>
-                <input type="text" required id="AddressFirstNameNew" class="input-full" name="address[first_name]" value="" autocapitalize="words" placeholder="First Name">
+                <input type="text" required id="AddressFirstNameNew" class="input-full" name="address[first_name]" value="{first_name}" autocapitalize="words" placeholder="First Name">
             </div>
         </div>
 
         <div class="one-half">
             <div class="tiny-input">
                 <label for="AddressLastNameNew">Last Name</label>
-                <input type="text" required class="input-full" name="address[last_name]" value="" autocapitalize="words" placeholder="Last Name">
+                <input type="text" required class="input-full" name="address[last_name]" value="{last_name}" autocapitalize="words" placeholder="Last Name">
             </div>
         </div>
 
@@ -159,41 +160,41 @@
 
     <div class="tiny-input">
         <label for="AddressCompanyNew">Company</label>
-        <input type="text" class="input-full" name="address[company]" value="" autocapitalize="words" placeholder="Company">
+        <input type="text" class="input-full" name="address[company]" value="{company}" autocapitalize="words" placeholder="Company">
     </div>
     <div class="tiny-input">
         <label for="AddressAddress1New">Address1</label>
-        <input type="text" class="input-full" required name="address[address1]" value="" autocapitalize="words" placeholder="Address1">
+        <input type="text" class="input-full" required name="address[address1]" value="{address1}" autocapitalize="words" placeholder="Address1">
     </div>
     <div class="tiny-input">
         <label for="AddressAddress2New">Address2</label>
-        <input type="text" id="AddressAddress2New" class="input-full" name="address[address2]" value="" autocapitalize="words" placeholder="Address2">
+        <input type="text" id="AddressAddress2New" class="input-full" name="address[address2]" value="{address2}" autocapitalize="words" placeholder="Address2">
     </div>
     <div class="grid">
         <div class="grid__item large--one-half">
             <div class="tiny-input">
                 <label for="AddressCityNew">City</label>
-                <input type="text" required class="input-full" name="address[city]" value="" autocapitalize="words" placeholder="City">
+                <input type="text" required class="input-full" name="address[city]" value="{city}" autocapitalize="words" placeholder="City">
             </div>
         </div>
 
         <div class="grid__item large--one-half">
             <div class="tiny-input">
                 <label for="AddressZipNew">Postal/Zip Code</label>
-                <input type="text" required class="input-full" name="address[zip]" value="" autocapitalize="characters" placeholder="Postal/Zip Code">
+                <input type="text" required class="input-full" name="address[zip]" value="{zip}" autocapitalize="characters" placeholder="Postal/Zip Code">
             </div>
         </div>
 
         <div class="grid__item large--one-half">
             <div class="tiny-input">
                 <label for="AddressPhoneNew">Phone</label>
-                <input type="tel" required class="input-full" name="address[phone]" value="" placeholder="Phone">
+                <input type="tel" required class="input-full" name="customer_phone" value="" placeholder="Phone">
             </div>
         </div>
     </div>
 
     <p class="default-box">
-        <input type="checkbox" id="address_default_address_new" name="address[default]" value="1">
+        <input type="checkbox" id="address_default_address_new" name="set_as_default" value="1">
         <label for="address_default_address_new" class="inline">Set as default address</label>
     </p>
 
@@ -203,6 +204,7 @@
     <p class="align-center"><a href="/" class="link-default">Cancel</a>
     </p>
 </form>
+{/addr_default}
             </div>
         </div>
     </div>

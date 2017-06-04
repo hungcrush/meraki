@@ -1,47 +1,46 @@
-<div ui-view="" class="template-index">
-    <header ng-init="type = '{content_title}'" class="header--module visible" style="background-image:url({background});">
-        <a href="" class="full-link"></a>
-        <div ng-switch="type" class="header--module-text-center">
-            <div ng-switch-when="video" class="video-container no-controls">
-                <iframe src="{src}" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div ng-switch-when="image">
-                <img class="responsive-img" ng-src="{content}" />
-            </div>
-            <div ng-switch-when="text">
-                {content}
-            </div>
 
-            <a href="" class="underlined white">Shop Now</a>
+<header ng-init="type = '{content_title}'" class="header--module visible" style="background-image:url({background});">
+    <a href="" class="full-link"></a>
+    <div ng-switch="type" class="header--module-text-center">
+        <div ng-switch-when="video" class="video-container no-controls">
+            <iframe src="{src}" frameborder="0" allowfullscreen></iframe>
         </div>
-    </header>
-    <div class="footer--social visible">
-        <ul>
-            <li class="footer--social-wide">
-                <h4>Follow US</h4>
-            </li>
-            <li><a href="https://www.facebook.com/stores.meraki/" target="_blank"><i class="ion-social-facebook"></i></a>
-            </li>
-            <li><a href="https://www.instagram.com/merakistores/" target="_blank"><i class="ion-social-instagram-outline"></i></a>
-            </li>
-        </ul>
-        <div class="footer--social-insta">
-            <a style="cursor: pointer;" ng-repeat="item in instagrams" href="{{item.link}}" target="_blank"><img ng-src="{{item.src}}"></a>
+        <div ng-switch-when="image">
+            <img class="responsive-img" ng-src="{content}" />
         </div>
+        <div ng-switch-when="text">
+            {content}
+        </div>
+
+        <a href="/product/12-products.html" class="underlined white">Shop Now</a>
     </div>
-
-    <section class="newsletter">
-
-        <div class="newsletter--form">
-            <form method="post" action="/contact#contact_form" id="contact_form" class="contact-form" accept-charset="UTF-8">
-                <input type="hidden" value="customer" name="form_type">
-                <input type="hidden" name="utf8" value="✓">
-                <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,newsletter">
-                <input type="text" id="contact_email" placeholder="Your email" class="newsletter--form-input" name="contact[email]">
-                <span class="newsletter--form-submit">
-          <input type="submit" class="btn" name="subscribe" id="subscribe" value="Subscribe to our Newsletter">
-        </span>
-            </form>
-        </div>
-    </section>
+</header>
+<div class="footer--social visible">
+    <ul>
+        <li class="footer--social-wide">
+            <h4>Follow US</h4>
+        </li>
+        <li><a href="https://www.facebook.com/stores.meraki/" target="_blank"><i class="ion-social-facebook"></i></a>
+        </li>
+        <li><a href="https://www.instagram.com/merakistores/" target="_blank"><i class="ion-social-instagram-outline"></i></a>
+        </li>
+    </ul>
+    <div class="footer--social-insta">
+        <a style="cursor: pointer;" ng-repeat="item in instagrams" href="{{item.link}}" target="_blank"><img ng-src="{{item.src}}"></a>
+    </div>
 </div>
+
+<section class="newsletter">
+
+    <div class="newsletter--form">
+        <form method="post" action="/contact#contact_form" id="contact_form" class="contact-form" accept-charset="UTF-8">
+            <input type="hidden" value="customer" name="form_type">
+            <input type="hidden" name="utf8" value="✓">
+            <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,newsletter">
+            <input type="text" id="contact_email" placeholder="Your email" class="newsletter--form-input" name="contact[email]">
+            <span class="newsletter--form-submit">
+      <input type="submit" class="btn" name="subscribe" id="subscribe" value="Subscribe to our Newsletter">
+    </span>
+        </form>
+    </div>
+</section>

@@ -75,6 +75,19 @@ angular.module('yuyu.controller', [])
             $scope.mobileNavShow = !$scope.mobileNavShow;
         }
 
+        var _filterIdOthers = function(id)
+        {   
+            var _obj = [];
+            forEach($rootScope._privateCartIds, function(obj, keys){
+                if(keys.match(new RegExp(id, 'gi')))
+                {
+                    _obj.push(obj);
+                }
+            })
+
+            return _obj;
+        }
+
         /* SHOP CART */
         $rootScope.shopCart = [];
         $rootScope._privateCartIds = {};
@@ -94,8 +107,11 @@ angular.module('yuyu.controller', [])
                     .then(function(data){
 
                         data.product.forEach(function(itemData, k){
-                            var item = $rootScope._privateCartIds[itemData.product_item_id];
-                            $rootScope.shopCart.push({quantity: item.quantity, size: item.size, product_id: itemData.product_item_id, name: itemData.name, price: tn.parseInt(itemData.price), image: itemData.thumb});
+                            var items = _filterIdOthers(itemData.product_item_id);
+                            items.forEach(function(item){
+                                $rootScope.shopCart.push({quantity: item.quantity, size: item.size, product_id: itemData.product_item_id, name: itemData.name, price: tn.parseInt(itemData.price), image: itemData.thumb});
+                            })
+                            
                         })
                     })
                 }
@@ -106,26 +122,45 @@ angular.module('yuyu.controller', [])
         $rootScope.loadShopCartViaCookies();
 
         
+        $rootScope.textAddtoCart = 'Add to Bag';
         $rootScope.addToCart = function(item)
         {
-            if(!$rootScope._privateCartIds[item.product_id]){
-                $tiny.loadData('/products/load-data-item/0/' + item.product_id).then(function(data){
-                    var itemData = data.item_data.product;
-                    $rootScope._privateCartIds[item.product_id] = {
+            $rootScope.textAddtoCart = 'Processing...';
+            
+            $tiny.loadData('/products/load-data-item/0/' + item.product_id).then(function(data){
+                var itemData = data.item_data.product;
+                var _product_id;
+                if(!$rootScope._privateCartIds[item.product_id]){
+                    _product_id = itemData.product_item_id;
+                    $rootScope._privateCartIds[_product_id] = {
                         quantity: item.quantity,
                         size: item.size
                     }
+                }
+                else
+                {
+                    // is exist in the bag
+                    _product_id = itemData.product_item_id + '__' + new Date().getTime();
+                    $rootScope._privateCartIds[_product_id] = {
+                        quantity: item.quantity,
+                        size: item.size
+                    }
+                }
 
-                    $rootScope.shopCart.push({quantity: item.quantity, size: item.size, product_id: itemData.product_item_id, name: itemData.name, price: tn.parseInt(itemData.price), image: itemData.thumb});
+                $rootScope.shopCart.push({quantity: item.quantity, size: item.size, product_id: _product_id, name: itemData.name, price: tn.parseInt(itemData.price), image: itemData.thumb});
+            
+                $cookies.put('tiny_carts', JSON.stringify($rootScope._privateCartIds), {path: '/'});
+                $timeout(function(){
+                    $rootScope.toggleCart(true);
+                    $rootScope.textAddtoCart = 'Add to Bag';
+                }, 500);
+
                 
-                    $cookies.put('tiny_carts', JSON.stringify($rootScope._privateCartIds), {path: '/'});
-                    $timeout(function(){
-                        $rootScope.toggleCart(true);
-                    }, 500);
-                })
-            }
+            })
            
         }
+
+
         $rootScope.removeItemCart = function(key)
         {
             var item = $rootScope.shopCart[key];
@@ -138,7 +173,7 @@ angular.module('yuyu.controller', [])
         $rootScope.calcSubTotal = function(){
             var total = 0;
             $rootScope.shopCart.forEach(function(obj){
-                total += (obj.price * (obj.quantity/2));
+                total += (obj.price * (obj.quantity));
             })
 
             return total;
@@ -163,14 +198,17 @@ angular.module('yuyu.controller', [])
     {
         $rootScope.isActive = 'product';
     })
-    .controller('PaymentCtrl', function($scope, $tiny){
+    .controller('PaymentCtrl', function($scope, $tiny, $state){
         $scope.submitPayment = function(data){
             $tiny.ajax({
                 url: '/payment/submit',
                 data: {payment_data: data}
             })
             .then(function(data){
-
+                if(data.success)
+                {
+                    $state.go('home.payment.responsive', {params: 'complete'});
+                }
             })
         }
     })
@@ -181,94 +219,33 @@ angular.module('yuyu.controller', [])
 
         console.log('Debug products', $scope.products);
     })
-    .controller('ChildPhotobookCtrl', function($scope, $rootScope, itemsData)
+    .controller('ProductDetailCtrl', function($scope, $rootScope, itemsData, $tiny)
     {
         $scope.itemData = itemsData.item_data.product;
         $scope.first_image = $scope.itemData.images[0];
+
+        $scope.product_related = [];
+
+        $scope.loadRelatedProducts = function()
+        {
+            $tiny.ajax({
+                url: '/products/load-related/',
+                data: {
+                    item_id: $scope.itemData.product_item_id, 
+                    product_id: $scope.itemData.product_id
+                }
+            })
+            .then(function(data){
+                $scope.product_related = data.products.product;
+                console.log('Debug product related', $scope.product_related);
+            })
+        }
+
+        $scope.loadRelatedProducts();
     })
-    .controller('DetailPhotobookCtrl', function($rootScope, $scope)
+    .controller('ProductDetailCtrl2', function($rootScope, $scope)
     {
-        $rootScope.isActive = 'product';
-        $scope.listImage = [
-            {
-                src: URL_SERVER+'detail_1.jpg',
-                hash: 'one'
-            },
-            {
-                src: URL_SERVER+'detail_2.jpg',
-                hash: 'two'
-            },
-            {
-                src: URL_SERVER+'detail_3.jpg',
-                hash: 'three'
-            },
-            {
-                src: URL_SERVER+'detail_4.jpg',
-                hash: 'four'
-            },
-            {
-                src: URL_SERVER+'detail_5.jpg',
-                hash: 'five'
-            },
-            {
-                src: URL_SERVER+'detail_6.jpg',
-                hash: 'six'
-            }
-        ];
         
-        $scope.res = {
-            0: {
-                items: 2  
-            },
-            500:{
-                items: 3  
-            },
-            787: {
-                items: 4
-            },
-            1024: {
-                items: 5
-            },
-        };
-        
-        $scope.res_bottom = {
-            0: {
-                items: 3  
-            },
-            787: {
-                items: 4
-            },
-            1024: {
-                items: 5
-            },
-        };
-        
-        $scope.listThumbnail = [
-            {
-                src: URL_SERVER+'detail_1_1.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'detail_2_2.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'detail_3_3.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'detail_4_4.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'detail_5_5.jpg',
-                link: '#'
-            },
-            {
-                src: URL_SERVER+'detail_6_6.jpg',
-                link: '#'
-            }
-        ];
     })
     .controller('BlogCtrl', function($rootScope)
     {
@@ -284,3 +261,8 @@ angular.module('yuyu.controller', [])
     .controller('PagesCtrl', function(){
         
     })
+    .controller('SearchCtrl', function(){
+
+    })
+
+    
