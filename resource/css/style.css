@@ -417,6 +417,10 @@ a.logo {
 .product--extended-copy{
     word-break: break-all;
 }
+.payment-complete--wrap{
+    text-align: center;
+    padding: 4rem 2rem;
+}
 @media screen and (max-width: 1024px) {
     .linkcious_ads {
         width: calc(50%)!important;

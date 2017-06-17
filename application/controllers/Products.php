@@ -65,6 +65,15 @@ class Products extends TINY_Controller {
         {
             return $this->item->Load($items);
         }
+    }
+
+    public function loadRelated()
+    {
+        $product_id      = $this->_post('product_id');
+
+        $data = $this->item->Load($product_id, 0, TRUE);
+
+        return array('products' => $data);
 
     }
 }

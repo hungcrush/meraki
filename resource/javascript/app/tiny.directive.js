@@ -18,7 +18,7 @@ angular.module('tinyfw.directive', [])
                             var r = scope.onSubmit({dataForm: dataForm});
                             
                             if(r !== false){
-                                $form.find('[type="submit"]').prop('disabled', true);
+                                //$form.find('[type="submit"]').prop('disabled', true);
                                 // if(typeof attrs.noReset == 'undefined'){
                                 //     $form.trigger('reset');
                                 // }else

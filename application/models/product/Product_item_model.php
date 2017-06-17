@@ -7,7 +7,7 @@ class Product_item_model extends TINY_Model
         $this->_temporary_return_type = 'array';
     }
     
-    public function Load($product_id = 0, $item_id = 0){
+    public function Load($product_id = 0, $item_id = 0, $load_product_related = FALSE){
         $dataOut = array();
         $this->_ctrl->load->model('product/product_items_cate', 'cates');
 
@@ -16,17 +16,17 @@ class Product_item_model extends TINY_Model
         {
             $where = $product_id != 0 ? array('product_id' => $product_id) : array();
             //-- get other categories
-            if($product_id != 0)
-            {
-                $otherCates = $this->_ctrl->cates->Load($product_id);
+            // if($product_id != 0)
+            // {
+            //     $otherCates = $this->_ctrl->cates->Load($product_id);
 
-                if(!empty($otherCates))
-                {
+            //     if(!empty($otherCates))
+            //     {
                     
-                    //$where['product_item_id'] = NULL;
-                    $where[1] = 'OR product_item_id IN ('.implode(',', $otherCates).')';
-                }
-            }
+            //         //$where['product_item_id'] = NULL;
+            //         $where[1] = 'OR product_item_id IN ('.implode(',', $otherCates).')';
+            //     }
+            // }
             
             if($item_id != 0){
                 $where['product_item_id'] = $item_id;
@@ -37,7 +37,16 @@ class Product_item_model extends TINY_Model
         {
             $where['product_item_id'] = $product_id;
         }
+
+        if($load_product_related)
+        {
+            $this->order_by('RAND()');
+            $this->_database->limit(4);
+        }
+
         $data = $this->get_many_by($where);
+
+        //debug($this->_database->last_query());
         //debug($this->_database->last_query());
         if(count($data) > 0){
             foreach($data as $row){

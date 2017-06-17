@@ -99,8 +99,8 @@
 
                             <input type="hidden" name="product_id" value="{{itemData.product_item_id}}">
 
-                            <button type="submit" name="add" id="AddToCart" class="btn product--add-to-cart">
-                                <span id="AddToCartText">Add to Bag</span>
+                            <button type="submit" name="add"  class="btn product--add-to-cart">
+                                <span id="AddToCartText">{{textAddtoCart}}</span>
                             </button>
                         </form>
 
@@ -190,21 +190,21 @@
     <!-- googleoff: all -->
 
     <div id="linkcious" class="linkcious_clearfix">
-        <div ng-repeat="product in [0,1,2,3]" class="linkcious_ads">
+        <div ng-repeat="product in product_related" class="linkcious_ads">
             <div class="linkcious_img">
-                <a href="">
-                    <img src="/image_demo/EAOO4A.jpg" alt="LONG SLEEVE TEE" title="LONG SLEEVE TEE">
+                <a href="{{category_data.url | mkurl}}/{{product.url}}">
+                    <img ng-src="{{product.thumb}}" alt="{{product.item_name}}" title="{{product.item_name}}">
                 </a>
             </div>
 
             <div class="linkcious_title">
                 <h3 class="linkcious_title_h3">
-                  <a href="">LONG SLEEVE TEE <span class="linkcious_price_display linkcious_hide ">- $550.00</span></a>
+                  <a href="{{category_data.url | mkurl}}/{{product.url}}">{{product.item_name}} <span class="linkcious_price_display linkcious_hide ">- {{product.price}} VND</span></a>
                 </h3>
             </div>
 
             <div class="linkcious_price">
-                <span class="linkcious_price_display">$550.00</span>
+                <span class="linkcious_price_display">{{product.price}} VND</span>
             </div>
         </div>
     </div>
